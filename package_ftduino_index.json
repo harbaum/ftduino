@@ -14,11 +14,11 @@
 		    "architecture": "avr",
 		    "version": "0.0.1",
 		    "category": "Ftduino",
-		    "url": "https://github.com/harbaum/ftduino/releases/0.0.1/ftduino-0.0.1.zip",
+		    "url": "https://raw.githubusercontent.com/harbaum/ftduino/releases/0.0.1/ftduino-0.0.1.zip",
 
 		    "archiveFileName": "ftduino-0.0.1.zip",
-		    "checksum": "SHA-256:7f1dabaf8491f39b022ac1482121e6d33b9ed43110bf8140a5ad15f47637fe15",
-		    "size": "39911",
+		    "checksum": "SHA-256:07562e0adb26278217a64cf44de5c38cecab0fdc5133973ca2fef27872671169",
+		    "size": "39932",
 		    "help": {
 			"online": "https://github.com/harbaum/ftduino/issues"
 		    },
