@@ -3,6 +3,8 @@
 This repository contains support files for the ftDuino fischertechnik
 and Arduino compatible controller.
 
+![Early version of the ftDuino with OLED mounted](doc/ftduino.jpg)
+
 ## Installation
 
 You can easily add custom board support packages to the Arduino IDE
