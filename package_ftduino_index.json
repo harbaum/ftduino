@@ -14,7 +14,7 @@
 		    "architecture": "avr",
 		    "version": "0.0.1",
 		    "category": "Ftduino",
-		    "url": "https://raw.githubusercontent.com/harbaum/ftduino/releases/0.0.1/ftduino-0.0.1.zip",
+		    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
 
 		    "archiveFileName": "ftduino-0.0.1.zip",
 		    "checksum": "SHA-256:07562e0adb26278217a64cf44de5c38cecab0fdc5133973ca2fef27872671169",
