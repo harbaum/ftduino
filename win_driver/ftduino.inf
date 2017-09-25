@@ -1,0 +1,62 @@
+; ftDuino driver
+
+[Strings]
+DriverPackageDisplayName="ftDuino USB Driver"
+ManufacturerName="Till Harbaum"
+ServiceName="USB RS-232 Emulation Driver"
+
+ftduino.bootloader.name="ftDuino bootloader"
+ftduino.sketch.name="ftDuino"
+
+[DefaultInstall]
+CopyINF=ftduino.inf
+
+[Version]
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+Signature="$Windows NT$"
+Provider=%ManufacturerName%
+DriverPackageDisplayName=%DriverPackageDisplayName%
+CatalogFile=arduino-org.cat
+DriverVer=03/19/2015,1.1.1.0
+
+[Manufacturer]
+%ManufacturerName%=DeviceList, NTamd64, NTia64
+
+[DestinationDirs]
+FakeModemCopyFileSection=12
+DefaultDestDir=12
+
+[DeviceList]
+%ftduino.bootloader.name%=DriverInstall, USB\VID_1C40&PID_0537
+%ftduino.sketch.name%=DriverInstall, USB\VID_1C40&PID_0538&MI_00
+
+[DeviceList.NTamd64]
+%ftduino.bootloader.name%=DriverInstall, USB\VID_1C40&PID_0537
+%ftduino.sketch.name%=DriverInstall, USB\VID_1C40&PID_0538&MI_00
+
+[DeviceList.NTia64]
+%ftduino.bootloader.name%=DriverInstall, USB\VID_1C40&PID_0537
+%ftduino.sketch.name%=DriverInstall, USB\VID_1C40&PID_0538&MI_00
+
+[DriverInstall]
+include=mdmcpq.inf,usb.inf
+CopyFiles = FakeModemCopyFileSection
+AddReg=DriverAddReg
+
+[DriverAddReg]
+HKR,,DevLoader,,*ntkern 
+HKR,,NTMPDriver,,usbser.sys 
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.Services]
+include=mdmcpq.inf
+AddService=usbser, 0x00000002, DriverService
+
+[DriverService]
+DisplayName=%ServiceName%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys
+LoadOrderGroup=Base
