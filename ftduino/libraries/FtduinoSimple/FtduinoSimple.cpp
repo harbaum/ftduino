@@ -16,7 +16,7 @@
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 
-#include "Ftduino_simple.h"
+#include "FtduinoSimple.h"
 
 Ftduino ftduino;
 

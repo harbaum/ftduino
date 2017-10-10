@@ -1,5 +1,5 @@
 /*
-  lamp_timer - Lampen-Zeitschaltuhr
+  LampTimer - Lampen-Zeitschaltuhr
 
   (c) 2017 by Till Harbaum <till@harbaum.org>
 
@@ -10,7 +10,7 @@
   sobald ein Taster an Eingang I1 gedrückt wird.
 */
 
-#include <Ftduino_simple.h>
+#include <FtduinoSimple.h>
 
 uint32_t start_time_zeit = 0;
 
