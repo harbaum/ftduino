@@ -1,5 +1,5 @@
 /*
-  Ftduino_simple.cpp - Library for ftduino
+  FtduinoSimple.cpp - Library for ftduino
 
   (c) 2017 by Till Harbaum <till@harbaum.org>
 
