@@ -17,7 +17,7 @@ void setup() {
 // die loop-Funktion wird immer wieder aufgerufen
 void loop() {
   digitalWrite(LED_BUILTIN, HIGH);   // schalte die LED ein (HIGH ist der hohe Spannungspegel)
-  delay(1000);                       // warte 100 Millisekunden (eine Sekunde)
+  delay(1000);                       // warte 1000 Millisekunden (eine Sekunde)
   digitalWrite(LED_BUILTIN, LOW);    // schalte die LED aus, indem die Spannung auf
   			    	     // niedrigen Pegel (LOW) geschaltet wird
   delay(1000);                       // warte eine Sekunde
