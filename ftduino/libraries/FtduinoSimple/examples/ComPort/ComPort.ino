@@ -6,7 +6,7 @@
 int zaehler = 0;
 
 void setup() {
-  // Port initialisieren und auf USB-Verbindung warten
+  // Initialize serial and wait for port to open:
   Serial.begin(9600);
   while(!Serial);      // warte auf USB-Verbindung
 

@@ -67,14 +67,18 @@ void Ftduino::input_init() {
 }
 
 uint8_t Ftduino::input_get(uint8_t ch) {
+  static char cd4051_mode = -1;
   uint8_t rval = 0;
   
   // this enables the pullup for the given channel and returns
   // its digital state
 
-  // enable pullup
-  cd4051_set(ch);
-  _delay_us(100);
+  // enable pullup if necessary
+  if(cd4051_mode != ch) {
+    cd4051_set(ch);
+    _delay_us(100);
+    cd4051_mode = ch;
+  }
 
   switch(ch) {
     case Ftduino::I1:
