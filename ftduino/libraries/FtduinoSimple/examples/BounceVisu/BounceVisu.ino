@@ -15,9 +15,6 @@ void setup() {
   while(!Serial);      // warte auf USB-Verbindung
 }
 
-uint8_t letzter_zustand = false;
-uint8_t wechselzaehler = 0;
-
 // die loop-Funktion wird immer wieder aufgerufen
 void loop() {
 
