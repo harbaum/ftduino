@@ -281,7 +281,6 @@ typedef short unsigned LINENUM;
 
 
 static unsigned char program[kRamSize];
-static const char *  sentinel = "HELLO";
 static unsigned char *txtpos,*list_line, *tmptxtpos;
 static unsigned char expression_error;
 static unsigned char *tempsp;
@@ -449,6 +448,29 @@ const static unsigned char highlow_tab[] PROGMEM = {
 };
 #define HIGHLOW_HIGH    1
 #define HIGHLOW_UNKNOWN 4
+
+const static unsigned char out_tab[] PROGMEM = {
+  'H','I','G','H'+0x80,
+  'H','I'+0x80,
+  'L','O','W'+0x80,
+  'L','O'+0x80,
+  'O','F','F'+0x80,
+  0
+};
+#define OUT_HIGH    1
+#define OUT_LOW     3
+#define OUT_UNKNOWN 5
+
+const static unsigned char motor_tab[] PROGMEM = {
+  'L','E','F','T'+0x80,
+  'R','I','G','H','T'+0x80,
+  'O','F','F'+0x80,
+  0
+};
+#define MOTOR_LEFT    0
+#define MOTOR_RIGHT   1
+#define MOTOR_OFF     2
+#define MOTOR_UNKNOWN 3
 
 #define STACK_SIZE (sizeof(struct stack_for_frame)*5)
 #define VAR_SIZE sizeof(short int) // Size of variables in bytes
@@ -1944,11 +1966,25 @@ output:
     txtpos++;
     ignore_blanks();
 
-    // Get PWM value
-    expression_error = 0;
-    value = expression();
-    if(expression_error)
-      goto qwhat;
+    txtposBak = txtpos; 
+    scantable(out_tab);
+    if(table_index != OUT_UNKNOWN)
+    {
+      if( table_index <= OUT_HIGH )
+        value = 1;
+      else if( table_index <= OUT_LOW )
+        value = 0;
+      else
+        value = -1;   // < 0 = OFF
+    } 
+    else {
+
+      // Get PWM value
+      expression_error = 0;
+      value = expression();
+      if(expression_error)
+        goto qwhat;
+    }
 
 #ifndef ARDUINO
     printf("OUTPUT %d %d\n", inputNo, value);
@@ -1988,11 +2024,25 @@ motor:
     txtpos++;
     ignore_blanks();
 
-    // Get PWM value
-    expression_error = 0;
-    value = expression();
-    if(expression_error)
-      goto qwhat;
+    txtposBak = txtpos; 
+    scantable(motor_tab);
+    if(table_index != MOTOR_UNKNOWN)
+    {
+      if( table_index == MOTOR_LEFT )
+        value = -1;
+      else if( table_index == MOTOR_RIGHT )
+        value = 1;
+      else
+        value = 0;   // 0 = OFF
+    } 
+    else {
+
+      // Get PWM value
+      expression_error = 0;
+      value = expression();
+      if(expression_error)
+        goto qwhat;
+    }
 
 #ifndef ARDUINO
     printf("MOTOR %d %d\n", inputNo, value);
