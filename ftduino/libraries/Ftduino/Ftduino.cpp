@@ -493,33 +493,45 @@ uint8_t Ftduino::counter_get_state(uint8_t ch) {
   return 0;
 }
 
+void Ftduino::counter_timer_exceeded(uint8_t c) {
+  // determine mode of current counter port
+  uint8_t mode = (counter_modes >> (2*c)) & 3;
+
+  // get current port state
+  uint8_t state;
+  if(c == 0)      state = PIND & (1<<2);
+  else if(c == 1) state = PIND & (1<<3);
+  else if(c == 2) state = PINB & (1<<5);
+  else            state = PINB & (1<<6);
+
+  // TODO: save last accepted state and only count if
+  // the current state differs from the accepted one.
+  // otherwise very short events may only count one
+  // edge
+  
+  // count event if it has the desired edge
+  if((mode == Ftduino::C_EDGE_ANY) ||
+     (!state && (mode == Ftduino::C_EDGE_FALLING)) ||
+     ( state && (mode == Ftduino::C_EDGE_RISING)) )
+    counter_val[c]++;
+
+  // this counter timer has been processed
+  counter_reload_time[c] = 0xff;
+}
+
 // the one shot timer itself, usually fires 1 ms after a counter event
 void Ftduino::timer1_compb_interrupt_exec() {
   if(counter_timer >= 0) {
-    // determine mode of current counter port
-    uint8_t mode = (counter_modes >> (2*counter_timer)) & 3;
-
-    // get current port state
-    uint8_t state;
-    if(counter_timer == 0)      state = PIND & (1<<2);
-    else if(counter_timer == 1) state = PIND & (1<<3);
-    else if(counter_timer == 2) state = PINB & (1<<5);
-    else                        state = PINB & (1<<6);
-
-    // TODO: save last accepted state and only count if
-    // the current state differs from the accepted one.
-    // otherwise very short events may only count one
-    // edge
-
-    // count event if it has the desired edge
-    if((mode == Ftduino::C_EDGE_ANY) ||
-      (!state && (mode == Ftduino::C_EDGE_FALLING)) ||
-      ( state && (mode == Ftduino::C_EDGE_RISING)) )
-      counter_val[counter_timer]++;
-    
+    counter_timer_exceeded(counter_timer);
     counter_timer = -1;
   }
 
+  // check if any of the "next reload times"
+  // is zero and process them immediately
+  for(uint8_t c=0;c<4;c++)
+    if(counter_reload_time[c] == 0)
+      counter_timer_exceeded(c);
+  
   // check for the next pending counter_reload_time
   uint8_t next_pending = 0xff;
   uint8_t next_reload_time = 0xff;
@@ -534,6 +546,13 @@ void Ftduino::timer1_compb_interrupt_exec() {
   if(next_pending != 0xff) {
     counter_reload_time[next_pending] = 0xff;
     counter_timer = next_pending;
+
+    // reduce pending times of all other pending
+    // timers
+    for(uint8_t c=0;c<4;c++)
+      if((c != next_pending) && (counter_reload_time[c] != 0xff))
+	counter_reload_time[c] -= next_reload_time;
+      
     TCNT1 = 0xffff - next_reload_time;
   }
 }

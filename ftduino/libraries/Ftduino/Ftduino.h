@@ -126,6 +126,7 @@ class Ftduino {
 
     // ------- counter inputs ------------
     void counter_init(void);
+    void counter_timer_exceeded(uint8_t c);
     
     void timer1_compb_interrupt_exec();
     CLASS_IRQ(timer1_compb_interrupt, TIMER1_COMPB_vect);
