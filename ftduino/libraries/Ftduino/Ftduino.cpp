@@ -493,8 +493,6 @@ uint8_t Ftduino::counter_get_state(uint8_t ch) {
   return 0;
 }
 
-int32_t spurious = 0;
-
 // the one shot timer itself, usually fires 1 ms after a counter event
 void Ftduino::timer1_compb_interrupt_exec() {
   if(counter_timer >= 0) {
@@ -520,8 +518,7 @@ void Ftduino::timer1_compb_interrupt_exec() {
       counter_val[counter_timer]++;
     
     counter_timer = -1;
-  } else
-    spurious++;
+  }
 
   // check for the next pending counter_reload_time
   uint8_t next_pending = 0xff;
