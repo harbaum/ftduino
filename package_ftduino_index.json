@@ -17,8 +17,8 @@
 		    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
 
 		    "archiveFileName": "ftduino-0.0.1.zip",
-		    "checksum": "SHA-256:4d3a6540cb3f5649231ce24fa2e44572e56c0c268ab457e28185caa13d1ed973",
-		    "size": "100814",
+		    "checksum": "SHA-256:e7b5d9b70c8a3fefd1cb490be7c1ee1d2929f62dd5b8687ebc65007026be79c8",
+		    "size": "102225",
 		    "help": {
 			"online": "https://github.com/harbaum/ftduino/issues"
 		    },

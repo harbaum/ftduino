@@ -466,6 +466,63 @@ int16_t Ftduino::ultrasonic_get() {
   return ultrasonic_rx_data[0]*128 + ultrasonic_rx_data[1];
 }
 
+// the fast counter inputs are the most complex part. This is mainly due to the
+// filtering.
+
+// Basic principle:
+// 1) Any changing counter input triggers a pin change hardware interrupt
+// 2) The pin change interrupt handler starts a timer which fires after 1 ms
+//    -> Any further event will restart the timer
+// 3) The timer interrupt fires once there hasn't been any change for 1 ms
+//    and it's checked whether the input has actually changed state. If it
+//    has and if the edge matches the requested one, then the counter is
+//    increased
+
+// Problem due to the fact that there is only one timer for four counters.
+// Solution: A list of scheduled "future events" is kept and the timer is
+// always setup for the next event. So when a pin change irq occurs:
+// 1) The timer is not running at all
+//    - Load timer with current counter
+// 2) The timer is already running
+//   a) It's running for a different counter 
+//      - The current counter will be placed in a list of "scheduled counters"
+//      - It's "reload" time is set to the time this counter needs to be
+//        processed after the one currently in progress
+//   b) It's running for the current counter
+//      1) There are other counters waiting for earlier processing
+//         - The next scheduled counter is loaded into the timer incl. the
+//           time that remained from the previous timer
+//         - The current timer is scheduled for later processing
+//         - the times of all other scheduled timers are reduced by
+//           the time of the counter which is now being set in the timer
+//      2) There's no other counter waiting
+//         - Reload timer for current counter 
+
+// Example: Timer is being used for counter 0, counter 1 and 2 are scheduled
+//          with a reload time of 200 and 300 us
+// Timer
+// 0 |------------------->|          ( 1ms   )
+// Scheduled:
+// 1                      |--->|     ( 200us )
+// 2                      |------->| ( 300us )
+//        Pin 0 change ^
+// A pin change event occurs on counter input 0 100 us before the timer expires.
+// Result:
+// - The counter scheduled with the lowest timeout value is counter 1. 
+// - Counter 1 plus is loaded into the timer with the 100us time remaining
+//   from the previous timer added. 
+// - The previosly active counter is scheduled to fire at 1ms minus the 
+//   time the timer will run for the current counter 1 (incl the remains)
+// - All counters that stay scheduled are reduced by the time
+//   that was scheduled for counter 1
+
+// Afterwards the state should be:
+// Timer
+// 1                   |----->|                  ( 200 + 100 us       )
+// Scheduled:
+// 0                          |--------------->| ( 1ms - (200+100) us )
+// 2                          |--->|             ( 300 - 200 us       )
+
 uint16_t Ftduino::counter_get(uint8_t ch) {
   if((ch >= Ftduino::C1) && (ch <= Ftduino::C4))
     return counter_val[ch-Ftduino::C1];
@@ -494,9 +551,6 @@ uint8_t Ftduino::counter_get_state(uint8_t ch) {
 }
 
 void Ftduino::counter_timer_exceeded(uint8_t c) {
-  // determine mode of current counter port
-  uint8_t mode = (counter_modes >> (2*c)) & 3;
-
   // get current port state
   uint8_t state;
   if(c == 0)      state = PIND & (1<<2);
@@ -504,11 +558,29 @@ void Ftduino::counter_timer_exceeded(uint8_t c) {
   else if(c == 2) state = PINB & (1<<5);
   else            state = PINB & (1<<6);
 
-  // TODO: save last accepted state and only count if
+  // save last accepted state and only count if
   // the current state differs from the accepted one.
-  // otherwise very short events may only count one
-  // edge
+  // otherwise very short spikes may e.g. counted
+
+  // check if state of counter input was high and has fallen
+  if(counter_in_state & (1<<c)) {
+    // pin state as not changed: Do nothing
+    if(state) return;
+    // pin state bas changed: Save new state
+    else counter_in_state &= ~(1<<c);
+  }
   
+  // check if state of counter input was low and has risen
+  else {
+    // pin state as not changed: Do nothing
+    if(!state) return;
+    // pin state bas changed: Save new state
+    else counter_in_state |= (1<<c);
+  }
+  
+  // determine mode of current counter port
+  uint8_t mode = (counter_modes >> (2*c)) & 3;
+
   // count event if it has the desired edge
   if((mode == Ftduino::C_EDGE_ANY) ||
      (!state && (mode == Ftduino::C_EDGE_FALLING)) ||
@@ -521,6 +593,8 @@ void Ftduino::counter_timer_exceeded(uint8_t c) {
 
 // the one shot timer itself, usually fires 1 ms after a counter event
 void Ftduino::timer1_compb_interrupt_exec() {
+  // this test shouldn't be needed as the irq is supposed to only fire
+  // if a valid counter has been set
   if(counter_timer >= 0) {
     counter_timer_exceeded(counter_timer);
     counter_timer = -1;
@@ -551,7 +625,7 @@ void Ftduino::timer1_compb_interrupt_exec() {
     // timers
     for(uint8_t c=0;c<4;c++)
       if((c != next_pending) && (counter_reload_time[c] != 0xff))
-	counter_reload_time[c] -= next_reload_time;
+      	counter_reload_time[c] -= next_reload_time;
       
     TCNT1 = 0xffff - next_reload_time;
   }
@@ -560,30 +634,75 @@ void Ftduino::timer1_compb_interrupt_exec() {
 void Ftduino::timer1_compb_interrupt() {
   ftduino.timer1_compb_interrupt_exec();
 }
-
+      
 // this irq fires whenever anything on one of the four
 // counter ports
-void Ftduino::ext_interrupt_exec(uint8_t c) {
+void Ftduino::ext_interrupt_exec(uint8_t counter) {
   // stop counter to make sure IRQ dosn't fire while this routine executes
   TCCR1B &= ~((1<<CS12) | (1<<CS11) | (1<<CS10)); // stop timer 1 
 
   // check if the timer is not running for the current counter
   // and check if timer is already active it is when it's above the OCR1A value
-  if((counter_timer != c) && (TCNT1 >= 0xffff - COUNTER_FILTER)) {
+  if((counter_timer != counter) && (TCNT1 >= 0xffff - COUNTER_FILTER)) {
+
+    // timer is running, but it's not running for the current counter
     
     // get remaining timer value, byte value only works here with max 1ms filter
     uint8_t t_rem = 0xffff - TCNT1;
 
     // reload value fpr this event to be used when the current timer expires
-    uint8_t t_reload = COUNTER_FILTER - t_rem;
-
     // schedule this counter for later processing
-    counter_reload_time[c] = t_reload;
+    counter_reload_time[counter] = COUNTER_FILTER - t_rem;
   } else {
-    counter_timer = c;
 
-    // start one shot timer1 to fire an interrupt after 1 msec
-    TCNT1 = 0xffff - COUNTER_FILTER;
+    // Check if the timer is already running for the current counter
+    if(counter_timer == counter) {
+      // since we'll be reloading the timer any other timer marked as pending
+      // will fire beforehand
+
+      // check for the next pending counter_reload_time
+      uint8_t next_pending = 0xff;
+      uint8_t next_reload_time = 0xff;
+      for(uint8_t c=0;c<4;c++) {
+        if(counter_reload_time[c] < next_reload_time) {
+          next_reload_time = counter_reload_time[c];
+          next_pending = c;
+        }  
+      }
+
+      // clear pending counter timer and start it
+      if(next_pending != 0xff) {
+        counter_reload_time[next_pending] = 0xff;
+        counter_timer = next_pending;
+
+        // reduce pending times of all other pending timers by the time
+        // the one we just took from the list of scheduled ones
+        for(uint8_t c=0;c<4;c++)
+          if((c != next_pending) && (counter_reload_time[c] != 0xff)) {
+            if(counter_reload_time[c] == next_reload_time)
+              counter_debug++;
+            
+            counter_reload_time[c] -= next_reload_time;
+          }
+
+        // the current timer needs to be scheduled
+        // get remaining timer value, byte value only works here with max 1ms filter
+        uint8_t t_rem = 0xffff - TCNT1;
+
+        // schedule this counter for later processing
+        counter_reload_time[counter] = COUNTER_FILTER - (t_rem + next_reload_time);
+
+        // run the timer for the next scheduled counter plus the time
+        // that the timer was still expected to be run
+        TCNT1 = 0xffff - (next_reload_time + t_rem);
+      }
+    } else {
+      // no other counter scheduled: load this one
+      counter_timer = counter;
+
+      // start one shot timer1 to fire an interrupt after 1 msec
+      TCNT1 = 0xffff - COUNTER_FILTER;
+    }   
   }
   TCCR1B |= (1<<CS11) | (1<<CS10); // restart timer 1 at 1/64 F_CPU
 }
@@ -651,6 +770,10 @@ void Ftduino::counter_init(void) {
   TIMSK1 = (1<<OCIE1B);
 
   TCCR1B |= (1<<CS11) | (1<<CS10);  // start timer at 1/64 F_CPU -> 250kHz
+
+  // initially no counter input is assumed to be active, so we assmume they
+  // are pulled high
+  counter_in_state = 0xff;
 
   // clear all counters
   for(char i=0;i<4;i++)

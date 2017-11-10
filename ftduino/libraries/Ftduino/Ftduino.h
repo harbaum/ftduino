@@ -65,6 +65,8 @@ class Ftduino {
     void counter_clear(uint8_t ch);
     uint8_t counter_get_state(uint8_t ch);
 
+    uint8_t counter_debug = 0;
+    
   private:
 
     // --------------- ADC -------------
@@ -127,7 +129,7 @@ class Ftduino {
     // ------- counter inputs ------------
     void counter_init(void);
     void counter_timer_exceeded(uint8_t c);
-    
+
     void timer1_compb_interrupt_exec();
     CLASS_IRQ(timer1_compb_interrupt, TIMER1_COMPB_vect);
 
@@ -138,6 +140,7 @@ class Ftduino {
 
     uint16_t counter_val[4];
     uint8_t counter_modes;
+    uint8_t counter_in_state;
     
     // keep track for which port the timer will fire next
     int8_t counter_timer = -1;
