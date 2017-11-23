@@ -75,7 +75,7 @@ void loop() {
           *strchr(rxBuf, ' ') = '\0';
         }
 
-        else if((strcasecmp_P(rxBuf, PSTR("hol")) == 0) && parm) {
+        if((strcasecmp_P(rxBuf, PSTR("hol")) == 0) && parm) {
           int c = atoi(parm);
           Serial.print("Hole aus Fach ");
           Serial.println(c, DEC);
