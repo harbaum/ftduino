@@ -13,6 +13,9 @@
 #define CLASS_IRQ(name, vector) \
     static void name(void) asm(STRINGIFY(vector)) \
     __attribute__ ((signal, __INTR_ATTRS))
+
+// there are two very different counter implementations
+#define ALTERNATE_COUNTER
     
 extern const PROGMEM unsigned short adc2r[];
 
@@ -65,7 +68,9 @@ class Ftduino {
     void counter_clear(uint8_t ch);
     uint8_t counter_get_state(uint8_t ch);
 
+#ifndef ALTERNATE_COUNTER
     uint8_t counter_debug = 0;
+#endif
     
   private:
 
@@ -130,9 +135,21 @@ class Ftduino {
     void counter_init(void);
     void counter_timer_exceeded(uint8_t c);
 
+#ifndef ALTERNATE_COUNTER
     void timer1_compb_interrupt_exec();
     CLASS_IRQ(timer1_compb_interrupt, TIMER1_COMPB_vect);
 
+    // keep track for which port the timer will fire next
+    int8_t counter_timer = -1;
+    uint8_t counter_reload_time[4] = { 0xff, 0xff, 0xff, 0xff };
+#else
+    // time when last event has been seen
+    uint32_t counter_event_time[4] = { 0,0,0,0 };
+    void counter_check_pending(uint8_t ch);
+#endif
+
+    uint8_t counter_in_state;
+    
     void ext_interrupt_exec(uint8_t c);
     CLASS_IRQ(ext_interrupt2, INT2_vect);
     CLASS_IRQ(ext_interrupt3, INT3_vect);
@@ -140,11 +157,6 @@ class Ftduino {
 
     uint16_t counter_val[4];
     uint8_t counter_modes;
-    uint8_t counter_in_state;
-    
-    // keep track for which port the timer will fire next
-    int8_t counter_timer = -1;
-    uint8_t counter_reload_time[4] = { 0xff, 0xff, 0xff, 0xff };
 };
 
 extern Ftduino ftduino;

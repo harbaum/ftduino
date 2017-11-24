@@ -466,6 +466,7 @@ int16_t Ftduino::ultrasonic_get() {
   return ultrasonic_rx_data[0]*128 + ultrasonic_rx_data[1];
 }
 
+#ifndef ALTERNATE_COUNTER
 // the fast counter inputs are the most complex part. This is mainly due to the
 // filtering.
 
@@ -523,32 +524,59 @@ int16_t Ftduino::ultrasonic_get() {
 // 0                          |--------------->| ( 1ms - (200+100) us )
 // 2                          |--->|             ( 300 - 200 us       )
 
-uint16_t Ftduino::counter_get(uint8_t ch) {
-  if((ch >= Ftduino::C1) && (ch <= Ftduino::C4))
-    return counter_val[ch-Ftduino::C1];
+// the one shot timer itself, usually fires 1 ms after a counter event
+void Ftduino::timer1_compb_interrupt_exec() {
+  // this test shouldn't be needed as the irq is supposed to only fire
+  // if a valid counter has been set
+  if(counter_timer >= 0) {
+    counter_timer_exceeded(counter_timer);
+    counter_timer = -1;
+  }
+
+  // check if any of the "next reload times"
+  // is zero and process them immediately
+  for(uint8_t c=0;c<4;c++)
+    if(counter_reload_time[c] == 0)
+      counter_timer_exceeded(c);
   
-  return 0;  // sane value, but should never happen
+  // check for the next pending counter_reload_time
+  uint8_t next_pending = 0xff;
+  uint8_t next_reload_time = 0xff;
+  for(uint8_t c=0;c<4;c++) {
+    if(counter_reload_time[c] < next_reload_time) {
+      next_reload_time = counter_reload_time[c];
+      next_pending = c;
+    }  
+  }
+
+  // clear pending counter timer and start it
+  if(next_pending != 0xff) {
+    counter_reload_time[next_pending] = 0xff;
+    counter_timer = next_pending;
+
+    // reduce pending times of all other pending
+    // timers
+    for(uint8_t c=0;c<4;c++)
+      if((c != next_pending) && (counter_reload_time[c] != 0xff))
+        counter_reload_time[c] -= next_reload_time;
+      
+    TCNT1 = 0xffff - next_reload_time;
+  }
 }
 
-void Ftduino::counter_clear(uint8_t ch) {
-  counter_val[ch-Ftduino::C1] = 0;
+void Ftduino::timer1_compb_interrupt() {
+  ftduino.timer1_compb_interrupt_exec();
 }
-
-void Ftduino::counter_set_mode(uint8_t ch, uint8_t mode) {
-  char ch_idx = (ch-Ftduino::C1)<<1; // CH1 = 0, CH2 = 2, ...
-  
-  counter_modes &= ~(3 << ch_idx);   // clear mode bits
-  counter_modes |= mode << ch_idx;   // set new mode bits
+#else
+void Ftduino::counter_check_pending(uint8_t counter) {
+  // check if there is a "unprocessed event for this counter
+  if(counter_event_time[counter]) {
+    // check if it's longer than the timeout time
+    if((micros() - counter_event_time[counter]) > 4*COUNTER_FILTER)
+      counter_timer_exceeded(counter);
+  }
 }
-
-uint8_t Ftduino::counter_get_state(uint8_t ch) {
-  if(ch == Ftduino::C1) return !(PIND & (1<<2));
-  if(ch == Ftduino::C2) return !(PIND & (1<<3));
-  if(ch == Ftduino::C3) return !(PINB & (1<<5));
-  if(ch == Ftduino::C4) return !(PINB & (1<<6));
-
-  return 0;
-}
+#endif
 
 void Ftduino::counter_timer_exceeded(uint8_t c) {
   // get current port state
@@ -588,56 +616,49 @@ void Ftduino::counter_timer_exceeded(uint8_t c) {
     counter_val[c]++;
 
   // this counter timer has been processed
+#ifndef ALTERNATE_COUNTER
   counter_reload_time[c] = 0xff;
+#else
+  counter_event_time[c] = 0;
+#endif
 }
 
-// the one shot timer itself, usually fires 1 ms after a counter event
-void Ftduino::timer1_compb_interrupt_exec() {
-  // this test shouldn't be needed as the irq is supposed to only fire
-  // if a valid counter has been set
-  if(counter_timer >= 0) {
-    counter_timer_exceeded(counter_timer);
-    counter_timer = -1;
+uint16_t Ftduino::counter_get(uint8_t ch) {
+  if((ch >= Ftduino::C1) && (ch <= Ftduino::C4)) {
+#ifdef ALTERNATE_COUNTER
+  counter_check_pending(ch - Ftduino::C1);  
+#endif
+    return counter_val[ch-Ftduino::C1];
   }
-
-  // check if any of the "next reload times"
-  // is zero and process them immediately
-  for(uint8_t c=0;c<4;c++)
-    if(counter_reload_time[c] == 0)
-      counter_timer_exceeded(c);
   
-  // check for the next pending counter_reload_time
-  uint8_t next_pending = 0xff;
-  uint8_t next_reload_time = 0xff;
-  for(uint8_t c=0;c<4;c++) {
-    if(counter_reload_time[c] < next_reload_time) {
-      next_reload_time = counter_reload_time[c];
-      next_pending = c;
-    }  
-  }
-
-  // clear pending counter timer and start it
-  if(next_pending != 0xff) {
-    counter_reload_time[next_pending] = 0xff;
-    counter_timer = next_pending;
-
-    // reduce pending times of all other pending
-    // timers
-    for(uint8_t c=0;c<4;c++)
-      if((c != next_pending) && (counter_reload_time[c] != 0xff))
-      	counter_reload_time[c] -= next_reload_time;
-      
-    TCNT1 = 0xffff - next_reload_time;
-  }
+  return 0;  // sane value, but should never happen
 }
 
-void Ftduino::timer1_compb_interrupt() {
-  ftduino.timer1_compb_interrupt_exec();
+void Ftduino::counter_clear(uint8_t ch) {
+  counter_val[ch-Ftduino::C1] = 0;
 }
+
+void Ftduino::counter_set_mode(uint8_t ch, uint8_t mode) {
+  char ch_idx = (ch-Ftduino::C1)<<1; // CH1 = 0, CH2 = 2, ...
+  
+  counter_modes &= ~(3 << ch_idx);   // clear mode bits
+  counter_modes |= mode << ch_idx;   // set new mode bits
+}
+
+uint8_t Ftduino::counter_get_state(uint8_t ch) {
+  if(ch == Ftduino::C1) return !(PIND & (1<<2));
+  if(ch == Ftduino::C2) return !(PIND & (1<<3));
+  if(ch == Ftduino::C3) return !(PINB & (1<<5));
+  if(ch == Ftduino::C4) return !(PINB & (1<<6));
+
+  return 0;
+}
+
       
 // this irq fires whenever anything on one of the four
 // counter ports
 void Ftduino::ext_interrupt_exec(uint8_t counter) {
+#ifndef ALTERNATE_COUNTER
   // stop counter to make sure IRQ dosn't fire while this routine executes
   TCCR1B &= ~((1<<CS12) | (1<<CS11) | (1<<CS10)); // stop timer 1 
 
@@ -705,6 +726,11 @@ void Ftduino::ext_interrupt_exec(uint8_t counter) {
     }   
   }
   TCCR1B |= (1<<CS11) | (1<<CS10); // restart timer 1 at 1/64 F_CPU
+#else
+  // alternate implementation using the micros() function
+  counter_check_pending(counter);  
+  counter_event_time[counter] = micros();
+#endif
 }
 
 void Ftduino::ext_interrupt2() {
