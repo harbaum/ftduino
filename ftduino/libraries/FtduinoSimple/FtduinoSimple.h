@@ -9,8 +9,6 @@
 
 #include "Arduino.h"
 
-extern const PROGMEM unsigned short adc2r[];
-
 class Ftduino {
   public:
     Ftduino();
