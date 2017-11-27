@@ -66,9 +66,9 @@ void Ftduino::input_init() {
   DDRB &= ~(1<<4);
 }
 
-uint8_t Ftduino::input_get(uint8_t ch) {
+bool Ftduino::input_get(uint8_t ch) {
   static char cd4051_mode = -1;
-  uint8_t rval = 0;
+  bool rval = false;
   
   // this enables the pullup for the given channel and returns
   // its digital state
@@ -241,13 +241,13 @@ void Ftduino::pulldown_c1_enable(char on) {
   else   PORTE &= ~(1<<2);
 }
 
-uint8_t Ftduino::counter_get_state(uint8_t ch) {
+bool Ftduino::counter_get_state(uint8_t ch) {
   if(ch == Ftduino::C1) return !(PIND & (1<<2));
   if(ch == Ftduino::C2) return !(PIND & (1<<3));
   if(ch == Ftduino::C3) return !(PINB & (1<<5));
   if(ch == Ftduino::C4) return !(PINB & (1<<6));
 
-  return 0;
+  return false;
 }
 
 void Ftduino::counter_init(void) {

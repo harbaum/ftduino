@@ -31,12 +31,12 @@ class Ftduino {
     // motor modes
     static const uint8_t LEFT = 1, RIGHT = 2, BRAKE = 3;
 
-    uint8_t input_get(uint8_t ch);
+    bool input_get(uint8_t ch);
 
     void output_set(uint8_t port, uint8_t mode);
     void motor_set(uint8_t port, uint8_t mode);
 
-    uint8_t counter_get_state(uint8_t ch);
+    bool counter_get_state(uint8_t ch);
 
   private:
     void cd4051_init();
