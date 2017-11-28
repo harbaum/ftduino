@@ -375,7 +375,7 @@ void Ftduino::pulldown_c1_init() {
   PORTE &= ~(1<<2);    // de-activate by default
 }
 
-void Ftduino::pulldown_c1_enable(char on) {
+void Ftduino::pulldown_c1_enable(bool on) {
   if(on) PORTE |=  (1<<2);
   else   PORTE &= ~(1<<2);
 }
@@ -404,7 +404,7 @@ void Ftduino::usart_init() {
   UCSR1C = (1<<UCSZ11)|(1<<UCSZ10);   // 8 bit
 }
 
-void Ftduino::usart_enable(int8_t on) {
+void Ftduino::usart_enable(bool on) {
   if(on) UCSR1B |=  (1<<RXEN1);
   else   UCSR1B &= ~(1<<RXEN1);
 }
@@ -421,12 +421,12 @@ void Ftduino::timer3_compa_interrupt_exec() {
     
     // start a new measurement
     ultrasonic_state = 0;
-    usart_enable(0);        // disable usart so we don't see our own trigger signal  
-    pulldown_c1_enable(1);
+    usart_enable(false);        // disable usart so we don't see our own trigger signal  
+    pulldown_c1_enable(true);
   } else {
     ultrasonic_state = 1;
-    pulldown_c1_enable(0);
-    usart_enable(1);    
+    pulldown_c1_enable(false);
+    usart_enable(true);    
   }
 }
 
@@ -434,7 +434,7 @@ void Ftduino::timer3_compa_interrupt() {
   ftduino.timer3_compa_interrupt_exec();
 }
 
-void Ftduino::ultrasonic_enable(uint8_t ena) {
+void Ftduino::ultrasonic_enable(bool ena) {
   if(ena) {
     ultrasonic_state = 1;  // reset state machine
     ultrasonic_timeout = 0;
@@ -454,8 +454,8 @@ void Ftduino::ultrasonic_enable(uint8_t ena) {
     TIMSK3 &= ~(1<<OCIE3A);
 
     // disable pullup and usart
-    pulldown_c1_enable(0);
-    usart_enable(0);    
+    pulldown_c1_enable(false);
+    usart_enable(false);    
   }
 }
 

@@ -60,7 +60,7 @@ class Ftduino {
     void output_set(uint8_t port, uint8_t mode, uint8_t pwm);
     void motor_set(uint8_t port, uint8_t mode, uint8_t pwm);
 
-    void ultrasonic_enable(uint8_t ena);
+    void ultrasonic_enable(bool ena);
     int16_t ultrasonic_get();
 
     void counter_set_mode(uint8_t ch, uint8_t mode);
@@ -117,13 +117,13 @@ class Ftduino {
 
     // -------- ultrasonic ---------------
     void pulldown_c1_init();
-    void pulldown_c1_enable(char on);
+    void pulldown_c1_enable(bool on);
 
     void timer3_compa_interrupt_exec();
     CLASS_IRQ(timer3_compa_interrupt, TIMER3_COMPA_vect);
     
     void usart_init();
-    void usart_enable(int8_t on);
+    void usart_enable(bool on);
     void usart1_interrupt_exec();
     CLASS_IRQ(usart1_interrupt, USART1_RX_vect);
 
