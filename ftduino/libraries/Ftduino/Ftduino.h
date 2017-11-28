@@ -68,17 +68,12 @@ class Ftduino {
     void counter_clear(uint8_t ch);
     bool counter_get_state(uint8_t ch);
 
-#ifndef ALTERNATE_COUNTER
-    uint8_t counter_debug = 0;
-#endif
-    
   private:
 
     // --------------- ADC -------------
     void adc_init();
     
     void adc_prepare(uint8_t ch);
-    void adc_start();
     uint16_t adc_get(uint8_t ch);
     uint16_t adc_get_r(uint8_t ch);
     uint16_t adc_get_v(uint8_t ch);

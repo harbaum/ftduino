@@ -79,7 +79,7 @@ void Ftduino::adc_interrupt_exec() {
   if(!(adc_state & 1))
     adc_prepare(adc_state>>1);
   else
-    adc_start();
+    ADCSRA |= (1<<ADSC);
 }
 
 // the IRQ handler itself is static
@@ -108,10 +108,6 @@ void Ftduino::adc_prepare(uint8_t ch) {
     ADCSRB =  (1<<MUX5);  // MUX5 = 1     -"-
   }
   
-  ADCSRA |= (1<<ADSC);
-}
-
-void Ftduino::adc_start() {
   ADCSRA |= (1<<ADSC);
 }
 
@@ -188,11 +184,11 @@ uint16_t Ftduino::adc_get_r(uint8_t ch) {
 
 /* a switch is considered closed if the resistance is < 100R */
 uint16_t Ftduino::adc_get_s(uint8_t ch) {
-  return (pgm_read_word_near(adc2r + adc_get(ch)) < 100 );
+  return( adc_get_r(ch) < 100 );
 }
 
 uint16_t Ftduino::adc_get_v(uint8_t ch) {
-  return 5000l * adc_get(ch) / 1023;
+  return 10000l * adc_get(ch) / 1023;
 }
 
 uint16_t Ftduino::input_get(uint8_t ch) {
@@ -699,12 +695,8 @@ void Ftduino::ext_interrupt_exec(uint8_t counter) {
         // reduce pending times of all other pending timers by the time
         // the one we just took from the list of scheduled ones
         for(uint8_t c=0;c<4;c++)
-          if((c != next_pending) && (counter_reload_time[c] != 0xff)) {
-            if(counter_reload_time[c] == next_reload_time)
-              counter_debug++;
-            
+          if((c != next_pending) && (counter_reload_time[c] != 0xff)) 
             counter_reload_time[c] -= next_reload_time;
-          }
 
         // the current timer needs to be scheduled
         // get remaining timer value, byte value only works here with max 1ms filter
