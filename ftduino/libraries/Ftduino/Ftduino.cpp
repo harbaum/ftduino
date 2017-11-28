@@ -645,13 +645,13 @@ void Ftduino::counter_set_mode(uint8_t ch, uint8_t mode) {
   counter_modes |= mode << ch_idx;   // set new mode bits
 }
 
-uint8_t Ftduino::counter_get_state(uint8_t ch) {
+bool Ftduino::counter_get_state(uint8_t ch) {
   if(ch == Ftduino::C1) return !(PIND & (1<<2));
   if(ch == Ftduino::C2) return !(PIND & (1<<3));
   if(ch == Ftduino::C3) return !(PINB & (1<<5));
   if(ch == Ftduino::C4) return !(PINB & (1<<6));
 
-  return 0;
+  return false;
 }
 
       

@@ -66,7 +66,7 @@ class Ftduino {
     void counter_set_mode(uint8_t ch, uint8_t mode);
     uint16_t counter_get(uint8_t ch);
     void counter_clear(uint8_t ch);
-    uint8_t counter_get_state(uint8_t ch);
+    bool counter_get_state(uint8_t ch);
 
 #ifndef ALTERNATE_COUNTER
     uint8_t counter_debug = 0;
