@@ -182,9 +182,9 @@ uint16_t Ftduino::adc_get_r(uint8_t ch) {
   return pgm_read_word_near(adc2r + adc_get(ch));
 }
 
-/* a switch is considered closed if the resistance is < 100R */
+/* a switch is considered closed if the resistance is < 500R */
 uint16_t Ftduino::adc_get_s(uint8_t ch) {
-  return( adc_get_r(ch) < 100 );
+  return( adc_get_r(ch) < 500 );
 }
 
 uint16_t Ftduino::adc_get_v(uint8_t ch) {
