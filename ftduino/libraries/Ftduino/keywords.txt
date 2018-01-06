@@ -1,0 +1,84 @@
+#######################################
+# Syntax Coloring Map For ftDuino
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+Ftduino	KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init	KEYWORD2
+
+input_set_mode	KEYWORD2
+input_get	KEYWORD2
+
+counter_set_mode	KEYWORD2
+C_EDGE_NONE	KEYWORD2
+C_EDGE_RISING	KEYWORD2
+C_EDGE_FALLING	KEYWORD2
+C_EDGE_BOTH	KEYWORD2
+counter_get	KEYWORD2
+counter_clear	KEYWORD2
+counter_get_state	KEYWORD2
+
+ultrasonic_enable	KEYWORD2
+ultrasonic_get	KEYWORD2
+
+output_set	KEYWORD2
+
+motor_set	KEYWORD2
+
+LEFT	KEYWORD2
+RIGHT	KEYWORD2
+BRAKE	KEYWORD2
+
+HI	KEYWORD2
+LO	KEYWORD2
+OFF	KEYWORD2
+MAX	KEYWORD2
+
+RESISTANCE	KEYWORD2
+SWITCH	KEYWORD2
+VOLTAGE	KEYWORD2
+
+I1	KEYWORD2
+I2	KEYWORD2
+I3	KEYWORD2
+I4	KEYWORD2
+I5	KEYWORD2
+I6	KEYWORD2
+I7	KEYWORD2
+I8	KEYWORD2
+
+M1	KEYWORD2
+M2	KEYWORD2
+M3	KEYWORD2
+M4	KEYWORD2
+
+O1	KEYWORD2
+O2	KEYWORD2
+O3	KEYWORD2
+O4	KEYWORD2
+O5	KEYWORD2
+O6	KEYWORD2
+O7	KEYWORD2
+O8	KEYWORD2
+
+C1	KEYWORD2
+C2	KEYWORD2
+C3	KEYWORD2
+C4	KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+ftduino	LITERAL1
+Ftduino	LITERAL1
