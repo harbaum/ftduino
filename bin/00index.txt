@@ -1,0 +1,16 @@
+; list of all compiled sketches in this directory
+
+[ftduino_direct]
+name: ftDuino direct
+file: ftduino_direct.ino.hex
+version: 0.9.7
+
+[Blink]
+name: Blink
+file: Blink.ino.hex
+version: 0.0.1
+
+[ComPort]
+name: COM port demo
+file: ComPort.ino.hex
+version: 0.0.1
