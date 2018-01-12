@@ -11,3 +11,7 @@ Kombisensor 158402 3-in-1 Orientierungssensor``` ([PDF](https://content.ugfische
 I²C:
 
 ![adapter between ftduino and ft sensor](ftduino.jpg)
+
+This is how the setup looks right before assembly:
+
+![disassembled](parts.jpg)
