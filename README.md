@@ -1,9 +1,35 @@
 # ftDuino
 
-This repository contains support files for the ftDuino fischertechnik
-and Arduino compatible controller.
+The ftDuino is an [arduino](http://arduino.cc) compatible controller for the
+[fischertechnik construction toy](http://fischertechnik.de).
 
-![Early version of the ftDuino with OLED mounted](doc/ftduino.jpg)
+The ftDuino is similar to the fischertechnik TXT in size and shape as
+well as electrically and can usually be used as a drop-in-replacement
+to this controller.
+
+The ftDuino combines the sophisticated mechanics of the fischertechnik
+toy with the versatility of the arduino world allowing anyone to create
+and program awsome machines.
+
+![ftDuino based robot](doc/ftduino.jpg)
+
+## Features of the ftDuino
+
+   - 8 universal analog inputs I1 to I8
+   - 4 fast counter inputs C1 to C4
+   - 8 analog outputs O1 to O8 which can be combined as motor outputs M1 to M4
+   - I²C connector like the fischertechnik TX controller  
+   - compatible to standard fischertechnik 9V power supply
+   - compatible with Arduino Leonardo
+
+## Videos
+
+See the ftDuino in action on [youtube](https://www.youtube.com/playlist?list=PLi6a2BPpYcCTMfehFcKaVUSZGubVMpxHx).
+
+## About this repository
+
+This repository contains support files to enable ftDuino support in
+the Arduino IDE.
 
 ## Installation
 
