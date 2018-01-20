@@ -14,9 +14,6 @@
     static void name(void) asm(STRINGIFY(vector)) \
     __attribute__ ((signal, __INTR_ATTRS))
 
-// there are two very different counter implementations
-#define ALTERNATE_COUNTER
-    
 extern const PROGMEM unsigned short adc2r[];
 
 // the PWM rate is roughly SPI-CLK/36/CYCLE_LEN
@@ -59,6 +56,9 @@ class Ftduino {
 
     void output_set(uint8_t port, uint8_t mode, uint8_t pwm);
     void motor_set(uint8_t port, uint8_t mode, uint8_t pwm);
+    void motor_counter(uint8_t port, uint8_t mode, uint8_t pwm, uint16_t counter);
+    bool motor_counter_active(uint8_t port);
+    void motor_counter_set_brake(uint8_t port, bool on);
 
     void ultrasonic_enable(bool ena);
     int16_t ultrasonic_get();
@@ -129,19 +129,11 @@ class Ftduino {
     // ------- counter inputs ------------
     void counter_init(void);
     void counter_timer_exceeded(uint8_t c);
+    bool counter_get_pin_state(uint8_t c);
 
-#ifndef ALTERNATE_COUNTER
-    void timer1_compb_interrupt_exec();
-    CLASS_IRQ(timer1_compb_interrupt, TIMER1_COMPB_vect);
-
-    // keep track for which port the timer will fire next
-    int8_t counter_timer = -1;
-    uint8_t counter_reload_time[4] = { 0xff, 0xff, 0xff, 0xff };
-#else
     // time when last event has been seen
     uint32_t counter_event_time[4] = { 0,0,0,0 };
     void counter_check_pending(uint8_t ch);
-#endif
 
     uint8_t counter_in_state;
     
@@ -150,6 +142,7 @@ class Ftduino {
     CLASS_IRQ(ext_interrupt3, INT3_vect);
     CLASS_IRQ(pc_interrupt, PCINT0_vect);
 
+    uint8_t counter4motor;
     uint16_t counter_val[4];
     uint8_t counter_modes;
 };

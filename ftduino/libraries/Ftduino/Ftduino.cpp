@@ -365,6 +365,30 @@ void Ftduino::motor_set(uint8_t port, uint8_t mode, uint8_t pwm) {
   }
 }
 
+bool Ftduino::motor_counter_active(uint8_t port) {
+  return(counter4motor & (1<< (port - Ftduino::M1)));
+}
+
+void Ftduino::motor_counter_set_brake(uint8_t port, bool on) {
+  uint8_t brake_bit = 0x10 << (port - Ftduino::M1);
+  if(on) counter4motor |=  brake_bit;
+  else   counter4motor &= ~brake_bit;
+}
+
+void Ftduino::motor_counter(uint8_t port, uint8_t mode, uint8_t pwm, uint16_t counter) {
+  // enable counter
+  counter_set_mode(port - Ftduino::M1 + Ftduino::C1, Ftduino::C_EDGE_RISING);
+
+  // load counter so that it passes 0 after "counter" events
+  counter_val[port - Ftduino::M1] = 0 - counter;
+
+  // set flag indicating that the counter is being used for a motor
+  counter4motor |= (1<< (port - Ftduino::M1));
+
+  // start motor using the given values
+  motor_set(port, mode, pwm);
+}
+
 // control pull-down on c1 to trigger distance sensor
 void Ftduino::pulldown_c1_init() {
   DDRE |= (1<<2);      // pulldown is controlled by PE.2 (#HWB)
@@ -462,109 +486,36 @@ int16_t Ftduino::ultrasonic_get() {
   return ultrasonic_rx_data[0]*128 + ultrasonic_rx_data[1];
 }
 
-#ifndef ALTERNATE_COUNTER
-// the fast counter inputs are the most complex part. This is mainly due to the
-// filtering.
-
-// Basic principle:
-// 1) Any changing counter input triggers a pin change hardware interrupt
-// 2) The pin change interrupt handler starts a timer which fires after 1 ms
-//    -> Any further event will restart the timer
-// 3) The timer interrupt fires once there hasn't been any change for 1 ms
-//    and it's checked whether the input has actually changed state. If it
-//    has and if the edge matches the requested one, then the counter is
-//    increased
-
-// Problem due to the fact that there is only one timer for four counters.
-// Solution: A list of scheduled "future events" is kept and the timer is
-// always setup for the next event. So when a pin change irq occurs:
-// 1) The timer is not running at all
-//    - Load timer with current counter
-// 2) The timer is already running
-//   a) It's running for a different counter 
-//      - The current counter will be placed in a list of "scheduled counters"
-//      - It's "reload" time is set to the time this counter needs to be
-//        processed after the one currently in progress
-//   b) It's running for the current counter
-//      1) There are other counters waiting for earlier processing
-//         - The next scheduled counter is loaded into the timer incl. the
-//           time that remained from the previous timer
-//         - The current timer is scheduled for later processing
-//         - the times of all other scheduled timers are reduced by
-//           the time of the counter which is now being set in the timer
-//      2) There's no other counter waiting
-//         - Reload timer for current counter 
-
-// Example: Timer is being used for counter 0, counter 1 and 2 are scheduled
-//          with a reload time of 200 and 300 us
-// Timer
-// 0 |------------------->|          ( 1ms   )
-// Scheduled:
-// 1                      |--->|     ( 200us )
-// 2                      |------->| ( 300us )
-//        Pin 0 change ^
-// A pin change event occurs on counter input 0 100 us before the timer expires.
-// Result:
-// - The counter scheduled with the lowest timeout value is counter 1. 
-// - Counter 1 plus is loaded into the timer with the 100us time remaining
-//   from the previous timer added. 
-// - The previosly active counter is scheduled to fire at 1ms minus the 
-//   time the timer will run for the current counter 1 (incl the remains)
-// - All counters that stay scheduled are reduced by the time
-//   that was scheduled for counter 1
-
-// Afterwards the state should be:
-// Timer
-// 1                   |----->|                  ( 200 + 100 us       )
-// Scheduled:
-// 0                          |--------------->| ( 1ms - (200+100) us )
-// 2                          |--->|             ( 300 - 200 us       )
-
-// the one shot timer itself, usually fires 1 ms after a counter event
-void Ftduino::timer1_compb_interrupt_exec() {
-  // this test shouldn't be needed as the irq is supposed to only fire
-  // if a valid counter has been set
-  if(counter_timer >= 0) {
-    counter_timer_exceeded(counter_timer);
-    counter_timer = -1;
-  }
-
-  // check if any of the "next reload times"
-  // is zero and process them immediately
-  for(uint8_t c=0;c<4;c++)
-    if(counter_reload_time[c] == 0)
-      counter_timer_exceeded(c);
-  
-  // check for the next pending counter_reload_time
-  uint8_t next_pending = 0xff;
-  uint8_t next_reload_time = 0xff;
-  for(uint8_t c=0;c<4;c++) {
-    if(counter_reload_time[c] < next_reload_time) {
-      next_reload_time = counter_reload_time[c];
-      next_pending = c;
-    }  
-  }
-
-  // clear pending counter timer and start it
-  if(next_pending != 0xff) {
-    counter_reload_time[next_pending] = 0xff;
-    counter_timer = next_pending;
-
-    // reduce pending times of all other pending
-    // timers
-    for(uint8_t c=0;c<4;c++)
-      if((c != next_pending) && (counter_reload_time[c] != 0xff))
-        counter_reload_time[c] -= next_reload_time;
-      
-    TCNT1 = 0xffff - next_reload_time;
-  }
+bool Ftduino::counter_get_pin_state(uint8_t c) {
+  uint8_t state = 1;
+  if(c == 0)      state = PIND & (1<<2);
+  else if(c == 1) state = PIND & (1<<3);
+  else if(c == 2) state = PINB & (1<<5);
+  else            state = PINB & (1<<6);
+  return(state != 0);
 }
 
-void Ftduino::timer1_compb_interrupt() {
-  ftduino.timer1_compb_interrupt_exec();
-}
-#else
 void Ftduino::counter_check_pending(uint8_t counter) {
+  // check if the current counter is being used for a motor
+  if(counter4motor & (1 << counter)) {
+    // get current port state
+    bool state = counter_get_pin_state(counter);
+  
+    // Something has happened. Check if it's a rising edge
+    if(state && !(counter_in_state & (1<<counter))) {
+      // check if this event (once processed after all debouncing) will
+      // make the counter roll over to 0
+      if(counter_val[counter] == 0xffff ) {
+        // ok, counter will reach zero and a motor is active. Stop it!
+        motor_set(counter + Ftduino::M1, 
+          (counter4motor & (0x10 << counter))?Ftduino::BRAKE:Ftduino::OFF, 
+          Ftduino::MAX);
+        // unlink motor and counter
+        counter4motor &= ~(1 << counter);
+      }
+    }
+  }
+    
   // check if there is a "unprocessed event for this counter
   if(counter_event_time[counter]) {
     // check if it's longer than the timeout time
@@ -572,15 +523,10 @@ void Ftduino::counter_check_pending(uint8_t counter) {
       counter_timer_exceeded(counter);
   }
 }
-#endif
 
 void Ftduino::counter_timer_exceeded(uint8_t c) {
   // get current port state
-  uint8_t state;
-  if(c == 0)      state = PIND & (1<<2);
-  else if(c == 1) state = PIND & (1<<3);
-  else if(c == 2) state = PINB & (1<<5);
-  else            state = PINB & (1<<6);
+  bool state = counter_get_pin_state(c);
 
   // save last accepted state and only count if
   // the current state differs from the accepted one.
@@ -612,18 +558,12 @@ void Ftduino::counter_timer_exceeded(uint8_t c) {
     counter_val[c]++;
 
   // this counter timer has been processed
-#ifndef ALTERNATE_COUNTER
-  counter_reload_time[c] = 0xff;
-#else
   counter_event_time[c] = 0;
-#endif
 }
 
 uint16_t Ftduino::counter_get(uint8_t ch) {
   if((ch >= Ftduino::C1) && (ch <= Ftduino::C4)) {
-#ifdef ALTERNATE_COUNTER
-  counter_check_pending(ch - Ftduino::C1);  
-#endif
+    counter_check_pending(ch - Ftduino::C1);  
     return counter_val[ch-Ftduino::C1];
   }
   
@@ -642,87 +582,15 @@ void Ftduino::counter_set_mode(uint8_t ch, uint8_t mode) {
 }
 
 bool Ftduino::counter_get_state(uint8_t ch) {
-  if(ch == Ftduino::C1) return !(PIND & (1<<2));
-  if(ch == Ftduino::C2) return !(PIND & (1<<3));
-  if(ch == Ftduino::C3) return !(PINB & (1<<5));
-  if(ch == Ftduino::C4) return !(PINB & (1<<6));
-
-  return false;
+  return !counter_get_pin_state(ch-Ftduino::C1);
 }
-
       
 // this irq fires whenever anything on one of the four
 // counter ports
 void Ftduino::ext_interrupt_exec(uint8_t counter) {
-#ifndef ALTERNATE_COUNTER
-  // stop counter to make sure IRQ dosn't fire while this routine executes
-  TCCR1B &= ~((1<<CS12) | (1<<CS11) | (1<<CS10)); // stop timer 1 
-
-  // check if the timer is not running for the current counter
-  // and check if timer is already active it is when it's above the OCR1A value
-  if((counter_timer != counter) && (TCNT1 >= 0xffff - COUNTER_FILTER)) {
-
-    // timer is running, but it's not running for the current counter
-    
-    // get remaining timer value, byte value only works here with max 1ms filter
-    uint8_t t_rem = 0xffff - TCNT1;
-
-    // reload value fpr this event to be used when the current timer expires
-    // schedule this counter for later processing
-    counter_reload_time[counter] = COUNTER_FILTER - t_rem;
-  } else {
-
-    // Check if the timer is already running for the current counter
-    if(counter_timer == counter) {
-      // since we'll be reloading the timer any other timer marked as pending
-      // will fire beforehand
-
-      // check for the next pending counter_reload_time
-      uint8_t next_pending = 0xff;
-      uint8_t next_reload_time = 0xff;
-      for(uint8_t c=0;c<4;c++) {
-        if(counter_reload_time[c] < next_reload_time) {
-          next_reload_time = counter_reload_time[c];
-          next_pending = c;
-        }  
-      }
-
-      // clear pending counter timer and start it
-      if(next_pending != 0xff) {
-        counter_reload_time[next_pending] = 0xff;
-        counter_timer = next_pending;
-
-        // reduce pending times of all other pending timers by the time
-        // the one we just took from the list of scheduled ones
-        for(uint8_t c=0;c<4;c++)
-          if((c != next_pending) && (counter_reload_time[c] != 0xff)) 
-            counter_reload_time[c] -= next_reload_time;
-
-        // the current timer needs to be scheduled
-        // get remaining timer value, byte value only works here with max 1ms filter
-        uint8_t t_rem = 0xffff - TCNT1;
-
-        // schedule this counter for later processing
-        counter_reload_time[counter] = COUNTER_FILTER - (t_rem + next_reload_time);
-
-        // run the timer for the next scheduled counter plus the time
-        // that the timer was still expected to be run
-        TCNT1 = 0xffff - (next_reload_time + t_rem);
-      }
-    } else {
-      // no other counter scheduled: load this one
-      counter_timer = counter;
-
-      // start one shot timer1 to fire an interrupt after 1 msec
-      TCNT1 = 0xffff - COUNTER_FILTER;
-    }   
-  }
-  TCCR1B |= (1<<CS11) | (1<<CS10); // restart timer 1 at 1/64 F_CPU
-#else
-  // alternate implementation using the micros() function
+  // implementation using the micros() function
   counter_check_pending(counter);  
   counter_event_time[counter] = micros();
-#endif
 }
 
 void Ftduino::ext_interrupt2() {
@@ -758,6 +626,10 @@ void Ftduino::counter_init(void) {
 
   // port change interrupts are not used as they cannot easily be made to cope with
   // input signal bouncing
+
+  // no counter is currently being used to control an encoder motor and all four motor
+  // brakes are on
+  counter4motor = 0xf0;
 
   // default mode is to not count at all
   counter_modes = (Ftduino::C_EDGE_NONE << 6) | (Ftduino::C_EDGE_NONE << 4) |
