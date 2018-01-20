@@ -30,9 +30,9 @@ ultrasonic_get	KEYWORD2
 output_set	KEYWORD2
 
 motor_set	KEYWORD2
-motor_counter KEYWORD2
-motor_counter_active KEYWORD2
-motor_counter_set_brake KEYWORD2
+motor_counter	KEYWORD2
+motor_counter_active	KEYWORD2
+motor_counter_set_brake	KEYWORD2
 
 
 #######################################
