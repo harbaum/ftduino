@@ -3,7 +3,7 @@
 [ftduino_direct]
 name: ftDuino direct
 file: ftduino_direct.ino.hex
-version: 0.9.7
+version: 1.1.0
 
 [Blink]
 name: Blink
