@@ -142,8 +142,8 @@ class Ftduino {
     CLASS_IRQ(ext_interrupt3, INT3_vect);
     CLASS_IRQ(pc_interrupt, PCINT0_vect);
 
-    uint8_t counter4motor;
-    uint16_t counter_val[4];
+    volatile uint8_t counter4motor;
+    volatile uint16_t counter_val[4];
     uint8_t counter_modes;
 };
 
