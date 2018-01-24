@@ -1,37 +1,34 @@
 {
-    "packages":[
-	{
-            "name":"ftduino",
-            "maintainer":"Till Harbaum",
-            "websiteURL":"https://github.com/harbaum/ftduino",
-            "email":"ftduino@harbaum.org",
-            "help":{
-		"online":"https://github.com/harbaum/ftduino"
+    "packages": [
+        {
+            "email": "info@ftduino.de",
+            "websiteURL": "https://ftduino.de",
+            "name": "ftduino",
+            "help": {
+                "online": "https://ftduino.de"
             },
-            "platforms":[
-		{
-		    "name": "ftDuino",
-		    "architecture": "avr",
-		    "version": "0.0.1",
-		    "category": "ftDuino",
-		    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
-
-		    "archiveFileName": "ftduino-0.0.1.zip",
-		    "checksum": "SHA-256:6ceb7d660cf19d37cefc96857bc439bbeaad1fd7f1842662ea488a84261274ca",
-		    "size": "123516",
-		    "help": {
-			"online": "https://github.com/harbaum/ftduino/issues"
-		    },
-		    "boards": [
-			{
-			    "name": "ftDuino fischertechnik compatible controller"
-			}
-		    ]
-		}
-		
+            "platforms": [
+                {
+                    "size": "123516",
+                    "boards": [
+                        {
+                            "name": "ftDuino fischertechnik compatible controller"
+                        }
+                    ],
+                    "name": "ftDuino",
+                    "help": {
+                        "online": "http://ftduino.de/issues"
+                    },
+                    "archiveFileName": "ftduino-0.0.1.zip",
+                    "category": "ftDuino",
+                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
+                    "version": "0.0.1",
+                    "architecture": "avr",
+                    "checksum": "SHA-256:6ceb7d660cf19d37cefc96857bc439bbeaad1fd7f1842662ea488a84261274ca"
+                }
             ],
-            "tools":[
-	    ]
-	}
+            "maintainer": "Till Harbaum",
+            "tools": []
+        }
     ]
 }
