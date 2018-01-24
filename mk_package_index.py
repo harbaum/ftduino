@@ -22,8 +22,6 @@ RELEASES_PATH = "releases"
 
 # -----------------------------------
 
-VERSIONS = [ "0.0.1" ]
-
 import json, hashlib, os
 
 index = { }
