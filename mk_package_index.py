@@ -9,7 +9,7 @@
 PACKAGE_NAME = "ftduino"
 
 MAINTAINER = "Till Harbaum"
-WEBSITE = "https://ftduino.de"
+WEBSITE = "http://ftduino.de"
 EMAIL = "info@ftduino.de"
 HELP = "http://ftduino.de/issues"
 BOARDNAME = "ftDuino fischertechnik compatible controller"
