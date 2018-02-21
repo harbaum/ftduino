@@ -3,7 +3,9 @@
 These are mesh files for the ftDuino 1.1 case. At least ```bottom.stl``` and
 one of ```top_with_isp.stl``` or ```top_without_isp.stl``` are needed.
 
-![bottom case](images/bottom.png) ![top case with ISP connector opening](images/top_with_isp.png) ![top case without ISP connector opening](images/top_without_isp.png)
+![bottom case](images/bottom.png) | ![top case with ISP connector opening](images/top_with_isp.png) | ![top case without ISP connector opening](images/top_without_isp.png)
+ --- | --- | ---
+bottom.stl | top_with_isp.stl | top_without_isp.stl
 
 The ```top_with_isp.stl``` is to be used if the ISP connector is to
 be mounted. The ```top_without_isp.stl``` is for boards without ISP
