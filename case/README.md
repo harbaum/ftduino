@@ -11,6 +11,7 @@ connector. The ISP connector hole in ```top_with_isp.stl``` can alternally
 be closed with the ```isp_cap.stl```.
 
 ![ISP connector cap](images/isp_cap.png)
+ISP connector cap
 
 The ```i2c_protector.stl``` is a small piece that fits onto the 6 pin
 I²C connector if it's not in use and prevents it from accidetially
