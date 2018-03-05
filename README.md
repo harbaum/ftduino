@@ -3,6 +3,8 @@
 The ftDuino is an [arduino](http://arduino.cc) compatible controller for the
 [fischertechnik construction toy](http://fischertechnik.de).
 
+The latest version of the german manual can be found [here](https://github.com/harbaum/ftduino/raw/master/manual.pdf).
+
 The ftDuino is similar to the fischertechnik TXT in size and shape as
 well as electrically and can usually be used as a drop-in-replacement
 to this controller.
