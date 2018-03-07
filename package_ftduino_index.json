@@ -1,34 +1,52 @@
 {
     "packages": [
         {
+            "name": "ftduino",
+            "maintainer": "Till Harbaum",
             "websiteURL": "http://ftduino.de",
             "email": "info@ftduino.de",
+            "help": {
+                "online": "http://ftduino.de"
+            },
             "platforms": [
                 {
-                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
+                    "name": "ftDuino",
+                    "architecture": "avr",
+                    "version": "0.0.2",
                     "category": "ftDuino",
-                    "archiveFileName": "ftduino-0.0.1.zip",
+                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.2/ftduino-0.0.2.zip",
+                    "archiveFileName": "ftduino-0.0.2.zip",
+                    "checksum": "SHA-256:89421ea5d8206d2941b4757a4fe28985932930f9161e6a5995da0b735bf4fae7",
+                    "size": "124313",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
-                    "checksum": "SHA-256:6ceb7d660cf19d37cefc96857bc439bbeaad1fd7f1842662ea488a84261274ca",
-                    "name": "ftDuino",
-                    "version": "0.0.1",
                     "boards": [
                         {
                             "name": "ftDuino fischertechnik compatible controller"
                         }
-                    ],
+                    ]
+                },
+                {
+                    "name": "ftDuino",
                     "architecture": "avr",
-                    "size": "123516"
+                    "version": "0.0.1",
+                    "category": "ftDuino",
+                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
+                    "archiveFileName": "ftduino-0.0.1.zip",
+                    "checksum": "SHA-256:6ceb7d660cf19d37cefc96857bc439bbeaad1fd7f1842662ea488a84261274ca",
+                    "size": "123516",
+                    "help": {
+                        "online": "http://ftduino.de/issues"
+                    },
+                    "boards": [
+                        {
+                            "name": "ftDuino fischertechnik compatible controller"
+                        }
+                    ]
                 }
             ],
-            "help": {
-                "online": "http://ftduino.de"
-            },
-            "tools": [],
-            "name": "ftduino",
-            "maintainer": "Till Harbaum"
+            "tools": []
         }
     ]
 }
