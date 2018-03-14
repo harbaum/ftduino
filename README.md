@@ -36,8 +36,23 @@ the Arduino IDE.
 ## Installation
 
 You can easily add custom board support packages to the Arduino IDE
-as described [here](https://learn.adafruit.com/add-boards-arduino-v164/overview).
+as described e.g. [here](https://learn.adafruit.com/add-boards-arduino-v164/overview).
 
-Follow this instruction but use the [https://raw.githubusercontent.com/harbaum/ftduino/master/package_ftduino_index.json](https://raw.githubusercontent.com/harbaum/ftduino/master/package_ftduino_index.json) file instead. Afterwards the ftDuino board will show up in board manager from which it can easily be installed.
+You first need to add the download location of the ftDuino setup to
+the preferences of the Arduino IDE:
 
-Once you've done that the ftDuino board shows up in the IDE and can be selected as the board to use.
+![ftDuino IDE preferences](doc/ide_voreinstellungen.png)
+
+Afterwards the ftDuino will show up in the board manager from where
+it can be installed by just one click:
+
+![ftDuino in the board manager](doc/boardverwalter_ftduino.png)
+
+Afterwards the ftDuino can be selected as the current device and
+e.g. the ftDuino code examples will automatically show up in the
+file menu:
+
+![ftDuino examples in the file menu](doc/beispiele_ftduino.png)
+
+The ftDuino is now supported by the Arduino IDE and can be used
+without any further setup.
