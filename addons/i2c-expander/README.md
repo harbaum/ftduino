@@ -1,5 +1,9 @@
 # I²C expander
 
+| ![bottom case](bottom.png) | ![top case](top.png) |
+|:---:|:---:|
+| [`bottom.stl`](bottom.stl) | [`top.stl`](top.stl) |
+
 The I²C expander expands the single 5V I²C port of a ftDuino or
 fischertechnik TX controller by three more ports and contains a level
 shifter to bridge to a fischertechnik TXT compatible 3.3V port.
