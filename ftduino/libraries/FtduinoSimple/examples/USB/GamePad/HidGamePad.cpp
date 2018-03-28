@@ -9,8 +9,8 @@
 static const uint8_t _hidReportDescriptor[] PROGMEM = {
   0x05, 0x01,                // USAGE_PAGE (Generic Desktop)
   0x09, 0x05,                // USAGE (Gamepad)
-  0x85, REPORT_ID,           // REPORT_ID(3)
   0xa1, 0x01,                // COLLECTION (Application)
+  0x85, REPORT_ID,           //   REPORT_ID(3)
   0x09, 0x01,                //   USAGE (Pointer)
   0xa1, 0x00,                //   COLLECTION (Physical)
   0x09, 0x30,                //     USAGE (X)
