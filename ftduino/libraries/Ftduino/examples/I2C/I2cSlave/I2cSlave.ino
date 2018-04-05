@@ -6,19 +6,13 @@
 #include <Ftduino.h>
 #include <Wire.h>
 
-// #define DEBUG
-
+// Puffer, um den Zustand der Ausgänge zu speichern
 unsigned char output_state[4][2];
 
 void setup() {
-#ifdef DEBUG
-  Serial.begin(115200);
-  while(!Serial);
-  Serial.println("I2cSlave ready");
-#endif
-
   Wire.begin(42);               // tritt I2C-Bus an Adresse #42 als "Slave" bei
-  Wire.onReceive(receiveEvent); // Auf Eregnisse registrieren
+  Wire.onReceive(receiveEvent); // Auf Schreib-Ereignisse registrieren
+  Wire.onRequest(requestEvent); // Auf Lese-Ereignisse registrieren
 
   ftduino.init();
 
@@ -30,31 +24,20 @@ void loop() {
   delay(100);
 }
 
+int addr = 0;
+
 // Funktion, die immer dann aufgerufen wird, wenn vom Master
 // Daten üner I2C gesehndet werden. Diese Funktion wurde in
 // setup() registriert.
 void receiveEvent(int num) {
-
   // es muss mindestens ein Byte empfangen worden sein
   if(Wire.available()) {
     // erstes Byte ist die Register-Adresse
-    int addr = Wire.read();
+    addr = Wire.read();
 
-    // nächstes Byte ist das Längenfeld bei Übertragung eines
-    // ganzen Blocks. Das wird ignoriert, da wir die gesamte
-    // Nachrichtenlänge kennen
-    if(num > 2) Wire.read();
-
-    // es muss ein weiteres Byte empfangen worden sein
+    // alle weiteren Bytes sind Datenbytes
     while(Wire.available()) {
       unsigned char value = Wire.read();
-
-#ifdef DEBUG
-      Serial.print("write addr: ");
-      Serial.print(addr, DEC);
-      Serial.print(" val: ");
-      Serial.println(value, HEX);
-#endif
 
       // Adressen 0x00 bis 0x0f schalten und kontrollieren
       // die Ausgänge
@@ -72,7 +55,7 @@ void receiveEvent(int num) {
           // die zugehörigen Ausgänge O1, O3, O5 oder O7 nicht als
           // Motorausgang konfiguriert sind
           if(((port&1) == 0) || 
-             ((port&1) == 1) && ((output_state[port-1][0] & 1) != 1)) {
+            ((port&1) == 1) && ((output_state[port-1][0] & 1) != 1)) {
               // skaliere 0...255 nach 0..Ftduino::MAX
               int pwm = (value * Ftduino::MAX)/255;
               int mode;
@@ -96,7 +79,34 @@ void receiveEvent(int num) {
           }
         }
       }
+      
+      // Die geraden Adressen 0x10 bis 0x1f konfigurireen die Eingänge
+      if((addr >= 0x10)&&(addr <= 0x1f) && (!(addr & 1))) {
+        unsigned char port = (addr - 0x10) >> 1;
+        int mode;
+
+        switch(value) {
+          case 0x00: mode = Ftduino::VOLTAGE;    break;
+          case 0x01: mode = Ftduino::RESISTANCE; break;
+          case 0x02: mode = Ftduino::SWITCH;     break;
+          default:   mode = Ftduino::VOLTAGE;          
+        }
+        
+        ftduino.input_set_mode(Ftduino::I1+port, mode);
+      }
+      
       addr++;  // nächste Adresse
     }
   }
 }
+
+void requestEvent() {
+  // Eingangswerte lesen. Man kann maximal einen Eingang zur Zeit
+  // lesen
+  if((addr >= 0x10) && (addr <= 0x1f)) {
+    unsigned short val = ftduino.input_get((addr - 0x10)>>1);
+    if(!(addr & 1)) Wire.write(val & 0xff);
+    Wire.write(val >> 8);
+  }
+}
+

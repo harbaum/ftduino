@@ -42,3 +42,25 @@ Registerbelegungen für Ausgänge O1 bis O8 bzw. M1 bis M4
 
 Registerbelegungen für Eingänge I1 bis I8
 -----------------------------------------
+Es können maximal die beiden Bytes eines Eingangs in einem gemeinsamen I2C-Transfer
+gelesen werden. Jeder Eingang muss einzeln gelesen werden
+0x10 : schreiben: Eingangs-Modus I1
+       0x00 - Spannung
+       0x01 - Widerstand
+       0x02 - Schalter
+       lesen: Eingangswert I1, Low-Byte (LSB)
+0x11 : lesen: Eingangswert I1, High-Byte (MSB)
+0x12 : Eingangs-Modus/Eingangswert I2, siehe Eingangs-Modus I1 (Register 0x10)
+0x13 : Eingangswert I2, siehe Eingangswert I1 (Register 0x11)
+0x14 : Eingangs-Modus/Eingangswert I3, siehe Eingangs-Modus I1 (Register 0x10)
+0x15 : Eingangswert I3, siehe Eingangswert I1 (Register 0x11)
+0x16 : Eingangs-Modus/Eingangswert I4, siehe Eingangs-Modus I1 (Register 0x10)
+0x17 : Eingangswert I4, siehe Eingangswert I1 (Register 0x11)
+0x18 : Eingangs-Modus/Eingangswert I5, siehe Eingangs-Modus I1 (Register 0x10)
+0x19 : Eingangswert I5, siehe Eingangswert I1 (Register 0x11)
+0x1a : Eingangs-Modus/Eingangswert I6, siehe Eingangs-Modus I1 (Register 0x10)
+0x1b : Eingangswert I6, siehe Eingangswert I1 (Register 0x11)
+0x1c : Eingangs-Modus/Eingangswert I7, siehe Eingangs-Modus I1 (Register 0x10)
+0x1d : Eingangswert I7, siehe Eingangswert I1 (Register 0x11)
+0x1e : Eingangs-Modus/Eingangswert I8, siehe Eingangs-Modus I1 (Register 0x10)
+0x1f : Eingangswert I8, siehe Eingangswert I1 (Register 0x11)
