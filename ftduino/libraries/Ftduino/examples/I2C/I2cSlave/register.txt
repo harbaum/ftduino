@@ -1,0 +1,44 @@
+I2C-Register, wie sie vom I2cSlave.ino für den ftDuino implementiert werden.
+Werte mit vorangestelltem 0x sind in Hexadezimalschreibweise dargestellt.
+
+Registerbelegungen für Ausgänge O1 bis O8 bzw. M1 bis M4
+--------------------------------------------------------
+0x00 : Ausgangs-Modus O1/M1
+       0x0x - Betrieb als Einzelausgang
+       0x00 - Einzelausgang offen/hochohmig (tristate)
+       0x01 - Einzelausgang gegen +9V geschaltet (High)
+       0x02 - Einzelausgang gegen Masse geschaltet (Low)
+       0x1x - Ausgang mit O2 zum Motorausgang M1 gekoppelt
+       0x10 - Motorausgang ungebremst aus (off)
+       0x11 - Motorausgang gebremst aus (brake)
+       0x12 - Motorausgang linksdrehend an
+       0x13 - Motorausgang rechsdrehend an
+0x01 : Ausgangswert (PWM) O1/M1 von 0 (aus) bis 255 (100% an)
+       Der Zustand des Hardwareausgangs wird beim Schreiben
+       dieses Registers aktualisiert
+0x02 : Ausgangs-Modus O2
+       Der Inhalt dieses Registers wird ignoriert, wenn Ausgangs-Modus O1/M1
+       (Register 0x00) den Wert 0x1x enthält
+       0x00 - Einzelausgang offen/hochohmig (tristate)
+       0x01 - Einzelausgang gegen +9V geschaltet (High)
+       0x02 - Einzelausgang gegen Masse geschaltet (Low)
+0x03 : Ausgangswert (PWM) O2 von 0 (aus) bis 255 (100% an)
+       Der Inhalt dieses Registers wird ignoriert, wenn Ausgangs-Modus O1/M1
+       (Register 0x00) den Wert 0x1x enthält
+       Der Zustand des Hardwareausgangs wird beim Schreiben
+       dieses Registers aktualisiert
+0x04 : Ausgangs-Modus O3/M2, siehe Ausgang-Modus O1 (Register 0x00)
+0x05 : Ausgangswert O3/M2, siehe Ausgangwert O1 (Register 0x01)
+0x06 : Ausgangs-Modus O4, siehe Ausgang-Modus O2 (Register 0x02)
+0x07 : Ausgangswert O4, siehe Ausgangwert O2 (Register 0x03)
+0x08 : Ausgangs-Modus O5/M3, siehe Ausgang-Modus O1 (Register 0x00)
+0x09 : Ausgangswert O5/M3, siehe Ausgangwert O1 (Register 0x01)
+0x0a : Ausgangs-Modus O6, siehe Ausgang-Modus O2 (Register 0x02)
+0x0b : Ausgangswert O6, siehe Ausgangwert O2 (Register 0x03)
+0x0c : Ausgangs-Modus O7/M4, siehe Ausgang-Modus O1 (Register 0x00)
+0x0d : Ausgangswert O7/M4, siehe Ausgangwert O1 (Register 0x01)
+0x0e : Ausgangs-Modus O8, siehe Ausgang-Modus O2 (Register 0x02)
+0x0f : Ausgangswert O8, siehe Ausgangwert O2 (Register 0x03)
+
+Registerbelegungen für Eingänge I1 bis I8
+-----------------------------------------
