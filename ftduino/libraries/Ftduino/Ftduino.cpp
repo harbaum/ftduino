@@ -75,8 +75,13 @@ void Ftduino::adc_interrupt_exec() {
   // next channel, lowest channel bit is state toggle
   adc_state = (adc_state+1)&15;
   
+  // We abuse the adc irq to frequently check for events
+  // in the counter inputs. There must be a nicer solution
+  if(!(adc_state & 3))
+    counter_check_pending(adc_state >> 2);
+  
   // switch to next channel and restart conversion
-  if(!(adc_state & 1))
+  if(!(adc_state & 1)) 
     adc_prepare(adc_state>>1);
   else
     ADCSRA |= (1<<ADSC);
@@ -556,7 +561,7 @@ void Ftduino::counter_timer_exceeded(uint8_t c) {
      (!state && (mode == Ftduino::C_EDGE_FALLING)) ||
      ( state && (mode == Ftduino::C_EDGE_RISING)) )
     counter_val[c]++;
-
+    
   // this counter timer has been processed
   counter_event_time[c] = 0;
 }
