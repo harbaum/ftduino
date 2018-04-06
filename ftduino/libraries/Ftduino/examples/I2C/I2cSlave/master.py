@@ -30,6 +30,9 @@ if bus:
     bus.write_byte_data(CLIENT, 0x24, 0x01)
     # C2 löschen
     bus.write_byte_data(CLIENT, 0x25, 0x01)
+
+    # C1 für Ultraschallsensor aktivieren
+    bus.write_byte_data(CLIENT, 0x20, 0x04)
     
     for i in range(10):
         bus.write_i2c_block_data(CLIENT, 0x00, [ 0x12, 0xff ]);
@@ -51,6 +54,11 @@ if bus:
         # b0 = bus.read_byte_data(CLIENT, 0x10)
         # b1 = bus.read_byte_data(CLIENT, 0x11)
         # value = b1*256+b0
+
+        # Distanzsensor an C1 auswerten
+        data = bus.read_i2c_block_data(CLIENT, 0x21, 2)
+        value = struct.unpack("<h", bytes(data))[0]
+        print("C1 Dist: ", value)
 
     # Zählerstand C2 ausgeben
     data = bus.read_i2c_block_data(CLIENT, 0x25, 2)
