@@ -30,6 +30,7 @@ void loop() {
     _delay_us(US_PER_STEP);
     ftduino.motor_set(Ftduino::M2, Ftduino::RIGHT); 
     _delay_us(US_PER_STEP);
+  }
     
   // Taste an I2 gedrückt
   while(ftduino.input_get(Ftduino::I2)) {
