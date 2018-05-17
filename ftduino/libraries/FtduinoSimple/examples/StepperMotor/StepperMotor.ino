@@ -20,7 +20,7 @@ void setup() {
 void loop() {
 
   // Taste an I1 gedrückt
-  if(ftduino.input_get(Ftduino::I1)) {
+  while(ftduino.input_get(Ftduino::I1)) {
     // Motor dreht
     ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
     _delay_us(US_PER_STEP);
@@ -32,7 +32,7 @@ void loop() {
     _delay_us(US_PER_STEP);
     
   // Taste an I2 gedrückt
-  } else if(ftduino.input_get(Ftduino::I2)) {
+  while(ftduino.input_get(Ftduino::I2)) {
     // Motor dreht in Gegenrichtung
     ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
     _delay_us(US_PER_STEP);
