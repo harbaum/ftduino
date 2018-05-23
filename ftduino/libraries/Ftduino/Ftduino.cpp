@@ -79,7 +79,7 @@ void Ftduino::adc_interrupt_exec() {
   // in the counter inputs. There must be a nicer solution
   if(!(adc_state & 3))
     counter_check_pending(adc_state >> 2);
-  
+ 
   // switch to next channel and restart conversion
   if(!(adc_state & 1)) 
     adc_prepare(adc_state>>1);
@@ -406,11 +406,20 @@ void Ftduino::pulldown_c1_enable(bool on) {
 }
 
 void Ftduino::usart1_interrupt_exec() {
+  uint8_t data = UDR1; 
   if(ultrasonic_state == 1) {
-    ultrasonic_rx_data[0] = UDR1 & 0x7f;
-    ultrasonic_state++;
+    // bits of first byte are
+    // 1,valid,w/d#,ID1,ID0,L9,L8,L7
+    // msb should be 10000
+    if((data & 0xf8) == 0x80) {   
+      ultrasonic_rx_data[0] = data & 0x07;
+      ultrasonic_state++;
+    } else
+      ultrasonic_state = 2;  // prevent writing of second byte on error
   } else if(ultrasonic_state == 2) {
-    ultrasonic_rx_data[1] = UDR1 & 0x7f;
+    if((data & 0x80) == 0x00)  
+      ultrasonic_rx_data[1] = data;
+      
     ultrasonic_state++;
     ultrasonic_timeout = 0;  // got a value -> reset timeout
   }
@@ -422,7 +431,7 @@ void Ftduino::usart1_interrupt() {
 
 // usart 1 at 115200 8n1 for utrasonic sensor
 void Ftduino::usart_init() {
-  UBRR1 = F_CPU / (16*115200) - 1;
+  UBRR1 = (F_CPU / 8 / 115200 - 1)/2;
 
   // usart disabled. will be enabled once the sensor has been triggered
   UCSR1B = (1<<RXCIE1);    
@@ -448,10 +457,13 @@ void Ftduino::timer3_compa_interrupt_exec() {
     ultrasonic_state = 0;
     usart_enable(false);        // disable usart so we don't see our own trigger signal  
     pulldown_c1_enable(true);
+    
+    // make next IRQ happen after ~80us
+    TCNT3 = (F_CPU/64/4)-1-20;
   } else {
     ultrasonic_state = 1;
     pulldown_c1_enable(false);
-    usart_enable(true);    
+    usart_enable(true);
   }
 }
 
@@ -471,8 +483,8 @@ void Ftduino::ultrasonic_enable(bool ena) {
     // run timer 3 in ctc mode with OCR3A as top
     TCCR3A = 0;
     TCCR3B = (1<<WGM32) | (1<<CS31) | (1<<CS30);  // 1/64
-    // run isr at ~8Hz
-    OCR3A = (uint16_t)(F_CPU/64/8)-1;
+    // run isr at ~4Hz
+    OCR3A = (uint16_t)(F_CPU/64/4)-1;
     TIMSK3 = (1<<OCIE3A);
   } else {
     // stop sensor reading
@@ -520,7 +532,7 @@ void Ftduino::counter_check_pending(uint8_t counter) {
       }
     }
   }
-    
+
   // check if there is a "unprocessed event for this counter
   if(counter_event_time[counter]) {
     // check if it's longer than the timeout time
@@ -552,7 +564,7 @@ void Ftduino::counter_timer_exceeded(uint8_t c) {
     // pin state bas changed: Save new state
     else counter_in_state |= (1<<c);
   }
-  
+
   // determine mode of current counter port
   uint8_t mode = (counter_modes >> (2*c)) & 3;
 
