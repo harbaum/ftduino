@@ -69,6 +69,20 @@
       }
     });
 
+    let ledOnButton = document.querySelector('#ledon');
+    ledOnButton.addEventListener('click', function() {
+      if (port) {
+        port.send('H');
+      }
+    }
+
+    let ledOffButton = document.querySelector('#ledoff');
+    ledOffButton.addEventListener('click', function() {
+      if (port) {
+        port.send('L');
+      }
+    }
+				 
     serial.getPorts().then(ports => {
       if (ports.length == 0) {
         t.io.println('No devices found.');
