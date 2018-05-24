@@ -8,6 +8,10 @@
  * The URL here provides a hint to the browser about what page the user should
  * navigate to to interact with the device.
  */
+
+#if USB_VERSION != 0x210
+#error "Bitte board 'ftDuino (WebUSB)' auswählen"
+#endif
  
 WebUSB WebUSBSerial(1 /* https:// */, "harbaum.github.io/ftduino/webusb/console");
 
@@ -21,6 +25,7 @@ void setup() {
   }
   Serial.begin(9600);
   Serial.write("Sketch begins.\r\n> ");
+  Serial.write("Press 'H' or 'L' for LED\r\n> ");
   Serial.flush();
   pinMode(ledPin, OUTPUT);
 }
