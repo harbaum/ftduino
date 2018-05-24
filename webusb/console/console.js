@@ -71,15 +71,15 @@
 
     let ledOnButton = document.querySelector('#ledon');
     ledOnButton.addEventListener('click', function() {
-      if (port) {
-        port.send('H');
+      if (port !== undefined) {
+        port.send(textEncoder.encode("H"));
       }
     }
 
     let ledOffButton = document.querySelector('#ledoff');
     ledOffButton.addEventListener('click', function() {
-      if (port) {
-        port.send('L');
+      if (port !== undefined) {
+        port.send(textEncoder.encode("L"));
       }
     }
 				 
