@@ -72,16 +72,16 @@
     let ledOnButton = document.querySelector('#ledon');
     ledOnButton.addEventListener('click', function() {
       if (port !== undefined) {
-        port.send(textEncoder.encode("H"));
+          port.send(textEncoder.encode("H"));
       }
-    }
+    });
 
     let ledOffButton = document.querySelector('#ledoff');
     ledOffButton.addEventListener('click', function() {
       if (port !== undefined) {
         port.send(textEncoder.encode("L"));
       }
-    }
+    });
 				 
     serial.getPorts().then(ports => {
       if (ports.length == 0) {
