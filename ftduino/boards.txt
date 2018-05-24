@@ -33,3 +33,27 @@ ftduino.build.core=arduino:arduino
 ftduino.build.board=AVR_FTDUINO
 ftduino.build.variant=ftduino
 ftduino.build.extra_flags={build.usb_flags}
+
+ftduinowebusb.name=ftDuino (WebUSB)
+ftduinowebusb.vid.1=0x1c40
+ftduinowebusb.pid.1=0x0538
+
+ftduinowebusb.upload.tool=avrdude
+ftduinowebusb.upload.protocol=avr109
+ftduinowebusb.upload.maximum_size=28672
+ftduinowebusb.upload.maximum_data_size=2560
+ftduinowebusb.upload.speed=57600
+ftduinowebusb.upload.disable_flushing=true
+ftduinowebusb.upload.use_1200bps_touch=true
+ftduinowebusb.upload.wait_for_upload_port=true
+
+ftduinowebusb.build.mcu=atmega32u4
+ftduinowebusb.build.f_cpu=16000000L
+ftduinowebusb.build.vid=0x1c40
+ftduinowebusb.build.pid=0x0538
+ftduinowebusb.build.usb_manufacturer="Till Harbaum"
+ftduinowebusb.build.usb_product="ftDuino"
+ftduinowebusb.build.core=arduino:arduino
+ftduinowebusb.build.board=AVR_FTDUINO
+ftduinowebusb.build.variant=ftduino
+ftduinowebusb.build.extra_flags={build.usb_flags} "-DUSB_VERSION=0x210"
