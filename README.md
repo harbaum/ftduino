@@ -1,5 +1,7 @@
 Hier geht es zur [deutschsprachigen Anleitung](https://github.com/harbaum/ftduino/raw/master/manual.pdf).
 
+Lust auf einen eigenen ftDuino? Einfach eine Email an info@ftduino.de  schicken und die Verfügbarkeit erfragen.
+
 ![logo](doc/logo.png)
 
 # ftDuino
