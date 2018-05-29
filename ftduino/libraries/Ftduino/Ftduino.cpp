@@ -431,9 +431,10 @@ void Ftduino::usart1_interrupt() {
 
 // usart 1 at 115200 8n1 for utrasonic sensor
 void Ftduino::usart_init() {
-  UBRR1 = (F_CPU / 8 / 115200 - 1)/2;
+  UBRR1 = F_CPU / 8 / 115200 - 1;
 
   // usart disabled. will be enabled once the sensor has been triggered
+  UCSR1A = (1<<U2X1);
   UCSR1B = (1<<RXCIE1);    
   UCSR1C = (1<<UCSZ11)|(1<<UCSZ10);   // 8 bit
 }
