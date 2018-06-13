@@ -12,48 +12,30 @@
                 {
                     "name": "ftDuino",
                     "architecture": "avr",
-                    "version": "0.0.2",
-                    "category": "ftDuino",
-                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.2/ftduino-0.0.2.zip",
-                    "archiveFileName": "ftduino-0.0.2.zip",
-                    "checksum": "SHA-256:89421ea5d8206d2941b4757a4fe28985932930f9161e6a5995da0b735bf4fae7",
-                    "size": "124313",
-                    "help": {
-                        "online": "http://ftduino.de/issues"
-                    },
-                    "boards": [
-                        {
-                            "name": "ftDuino fischertechnik compatible controller"
-                        }
-                    ]
-                },
-                {
-                    "name": "ftDuino",
-                    "architecture": "avr",
-                    "version": "0.0.1",
-                    "category": "ftDuino",
-                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.1/ftduino-0.0.1.zip",
-                    "archiveFileName": "ftduino-0.0.1.zip",
-                    "checksum": "SHA-256:6ceb7d660cf19d37cefc96857bc439bbeaad1fd7f1842662ea488a84261274ca",
-                    "size": "123516",
-                    "help": {
-                        "online": "http://ftduino.de/issues"
-                    },
-                    "boards": [
-                        {
-                            "name": "ftDuino fischertechnik compatible controller"
-                        }
-                    ]
-                },
-                {
-                    "name": "ftDuino",
-                    "architecture": "avr",
                     "version": "0.0.3",
                     "category": "ftDuino",
                     "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.3/ftduino-0.0.3.zip",
                     "archiveFileName": "ftduino-0.0.3.zip",
                     "checksum": "SHA-256:dfba6565279af44c147c5521691b1c76a0f4eb02eb37c11415c58e16a8d990da",
                     "size": "129536",
+                    "help": {
+                        "online": "http://ftduino.de/issues"
+                    },
+                    "boards": [
+                        {
+                            "name": "ftDuino fischertechnik compatible controller"
+                        }
+                    ]
+                },
+                {
+                    "name": "ftDuino",
+                    "architecture": "avr",
+                    "version": "0.0.4",
+                    "category": "ftDuino",
+                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.4/ftduino-0.0.4.zip",
+                    "archiveFileName": "ftduino-0.0.4.zip",
+                    "checksum": "SHA-256:86330b94f8b90b18f28dd4120427f38917b5661294acae0386d58ec823494884",
+                    "size": "134127",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
@@ -102,12 +84,12 @@
                 {
                     "name": "ftDuino",
                     "architecture": "avr",
-                    "version": "0.0.4",
+                    "version": "0.0.7",
                     "category": "ftDuino",
-                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.4/ftduino-0.0.4.zip",
-                    "archiveFileName": "ftduino-0.0.4.zip",
-                    "checksum": "SHA-256:86330b94f8b90b18f28dd4120427f38917b5661294acae0386d58ec823494884",
-                    "size": "134127",
+                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.7/ftduino-0.0.7.zip",
+                    "archiveFileName": "ftduino-0.0.7.zip",
+                    "checksum": "SHA-256:885d6d8ddc47a704ab4674c8c3a75464bcda8cf964899e0007afd1ad15216c5e",
+                    "size": "146667",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },

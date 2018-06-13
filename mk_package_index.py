@@ -43,6 +43,9 @@ for r in rlist:
     if os.path.isdir(release):
         versions.append(r)
 
+# sort versions
+versions.sort(key=lambda s: list(map(int, s.split('.'))))
+
 releases = [ ]
 for version in versions:
     print("Including version", version)
