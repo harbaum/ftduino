@@ -1,6 +1,6 @@
 Hier geht es zur [deutschsprachigen Anleitung](https://github.com/harbaum/ftduino/raw/master/manual.pdf).
 
-Lust auf einen eigenen ftDuino? Einfach eine Email an info@ftduino.de  schicken und die Verfügbarkeit erfragen.
+Lust auf einen eigenen ftDuino? Es gibt ihn jetzt als fertiges Gerät zu kaufen. Einfach eine Email an info@ftduino.de  schicken und die Verfügbarkeit erfragen.
 
 ![logo](doc/logo.png)
 
