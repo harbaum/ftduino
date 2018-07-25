@@ -2,7 +2,8 @@
 
 | ![bottom case](bottom.png) | ![top case](top.png) |
 |:---:|:---:|
-| [`bottom.stl`](bottom.stl) | [`top.stl`](top.stl) |
+| [View `bottom.stl`](bottom.stl) | [View `top.stl`](top.stl) |
+| [Download `bottom.stl`](bottom.stl?raw=true) | [Download `top.stl`](top.stl?raw=true) |
 
 The vl53l0x is a time of flight (ToF) distance sensor. It can e.g. be
 used as a replacement for the fischertechnik ultrasonic distance

@@ -2,7 +2,8 @@
 
 | ![bottom case](oled_bottom.png) | ![top case](oled_top.png) |
 |:---:|:---:|
-| [`oled_bottom.stl`](oled_bottom.stl) | [`oled_top.stl`](oled_top.stl) |
+| [View `oled_bottom.stl`](oled_bottom.stl) | [View `oled_top.stl`](oled_top.stl) |
+| [Download `oled_bottom.stl`](oled_bottom.stl?raw=true) | [Download `oled_top.stl`](oled_top.stl?raw=true) |
 
 The ftDuinos I²C interface can be used to add a small OLED display
 to the ftDuino.
