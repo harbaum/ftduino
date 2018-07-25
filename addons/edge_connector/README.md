@@ -4,8 +4,8 @@ The ftDuino case unfortunately does not have ft mounts at
 its bottom. This is due to the fact that this would make
 moulding much more expensive.
 
-![Edge connector](edge.png)
-|:---:|:---:|
+| ![Edge connector](edge.png) |
+|:---:|
 | [View `edge.stl`](edge.stl) |
 | [Download `edge.stl`](edge.stl?raw=true) |
 
