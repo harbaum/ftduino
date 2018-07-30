@@ -23,8 +23,8 @@ schicken und die Verfügbarkeit und den Preis erfragen.
 Der ftDuino eignet sich für Programmier-Anfänger, die einen ersten
 Blick in die "ernste" Programmierung werfen und ihre
 fischertechnik-Modelle professionell steuern wollen. Er eignet sich
-aber ebenso an erfahrene Arduino-User, die das fischertechnik-System
-für mechanische Experimente nutzen wollen.
+aber ebenso für erfahrene Arduino-User, die das leistungsfähige
+fischertechnik-System für komplexe mechanische Modelle nutzen wollen.
 
 Der ftDuino kombiniert auf perfekte Weise die Vorteile des
 Arduino-Systems mit den Fähigkeiten des fischertechnik-Systems.
