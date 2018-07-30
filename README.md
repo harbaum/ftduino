@@ -1,10 +1,73 @@
-Hier geht es zur [deutschsprachigen Anleitung](https://harbaum.github.io/ftduino/manual.pdf).
+<p align="center">
+  <img src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/logo.png">
+</p>
 
-Hast Du Lust auf einen eigenen ftDuino? Es gibt ihn jetzt als fertiges Gerät zu kaufen. Einfach eine Email an info@ftduino.de schicken und die Verfügbarkeit und den Preis erfragen.
+# Der ftDuino (scroll down for english ...)
 
-![logo](doc/logo.png)
+Der ftDuino ist schlägt die Brücke zwischen den populären
+[Arduino](http://arduino.cc)-Controllern und dem
+[fischertechnik](http://fischertechnik.de)-Konstruktionsspielzeug.
 
-# ftDuino
+<p align="center">
+  <img width="50%" src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/ftduino.jpg">
+</p>
+
+## ftDuino kaufen
+
+Haben wir Lust auf einen eigenen ftDuino gemacht? Es gibt ihn jetzt
+als fertiges Gerät zu kaufen. Einfach eine Email an info@ftduino.de
+schicken und die Verfügbarkeit und den Preis erfragen.
+
+## Was ist der ftDuino?
+
+Der ftDuino eignet sich für Programmier-Anfänger, die einen ersten
+Blick in die "ernste" Programmierung werfen und ihre
+fischertechnik-Modelle professionell steuern wollen. Er eignet sich
+aber ebenso an erfahrene Arduino-User, die das fischertechnik-System
+für mechanische Experimente nutzen wollen.
+
+Der ftDuino kombiniert auf perfekte Weise die Vorteile des
+Arduino-Systems mit den Fähigkeiten des fischertechnik-Systems.
+
+Der ftDuino erfordert als Fertiggerät kein Löten und mit dem
+fischertechnik-System ist auch der mechanische Aufbau ein Kinderspiel.
+
+## Anleitung
+
+Der ftDuino kommt mit einer über hunderseitigen [deutschsprachigen
+Anleitung](https://harbaum.github.io/ftduino/manual.pdf). Die
+Anleitung erklärt alle Schritte von der Einrichtung der Arduino-IDE
+über die ersten eigenen Programme bis zu forgeschrittener
+Programmierung.
+
+Alle Source-Codes und Unterlagen zum ftDuino finden sich im
+[Github-Repository](https://github.com/harbaum/ftduino) zum freien
+Download.
+
+## Eigenschaften des ftDuino
+
+   - mechanisch und elektrisch kompatibel zum fischertechnik TXT
+     - 8 universtelle Analogeingänge I1 bis I8
+     - 4 schnelle Zählereingänge C1 bis C4
+     - 8 analoge Ausgänge O1 bis O8, die zu Motorausgängen M1 bis M4 kombiniert werden können
+     - unterstützt alle fischertechnik-Aktoren und -Sensoren
+       - Motoren
+       - Schalter und Taster
+       - Temperatur- und optische Sensoren
+       - Linien-, Distanze- und Orientierungssensoren
+       - vieles mehr ...
+   - I²C-Ascnhluss
+     - fischertechnik-TX-kompatibel
+     - Master/Slave-fähig
+   - kompatibel mit üblichen fischertechnik-9V-Versorgungen
+     - 9V Batterie-Halter
+     - 8.4V-Akku-Pack
+     - 9V-Power-Set-Netzteil
+   - voll kompatibel mit der Arduino-IDE
+     - speziell angepasste Bibliotheken
+     - viele Beispiele
+
+# The ftDuino
 
 The ftDuino is an [arduino](http://arduino.cc) compatible controller for the
 [fischertechnik construction toy](http://fischertechnik.de).
@@ -16,8 +79,6 @@ to this controller.
 The ftDuino combines the sophisticated mechanics of the fischertechnik
 toy with the versatility of the arduino world allowing anyone to create
 and program awsome robots.
-
-![ftDuino based robot](doc/ftduino.jpg)
 
 ## Features of the ftDuino
 
