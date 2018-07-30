@@ -1,4 +1,4 @@
-Hier geht es zur [deutschsprachigen Anleitung](https://github.com/harbaum/ftduino/raw/master/manual.pdf) ([direkter Download](https://github.com/harbaum/ftduino/blob/master/manual.pdf)).
+Hier geht es zur [deutschsprachigen Anleitung](https://github.com/harbaum/ftduino/blob/master/manual.pdf) ([direkter Download](https://github.com/harbaum/ftduino/raw/master/manual.pdf)).
 
 Hast Du Lust auf einen eigenen ftDuino? Es gibt ihn jetzt als fertiges Gerät zu kaufen. Einfach eine Email an info@ftduino.de schicken und die Verfügbarkeit und den Preis erfragen.
 
