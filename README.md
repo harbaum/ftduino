@@ -34,7 +34,7 @@ fischertechnik-System ist auch der mechanische Aufbau ein Kinderspiel.
 
 ## Anleitung
 
-Der ftDuino kommt mit einer über hunderseitigen [deutschsprachigen
+Der ftDuino kommt mit einer über hundertseitigen [deutschsprachigen
 Anleitung](https://harbaum.github.io/ftduino/manual.pdf). Die
 Anleitung erklärt alle Schritte von der Einrichtung der Arduino-IDE
 über die ersten eigenen Programme bis zu forgeschrittener
