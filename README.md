@@ -1,8 +1,11 @@
+# ftDuino
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/logo.png">
 </p>
 
-# Der ftDuino (scroll down for english ...)
+## Der ftDuino (scroll down for english ...)
+
 
 Der ftDuino ist schlägt die Brücke zwischen den populären
 [Arduino](http://arduino.cc)-Controllern und dem
@@ -12,13 +15,13 @@ Der ftDuino ist schlägt die Brücke zwischen den populären
   <img width="50%" src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/ftduino.jpg">
 </p>
 
-## ftDuino kaufen
+### ftDuino kaufen
 
 Haben wir Lust auf einen eigenen ftDuino gemacht? Es gibt ihn jetzt
 als fertiges Gerät zu kaufen. Einfach eine Email an info@ftduino.de
 schicken und die Verfügbarkeit und den Preis erfragen.
 
-## Was ist der ftDuino?
+### Was ist der ftDuino?
 
 Der ftDuino eignet sich für Programmier-Anfänger, die einen ersten
 Blick in die "ernste" Programmierung werfen und ihre
@@ -32,7 +35,7 @@ Arduino-Systems mit den Fähigkeiten des fischertechnik-Systems.
 Der ftDuino erfordert als Fertiggerät kein Löten und mit dem
 fischertechnik-System ist auch der mechanische Aufbau ein Kinderspiel.
 
-## Anleitung
+### Anleitung
 
 Der ftDuino kommt mit einer über hundertseitigen [deutschsprachigen
 Anleitung](https://harbaum.github.io/ftduino/manual.pdf). Die
@@ -44,7 +47,7 @@ Alle Source-Codes und Unterlagen zum ftDuino finden sich im
 [Github-Repository](https://github.com/harbaum/ftduino) zum freien
 Download.
 
-## Eigenschaften des ftDuino
+### Eigenschaften des ftDuino
 
    - mechanisch und elektrisch kompatibel zum fischertechnik TXT
      - 8 universtelle Analogeingänge I1 bis I8
@@ -67,7 +70,7 @@ Download.
      - speziell angepasste Bibliotheken
      - viele Beispiele
 
-# The ftDuino
+## The ftDuino
 
 The ftDuino is an [arduino](http://arduino.cc) compatible controller for the
 [fischertechnik construction toy](http://fischertechnik.de).
@@ -80,7 +83,7 @@ The ftDuino combines the sophisticated mechanics of the fischertechnik
 toy with the versatility of the arduino world allowing anyone to create
 and program awsome robots.
 
-## Features of the ftDuino
+### Features of the ftDuino
 
    - mechanically and electrically compatible to the fischertechnik TXT
      - 8 universal analog inputs I1 to I8
@@ -103,16 +106,16 @@ and program awsome robots.
      - Custom libraries
      - Lots of examples
 
-## Videos
+### Videos
 
 See the ftDuino in action on [youtube](https://www.youtube.com/playlist?list=PLi6a2BPpYcCTMfehFcKaVUSZGubVMpxHx).
 
-## About this repository
+### About this repository
 
 This repository contains support files to enable ftDuino support in
 the Arduino IDE.
 
-## Installation
+### Installation
 
 You can easily add custom board support packages to the Arduino IDE
 as described e.g. [here](https://learn.adafruit.com/add-boards-arduino-v164/overview).
