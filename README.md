@@ -1,4 +1,4 @@
-# ftDuino
+# ftDuino: Arduino + fischertechnik
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/logo.png">
