@@ -4,11 +4,12 @@
   <img src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/logo.png">
 </p>
 
-## Der ftDuino (scroll down for english ...)
+## Der ftDuino
 
+[English version below](https://github.com/harbaum/ftduino#the-ftduino)
 
-Der ftDuino ist schlägt die Brücke zwischen den populären
-[Arduino](http://arduino.cc)-Controllern und dem
+Der ftDuino schlägt die Brücke zwischen den populären
+[Arduino](http://arduino.cc)-Controllern und dem leistungsfähigen
 [fischertechnik](http://fischertechnik.de)-Konstruktionsspielzeug.
 
 <p align="center">
