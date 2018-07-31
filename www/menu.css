@@ -1,0 +1,64 @@
+/* Style the tab */
+body, html {
+    padding: 3px 3px 3px 3px;
+    font-family: sans-serif;
+    font-size: 12pt;
+    color: black;
+    background: lightblue;
+}
+
+h3 {
+    text-align: center;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tablinks {
+    font-size: 14pt;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 10px;
+    transition: 0.3s;
+}
+
+.tablang {
+    background-color: none;
+    float: right;
+    border: none;
+    outline: none;
+    padding: 4px 4px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    animation: fadeEffect 1s; /* Fading effect takes 1 second */
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+    background: white;
+} 
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

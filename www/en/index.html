@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../menu.css">
+    <script src="../menu.js"></script> 
+    <title>ftDuino - Arduino for fischertechnik</title>
+  </head>
+    
+  <body><center>
+    <table width="974">
+      <tr><td>    
+	  <img src="../images/banner.jpg"/>
+	  
+      </td></tr><tr><td>
+	  
+	  <div class="tab">
+	    <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">About ftDuino</button>
+	    <button class="tablinks" onclick="openTab(event, 'specs')">Specifications</button>
+	    <button class="tablinks" onclick="openTab(event, 'links')">Documents and Links</button>
+	    <button class="tablinks" onclick="openTab(event, 'buy')">Buy</button>
+	    <a class="tablang" href="../de"><img src="../images/de.png"></a>
+	  </div>
+	  
+	  <!-- Tab content -->
+	  <div id="about" class="tabcontent">
+	    <h3>ftDuino - Arduino for fischertechnik</h3>
+	    <table><tr><td>    
+		  <p>The ftDuino bridges the gap between the popular
+		    <a href="http://arduino.cc">Arduino</a> controllers and
+		    the versatile <a href="http://fischertechnik.de">fischertechnik construction kits</a>.</p>
+		  
+		  <p>The ftDuino is meant for beginners who wants to
+		    get a first glance at "real" programming and who want
+		    to control their fischertechnik models in a prefessional
+		    way. It's also perfect for Arduino professionals who
+		    want to make use of the powerful fischertechnik system
+		    for complex mechanical models.</p>
+
+		  <p>The ftDuino does not require any soldering and
+		    the fischertechik system makes the mechanical
+		    part a piece of cake.</p>
+		</td>
+		<td>&nbsp;</td>
+		<td><img src="../images/ftduino.jpg" width="300"/></td>
+	    </tr></table>			      
+	  </div>
+	  
+	  <div id="specs" class="tabcontent">
+	    <h3>Specifications</h3>
+	    <table><tr><td>    
+	    <p><ul>
+		<li>mechanically and electrically compatible with the fischertechnik TXT controller</li>
+		<ul>
+		  <li>8 universal analog inputs I1 to I8</li>
+		  <li>4 fast counter inputs C1 to C4</li>
+		  <li>8 analog outputs O1 to O8 which can be combined as motor outputs M1 to M4</li>
+		  <li>supports all current fischertechnik actors and sensors</li>
+		  <ul>
+		    <li>motors</li>
+		    <li>switches and buttons</li>
+		    <li>temperature and optical sensors</li>
+		    <li>line, distance and orientation sensors</li>
+		    <li>much more ...</li>
+		  </ul>
+		</ul>
+		<li>I²C connector</li>
+		<ul>
+		  <li>fischertechnik TX compatible</li>
+		  <li>master/slave capable</li>
+		</ul>
+		<li>compatible with all fischertechnik 9V power sources</li>
+		<ul>
+		  <li>9V battery holder</li>
+		  <li>8.4V accu pack</li>
+		  <li>9V power set</li>
+		</ul>
+		<li>voll kompatibel mit der Arduino-IDE</li>
+		<ul>
+		  <li>specially adopted code libraries</li>
+		  <li>many examples</li>
+		</ul>	  
+	    </ul></p>
+		</td>
+		<td>&nbsp;</td>
+		<td><img src="../images/anschluesse.png" width="300"/></td>
+	    </tr></table>			      
+	  </div>
+	  
+	  <div id="links" class="tabcontent">
+	    <h3>Documents and links</h3>
+	    <p><ul>
+		<li><a href="https://harbaum.github.io/ftduino/manual.pdf">Instruction manual (german, PDF)</a></li>
+		<li><a href="http://github.com/harbaum/ftduino">Github repository (english)</a></li>
+		<li><a href="https://www.youtube.com/playlist?list=PLi6a2BPpYcCTMfehFcKaVUSZGubVMpxHx">Youtube channel</a></li>
+		<li><a href="https://forum.ftcommunity.de/viewforum.php?f=8&sid=8a5d4d3be63c14fd7884cd14ee49214d">ftc discussion forum</a></li>
+	    </ul></p>
+	  </div>
+	  
+	  <div id="buy" class="tabcontent">
+	    <h3>Buy ftDuino</h3>
+	    <p>The ftDuino is professionally manufactured and comes
+	      fully assembled inside a robust injection moulded case. The
+	      manual is available for <a href="https://harbaum.github.io/ftduino/manual.pdf">download</a>.</p>
+
+	    <p>The ftDuino is a hobby project and it's being produced
+	      depending on demand. Thus price and availability may
+	      vary a little bit.</p>
+
+	    <p>Current ordering information can be obtained via email
+	      from <a href="mailto:://info@ftduino.de">info@ftduino.de</a>.</p>
+	  </div>
+	    
+	  <script>
+	    document.getElementById("defaultOpen").click();
+	  </script>
+	  
+      </td></tr>
+      
+      <tr><td>
+	  <footer>
+	    <p>Till Harbaum &lt;till@harbaum.org&gt;</p>
+	  </footer>
+	  
+    </td></tr></table></center>
+  </body>
+</html>

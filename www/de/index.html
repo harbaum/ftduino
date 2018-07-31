@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../menu.css">
+    <script src="../menu.js"></script> 
+    <title>ftDuino - Arduino für fischertechnik</title>
+  </head>
+    
+  <body><center>
+    <table width="974">
+      <tr><td>    
+	  <img src="../images/banner.jpg"/>
+	  
+      </td></tr><tr><td>
+	  
+	  <div class="tab">
+	    <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">Über ftDuino</button>
+	    <button class="tablinks" onclick="openTab(event, 'specs')">Spezifikationen</button>
+	    <button class="tablinks" onclick="openTab(event, 'links')">Dokumente und Links</button>
+	    <button class="tablinks" onclick="openTab(event, 'buy')">Kaufen</button>
+	    <a class="tablang" href="../en"><img src="../images/en.png"></a>
+	  </div>
+	  
+	  <!-- Tab content -->
+	  <div id="about" class="tabcontent">
+	    <h3>ftDuino - Arduino für fischertechnik</h3>
+	    <table><tr><td>    
+		  <p>Der ftDuino schlägt die Brücke zwischen den populären
+		    <a href="http://arduino.cc">Arduino</a>-Controllern und
+		    dem
+		    vielseitigen <a href="http://fischertechnik.de">fischertechnik-Baukastensystem</a>.</p>
+		  
+		  <p>Der ftDuino eignet sich für Programmier-Anfänger, die
+		    einen ersten Blick in die "ernste" Programmierung werfen
+		    und ihre fischertechnik-Modelle professionell steuern
+		    wollen. Er eignet sich ebenso für erfahrene
+		    Arduino-User, die das leistungsfähige
+		    fischertechnik-System für komplexe mechanische Modelle
+		    nutzen wollen.</p>
+		  
+		  <p>Der ftDuino erfordert kein Löten und mit dem
+		    fischertechnik-System ist auch der mechanische Aufbau
+		    ein Kinderspiel.</p>
+		</td>
+		<td>&nbsp;</td>
+		<td><img src="../images/ftduino.jpg" width="300"/></td>
+	    </tr></table>			      
+	  </div>
+	  
+	  <div id="specs" class="tabcontent">
+	    <h3>Spezifikationen</h3>
+	    <table><tr><td>    
+	    <p><ul>
+		<li>mechanisch und elektrisch kompatibel zum fischertechnik TXT</li>
+		<ul>
+		  <li>8 universelle Analogeingänge I1 bis I8</li>
+		  <li>4 schnelle Zählereingänge C1 bis C4</li>
+		  <li>8 analoge Ausgänge O1 bis O8, die zu Motorausgängen M1 bis M4 kombiniert werden können</li>
+		  <li>unterstützt alle aktuellen fischertechnik-Aktoren und -Sensoren</li>
+		  <ul>
+		    <li>Motoren</li>
+		    <li>Schalter und Taster</li>
+		    <li>Temperatur- und optische Sensoren</li>
+		    <li>Linien-, Distanz- und Orientierungssensoren</li>
+		    <li>vieles mehr ...</li>
+		  </ul>
+		</ul>
+		<li>I²C-Anschluss</li>
+		<ul>
+		  <li>fischertechnik-TX-kompatibel</li>
+		  <li>Master/Slave-fähig</li>
+		</ul>
+		<li>kompatibel mit allen fischertechnik-9V-Versorgungen</li>
+		<ul>
+		  <li>9V Batterie-Halter</li>
+		  <li>8.4V-Akku-Pack</li>
+		  <li>9V-Power-Set-Netzteil</li>
+		</ul>
+		<li>voll kompatibel mit der Arduino-IDE</li>
+		<ul>
+		  <li>speziell angepasste Bibliotheken</li>
+		  <li>viele Beispiele</li>
+		</ul>	  
+	    </ul></p>
+		</td>
+		<td>&nbsp;</td>
+		<td><img src="../images/anschluesse.png" width="300"/></td>
+	    </tr></table>			      
+	  </div>
+	  
+	  <div id="links" class="tabcontent">
+	    <h3>Dokumente und Links</h3>
+	    <p><ul>
+		<li><a href="https://harbaum.github.io/ftduino/manual.pdf">Bedienungsanleitung (deutsch, PDF)</a></li>
+		<li><a href="http://github.com/harbaum/ftduino">Github-Repository (englisch)</a></li>
+		<li><a href="https://www.youtube.com/playlist?list=PLi6a2BPpYcCTMfehFcKaVUSZGubVMpxHx">Youtube-Kanal</a></li>
+		<li><a href="https://forum.ftcommunity.de/viewforum.php?f=8&sid=8a5d4d3be63c14fd7884cd14ee49214d">ftc-Diskussions-Forum</a></li>
+	    </ul></p>
+	  </div>
+	  
+	  <div id="buy" class="tabcontent">
+	    <h3>ftDuino kaufen</h3>
+	    <p>Der ftDuino wird professionell gefertigt und fertig
+	      aufgebaut im robusten Spritzgussgehäuse geliefert. Die
+	      Anleitung ist
+	      als <a href="https://harbaum.github.io/ftduino/manual.pdf">Download</a>
+	      verfügbar.</p>
+
+	    <p>Der ftDuino ist ein Hobby-Projekt und wird nach Bedarf
+	      professionell produziert. Daher schwanken Preis und
+	      Verfügbarkeit etwas.</p>
+
+	    <p>Aktuelle Bestell-Informationen können
+	      unter <a href="mailto:://info@ftduino.de">info@ftduino.de</a>
+	      erfragt werden.</p>
+	  </div>
+	    
+	  <script>
+	    document.getElementById("defaultOpen").click();
+	  </script>
+	  
+      </td></tr>
+      
+      <tr><td>
+	  <footer>
+	    <p>Till Harbaum &lt;till@harbaum.org&gt;</p>
+	  </footer>
+	  
+    </td></tr></table></center>
+  </body>
+</html>
