@@ -1,36 +1,75 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../www/menu.css">
+    <script src="../www/menu.js"></script> 
     <title>ftDuino WebUSB Demos</title>
   </head>
-  <body>
-    <h1>WebUSB</h1>
-    <p><a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">WebUSB</a>
-    ist eine Technik, um direkt aus dem Webbrowser speziell dafür
-    vorbereitete USB-Geräte ansprechen zu können.</p>
+  <body><center>
+      <table width="974">
+	<tr><td>
+            <a href="http://ftduino.de"><img src="../www/images/banner.jpg"/></a>
+	</td></tr><tr><td>
 
-    <p>Vorbedingung ist, dass man einen WebUSB-fähigen Browser verwendet
-    und dass das USB-Gerät entsprechende Fähigkeiten besitzt. Als
-    Web-Browser kommt daher nur Googles Chrome in Frage, auf PCs
-    genauso wie auf Smartphones und Tablets.</p>
+	    <div class="tab">
+	      <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">WebUSB</button>
+	      <button class="tablinks" onclick="openTab(event, 'demos')">Demos</button>
+	    </div>
+	    
+	    <div id="about" class="tabcontent">
+	      <h3>WebUSB</h3>
+		    
+	      <p><a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">WebUSB</a>
+		ist eine Technik, um direkt aus dem Webbrowser speziell dafür
+		vorbereitete USB-Geräte ansprechen zu können.</p>
 
-    <p>Damit der ftDuino als entsprechendes USB-Gerät funktioniert muss
-    der passende Sketch installiert sein. Die Sketches befinden sich
-    nach Installation der ftDuino-Unterstützung in der Arduino-IDE
-    unter <tt>Beispiele/Exmaples for ftDuino/WebUSB</tt>. Zusätzlich
-    muss eine Anpassung an der USB-Konfiguration des ftDuino
-    vorgenommen werden.  Dazu muss als <tt>Board</tt> der
-    Typ <tt>ftDuino (WebUSB)</tt> ausgewählt werden. Dieser Typ sollte
-    nur für die WebUSB-Skechtes verwendet werden. Alle anderen Sketche
-    sollten weiterhin den Board-Typ <tt>ftDuino</tt> nutzen.</p>
+	      <p>Vorbedingung ist, dass man einen WebUSB-fähigen Browser verwendet
+		und dass das USB-Gerät entsprechende Fähigkeiten besitzt. Als
+		Web-Browser kommt daher nur Googles Chrome in Frage, auf PCs
+		genauso wie auf Smartphones und Tablets.</p>
+	      
+	      <div id="usbwarning"></div>
+	      
+	      <h3>Sketches</h3>
 
-    <p>Ist der passende Sketch auf dem ftDuino installiert und an den PC
-    angeschlossen, dann kann im Chrome-Browser die entsprechende Demo
-    geöffet werden.</p>
+	      <p>Damit der ftDuino als entsprechendes USB-Gerät funktioniert muss
+		der passende Sketch installiert sein. Die Sketches befinden sich
+		nach Installation der ftDuino-Unterstützung in der Arduino-IDE
+		unter <tt>Beispiele/Examples for ftDuino/WebUSB</tt>. Zusätzlich
+		muss eine Anpassung an der USB-Konfiguration des ftDuino
+		vorgenommen werden.  Dazu muss als <tt>Board</tt> der
+		Typ <tt>ftDuino (WebUSB)</tt> ausgewählt werden. Dieser Typ sollte
+		nur für die WebUSB-Skechtes verwendet werden. Alle anderen Sketche
+		sollten weiterhin den Board-Typ <tt>ftDuino</tt> nutzen.</p>
+	      
+	      <p>Ist der passende Sketch auf dem ftDuino installiert und an den PC
+		angeschlossen, dann kann im Chrome-Browser die entsprechende Demo
+		geöffet werden.</p>
+	    </div>	      
+
+	    <div id="demos" class="tabcontent">	      
+	      <h3>Demos</h3>
+	      <ul>
+		<li><a href="console/">Console</a>, benötigt den Sketch <tt style="background-color: #e0e0e0">Beispiele/Examples for ftDuino/WebUSB/Console<tt></li>
+	      </ul>
+	    </div>
+	      
+      </table>
+    </center>
+
+    <script>
+      if(navigator.usb === undefined) {
+        msg = document.getElementById("usbwarning");
+        msg.innerHTML = "<p><center><font color=\"red\">Ihr Browser unterstützt kein WebUSB. Bitte benutzen Sie z.B. Google Chrome.</font></center></p>";
+      } else {
+        msg = document.getElementById("usbwarning");
+        msg.innerHTML = "<p><center><font color=\"green\">Ihr Browser unterstützt WebUSB.</font></center></p>";
+      }
+    </script>
+    <script>
+      document.getElementById("defaultOpen").click();
+    </script>
     
-    <h1>ftDuino WebUSB Demos</h1>
-    <ul>
-      <li><a href="console/">Console</a></li>
-    </ul>
   </body>
 </html>
