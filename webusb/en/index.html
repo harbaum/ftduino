@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="../../www/menu.css">
+    <script src="../../www/menu.js"></script> 
+    <title>ftDuino WebUSB demos</title>
+  </head>
+  <body><center>
+      <table width="974">
+	<tr><td>
+            <a href="../../www/en"><img src="../../www/images/banner.jpg"/></a>
+	</td></tr><tr><td>
+
+	    <div class="tab">
+	      <button class="tablinks" onclick="window.location='../../www/en';">ftDuino</button>
+	      <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">WebUSB</button>
+	      <button class="tablinks" onclick="openTab(event, 'demos')">Demos</button>
+	        <a class="tablang" href="../de"><img src="../../www/images/de.png"></a>
+	    </div>
+	    
+	    <div id="about" class="tabcontent">
+	      <h3>WebUSB</h3>
+		    
+	      <p><a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">WebUSB</a>
+		is a technology to access specially prepared USB devices
+		from within the browser.</p>
+		
+	      <p>Precondition is the use of a WebUSB capable browser and
+		that the USB device has he necessary capabilities. Thus
+		only Googles Chrome currently qualifies on PCs as well as
+		smartphones or tablets.</p>
+	      
+	      <div id="usbwarning"></div>
+	      
+	      <h3>Sketches</h3>
+
+	      <p>In order to act as an appropriate USB device the
+		ftDuino has to be loaded with a matching sketch. After
+		installtion of the ftDuino support in the arduino IDE
+		all WebUSB demo sketches can be found in the menu under
+		<tt style="background-color: #e0e0e0">Examples/Examples for ftDuino/WebUSB</tt>.
+		Additionally a modification on the USB configuration
+		of the ftDuino needs to be enabled by setting
+		the <tt style="background-color: #e0e0e0">board</tt>
+		in the Arduino IDE to <tt style="background-color: #e0e0e0">ftDuino (WebUSB)</tt>.
+		This selection should
+		only be used for WebUSB sketched. All other regular
+		sketches should continue to use
+		the <tt style="background-color: #e0e0e0">ftDuino</tt>
+		board type.</p>
+		
+	      <p>The matching demo can be opened in the chrome browser
+		once the ftDuino is connected to the PC and the
+		correct sketch is installed on the ftDuino.</p>
+	    </div>	      
+
+	    <div id="demos" class="tabcontent">	      
+	      <h3>Demos</h3>
+	      <ul>
+		<li><a href="../console/">Console</a>, requires Sketch <tt style="background-color: #e0e0e0">Examples/Examples for ftDuino/WebUSB/Console<tt></li>
+	      </ul>
+	    </div>
+	      
+      </table>
+    </center>
+
+    <script>
+      if(navigator.usb === undefined) {
+        msg = document.getElementById("usbwarning");
+        msg.innerHTML = "<p><center><font color=\"red\">Your browser does not support WebUSB. Please use e.g.  Google Chrome.</font></center></p>";
+      } else {
+        msg = document.getElementById("usbwarning");
+        msg.innerHTML = "<p><center><font color=\"green\">Your browser supports WebUSB.</font></center></p>";
+      }
+    </script>
+    <script>
+      document.getElementById("defaultOpen").click();
+    </script>
+    
+  </body>
+</html>
