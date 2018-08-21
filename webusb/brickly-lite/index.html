@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Brickly lite - ftDuino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="./blockly/blockly_compressed.js"></script>
+  <script src="./blockly/blocks_compressed.js"></script>
+  <script src="./blockly/javascript_compressed.js"></script>
+  <script src="./blockly/msg/js/en.js"></script>
+  <script src="./acorn_interpreter.js"></script>
+  <script src="../serial.js"></script>
+</head>
+<body>
+
+  <table id="global" width="100%" border="0" height="98%">
+   <tr><td colspan="2">
+	<h1><a href="http://ftduino.de" style="text-decoration: none"><div class="outline"><font color="red">f</font><font color="#046ab4">t</font><font color="#00c0c0">Duino</font></div></a></h1>
+   </td></tr>
+    
+   <tr><td colspan="2">
+       <!-- most buttons are for debugging only -->
+       <button id="jsBut" onclick="showCode()" style="display:none">JavaScript</button>
+       <button id="xmlBut" onclick="showXml()" style="display:none">XML</button>
+       <button id="saveBut" onclick="saveXml()" style="display:none">Save</button>
+       <button id="loadBut" onclick="loadXml()" style="display:none">Load</button>
+
+       <span id="status"></span>
+   </td></tr>
+
+    <tr>
+      <td width="75%" id="blocklyArea"></td>
+      <td><table width="100%" height="100%" cellpadding="3" cellspacing="0">
+	  <tr><td width="50%">
+	      <!-- run button is initially disabled. Will be enabled once connected -->
+	      <button id="runBut" onclick="runClicked()" disabled="disabled">Run</button>
+	  </td></tr>
+	  <tr><td valign="top" height="100%"><div id="textArea"></div></td></tr>
+	</table></td>
+    </tr>
+  </table>
+
+  <xml id="toolbox" style="display: none">
+    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+      <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+    </category>
+    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <block type="math_number">
+            <field name="NUM">10</field>
+          </block>
+        </value>
+      </block>
+      <block type="controls_whileUntil"></block>
+    </category>
+    <category name="Math" colour="%{BKY_MATH_HUE}">
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+    </category>
+    <category name="Text" colour="%{BKY_TEXTS_HUE}">
+      <block type="text"></block>
+      <block type="text_length"></block>
+      <block type="text_print"></block>
+    </category>
+    <category name="ftDuino" colour="240">
+      <block type="ftd_output">
+        <value name="pwm">
+          <block type="math_number">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+      </block>
+      <block type="ftd_motor">
+        <value name="pwm">
+          <block type="math_number">
+            <field name="NUM">100</field>
+          </block>
+        </value>
+      </block>
+      <block type="ftd_input"></block>
+      <block type="ftd_led">
+        <value name="state">
+          <block type="logic_boolean"></block>
+        </value>
+      </block>
+      <block type="ftd_delay">
+        <value name="time">
+          <block type="math_number">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+      </block>
+    </category>
+  </xml>
+
+  <!-- preset code -->
+  <xml id="startBlocks" style="display: none">
+    <block type="text_print">
+      <value name="TEXT">
+	<block type="text">
+          <field name="TEXT">Hallo ftDuino!</field>
+	</block>
+      </value>
+    </block>
+  </xml>
+
+  <script>
+    var ftduino = { };
+    ftduino.interpreter = null;
+    ftduino.callback = null;
+    ftduino.expect_version = "0.9.0";  // expect ftDuino IoServer 0.9.0
+
+    // check if debug mode is to be enabled
+    var val = location.search.match(new RegExp('[?&]'+'debug'+'=([^&]+)'));
+    ftduino.debug = val?decodeURIComponent(val[1].replace(/\+/g, '%20')):false;
+
+    // enable run, js and xml buttons in debug mode
+    if(ftduino.debug) {
+      document.getElementById('jsBut').style.display = "inline";
+      document.getElementById('xmlBut').style.display = "inline";
+      document.getElementById('loadBut').style.display = "inline";
+      document.getElementById('saveBut').style.display = "inline";
+      document.getElementById('runBut').removeAttribute("disabled");
+    }
+    
+    function status(msg) {
+      document.getElementById('status').innerHTML = msg;
+    }
+
+    function set_button(text, onclick, enabled) {
+      var but = document.getElementById('runBut');
+      if(text)    but.innerHTML = text;
+      if(onclick) but.onclick = onclick;
+      if(enabled === true)    but.removeAttribute("disabled");
+      else if(enabled === false) but.setAttribute("disabled", "true");
+    }
+    
+    function clear_text() {
+      ftduino.text_buffer = [ "" ]
+      var objArea = document.getElementById("textArea");
+      objArea.innerHTML = '';
+      objArea.scrollTop = objArea.scrollHeight;
+    };
+
+    // htmlize text received from the code before it's being
+    // put into a text output
+    function html_escape(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')  // "
+        .replace(/'/g, '&#39;')   // '
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/ /g, '&nbsp;');
+    }
+    
+    // display some text output by the code
+    function print_text(str, color=null) {
+      // keep a scrollback buffer
+      str = str?html_escape(str.toString()):'';
+
+      if(color)
+        str = '<font color="'+color+'">'+str+'</font>';
+
+      if (typeof ftduino.text_buffer === 'undefined') {
+	// initial state: empty array
+	ftduino.text_buffer = [ "" ]
+      }
+    
+      lines = str.split('\n')
+      if(lines.length > 0) {
+	// append first line to the last line of the buffer
+	ftduino.text_buffer[ftduino.text_buffer.length - 1] += lines[0]
+	
+	// create buffer entries for further lines
+	if(lines.length > 1)
+	    for(var i=1;i<lines.length; i++) 
+		ftduino.text_buffer[ftduino.text_buffer.length] = lines[i];
+      }
+
+      // limit the total number of lines in the buffer
+      while(ftduino.text_buffer.length > 50)
+	ftduino.text_buffer.shift();
+
+      var objArea = document.getElementById("textArea");
+
+      // build a html representation of the buffer
+      s = ""
+      for(var i in ftduino.text_buffer)
+	s += ftduino.text_buffer[i] + "<br />";
+
+      objArea.innerHTML = s;
+      objArea.scrollTop = objArea.scrollHeight;
+    }
+
+    // ----------------------------------------------------------------------
+    // serial/WebUSB setup
+    // ----------------------------------------------------------------------
+    ftduino.textEncoder = new TextEncoder();   
+
+    if(navigator.usb) {
+      navigator.usb.addEventListener('connect', event => {
+        status("ftDuino reconnected");
+        autoConnect();  // and try to connect
+      });
+
+      navigator.usb.addEventListener('disconnect', event => {
+        status('Connection to ftDuino lost');
+        set_button(null, null, false);
+      });
+    }
+    
+    function connect() {   
+      ftduino.port.connect().then(() => {
+        status('Connected to ' + ftduino.port.device_.productName);
+
+        // check version. A correct result will enable the GUI
+        ftdCheckVersion();
+    
+        ftduino.port.onReceive = data => {
+          let textDecoder = new TextDecoder();
+          if(ftduino.debug) console.log("RX:"+textDecoder.decode(data));
+
+          // run result through json decoder
+          result = JSON.parse(textDecoder.decode(data));
+
+          // if there's a pending callback
+          if(ftduino.callback) {
+            var reply_ok = true;
+    
+            // check if all expected entries are in this reply (e.g. correct port)
+            if(ftduino.callback["expect"]) {
+              // iterate over all expected keys
+              var keys = Object.keys(ftduino.callback["expect"]);
+              for(var i=0; i < keys.length ; i++) {
+		if(result[keys[i]].toLowerCase() !== ftduino.callback["expect"][keys[i]].toLowerCase()) {
+	          console.log("Missing expected reply parameter:",
+			       keys[i], ":", ftduino.callback["expect"][keys[i]]);
+                  reply_ok = false;
+		}
+	      }
+            }
+
+	    if(result[ftduino.callback["value"]] === undefined) {
+              console.log("Missing value parameter: ", ftduino.callback["value"]);
+              reply_ok = false;
+            }
+			       
+            if(reply_ok) {
+              // call it callback ...
+              ftduino.callback["func"](result[ftduino.callback["value"]]);
+              // ... and forget about it
+              ftduino.callback = null;
+
+              // cancel any pending timeout
+              clearTimeout(ftduino.reply_timeout);
+              ftduino.reply_timeout = null;
+            }
+          }
+        }
+        ftduino.port.onReceiveError = error => {
+          console.log('Receive error: ' + error);
+        };
+      }, error => {
+        status('Connection error: ' + error);
+     });
+    }
+
+    function autoConnect() {
+      try {
+        serial.getPorts().then(ports => {
+          if (ports.length == 0) {
+            status('No ftDuino found.');
+            set_button("Connect", connectClicked, true);
+          } else {
+            // at least one device found. Connect to first one
+            ftduino.port = ports[0];    
+            connect();
+          }
+        } ); 
+      } catch (e) {
+        status("WebUSB not available: " + e);
+      }
+    }
+    
+    if(navigator.usb)
+      autoConnect();
+    else
+      status("<font color='red'>WebUSB is not supported by this browser!</font>");
+    
+    function connectClicked() {
+      serial.requestPort().then(selectedPort => {
+        ftduino.port = selectedPort;
+
+	// make connect button a run button again
+        set_button("Run", runClicked, false);
+        connect();
+      }).catch(error => {
+        status('Connection error: ' + error);
+      });
+    }
+    
+    // commands sent to ftDuino
+    function ftdReq(req) {
+      if (ftduino.port !== undefined) {
+        if(ftduino.debug) console.log("TX:" + req);
+        p = ftduino.port.send(ftduino.textEncoder.encode(req));
+        p.then(
+          function(val) {
+            if(ftduino.debug)
+              console.log("PROMISE fulfilled: "+ val.bytesWritten + " " + val.status);
+          }
+        );
+      }
+    };
+    
+    function ftdSet(item) { ftdReq(JSON.stringify({ set: item })); };
+    
+    function ftdSetLed(state)            { ftdSet({ port: "led", value: state }); }
+    function ftdSetOutput(port,pwm)      { ftdSet({ port: port, mode: "HI", value: pwm }); }
+    function ftdSetMotor(port,mode,pwm)  { ftdSet({ port: port, mode: mode, value: pwm }); }
+    function ftdSetMode(port,mode)       { ftdSet({ port: port, mode: mode } ); }
+    
+    function ftdGet(item = null, callback = null) {
+      if(item) {
+        ftduino.callback = callback;
+        ftduino.get_item = item;
+      }
+    
+      ftdReq(JSON.stringify({ get: ftduino.get_item }));
+
+      // schedule retransmission
+      ftduino.reply_timeout = setTimeout( ftdGet, 10);
+    };
+    
+    function ftdGetInput(port, callback) {
+      // send get request. expect a reply value in the "value" field and expect the
+      // correct port in the reply
+      ftdGet({ port: port }, { "func": callback, "value": "value", "expect": { "port": port } });
+    }
+
+    function ftdCheckVersionCallback(ver) {
+      // enable run button after successful connection
+      set_button(null, null, true);
+      status('Connected to ' + ftduino.port.device_.productName + ' V' + ver);
+    }
+    
+    function ftdCheckVersion() {
+      // send ESC (for parser reset)
+      ftduino.port.send(ftduino.textEncoder.encode("\x1b"));
+      ftdGet("version", { "value": "version", "func": ftdCheckVersionCallback } );
+    }
+    
+    // ----------------------------------------------------------------------
+    // custom blocks
+    // ----------------------------------------------------------------------
+    var block_ftd_delay = {
+      "type": "ftd_delay",
+      "message0": "wait %1",
+      "args0": [ {
+         "type": "input_value",
+         "name": "time"
+      } ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 240,
+      "tooltip": "wait a certain time given in seconds"
+    };
+
+    var block_ftd_output = {
+      "type": "ftd_output",
+      "message0": "set output %1 %2",
+      "args0": [ {
+        "type": "field_dropdown", "name": "port", "options": [
+          [ "O1", "O1" ], [ "O2", "O2" ], [ "O3", "O3" ], [ "O4", "O4" ],
+          [ "O5", "O5" ], [ "O6", "O6" ], [ "O7", "O7" ], [ "O8", "O8" ]
+        ] }, {
+         "type": "input_value",
+         "name": "pwm"
+      } ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 240,
+      "tooltip": "set ftDuino output in percent"
+    };
+    
+    var block_ftd_motor = {
+      "type": "ftd_motor",
+      "message0": "set motor %1 %2 %3",
+      "args0": [ {
+        "type": "field_dropdown", "name": "port", "options": [
+          [ "M1", "M1" ], [ "M2", "M2" ], [ "M3", "M3" ], [ "M4", "M4" ]
+        ] }, {
+        "type": "field_dropdown", "name": "mode", "options": [
+          [ "left", "left" ], [ "right", "right" ]
+        ] }, {
+         "type": "input_value",
+         "name": "pwm"
+      } ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 240,
+      "tooltip": "run ftDuino motor at specified direction with speed given in percent"
+    };
+
+    var block_ftd_input = {
+      "type": "ftd_input",
+      "message0": "%1 on %2",
+      "args0": [ {
+        "type": "field_dropdown", "name": "mode", "options": [
+          [ "switch state", "switch" ], [ "resistance", "resistance" ], [ "voltage", "voltage" ]
+        ] }, {
+        "type": "field_dropdown", "name": "port", "options": [
+          [ "I1", "I1" ], [ "I2", "I2" ], [ "I3", "I3" ], [ "I4", "I4" ],
+          [ "I5", "I5" ], [ "I6", "I6" ], [ "I7", "I7" ], [ "I8", "I8" ]
+        ] }
+      ],
+      "output": null,
+      "colour": 240,
+      "tooltip": "get ftDuino input"
+    };
+
+    var block_ftd_led = {
+      "type": "ftd_led",
+      "message0": "set led %1",
+      "args0": [ {
+         "type": "input_value",
+         "name": "state"
+      } ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": 240,
+      "tooltip": "set ftDuino led"
+    };
+
+    Blockly.JavaScript['ftd_delay'] = function(block) {
+      var time = Blockly.JavaScript.valueToCode(block, 'time', Blockly.JavaScript.ORDER_ATOMIC);
+      return 'delay(' + time + ');\n';
+    };
+    
+    Blockly.JavaScript['ftd_output'] = function(block) {
+      var port = block.getFieldValue('port');
+      var value = Blockly.JavaScript.valueToCode(block, 'pwm', Blockly.JavaScript.ORDER_ATOMIC);
+      return 'output_set("' + port + '", ' + value + ');\n';
+    };
+    
+    Blockly.JavaScript['ftd_motor'] = function(block) {
+      var port = block.getFieldValue('port');
+      var mode = block.getFieldValue('mode');
+      var value = Blockly.JavaScript.valueToCode(block, 'pwm', Blockly.JavaScript.ORDER_ATOMIC);
+      return 'motor_set("' + port + '", "' + mode + '", ' + value + ');\n';
+    };
+    
+    Blockly.JavaScript['ftd_input'] = function(block) {
+      var mode = block.getFieldValue('mode');
+      var port = block.getFieldValue('port');
+
+      var code = 'input_get("' + port + '", "' + mode + '")';
+      return [code, Blockly.JavaScript.ORDER_NONE];
+    };
+    
+    Blockly.JavaScript['ftd_led'] = function(block) {
+      var state = Blockly.JavaScript.valueToCode(block, 'state', Blockly.JavaScript.ORDER_ATOMIC);
+      return 'led(' + state + ');\n';
+    };
+    
+    Blockly.Blocks['ftd_delay']  = { init: function() { this.jsonInit(block_ftd_delay);  } };
+    Blockly.Blocks['ftd_output'] = { init: function() { this.jsonInit(block_ftd_output); } };
+    Blockly.Blocks['ftd_motor']  = { init: function() { this.jsonInit(block_ftd_motor);  } };
+    Blockly.Blocks['ftd_input']  = { init: function() { this.jsonInit(block_ftd_input);  } };
+    Blockly.Blocks['ftd_led']    = { init: function() { this.jsonInit(block_ftd_led);    } };
+
+    // ----------------------------------------------------------------------
+    
+    ftduino.ws = Blockly.inject('blocklyArea',
+        {media: './blockly/media/',
+         toolbox: document.getElementById('toolbox')});
+    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'),
+                               ftduino.ws);
+
+    // try to load xml from storage
+    if(!ftduino.debug)  
+      loadXml();
+      
+    function showCode() {
+      clear_text();
+      // Generate JavaScript code and display it.
+      var code = Blockly.JavaScript.workspaceToCode(ftduino.ws);
+      print_text(code);
+    }
+
+    function showXml() {
+      clear_text();
+      var xml = Blockly.Xml.workspaceToDom(ftduino.ws);
+      print_text(Blockly.Xml.domToPrettyText(xml));
+    }
+
+    function saveXml() {
+      var xml = Blockly.Xml.workspaceToDom(ftduino.ws);
+      localStorage.setItem("code", Blockly.Xml.domToPrettyText(xml));
+    }
+
+    function loadXml() {
+      var code = localStorage.getItem("code");
+      if(code) {
+        ftduino.ws.clear();
+        var xml = Blockly.Xml.textToDom(code);
+        Blockly.Xml.domToWorkspace(xml, ftduino.ws);
+      }
+    }
+
+    // ----------------------------------------------------------------------
+    // code execution
+    // ----------------------------------------------------------------------
+   
+    var initInterpreter = function(interpreter, scope) {
+      // highlightBlock(id)
+      var wrapper = function(id, callback) {
+        ftduino.ws.highlightBlock(id);
+        setTimeout(callback, 25);
+      };
+      interpreter.setProperty(scope, 'highlightBlock',
+        interpreter.createAsyncFunction(wrapper));
+
+      // led(state)
+      wrapper = function(state) { ftdSetLed(state); };
+      interpreter.setProperty(scope, 'led',
+        interpreter.createNativeFunction(wrapper));
+    
+      // alert(msg) from the print block
+      wrapper = function(text) { print_text(text + '\n'); };
+      interpreter.setProperty(scope, 'alert',
+        interpreter.createNativeFunction(wrapper));
+
+      // delay(time)
+      wrapper = function(time, callback) { setTimeout(callback, 1000 * time); };
+      interpreter.setProperty(scope, 'delay',
+        interpreter.createAsyncFunction(wrapper));
+
+      // output and motor functions can take booleans
+      function bool2pwm(val) {
+        if(typeof(val) === "boolean") return val?100:0;
+        return val;
+      };
+
+      // output_set(port, value)
+      wrapper = function(port, value) { ftdSetOutput(port, bool2pwm(value)); };
+      interpreter.setProperty(scope, 'output_set',
+        interpreter.createNativeFunction(wrapper));
+
+      // motor_set(port, mode, value)
+      wrapper = function(port, mode, value) { ftdSetMotor(port, mode, bool2pwm(value)); };
+      interpreter.setProperty(scope, 'motor_set',
+        interpreter.createNativeFunction(wrapper));
+
+      // input_get(port, mode)
+      wrapper = function(port, mode, callback) {
+        ftdSetMode(port, mode);
+        ftdGetInput(port, callback);
+      };
+      interpreter.setProperty(scope, 'input_get',
+        interpreter.createAsyncFunction(wrapper));
+    }
+
+    function stopClicked() {
+      print_text("<user interrupt>", "red");
+      ftduino.stop = true;
+    }
+      
+    function runClicked() {
+      // save current code in browsers local storage	
+      if(!ftduino.debug) saveXml();
+	
+      if (!('Interpreter' in window)) {
+        // Interpreter lazy loads and hasn't arrived yet.  Try again later.
+        setTimeout(runClicked, 250);
+        return;
+      }
+
+      clear_text();
+      ftduino.ws.highlightBlock(null);
+
+      // generate Javascript code
+      Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
+      var code = Blockly.JavaScript.workspaceToCode(ftduino.ws);
+
+      ftduino.stop = false;
+      set_button("Stop", stopClicked, true);
+
+      ftduino.interpreter = new Interpreter(code, initInterpreter);
+      runner = function() {
+        if(ftduino.interpreter.run() && !ftduino.stop) {
+          setTimeout(runner, 10);
+        } else {
+          // Program is complete.
+          set_button("Run", runClicked, true);
+          ftduino.ws.highlightBlock(null);
+        }
+      }
+      runner();
+    }
+    // ----------------------------------------------------------------------
+    
+  </script>
+
+</body>
+</html>
