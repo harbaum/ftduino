@@ -8,6 +8,7 @@ Mehr Infos auf der [ftDuino-Homepage](http://ftduno.de).
 
 <p align="center">
   <img width="50%" src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/ftduino.jpg">
+  <img width="50%" src="https://raw.githubusercontent.com/harbaum/ftduino/master/www/images/mobile.jpg">
 </p>
 
 The ftDuino bridges the gab between the popular [Arduino](http://arduino.cc)
