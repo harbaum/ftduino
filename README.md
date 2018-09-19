@@ -1,4 +1,4 @@
-# ftDuino: der Arduino für fischertechnik
+# [ftDuino](http://ftduino.de): der [Arduino](http://arduino.cc) für [fischertechnik](http://fischertechnik.de)
 
 <p align="center">
   <img width="40%" src="https://raw.githubusercontent.com/harbaum/ftduino/master/doc/ftduino.jpg">
