@@ -11,7 +11,7 @@ Mehr Infos auf der [ftDuino-Homepage](http://ftduno.de).
   <img width="50%" src="https://raw.githubusercontent.com/harbaum/ftduino/master/www/images/mobile.jpg">
 </p>
 
-The ftDuino bridges the gab between the popular [Arduino](http://arduino.cc)
+The ftDuino bridges the gap between the popular [Arduino](http://arduino.cc)
 controllers and the powerful [fischertechnik](http://fischertechnik.de)
 construction toy.
 
