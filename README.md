@@ -18,4 +18,4 @@ The ftDuino bridges the gap between the popular [Arduino](http://arduino.cc)
 controllers and the powerful [fischertechnik](http://fischertechnik.de)
 construction toy.
 
-More infos on the [ftDuino homepage](http://ftduino.de).
+More infos on the [ftDuino homepage](http://ftduino.de/en).
