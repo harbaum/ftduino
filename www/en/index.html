@@ -18,6 +18,7 @@
 	    <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">About ftDuino</button>
 	    <button class="tablinks" onclick="openTab(event, 'specs')">Specifications</button>
 	    <button class="tablinks" onclick="openTab(event, 'links')">Documents and Links</button>
+	    <button class="tablinks" onclick="openTab(event, 'quickstart')">Quickstart</button>
 	    <button class="tablinks" onclick="openTab(event, 'buy')">Buy</button>
 	    <a class="tablang" href="../de"><img src="../images/de.png"></a>
 	  </div>
@@ -28,7 +29,7 @@
 	    <table><tr><td>    
 		  <p>The ftDuino bridges the gap between the popular
 		    <a href="http://arduino.cc">Arduino</a> controllers and
-		    the versatile <a href="http://fischertechnik.de">fischertechnik construction kits</a>.</p>
+		    the versatile <a href="http://fischertechnik.de">fischertechnik construction toy</a>.</p>
 		  
 		  <p>The ftDuino is meant for beginners who wants to
 		    get a first glance at "real" programming and who want
@@ -111,6 +112,39 @@
 		<td><img src="../images/ide.png" width="100%"/></td>
 	    </tr></table>		
 	  </div>
+
+	  <div id="quickstart" class="tabcontent">
+	    <h3>Quickstart</h3>
+	    <p>A detailed description can be found in the <a href="https://harbaum.github.io/ftduino/manual.pdf">german manual</a>.</p>
+
+	    <p>A previously installed arduino IDE is required. If it's
+	      not yet install then it can be downloaded and installed
+	      from
+	      the <a href="https://www.arduino.cc/en/Main/Software">Arduino
+	      website</a>.</p>
+
+	    <p>In the preferences of the arduino IDE the URL</p>
+	    <center><tt>https://raw.githubusercontent.com/harbaum/ftduino/master/package_ftduino_index.json</tt></center>
+	    <p>needs to be configured as depicted below:</p>
+	      
+	    <center><img src="../images/setup_preferences_en.png"/></center>
+
+	    <p>Afterwards the ftDuino shows up in the board manager. A click on "install" will include the
+	      ftDuino support into the arduino IDE.</p>
+	    
+	    <center><img src="../images/setup_boardmanager_en.png"/></center>
+
+	    <p>After successful installation the ftDuino board can be selected. If everything is setup
+	      correctly then the ftDuino examples will now show up in the IDE. They can directly be
+	      opened and be downloaded onto the ftDuino.</p>
+	     
+	    <center><img src="../images/setup_examples_en.png"/></center>
+
+	    <h3>Driver</h3>
+	    
+	    <p>Windows 10, Linux and MacOS already include the matching drivers and the ftDuino can be used
+	      immediately. Windows 7 needs the installation of an <a href="https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/ftduino.inf">INF file</a>.</p>
+	  </div>
 	  
 	  <div id="buy" class="tabcontent">
 	    <h3>Buy ftDuino</h3>
@@ -123,9 +157,8 @@
 		    depending on demand. Thus price and availability may
 		    vary a little bit.</p>
 		  
-		  <p>Current ordering information can be obtained via email
+		  <p>The latest ordering information can be obtained via email
 		    from <a href="mailto:info@ftduino.de">info@ftduino.de</a>.</p>
-
 		  <p>Some ftDuino addons (OLED displays, I²C expander, ...) can be purchased
 		    from <a href="https://gundermann-software.de/shop/">Gundermann
 		    Hard & Softwareberatung e.K.</a>.</p>

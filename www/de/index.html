@@ -18,6 +18,7 @@
 	    <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">Über ftDuino</button>
 	    <button class="tablinks" onclick="openTab(event, 'specs')">Spezifikationen</button>
 	    <button class="tablinks" onclick="openTab(event, 'links')">Dokumente und Links</button>
+	    <button class="tablinks" onclick="openTab(event, 'quickstart')">Schnellstart</button>
 	    <button class="tablinks" onclick="openTab(event, 'buy')">Kaufen</button>
 	    <a class="tablang" href="../en"><img src="../images/en.png"></a>
 	  </div>
@@ -122,6 +123,37 @@
 		<td> </td>
 		<td><img src="../images/ide.png" width="100%"/></td>
 	    </tr></table>		
+	  </div>
+	  
+	  <div id="quickstart" class="tabcontent">
+	    <h3>Schnellstart</h3>
+	    <p>Eine detailiertere Beschreibung findet sich im <a href="https://harbaum.github.io/ftduino/manual.pdf">Handbuch</a>.</p>
+
+	    <p>Es wird eine installierte Arduino-IDE vorausgesetzt. Ist bisher keine installiert, dann
+	      kann sie von der <a href="https://www.arduino.cc/en/Main/Software">Arduino-Webseite</a>
+	      kostenlos heruntergeladen und installiert werden.</p>
+	    
+	    <p>In der Arduino-IDE wird in den Voreinstellungen die URL</p>	      
+	    <center><tt>https://raw.githubusercontent.com/harbaum/ftduino/master/package_ftduino_index.json</tt></center>
+	    <p>wie im folgenden Bild zu sehen eingetragen:</p>
+	      
+	    <center><img src="../images/setup_preferences_de.png"/></center>
+
+	    <p>Danach ist der ftDuino im Boardverwalter auswählbar. Durch ein Klick auf "Installieren" wird die
+	      ftDuino-Unterstützung in die Arduino-IDE eingebunden.</p>
+	    
+	    <center><img src="../images/setup_boardmanager_de.png"/></center>
+
+	    <p>Nach der Installation kann der ftDuino also Board ausgewählt werden. Wenn alles geklappt hat
+	      tauchen nun die ftDuino-Beispiele in der IDE auf. Sie können direkt geöffnet und auf den ftDuino
+	      geladen werden.</p>
+	     
+	    <center><img src="../images/setup_examples_de.png"/></center>
+
+	    <h3>Treiber</h3>
+	    
+	    <p>Windows 10, Linux und MacOS bringen bereits passende Treiber mit und der ftDuino ist direkt nutzbar. Unter
+	      Windows 7 muss eine <a href="https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/ftduino.inf">INF-Datei</a> installiert werden.</p>
 	  </div>
 	  
 	  <div id="buy" class="tabcontent">
