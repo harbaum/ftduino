@@ -72,7 +72,6 @@ void loop()
 
   if (millis()-timerCheckUpdate>=20)
   {
-    sendUpdateServomotors();
     sendSensorValues();
     timerCheckUpdate=millis();
   }
@@ -112,26 +111,6 @@ void resetPins() {
   ftduino.input_set_mode(Ftduino::I6, Ftduino::RESISTANCE);
   ftduino.input_set_mode(Ftduino::I7, Ftduino::SWITCH);
   ftduino.input_set_mode(Ftduino::I8, Ftduino::SWITCH);
-  
-/*
-  for (byte index=0; index <=13; index++) 
-  {
-    if (arduinoPins[index].type!=input)
-    {
-      pinMode(index, OUTPUT);
-      if (arduinoPins[index].type==servomotor)
-      {
-        arduinoPins[index].state = 255;
-        servo (index, 255);
-      }
-      else
-      {
-        arduinoPins[index].state=0;
-        digitalWrite(index,LOW);
-      }
-    }
-  }
-*/
 }
 
 void sendSensorValues()
@@ -141,10 +120,6 @@ void sendSensorValues()
 
   for (sensorIndex = 0; sensorIndex < 6; sensorIndex++) //for analog sensors, calculate the median of 5 sensor readings in order to avoid variability and power surges
   {
-//TH    for (byte p = 0; p < 5; p++)
-//TH      readings[p] = analogRead(sensorIndex);
-//TH    insertionSort(readings, 5); //sort readings
-//TH    sensorValues[sensorIndex] = readings[2]; //select median reading
      sensorValues[sensorIndex] = ftduino.input_get(Ftduino::I1+sensorIndex)>>6;
   }
 
@@ -153,8 +128,6 @@ void sendSensorValues()
     ScratchBoardSensorReport(sensorIndex, sensorValues[sensorIndex]);
 
   //send digital sensor values
-//TH  ScratchBoardSensorReport(6, digitalRead(2)?1023:0);
-//TH  ScratchBoardSensorReport(7, digitalRead(3)?1023:0);
   ScratchBoardSensorReport(6, ftduino.input_get(Ftduino::I7)?1023:0);
   ScratchBoardSensorReport(7, ftduino.input_get(Ftduino::I8)?1023:0);
 }
@@ -230,9 +203,9 @@ void updateActuator(byte pinNumber)
 {
   int8_t pin2ft[] = { -1, -1, -1, -1, -1, Ftduino::O1, Ftduino::O2, -1, -1, Ftduino::O3,
     Ftduino::O4, Ftduino::O5, Ftduino::O6, -2 };
+  int8_t pin2m[] = { -1, -1, -1, -1, Ftduino::M2, -1, -1, Ftduino::M3, Ftduino::M4, -1, 
+		      -1, -1, -1, -2 }; 
  
-//TH  if (arduinoPins[pinNumber].type==digital) digitalWrite(pinNumber, arduinoPins[pinNumber].state);
-//TH  else if (arduinoPins[pinNumber].type==pwm) analogWrite(pinNumber, arduinoPins[pinNumber].state);
   int8_t id = pin2ft[pinNumber];
   if (arduinoPins[pinNumber].type==digital) {
     if(id == -2) digitalWrite(pinNumber, arduinoPins[pinNumber].state);
@@ -242,28 +215,17 @@ void updateActuator(byte pinNumber)
     if(id >= 0)
       ftduino.output_set(id, Ftduino::HI, Ftduino::MAX*arduinoPins[pinNumber].state/255);
   }
-}
-
-void sendUpdateServomotors()
-{
-// no servos on ftduino
-//TH  for (byte p = 0; p < 10; p++)
-//TH    if (arduinoPins[p].type == servomotor) servo(p, arduinoPins[p].state);
-}
-
-void servo (byte pinNumber, byte angle)
-{
-// no servos on ftduino
-//TH  if (angle != 255)
-//TH    pulse(pinNumber, (angle * 10) + 600);
-}
-
-void pulse (byte pinNumber, unsigned int pulseWidth)
-{
-// no pulse (yet)
-//TH  digitalWrite(pinNumber, HIGH);
-//TH  delayMicroseconds(pulseWidth);
-//TH  digitalWrite(pinNumber, LOW);
+  else if (arduinoPins[pinNumber].type==servomotor) {
+    id = pin2m[pinNumber];
+    if(id >= 0) {
+      if(arduinoPins[pinNumber].state == 255)
+        ftduino.motor_set(id, Ftduino::OFF, Ftduino::MAX);
+      else if(arduinoPins[pinNumber].state == 0) 
+        ftduino.motor_set(id, Ftduino::LEFT, Ftduino::MAX);
+      else
+        ftduino.motor_set(id, Ftduino::RIGHT, Ftduino::MAX);
+    }
+  }
 }
 
 void checkScratchDisconnection() //the reset is necessary when using an wireless arduino board (because we need to ensure that arduino isn't waiting the actuators state from Scratch) or when scratch isn't sending information (because is how serial port close is detected)
