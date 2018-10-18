@@ -160,8 +160,8 @@
                     "category": "ftDuino",
                     "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.11/ftduino-0.0.11.zip",
                     "archiveFileName": "ftduino-0.0.11.zip",
-                    "checksum": "SHA-256:b0658ddac65f4932200b118006dfdab9d6baf361654b571b8795bb6a57b42cf5",
-                    "size": "181437",
+                    "checksum": "SHA-256:ccdd486a19256e7ed44d5440fc45df4a3cfdbbe401462107926c4fbda44eff7a",
+                    "size": "181214",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
