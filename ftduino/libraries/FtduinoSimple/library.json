@@ -1,0 +1,18 @@
+{
+    "name": "FtduinoSimple",
+    "description": "Simpler and smaller version of the Ftduino library. Use only with ftDuino board. For more information refer to https://github.com/harbaum/ftduino/blob/master/manual.pdf",
+    "keywords": "fischertechnik, IO, construction, motors, simple, lightweight",
+    "authors": {
+        "name": "Till Harbaum",
+        "email": "info@ftduino.de",
+        "url": "https://ftduino.de"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/harbaum/ftduino.git"
+    },
+    "version": "0.0.11",
+    "include": "ftduino/libraries/FtduinoSimple",
+    "frameworks": "arduino",
+    "platforms": "atmelavr"
+}
