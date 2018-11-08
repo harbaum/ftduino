@@ -67,7 +67,7 @@ void receiveEvent(int num) {
           // die zugehörigen Ausgänge O1, O3, O5 oder O7 nicht als
           // Motorausgang konfiguriert sind
           if(((port&1) == 0) || 
-             ((port&1) == 1) && ((output_mode[port-1] & 1) != 1)) {
+             ((port&1) == 1) && ((output_mode[port-1] & 0x10) != 0x10)) {
               // skaliere 0...255 nach 0..Ftduino::MAX
               int pwm = (value * Ftduino::MAX)/255;
               int mode;
