@@ -1,0 +1,18 @@
+{
+    "name": "Ftduino",
+    "description": "Use this library with the ftDuino board. It allows easy controlling of models built with the fischertechnik construction toy. For more information refer to https://github.com/harbaum/ftduino/blob/master/manual.pdf",
+    "keywords": "fischertechnik, IO, construction, motors",
+    "authors": {
+        "name": "Till Harbaum",
+        "email": "info@ftduino.de",
+        "url": "https://ftduino.de"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/harbaum/ftduino.git"
+    },
+    "version": "0.0.11",
+    "include": "ftduino/libraries/Ftduino",
+    "frameworks": "arduino",
+    "platforms": "atmelavr"
+}
