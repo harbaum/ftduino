@@ -163,8 +163,8 @@ void JsonParser::check_value(void) {
   if(cmd == CMD_GET) {
     if((depth == 1) && (parm == PARM_PORT)) {
       port.type = port::PORT_NONE;
+      port.index = substate_value.value.str[1] -'0' - 1;
       if(substate_value.type == value::TYPE_STR) {
-	
 	// check for inputs 1-8 or counter 1-4
 	if(strlen(substate_value.value.str) == 2) {
 	  if((substate_value.value.str[0] == 'i') &&
