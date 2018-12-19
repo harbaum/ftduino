@@ -12,24 +12,6 @@
                 {
                     "name": "ftDuino",
                     "architecture": "avr",
-                    "version": "0.0.5",
-                    "category": "ftDuino",
-                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.5/ftduino-0.0.5.zip",
-                    "archiveFileName": "ftduino-0.0.5.zip",
-                    "checksum": "SHA-256:c6205abf5b1b85eafa638368648e8a952e2c21e835046ca95d89adbb5c93b660",
-                    "size": "144397",
-                    "help": {
-                        "online": "http://ftduino.de/issues"
-                    },
-                    "boards": [
-                        {
-                            "name": "ftDuino fischertechnik compatible controller"
-                        }
-                    ]
-                },
-                {
-                    "name": "ftDuino",
-                    "architecture": "avr",
                     "version": "0.0.6",
                     "category": "ftDuino",
                     "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.6/ftduino-0.0.6.zip",
@@ -143,6 +125,24 @@
                     "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.12/ftduino-0.0.12.zip",
                     "archiveFileName": "ftduino-0.0.12.zip",
                     "checksum": "SHA-256:8d2bcb8756363fe3b7c03897bdc084ec604a9d9d0228c66e8ce7abaa77250241",
+                    "size": "182311",
+                    "help": {
+                        "online": "http://ftduino.de/issues"
+                    },
+                    "boards": [
+                        {
+                            "name": "ftDuino fischertechnik compatible controller"
+                        }
+                    ]
+                },
+                {
+                    "name": "ftDuino",
+                    "architecture": "avr",
+                    "version": "0.0.13",
+                    "category": "ftDuino",
+                    "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.13/ftduino-0.0.13.zip",
+                    "archiveFileName": "ftduino-0.0.13.zip",
+                    "checksum": "SHA-256:52512fcc3355137a28b277f923291083167e90d875ccba3715c3028d43363198",
                     "size": "182311",
                     "help": {
                         "online": "http://ftduino.de/issues"
