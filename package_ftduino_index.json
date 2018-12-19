@@ -142,8 +142,8 @@
                     "category": "ftDuino",
                     "url": "https://raw.githubusercontent.com/harbaum/ftduino/master/releases/0.0.13/ftduino-0.0.13.zip",
                     "archiveFileName": "ftduino-0.0.13.zip",
-                    "checksum": "SHA-256:52512fcc3355137a28b277f923291083167e90d875ccba3715c3028d43363198",
-                    "size": "182311",
+                    "checksum": "SHA-256:da4dacae91969a52b3cb3010deadf48523e3de81cb164a0b70087ed20b6b6152",
+                    "size": "189515",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
