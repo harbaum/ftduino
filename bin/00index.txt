@@ -1,9 +1,9 @@
 ; list of all compiled sketches in this directory
 
 [ftduino_direct]
-name: ftDuino direct
-file: ftduino_direct_1.2.ino.hex
-version: 1.2.0
+name: ftDuino direct 1.2.1
+file: ftduino_direct_1.2.1.ino.hex
+version: 1.2.1
 
 [Blink]
 name: Blink
