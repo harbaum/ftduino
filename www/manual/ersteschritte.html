@@ -1,0 +1,519 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>ersteschritte</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="3">3 Erste Schritte</a></h1> 
+
+<p>In diesem Kapitel geht es darum, erste Erfahrungen mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+und der Arduino-IDE zu sammeln. Voraussetzung ist, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+von einem passenden Treiber auf dem PC unterstützt wird und dass die
+Arduino-IDE wie in Kapitel <a href="installation.html#2">2</a> beschrieben
+installiert und für die Verwendung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s vorbereitet wurde.
+
+<p>Zusätzlich zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird ein handelsübliches Mini-USB-Kabel
+benötigt, wie es z.B. auch mit den fischertechnik TX und TXT verwendet
+wird.
+
+<p><h2><a name="3.1">3.1 Der erste Sketch</a></h2>
+
+<p>Für die ersten Versuche benötigt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> keine separate
+Stromversorgung. Es genügt, wenn er per USB vom PC versorgt wird. Die
+fischertechnik-Ein- und Ausgänge bleiben zunächst unbenutzt.
+
+<p>Als erstes kann man den folgenden Sketch direkt in der Arduino-IDE
+eingeben. Das Beispiel muss aber nicht zwingend manuell eingetippt
+werden, denn es findet sich als fertig mitgeliefertes Beispiel im
+<tt><span style="background-color:#f0f0f0;">Datei</span></tt>-Menü der Arduino-IDE unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Blink"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Blink</span></tt></a>.
+
+<p><center>
+  
+  <p><a name="IMG:3.1"><img src="ersteschritte/beispiele.png"></a>
+  <br><small>Abbildung 3.1: Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Beispiele in der Arduino-IDE</small>
+</center>
+
+<p>Alle vorinstallierten Beispiele können mit einem Klick geladen werden
+und es öffnet sich ein neues Fenster mit dem ausgewählten Beispiel.
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    Blink
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    Schaltet die interne rote LED des ftDuino für eine Sekunde ein
+     <font color="green"> 5</font>    und für eine Sekunde aus und wiederholt dies endlos.
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>    Original:
+     <font color="green"> 8</font>    http://www.arduino.cc/en/Tutorial/Blink
+     <font color="green"> 9</font>  */
+     <font color="green">10</font>  
+     <font color="green">11</font>  // die setup-Funktion wird einmal beim Start aufgerufen
+     <font color="green">12</font>  void setup() {
+     <font color="green">13</font>    // Konfiguriere den Pin, an den die interne LED angeschlossen ist, als Ausgang
+     <font color="green">14</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green">15</font>  }
+     <font color="green">16</font>  
+     <font color="green">17</font>  // die loop-Funktion wird immer wieder aufgerufen
+     <font color="green">18</font>  void loop() {
+     <font color="green">19</font>    digitalWrite(LED_BUILTIN, HIGH);   // schalte die LED ein (HIGH ist der hohe Spannungspegel)
+     <font color="green">20</font>    delay(1000);                       // warte 1000 Millisekunden (eine Sekunde)
+     <font color="green">21</font>    digitalWrite(LED_BUILTIN, LOW);    // schalte die LED aus, indem die Spannung auf
+     <font color="green">22</font>    			    	     // niedrigen Pegel (LOW) geschaltet wird
+     <font color="green">23</font>    delay(1000);                       // warte eine Sekunde
+     <font color="green">24</font>  }
+</pre> 
+
+<p><h3><a name="3.2.1">3.2.1 Download des Blink-Sketches auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+
+<p>Der Blink-Sketch sollte nun geöffnet sein. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sollte an
+den PC angeschlossen sein und im Menü unter
+<tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Board</span></tt> der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ausgewählt sowie
+der richtige <tt>COM:</tt>-Port unter
+<tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Port</span></tt> ausgewählt sein.
+
+<p><center>
+  
+  <p><a name="IMG:3.2"><img src="ersteschritte/win10_portauswahl.png"></a>
+  <br><small>Abbildung 3.2: Auswahl des Ports in der Arduino-IDE unter Windows</small>
+</center>
+
+<p>Dies zeigt die Arduino-IDE auch ganz unten rechts in der Statusleiste
+an.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:3.3"><img src="ersteschritte/statusleiste.png"></a></td></tr><tr><td align="center"><small>(a) Linux</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:3.3"><img src="ersteschritte/win10port.png"></a></td></tr><tr><td align="center"><small>(b) Windows</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 3.3: Der ausgewählte <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird in der Statusleiste angezeigt</small>
+</center>
+
+<p>Der Download des Sketches auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erfordert nur noch einen
+Klick auf die Download-Pfeil-Schaltfläche in der Arduino-IDE oben
+links.
+
+<p><center>
+  
+  <p><a name="IMG:3.4"><img src="ersteschritte/download.png"></a>
+  <br><small>Abbildung 3.4: Download-Schaltfläche der Arduino-IDE</small>
+</center>
+
+<p>Der Sketch wird von der IDE zunächst in Maschinencode übersetzt. Wenn
+die Übersetzung erfolgreich war wird der Maschinencode über die USB-Verbindung
+auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> übertragen und dort im Flash-Speicher abgelegt.
+
+<p>Während des Downloads zeigt die interne rote Leuchtdiode des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wie in Abschnitt <a href="controller.html#1.3.4">1.3.4</a> beschrieben an, dass der
+Bootloader aktiviert wird und dass der Download stattfindet.
+
+<p>Nach erfolgreichem Download startet der Sketch sofort und die interne
+rote Leuchtdiode blinkt langsam.
+
+<p><center>
+  
+  <p><a name="IMG:3.5"><img src="ersteschritte/blink_svg.png"></a>
+  <br><small>Abbildung 3.5: Blinkende interne rote Leuchtdiode im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p><h3><a name="3.2.2">3.2.2 Die Funktionsweise des Sketches</a></h3>
+
+<p>Der Sketch-Code besteht zum überwiegenden Teil aus erklärenden
+Kommentaren, die für die Funktion des Sketches völlig unbedeutend sind
+und lediglich dem Verständnis durch einen menschlichen Leser
+dienen. Kommentarzeilen beginnen mit einem doppelten Schrägstrich
+(<tt>//</tt>). Mehrzeilige Kommentare werden durch <tt>/*</tt> und
+<tt>*/</tt> eingeschlossen. In diesem Dokument sowie in der Arduino-IDE
+sind Kommentare an ihrer hellgrauen Färbung leicht zu
+erkennen. Tatsächlicher Code befindet sich lediglich in den Zeilen 12
+bis 15 sowie den Zeilen 18 bis 24.
+
+<p><h3><a name="3.2.3">3.2.3 Die Funktionen <tt>setup()</tt> und <tt>loop()</tt></a></h3>
+
+<p>Jeder Arduino-Sketch enthält mindestens die beiden Funktionen
+<tt>setup()</tt> (englisch für Einrichtung) und <tt>loop()</tt> (englisch
+für Schleife). Zwischen den beiden geschweiften Klammern (<tt>{</tt>
+und <tt>}</tt>) befinden sich jeweils durch Semikolon abgetrennt die
+eigentlichen durch den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auszuführenden Befehle. Die Befehle
+in der Funktion <tt>setup()</tt> werden einmal bei Sketch-Start
+ausgeführt. Sie werden üblicherweise verwendet, um initiale
+Einstellungen vorzunehmen oder Ein- und Ausgänge zu parametrieren. Die
+Befehle der <tt>loop()</tt>-Funktion werden hingegen immer wieder
+ausgeführt solange der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eingeschaltet bleibt oder bis er neu
+programmiert wird. Hier findet die eigentliche Sketch-Funktion statt
+und hier wird auf Sensoren reagiert und Aktoren werden angesteuert.
+
+<p>Auch das <tt>Blink</tt>-Beispiel arbeitet so. In der
+<tt>setup()</tt>-Funktion wird in Zeile 14 der mit der roten Leuchtdiode
+verbundene interne Anschluss im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum Ausgang erklärt.
+
+<p>In der <tt>loop()</tt>-Funktion wird dann in Zeile 19 der interne
+Anschluss der roten Leuchtdiode eingeschaltet (Spannungspegel hoch,
+<tt>HIGH</tt>) und in Zeile 21 wird er ausgeschaltet (Spannungspegel
+niedrig, <tt>LOW</tt>). Zwischendurch wird jeweils in den Zeilen 20 und
+23 1000 Millisekunden bzw. eine Sekunde gewartet. Die Leuchtdiode wird
+also eingeschaltet, es wird eine Sekunde gewartet, sie wird
+ausgeschaltet und es wird eine weitere Sekunde gewartet. Dies passiert
+immer und immer wieder, so dass die Leuchtdiode mit einer Frequenz von
+0,5 Hertz blinkt.
+
+<p><h3><a name="3.2.4">3.2.4 Anpassungen am Sketch</a></h3>
+
+<p>Für den Einstieg ist es oft sinnvoll, mit einem vorgefertigten Sketch
+zu starten und dann eigene Änderungen vorzunehmen. Die Beispiele der
+Arduino-IDE stehen aber allen Benutzern eines PCs zur Verfügung und
+können daher zunächst nicht verändert werden. Nimmt man an einem
+Beispiel-Sketch Änderungen vor und versucht sie zu speichern, dann
+weist einen die Arduino-IDE darauf hin, dass man eine eigene Kopie
+anlegen soll. Dazu öffnet die Arduino-IDE einen Dateidialog und man
+hat die Möglichkeit, den Sketch vor dem Speichern umzubenennen z.B. in
+<tt>SchnellBlink</tt>.
+
+<p><center>
+  
+  <p><a name="IMG:3.6"><img src="ersteschritte/speichern.png"></a>
+  <br><small>Abbildung 3.6: Die Arduino-IDE fordert zum Speichern einer eigenen Kopie auf</small>
+</center>
+
+<p>Sobald man auf diese Weise eine eigene Kopie angelegt hat kann man sie
+beliebig verändern. Die eigene Kopie wird im Menü der Arduino-IDE
+unter <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Sketchbook</span></tt> eingefügt und kann von dort
+später jederzeit wieder geladen werden.
+
+<p><center>
+  
+  <p><a name="IMG:3.7"><img src="ersteschritte/sketchbook.png"></a>
+  <br><small>Abbildung 3.7: Kopie <tt>SchnellBlink</tt> im Sketchbook der Arduino-IDE</small>
+</center>
+
+<p>Im Sketch kann man nun beispielsweise aus den 1000 Millisekunden in
+den Zeilen 20 und 23 jeweils 500 Millisekunden machen.
+
+<pre>
+     <font color="green">18</font>  void loop() {
+     <font color="green">19</font>    digitalWrite(LED_BUILTIN, HIGH);   // schalte die LED ein (HIGH ist der hohe Spannungspegel)
+     <font color="green">20</font>    delay(500);                        // warte 500 Millisekunden (eine halbe Sekunde)
+     <font color="green">21</font>    digitalWrite(LED_BUILTIN, LOW);    // schalte die LED aus, indem die Spannung auf
+     <font color="green">22</font>                                       // niedrigen Pegel (LOW) geschaltet wird
+     <font color="green">23</font>    delay(500);                        // warte eine halbe Sekunde
+     <font color="green">24</font>  }
+</pre>
+Nach erfolgreichem Download wird die Leuchtdiode dann jeweils für 0,5
+Sekunden ein- und ausgeschaltet und die Blinkfrequenz verdoppelt sich
+auf ein Hertz.
+
+<p><h2><a name="3.2">3.2 Ansteuerung von fischertechnik-Komponenten</a></h2>
+
+<p>Um die interne Leuchtdiode des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> blinken zu lassen hätten
+wir keinen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> benötigt. Alle Arduinos verfügen über eine
+solche interne Leuchtdiode und hätten für unser erstes Beispiel
+verwendet werden können.
+
+<p>Seine speziellen Fähigkeiten spielt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aus, wenn es darum
+geht mit den üblichen fischertechnik-Sensoren und -Aktoren umzugehen.
+Der Blink-Sketch soll daher so erweitert werden, dass zusätzlich zu
+Leuchtdiode eine am Ausgang <tt>O1</tt> angeschlossene Lampe blinkt.
+
+<p>Angeschlossen wird dazu eine normale fischertechnik-Lampe mit einem
+Stecker an den Ausgang <tt>O1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und mit dem zweiten Stecker
+an einen der Masseanschlüsse des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Masseanschlüsse sind die 12
+Anschlüsse, die in der Abbildung <a href="ersteschritte.html#IMG:3.8">3.8</a> mit einem Massesymbol
+&#x23CA; verbunden sind. 
+
+<p><center>
+  
+  <p><a name="IMG:3.8"><img src="ersteschritte/blinko1_svg.png"></a>
+  <br><small>Abbildung 3.8: Blinkende fischertechnik-Lampe am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
+</center>
+
+<p>Da nun die mit 9 Volt betriebenen fischertechnik-Ausgänge verwendet
+werden muss der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zusätzlich mit 9 Volt versorgt werden. Das
+kann z.B.  über ein übliches fischertechnik-Netzteil erfolgen oder
+über einen Batteriehalter. Beide Anschlüsse sind verpolungsgeschützt,
+speziell beim Anschluss der Batterie kann man also keinen Schaden
+anrichten.
+
+<p><h3><a name="3.3.1">3.3.1 Der Sketch</a></h3>
+
+<p>Der folgende Beispiel-Sketch <tt>BlinkO1</tt> findet sich auch im
+<tt><span style="background-color:#f0f0f0;">Datei</span></tt>-Menü der Arduino-IDE unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/BlinkO1"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">BlinkO1</span></tt></a>.
+
+<pre>     <font color="green"> 1</font>  // BlinkO1.ino
+     <font color="green"> 2</font>  //
+     <font color="green"> 3</font>  // Blinken einer Lamoe an Ausgang O1
+     <font color="green"> 4</font>  //
+     <font color="green"> 5</font>  // (c) 2018 by Till Harbaum &lt;till@harbaum.org&gt;
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  void setup() {
+     <font color="green">10</font>    // LED initialisieren
+     <font color="green">11</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green">12</font>  }
+     <font color="green">13</font>  
+     <font color="green">14</font>  void loop() {
+     <font color="green">15</font>    // schalte die interne LED und den Ausgang O1 ein (HIGH bzw. HI)
+     <font color="green">16</font>    digitalWrite(LED_BUILTIN, HIGH);
+     <font color="green">17</font>    ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green">18</font>  
+     <font color="green">19</font>    delay(1000);                       // warte 1000 Millisekunden (eine Sekunde)
+     <font color="green">20</font>  
+     <font color="green">21</font>    // schalte die interne LED und den Ausgang O1 aus (LOW bzw. LO)
+     <font color="green">22</font>    digitalWrite(LED_BUILTIN, LOW);
+     <font color="green">23</font>    ftduino.output_set(Ftduino::O1, Ftduino::LO);
+     <font color="green">24</font>    
+     <font color="green">25</font>    delay(1000);                       // warte eine Sekunde
+     <font color="green">26</font>  }
+</pre> 
+
+<p>Der Sketch unterscheidet sich nur in wenigen Details vom
+ursprünglichen Blink-Sketch. Neu hinzugekommen sind die Zeilen 7, 17
+und 23. In Zeile 7 wird eine Bibliothek eingebunden, die speziell für
+den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mitgeliefert wird und den Zugriff auf die Ein- und
+Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> vereinfacht. In den Zeilen 17 und 23 wird der
+Ausgang <tt>O1</tt> eingeschaltet (<tt>HI</tt>) bzw. ausgeschaltet
+(<tt>LO</tt>). Weitere Details zu dieser Bibliothek finden sich in
+Kapitel <a href="bibliotheken.html#9">9</a>.
+
+<p>Die Kommandos zum Ein- und Ausschalten der internen Leuchtdiode sind
+nach wie vor vorhanden, so dass die interne Leuchtdiode nun parallel
+zur extern angeschlossenen Lampe blinkt.
+
+<p>Weitere einfache Beispiele und Erklärungen zur Benutzung der Ein- und
+Ausgänge in eigenen Sketches finden sich in Abschnitt
+<a href="bibliotheken.html#9.2.1">9.2.1</a>.
+
+<p><h3><a name="3.3.2">3.3.2 Eingänge</a></h3>
+
+<p>Zum Anschluss an übliche fischertechnik-Taster, -Fototransistoren und
+ähnlich verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über die acht Eingänge <tt>I1</tt> bis
+<tt>I8</tt> und die Zählereingänge <tt>C1</tt> bis <tt>C4</tt>.
+
+<p><center>
+  
+  <p><a name="IMG:3.9"><img src="ersteschritte/input_i_svg.png"></a>
+  <br><small>Abbildung 3.9: Taster am Eingang <tt>I1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
+</center>
+
+<p>Der Zugriff auf diese Eingänge erfolgt über passende Bibliotheken wie
+in Abschnitt <a href="bibliotheken.html#9">9</a> dargestellt. Über die
+<tt>FtduinoSimple</tt>-Bibliothek kann der Schaltzustand eines Tasters
+abgefragt werden:
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  void setup() {
+     <font color="green"> 4</font>    // keine Initialisierung noetig
+     <font color="green"> 5</font>  }
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  void loop() {
+     <font color="green"> 8</font>    // lies den Zustand einer Taste an Eingang I1
+     <font color="green"> 9</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">10</font>      /* ... tue etwas ... */
+     <font color="green">11</font>    }
+     <font color="green">12</font>  }
+</pre>
+Um Analogwerte wie Spannungen und Widerstände einzulesen ist der
+erweiterte Funktionsumfang der <tt>Ftduino</tt>-Bibliothek nötig.
+Bei ihrer Verwendung muss zunächst der Messmodus des Eingangs
+eingestellt werden, bevor Widerstands-Werte gelesen werden können:
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;Ftduino.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  void setup() {
+     <font color="green"> 4</font>    // Initialisierung der Ftduino-Bibliothek
+     <font color="green"> 5</font>    ftduino.init();
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>    // Eingang I1 zur Widerstandsmessung vorbereiten
+     <font color="green"> 8</font>    ftduino.input_set_mode(Ftduino::I1, Ftduino::RESISTANCE);
+     <font color="green"> 9</font>  }
+     <font color="green">10</font>  
+     <font color="green">11</font>  void loop() {
+     <font color="green">12</font>    // Auswertung des Widerstands an Eingang I1
+     <font color="green">13</font>    uint16_t widerstand = ftduino.input_get(Ftduino::I1);
+     <font color="green">14</font>    /* ... tue etwas ... */
+     <font color="green">15</font>  }
+</pre>
+In den Experimenten in Kapitel <a href="experimente.html#6">6</a> finden sich
+diverse Beispiel, in denen die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ausgewertet
+werden inklusive spezieller Sensoren wie dem Temperatursensor in
+Abschnitt <a href="experimente.html#6.7">6.7</a>.
+
+<p><h2><a name="3.3">3.3 Kommunikation mit dem PC</a></h2>
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist primär dafür gedacht, ein Modell autonom zu steuern
+und während des Betriebs nicht auf die Hilfe eines PC angewiesen zu
+sein. Trotzdem gibt es Gründe, warum auch im laufenden Betrieb ein
+Datenaustausch mit einem PC erwünscht sein kann.
+
+<p>Vor allem während der Sketch-Entwicklung und bei der Fehlersuche hilft
+es oft sehr, wenn man sich z.B. bestimmte Werte am PC anzeigen lassen
+kann oder wenn man Fehlermeldungen im Klartext an den PC senden
+kann. Aber auch die Ausgabe z.B. von Messwerten an den PC zur weiteren
+Auswertung oder Speicherung ist oft hilfreich.
+
+<p>Ein Sketch kann dazu den <tt>COM:</tt>-Port zwischen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und PC
+für den Datenaustausch nutzen. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Beispiel-Sketch
+<tt>ComPort</tt> zum Beispiel verwendet den <tt>COM:</tt>-Port, um ein
+paar einfache Textausgaben am PC zu erzeugen. Das
+<tt>ComPort</tt>-Beispiel findet sich im <tt><span style="background-color:#f0f0f0;">Datei</span></tt>-Menü der
+Arduino-IDE unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/ComPort"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">USB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ComPort</span></tt></a>. Auch der
+<tt>ComPort</tt>-Sketch verwendet keinen der Ausgänge und benötigt
+daher neben der USB-Verbindung keinerlei weitere Spannungsversorgung.
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>     ComPort - Kommunikation mit dem PC über den COM:-Port
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>   */
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  int zaehler = 0;
+     <font color="green"> 7</font>  
+     <font color="green"> 8</font>  void setup() {
+     <font color="green"> 9</font>    // Port initialisieren und auf USB-Verbindung warten
+     <font color="green">10</font>    Serial.begin(9600);
+     <font color="green">11</font>    while(!Serial);      // warte auf USB-Verbindung
+     <font color="green">12</font>  
+     <font color="green">13</font>    Serial.println("ftDuino COM:-Port test");
+     <font color="green">14</font>  }
+     <font color="green">15</font>  
+     <font color="green">16</font>  void loop() {
+     <font color="green">17</font>    Serial.print("Zähler: ");       // gib "Zähler:" aus
+     <font color="green">18</font>    Serial.println(zaehler, DEC);   // gib zaehler als Dezimalzahl aus
+     <font color="green">19</font>  
+     <font color="green">20</font>    zaehler = zaehler+1;            // zaehler um eins hochzählen
+     <font color="green">21</font>  
+     <font color="green">22</font>    delay(1000);                    // warte 1 Sekunde (1000 Millisekunden)
+     <font color="green">23</font>  }
+</pre> 
+
+<p><h3><a name="3.4.1">3.4.1 Der serielle Monitor</a></h3> 
+
+<p>Man kann ein beliebiges sogenanntes Terminalprogramm auf dem PC
+nutzen, um Textausgaben des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> via <tt>COM:</tt>-Port zu
+empfangen. Die Arduino-IDE bringt praktischerweise selbst ein solches
+Terminal mit. Es findet sich im Menü unter
+<tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Serieller Monitor</span></tt>.
+
+<p><center>
+  
+  <p><a name="IMG:3.10"><img src="ersteschritte/menu_serieller_monitor.png"></a>
+  <br><small>Abbildung 3.10: Der serielle Monitor findet sich im <tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt>-Menü</small>
+</center>
+
+<p>Man muss den <tt>COM:</tt>-Port nicht separat einstellen, sondern es
+wird der <tt>COM:</tt>-Port übernommen, der bereits für den Sketch-Download
+eingestellt wurde.
+
+<p>Nach der Auswahl im Menü öffnet der serielle Monitor ein eigenes
+zusätzliches Fenster auf dem PC. Wurde der <tt>ComPort</tt>-Sketch
+bereits auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geladen, dann erscheinen sofort
+entsprechende Ausgaben, sobald der serielle Monitor geöffnet wurde.
+
+<p><center>
+  
+  <p><a name="IMG:3.11"><img src="ersteschritte/serieller_monitor.png"></a>
+  <br><small>Abbildung 3.11: Der serielle Monitor</small> 
+</center>
+
+<p><h4>Zeilenenden</h4> 
+
+<p>Der serielle Monitor hat am unteren Fensterrand eine recht
+unscheinbare Option, das Zeilenende zu markieren. Für einfache
+Textausgaben vom ftDuino zum PC ist diese Option bedeutungslos.  Aber
+sobald Eingaben vom PC erwartet werden wie zum Beispiel im Modell des
+Hochregallagers in Abschnitt <a href="modelle.html#7.1">7.1</a> kommt dieser Option
+eine Bedeutung zu. Die Option muss auf <tt><span style="background-color:#f0f0f0;">Neue Zeile</span></tt> oder
+<tt><span style="background-color:#f0f0f0;">Zeilenumbruch (CR)</span></tt> stehen, damit die Befehlseingabe klappt.
+
+<p><center>
+  
+  <p><a name="IMG:3.12"><img src="ersteschritte/zeilenenden.png"></a>
+  <br><small>Abbildung 3.12: Einstellung des Zeilenendes</small>
+</center>
+
+<p>Die Nutzung des <tt>COM:</tt>-Ports wird automatisch zwischen
+Sketch-Download und seriellem Monitor geteilt. Man kann also jederzeit
+bei geöffnetem seriellen Monitor den Sketch-Editor in den Vordergrund
+holen und einen Download starten. Der seriellem Monitor wird dann
+automatisch für die Zeit des Downloads deaktiviert.
+
+<p>Eine Besonderheit des USB-<tt>COM:</tt>-Ports die der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> vom
+Arduino Leonardo erbt ist, dass die sogenannte Bitrate (oft auch
+Baudrate genannt) keine Bedeutung hat. Im <tt>ComPort</tt>-Beispiel
+wird in Zeile 10 eine Bitrate von 9600 Bit pro Sekunde eingestellt, in
+Abbildung <a href="ersteschritte.html#IMG:3.11">3.11</a> ist aber unten rechts eine Bitrate
+von 115200 Bit pro Sekunde eingestellt. Die USB-Verbindung ignoriert
+diese Einstellungen und kommuniziert trotzdem fehlerfrei. Einige
+andere Mitglieder der Arduino-Familie wie der Arduino-Uno benötigen
+hier aber übereinstimmende Einstellungen.
+
+<p><h3><a name="3.4.2">3.4.2 Sketchbeschreibung</a></h3>
+
+<p>Der Sketch besteht aus wenig mehr als den eigentlich Aufrufen zur
+Bedienung des <tt>COM:</tt>-Ports. Da der <tt>COM:</tt>-Port auch oft
+``serieller Port'', englisch ``Serial'' genannt wird fangen die
+entsprechenden Funktionsaufrufe alle mit <tt>Serial.</tt> an.
+
+<p>In Zeile 10 der sofort bei Sketchstart aufgerufenen
+<tt>setup()</tt>-Funktion wird zunächst der <tt>COM:</tt>-Port für die
+Kommunikation geöffnet. In Zeile 11 dann wird gewartet, bis der
+<tt>COM:</tt>-Port auf PC-Seite verfügbar ist und die erste
+Kommunikation stattfinden kann. In Zeile 13 wird danach eine erste
+Startmeldung an den PC geschickt.
+
+<p>Innerhalb der wiederholt durchlaufenen <tt>loop()</tt>-Funktion wird dann
+in den Zeilen 17 und 18 zunächst der Text ``Zähler: `` ausgegeben,
+gefolgt von dem Inhalt der Variablen <tt>zaehler</tt> in
+Dezimaldarstellung. Die <tt>println()</tt>-Funktion führt nach der
+Ausgabe einen Zeilenvorschub aus. Die folgende Ausgabe erfolgt daher
+am Beginn der nächsten Bildschirmzeile.
+
+<p>Schließlich wird in Zeile 20 die <tt>zaehler</tt>-Variable um eins
+erhöht und eine Sekunde (1000 Millisekunden) gewartet.
+
+<p><h3><a name="3.4.3">3.4.3 USB-Verbindungsaufbau</a></h3>
+
+<p>Bei Geräten wie dem Arduino Uno, die einen separaten
+USB-Kommunikationsbaustein für die USB-Kommunikation nutzen, besteht
+die USB-Verbindung durchgängig, sobald das Gerät mit dem PC verbunden
+ist. Beim <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sowie beim Arduino Leonardo übernimmt der
+Mikrocontroller wichtige Aspekte der USB-Kommunikation selbst. Das
+bedeutet, dass die logische USB-Verbindung jedes Mal getrennt und neu
+aufgebaut wird, wenn ein neuer Sketch auf den Mikrocontroller
+übertragen wird.
+
+<p>Beginnt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> direkt nach dem Download mit der Textausgabe
+auf dem <tt>COM:</tt>-Port, so gehen die ersten Nachrichten verloren,
+da die USB-Verbindung noch nicht wieder aufgebaut ist. Daher wartet
+der Sketch in Zeile 11 darauf, dass die Kommunikationsverbindung
+zwischen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und PC wieder besteht, bevor die ersten Ausgaben
+erfolgen.
+
+<p>Man kann testweise diese Zeile einmal löschen oder auskommentieren
+(Programmcode, der per <tt>//</tt> in einen Kommentar verwandelt wurde,
+wird nicht ausgeführt).
+
+<pre>
+     <font color="green"> 8</font>  void setup() {
+     <font color="green"> 9</font>    // Port initialisieren und auf USB-Verbindung warten
+     <font color="green">10</font>    Serial.begin(9600);
+     <font color="green">11</font>  //  while(!Serial);      // warte auf USB-Verbindung
+     <font color="green">12</font>  
+     <font color="green">13</font>    Serial.println("ftDuino COM:-Port test");
+     <font color="green">14</font>  }
+</pre>
+Lädt man diesen Sketch nun auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>, so beginnt die
+Textausgabe im seriellen Monitor erst ab der Zeile
+<tt>Zähler:&nbsp;2</tt>. Die beiden vorhergehenden Zeilen werden vom
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an den PC gesendet, bevor die USB-Verbindung wieder steht
+und gehen daher verloren. Dieses Verhalten kann trotzdem gewünscht
+sein, wenn die Ausgabe über USB nur zusätzlich erfolgen soll und der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auch ohne angeschlossenen PC arbeiten soll.
+<hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - ersteschritte</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
