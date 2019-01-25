@@ -1,0 +1,441 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>community</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="8">8 Community-Projekte</a></h1> 
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist ein echtes Community-Projekt. Er basiert auf Ideen
+aus der fischertechnik-Community und integriert sich entsprechend gut
+in bestehende Community-Projekte. Während kommerzielle Produkte oft in
+Konkurrenz mit ihren eigenen Vorgängern stehen und dem Kunden vor
+allem Neues geboten werden soll können es sich Community-Projekte
+leichter erlauben, auch ältere und technisch in Konkurrenz stehende
+Systeme einzubinden.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich wie in Abschnitt <a href="experimente.html#6.14.5">6.14.5</a>
+beschrieben mit dem fischertechnik-TXT-Controller per I²C
+koppeln. Auf dem TXT kommt dabei die sogenannte
+Community-Firmware<a href="#fn1"><sup>1</sup></a>  zum Einsatz.
+Entsprechende Programme zur Anbindung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per I²C finden
+sich ebenfalls dort<a href="#fn2"><sup>2</sup></a> .
+
+<p><h2><a name="8.1">8.1 <tt>ftduino_direct</tt>: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Anbindung per USB an TXT und TX-Pi</a></h2>
+
+
+<p>Einfacher und robuster ist die Anbindung per USB an PCs, den TXT oder
+auch den Raspberry-Pi. Die Community stellt dazu einen Sketch sowie
+eine passende Python-Bibliothek zur
+Verfügung<a href="#fn3"><sup>3</sup></a> .
+
+<p>Mit Hilfe des Sketches stellt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> seine Anschlüsse einem
+per USB angeschlossenen übergeordneten Gerät zur Verfügung. Die
+Python-Bibliothek kann auf dem übergeordneten Gerät genutzt werden, um
+aus einem Python-Programm auf die Ein- und Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+zuzugreifen.
+
+<p><center>
+  
+  <p><a name="IMG:8.1"><img src="community/ftduino_and_pi.jpg"></a>
+  <br><small>Abbildung 8.1: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per USB am Raspberry-Pi</small>
+</center>
+
+<p>Mit Hilfe dieser Bibliothek lassen sich bestehende Python-Programme
+für die Community-Firmware leicht auf die Nutzung eines <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+erweitern. Besonders interessant ist dies auf Geräten wie dem
+Raspberry-Pi, da diese von Haus aus keine Schnittstelle zu
+fischertechnik-Sensoren und -Aktoren mitbringen.
+
+<p><center>
+  
+  <p><a name="IMG:8.2"><img src="community/tx-pi-xl+ftduino.jpg"></a>
+  <br><small>Abbildung 8.2: <tt>startIDE</tt> auf TX-Pi mit Zugriff auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Programme wie <tt>startIDE</tt><a href="#fn4"><sup>4</sup></a>  und
+<tt>Brickly</tt><a href="#fn5"><sup>5</sup></a> 
+können mit Hilfe von <tt>ftduino_direct</tt> auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+zugreifen und so auf dem Raspberry-Pi die fischertechnik-kompatiblen
+Anschlüsse des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzen.
+
+<p><h2><a name="8.2">8.2 <tt>ftDuinIO</tt>: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Kontroll-App für TXT und TX-Pi</a></h2>
+
+<p>Die Installation des <tt>ftduino_direct</tt>-Sketches auf dem
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann wie gewohnt per Arduino-IDE erfolgen, benötigt aber
+einen klassischen PC. Um vom PC komplett unabhängig zu sein wurde
+die <tt>ftDuinIO</tt>-App für die Community-Firmware entwickelt.
+
+<p><center>
+  
+  <p><a name="IMG:8.3"><img src="community/ftduinio.png"></a>
+  <br><small>Abbildung 8.3: Die <tt>ftDuinIO</tt>-App</small>
+</center>
+
+<p>Die App kann auf dem fischertechnik-TXT ebenso betrieben werden wie
+auf dem zum TX-Pi konfigurierten Raspberry-Pi und erlaubt es, Sketches
+auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden sowie die
+<tt>ftduino_direct</tt>-Funktionen zu testen.
+
+<p><h2><a name="8.3">8.3 <tt>Brickly-Plugin</tt>: Grafische <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Programmierung in Brickly</a></h2>
+
+
+<p>Brickly<a href="#fn6"><sup>6</sup></a>  ist eine auf Googles
+Blockly<a href="#fn7"><sup>7</sup></a>  basierende grafische
+Programmierumgebung.
+
+<p><center>
+  
+  <p><a name="IMG:8.4"><img src="community/brickly.png"></a>
+  <br><small>Abbildung 8.4: Die Brickly-Programmieroberfläche</small>
+</center>
+
+<p>Brickly wurde für den fischertechnik-TXT-Controller geschrieben und
+bringt alles mit, um dessen Ein- und Ausgänge nutzen zu
+können. Brickly selbst benötigt einen leistungsfähigen Controller, um
+darauf zu laufen. Dies kann ein fischertechnik-TXT-Controller oder
+auch ein Raspberry-Pi sein. Die Bedienung und Programmierung erfolgt
+dann im Web-Browser mit Hilfe eines per WLAN verbundenen Smartphones
+oder PCs.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> selbst ist nicht leistungsfähig genug, um Brickly
+auszuführen. Auch die nötige WLAN-Verbindung bringt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+nicht mit.
+
+<p>Stattdessen kann Brickly einen an den fischertechnik-TXT-Controller
+oder einen Raspberry-Pi (TX-Pi) angeschlossenen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ansteuern.
+Brickly nutzt dazu die in Abschnitt <a href="community.html#8.1">8.1</a>
+beschriebene <tt>ftduino_direct</tt>-Anbindung.
+
+<p>Das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Plugin für Brickly<a href="#fn8"><sup>8</sup></a> 
+kann in eine bestehende Brickly-Installation direkt in der
+Browser-Oberfläche installiert werden.
+
+<p><center>
+  
+  <p><a name="IMG:8.5"><img src="community/brickly_plugin_install.png"></a>
+  <br><small>Abbildung 8.5: Installation eines Brickly-Plugins</small>
+</center>
+
+<p>Danach können die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Ein- und -Ausgänge direkt in
+Brickly-Programmen verwendet werden. Einem Raspberry-Pi erschließt
+sich so die fischertechnik-Welt, ein TXT-Controller kann so um 20
+zusätzliche Ein- und 8 Ausgänge erweitert werden.
+
+<p><center>
+  
+  <p><a name="IMG:8.6"><img src="community/brickly_ftduino.png"></a>
+  <br><small>Abbildung 8.6: Ein Brickly-Programm zur Ansteuerung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Brickly existiert auch in der in Abschnitt <a href="experimente.html#6.19.4">6.19.4</a>
+beschriebenen lite-Variante. Diese erlaubt den direkten Zurgiff aus
+dem Browser auf einen per USB angeschlossenen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und benötigt
+keinen zusätzlichen TXT-Controller oder Raspberry-Pi.
+
+<p><h2><a name="8.4">8.4 <tt>startIDE</tt>: Programmierung direkt auf dem TX-Pi oder TXT</a></h2>
+
+
+<p>Die üblichen Programmierumgebung RoboPro für den fischertechnik-TXT-
+und -TX-Controller benötigt einen Windows-PC zur Programmierung.
+Selbst das deutlich modernere Brickly (siehe Abschnitt
+<a href="community.html#8.3">8.3</a>) ist auf ein externes Gerät zur Programmentwicklung
+angewiesen.
+
+<p>StartIDE<a href="#fn9"><sup>9</sup></a>  wurde dagegen
+so konzipiert, dass schon der kleine Touchbildschirm des
+fischertechnik-TXT-Controllers oder eines Raspberry-Pi ausreicht, um
+direkt am Gerät Programme erstellen zu können.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:8.7"><img src="community/startIDE01.png"></a></td></tr><tr><td align="center"><small>(a) Hauptbildschirm</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:8.7"><img src="community/startIDE02.png"></a></td></tr><tr><td align="center"><small>(b) Funktionsauswahl</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:8.7"><img src="community/startIDE03.png"></a></td></tr><tr><td align="center"><small>(c) IO-Konfiguration</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 8.7: Die Oberfläche der StartIDE</small>
+</center>
+
+<p>Die <tt>startIDE</tt> unterstützt neben den eigenen Anschlüssen des
+TXT auch die Anschlüsse einer ganzen Reihe per USB extern
+anzuschließender Interfaces und damit u.a. auch die des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Dazu bedient sich <tt>startIDE</tt> der bereits in
+Abschnitt <a href="community.html#8.1">8.1</a> vorgestellten
+<tt>ftduino_direct</tt>-Anbindung. Da die <tt>startIDE</tt> auch auf
+dem TX-Pi bzw. dem Raspberry-Pi läuft verleiht sie diesem die für den
+Einsatz im fischertechnik-Modellen nötigen Anschlüsse.
+
+<p>Das Gespann TX-Pi (bzw. Raspberry-Pi), <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und <tt>startIDE</tt>
+erlaubt damit, fischertechnik-Modelle ganz ohne PC oder Smartphone zu
+programmieren. 
+
+<p>Die ausführliche
+Bedienungsanleitung<a href="#fn10"><sup>10</sup></a> 
+der <tt>startIDE</tt> enthält weitere Details zur Nutzung des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p><h2><a name="8.5">8.5 ft-Extender: I²C-Erweiterung</a></h2> 
+
+<p>Der ft-Extender ist wie der I²C-Expander aus Abschnitt
+<a href="experimente.html#6.14.6">6.14.6</a> ein Gerät, das es erlaubt den I²C-Bus
+des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu erweitern und so unterschiedlichste Geräte
+gleichzeitig anzuschließen und zu koppeln.
+
+<p><center>
+  
+  <p><a name="IMG:8.8"><img src="community/ftExtender.jpeg"></a>
+  <br><small>Abbildung 8.8: ft-Extender</small>
+</center>
+
+<p>Über die Funktionen des I²C-Expander hinaus bietet der ft-Extender
+eine zusätzliche Spannungsversorgung für angeschlossene Geräte.  Mit
+Hilfe des ft-Extender an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angeschlossene Sensoren werden
+also anders als beim I²C-Expander nicht vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> versorgt,
+sondern vom ft-Extender selbst.  Dadurch steht einerseits ein etwas
+höherer Strom zur Verfügung. Vor allem steht aber neben den 5
+Volt, die auch der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> liefert, zusätzlich eine
+3,3-Volt-Versorgung zur Verfügung. Der ft-Extender ist damit flexibler
+einsetzbar als der I²C-Expander.
+
+<p>Mehr Informationen zum ft-Extender finden sich unter
+<a href="https://github.com/elektrofuzzis/ftExtender">https://github.com/elektrofuzzis/ftExtender</a>, speziell das
+Handbuch unter
+<a href="https://github.com/elektrofuzzis/ftExtender/blob/master/Handbuch_ft-Extender.pdf">https://github.com/elektrofuzzis/ftExtender/blob/master/Handbuch_ft-Extender.pdf</a>.
+
+<p><h2><a name="8.6">8.6 Scratch for Arduino (S4A)</a></h2> 
+
+<p>Scratch<a href="#fn11"><sup>11</sup></a>  ist eine grafische
+Programmierumgebung vergleichbar mit Blockly und Brickly (siehe Abschnitt
+<a href="experimente.html#6.19.4">6.19.4</a>).
+
+<p><center>
+  
+  <p><a name="IMG:8.9"><img src="community/s4a.png"></a>
+  <br><small>Abbildung 8.9: S4A-Hauptbildschirm</small>
+</center>
+
+
+<p>Scratch wurde als reine Simulationsumgebung entwickelt. Die Interaktion mit
+echter Hardware war nicht vorgesehen. Scratch for Arduino<a href="#fn12"><sup>12</sup></a> 
+erweitert Scratch im die Möglichkeit, Arduinos anzusprechen. Dazu wird
+auf dem Arduino ein spezieller Sketch installiert. Der so präparierte
+Arduino wird von S4A automatisch erkannt und eingebunden.
+
+<p>Da der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über spezielle Ein- und Ausgänge verfügt lässt er
+sich nicht direkt mit dem S4A-Sketch ansteuern. Stattdessen findet
+sich in der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation ein kompatibler Sketch unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/S4AFirmware16"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">S4AFirmware16</span></tt></a>. Ein mit diesem Sketch ausgestatteter
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird von S4A automatisch erkannt und eingebunden.
+
+<p><center>
+  
+  <p><a name="IMG:8.10"><img src="community/s4a_pins_svg.png"></a>
+  <br><small>Abbildung 8.10: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Anschlüsse unter S4A</small> 
+</center>
+
+<p>Da S4A sich mit den Bezeichnern der Ein- und Ausgänge nah an die
+üblichen Arduino-Bezeichnungen anlehnt kann nicht mit den
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-üblichen Bezeichnungen gearbeitet werden.  Abbildung
+<a href="community.html#IMG:8.10">8.10</a> zeigt, welchen Anschlüsse am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> in S4A
+unter welcher Bezeichnung auftauchen.
+
+<p><h3><a name="8.7.1">8.7.1 Installation</a></h3>
+
+<p>S4A auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> setzt eine normale Installation von S4A voraus.
+Die Installation ist auf der S4A-Homepage unter <a href="http://s4a.cat/">http://s4a.cat/</a>
+beschrieben.
+
+<p>Es muss lediglich statt des dort angebenen Original-Sketches der
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/S4AFirmware16"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">S4AFirmware16</span></tt></a>-Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geladen
+werden.
+
+<p><center>
+  
+  <p><a name="IMG:8.11"><img src="community/s4a_beispiel_svg.png"></a>
+  <br><small>Abbildung 8.11: Einfaches S4A-Beispiel, das eine Lampe blinken lässt</small> 
+</center>
+
+<p>In Abbildung <a href="community.html#IMG:8.11">8.11</a> ist ein Beispielprogramm
+nebst entsprechender Verkabelung abgebildet. Bei den Analogeingängen
+ist zu beachten, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> einen Wertebereich von 0 bis
+65,535k&#8486; messen kann während Scratch mit Werten von 0 bis 1023
+arbeitet. Ein Wert von 1023 in S4A entspricht dabei 65,535k&#8486;
+bzw. einem offenen Eingang am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Ein Wert von 0 in S4A entspricht
+0&#8486; bzw. einem geschlossenen Eingang.
+
+<p><h3><a name="8.7.2">8.7.2 Darstellung der Pin-Zuweisungen in S4A</a></h3>
+
+<p>Da S4A für die Benutzung mit eine Arduino entworfen wurde zeigt das Programm zunächst im oberen rechten
+Bereich die Belegung eines Arduino an. Es erleichtert die Arbeit mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter S4A sehr, wenn
+dort die abweichende Belegung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angezeigt wird.
+
+<p>Eine entsprechende sogegannte Sprite-Datei ist unter
+<a href="https://harbaum.github.io/ftduino/www/images/s4a_sprite.png">https://harbaum.github.io/ftduino/www/images/s4a_sprite.png</a>
+erhältlich. Sirekt unter der Anzeige des Arduino-Bildes befindet sich
+ein Icon zur Auswahl eines neuen Sprites.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:8.12"><img src="community/s4a_sprite.png"></a></td></tr><tr><td align="center"><small>(a) <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Sprite für S4A</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:8.12"><img src="community/s4a_new_sprite.png"></a></td></tr><tr><td align="center"><small>(b) Auswahl eines neuen Sprites</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 8.12: Installation eines neuen Sprites</small>
+</center>
+
+<p>Klickt man auf dieses Icon, so kann man im folgenden ``Paint''-Dialog
+ein neues Sprite zeichnen. Um die o.g.  Datei zu verwenden muss man
+diese zunächst auf den eigenen PC laden. Im ``Paint''-Dialog kann sie
+dann über den Import-Knopf in S3A importiert werden. Das neue
+Sprite-Bild muss abschließend mit ``Ok'' bestätigt werden.
+
+<p><center>
+  
+  <p><a name="IMG:8.13"><img src="community/s4a_gui.png"></a>
+  <br><small>Abbildung 8.13: Anzeige des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Sprites in S4A</small>
+</center>
+
+<p>Die Anschluss-Belegung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird nun für das aktuelle
+Projekt dauerhaft oben rechts in S4A angezeigt. 
+
+<p><h2><a name="8.7">8.7 <tt>Minecraft</tt> und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>: Computerspiel trifft reale Welt</a></h2>
+
+
+<p>Neben den grafischen Programm-Baukästen wie Scratch, die ihre Ursprünge
+im didaktischen Bereich haben, gibt es auch grafische Programmiersysteme,
+die auf den ersten Blick aus einer unerwarteten Richtung kommen.
+
+<p>Ein populäres Beispiel dafür ist Minecraft. Dieses Spiel bietet mit
+dem ``Redstone'' und den entsprechenden Komponenten eine Möglichkeit,
+Kabel in der virtuellen Minecraft-Welt zu verlegen und damit
+Spiel-interne Aktoren und Sensoren sowie Logikelemente zu verbinden.
+
+<p><center>
+  
+  <p><a name="IMG:8.14"><img src="community/minecraft.png"></a>
+  <br><small>Abbildung 8.14: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod in Minecraft</small> 
+</center>
+
+<p>Die Minecraft-Mod für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erweitert Minecraft um Blöcke,
+die die Minecraft-interne Welt mit den Anschlüssen eines am PC
+angeschlossenen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbindet.
+
+<p><h3><a name="8.8.1">8.8.1 Installation der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod</a></h3>
+
+<p>Die sogenannte <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod für Minecraft basiert auf Forge
+1.12.2 <a href="#fn13"><sup>13</sup></a> 
+und setzt eine Installation dieser Minecraft- und Forge-Versionen
+voraus. Die Installation der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod unterscheidet sich in
+keiner Weise von anderen Mods.
+
+<p>Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod selbst kann unter
+<a href="https://harbaum.github.io/ftduino/minecraft/ftduino-0.0.3.jar">https://harbaum.github.io/ftduino/minecraft/ftduino-0.0.3.jar</a> heruntergeladen werden. Sie
+eignet sich für Windows-, Linux- und MacOS-PCs. Sie wird den üblichen
+Anleitungen folgend in das entsprechende Mod-Verzeichnis von Minecraft
+kopiert und beim nächsten Start von Minecraft automatisch geladen.
+
+<p><h3><a name="8.8.2">8.8.2 Vorbereitung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> muss mit dem <tt>IoServer</tt>-Sketch versehen werden.
+Dieser ist in der Arduino-IDE unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/IoServer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">IoServer</span></tt></a> zu
+finden. In diesem Fall muss als Board der normale <tt>ftDuino</tt>
+ausgewählt werden und <em>nicht</em> <tt>ftDuino (WebUSB)</tt>, da es
+sich bei Minecraft im keine Web-Anwendung handelt.
+
+<p>Da der IoServer-Sketch bei entsprechend ausgerüsteten <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s auch
+das interne OLED-Display nutzt muss die Adafruit-GFX-Bibliothek
+installiert sein. Dies kann bei Bedarf über das Bibliotheken-Menü der
+Arduino-IDE mit wenigen Klicks nachgeholt werden. Ein internes Display
+ist nicht zwingend nötig, der Sketch funktioniert auch auf jedem
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ohne Display.
+
+<p><h3><a name="8.8.3">8.8.3 Verwendung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> in Minecraft</a></h3>
+
+<p>Wurde die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod erfolgreich eingebunden, dann stehen im
+Creative-Modus von Minecraft im Redstone-Bereich die in Abbildung
+<a href="community.html#IMG:8.15">8.15</a> dargestellten zusätzlichen Blöcke zur
+Verfügung.
+
+<p>Zur Zeit stehen reine digital-Blöcke für die Eingänge <tt>I1</tt> bis
+<tt>I8</tt>, die Ausgänge <tt>O1</tt> bis <tt>O8</tt> und die interne
+Leuchtdiode des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zur Verfügung.
+
+<p><center>
+   <table><tr><td><table><tr><td><a name="IMG:8.15"><img src="community/minecraft_input.png"></a></td></tr><tr><td align="center"><small>(a) Eingang
+    <tt>I1</tt>-<tt>I8</tt></small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:8.15"><img src="community/minecraft_output.png"></a></td></tr><tr><td align="center"><small>(b) Ausgang <tt>O1</tt>-<tt>O8</tt></small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:8.15"><img src="community/minecraft_led.png"></a></td></tr><tr><td align="center"><small>(c) interne LED</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 8.15: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Blöcke in Minecraft</small> 
+</center>
+
+<p>Der Input-Block (<tt>IN</tt>) stellt eine Verbindung von Redstone zu
+einem der Eingänge <tt>I1</tt> bis <tt>I8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zur
+Verfügung. Durch Rechtsklick auf die Vorderseite des Blocks kann der
+Eingang ausgewählt werden. Er wird durch einen grünen Stecker
+symbolisiert, der in einer von acht Buchsen steckt. Ein gelber Blitz
+rechts daneben zeigt an, wenn der angewählte Eingang aktiv ist weil
+z.B. ein am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angeschlossener Schalter geschlossen ist. Der
+in der Abbildung dargestellte Eingang <tt>I1</tt> ist zur Zeit nicht
+aktiv. Es können mehrere Input-Blöcke mit dem gleichen Eingang des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> assoziiert werden, alle Blöcke empfangen dann geichzeitig
+das Signal des entsprechenden Eingangs am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p>Der Output-Block (<tt>OUT</tt>) stellt eine Verbindung von Redstone zu
+einem der Ausgänge <tt>O1</tt> bis <tt>O8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> her. In
+diesem Fall erfolgt die Kennzeichnung durch einen roten Stecker. Der
+in der Abbildung dargestellte Block wird durch aktives Redstone
+angesteuert. Er ist also aktiv und steuert in diesem Fall den Ausgang
+<tt>O2</tt> an und schaltet ihn in den Zustand <tt>HI</tt> und eine
+zwischen dem Ausgang <tt>O2</tt> und Masse (-) angeschlossene Lampe
+würde leuchten. Dies wird durch das Blitz-Symbol angezeigt. Es kann
+immer nur ein Block einem der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Ausgänge zugeordnet werden,
+da andernfalls widersprüchliche Signale an den gleichen Ausgang
+gesendet werden können.
+
+<p>Der LED-Block steuert die interne Leuchtdiode des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an.
+Dieser Block kann nur einmal in der Minecraft-Welt existieren, um
+wiederum widersprüchlicher Ansteuerung vorzubeugen.
+
+<p>In der Beispielwelt in Abbildung <a href="community.html#IMG:8.14">8.14</a> ist rechts hinten
+z.B. ein einfacher Wechselblinker zu sehen. Die Redstone-Fackel an dem
+mit Ausgang <tt>O2</tt> assoziierten <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Output-Block bildet
+einen Inverter, der das vorne an diesem Block anliegende Signal
+negiert. Das Signal wird auf den davor liegenden Redstone-Repeater
+geführt, der das Signal leicht verzögert und zurück auf den mit
+Ausgang <tt>O2</tt> assoziierten <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Output-Block leitet. Das
+kontinuierliche Verzögern und Negieren des Signals führt zu einem
+Blinken ungefähr im Sekundentakt. Ein weiterer Output-Block, diesmal
+mit <tt>O1</tt> assoziiert, ist mit dem invertierten Signal
+verbunden. An die Ausgänge <tt>O1</tt> und <tt>O2</tt> angeschlossene
+Lampen blinken daher im Wechsel. Weiter links im Bild sind Eingänge
+über <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Input-Blöcke realisiert, die unter anderem eine
+Redstone-Lampe über Eingang <tt>I7</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ansteuern.
+<hr><small>
+<a name="fn1">1) </a>fischertechnik TXT Community-Firmware
+  <a href="http://cfw.ftcommunity.de/ftcommunity-TXT">http://cfw.ftcommunity.de/ftcommunity-TXT</a><br>
+<a name="fn2">2) </a>ftDuino I²C für die CFW
+  <a href="https://github.com/harbaum/cfw-apps/tree/master/packages/ftDuinoI2C">https://github.com/harbaum/cfw-apps/tree/master/packages/ftDuinoI2C</a><br>
+<a name="fn3">3) </a><tt>ftduino_direct</tt>-Sketch
+  <a href="https://github.com/PeterDHabermehl/ftduino_direct">https://github.com/PeterDHabermehl/ftduino_direct</a><br>
+<a name="fn4">4) </a><tt>startIDE</tt>:
+  <a href="https://forum.ftcommunity.de/viewtopic.php?f=33&t=4297">https://forum.ftcommunity.de/viewtopic.php?f=33&t=4297</a><br>
+<a name="fn5">5) </a><tt>Brickly</tt>:
+  <a href="https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/">https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/</a><br>
+<a name="fn6">6) </a>Brickly-Anleitung <a href="https://github.com/EstherMi/ft-brickly-userguide/blob/master/de/brickly/index.md">https://github.com/EstherMi/ft-brickly-userguide/blob/master/de/brickly/index.md</a><br>
+<a name="fn7">7) </a>Google-Blockly
+<a href="https://developers.google.com/blockly/">https://developers.google.com/blockly/</a><br>
+<a name="fn8">8) </a>Brickly-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Plugin
+  <a href="https://github.com/harbaum/brickly-plugins#ftduino-io---ftduinoxml">https://github.com/harbaum/brickly-plugins#ftduino-io---ftduinoxml</a><br>
+<a name="fn9">9) </a><tt>startIDE</tt>-Homepage:
+  <a href="https://github.com/PeterDHabermehl/startIDE/">https://github.com/PeterDHabermehl/startIDE/</a><br>
+<a name="fn10">10) </a><tt>startIDE</tt>-Anleitung:
+  <a href="https://github.com/PeterDHabermehl/startIDE/blob/master/ddoc/Manual_160_de.pdf">https://github.com/PeterDHabermehl/startIDE/blob/master/ddoc/Manual_160_de.pdf</a><br>
+<a name="fn11">11) </a>Scratch: <a href="https://scratch.mit.edu/">https://scratch.mit.edu/</a><br>
+<a name="fn12">12) </a>S4A: <a href="http://s4a.cat/">http://s4a.cat/</a><br>
+<a name="fn13">13) </a>Forge 1.12.2:
+  <a href="http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html">http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html</a><br>
+</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - community</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

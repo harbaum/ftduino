@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>modelle</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="7">7 Modelle</a></h1> 
+
+<p>Während in den Experimenten aus Kapitel <a href="experimente.html#6">6</a> der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Controller im Mittelpunkt stand und nur wenige externe
+Komponenten Verwendung fanden geht es in diesem Kapitel um komplexere
+Modelle. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> spielt dabei eine untergeordnete Rolle.
+
+<p>Sämtliche Modelle stammen aus aktuellen Baukästen bzw. sind nah an
+deren Modelle angelehnt, so dass ein Nachbau mit dem entsprechenden
+Kasten möglich ist.
+
+<p><h2><a name="7.1">7.1 Automation Robots: Hochregallager</a></h2> 
+
+<p>Das Modell Hochregallager stammt aus dem Baukasten ``Automation
+Robots''. In der Originalanleitung wird der Einsatz des TX-Controllers
+beschrieben. Ein Zusatzblatt beschreibt den TXT-Controller.
+
+<p><center>
+  
+  <p><a name="IMG:7.1"><img src="modelle/hochregal.jpg"></a>
+  <br><small>Abbildung 7.1: Hochregal mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Der Beispielsketch <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/HighLevelRack"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">HighLevelRack</span></tt></a> steuert das Modell
+``Hochregallager'' aus dem Baukasten 511933 ``ROBO TX Automation
+Robots''. Der Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an das Modell entspricht dabei
+exakt dem Schaltplan für den TXT.
+
+<p>Die Bedienung erfolgt dabei aus dem seriellen Monitor vom PC
+aus<a href="#fn1"><sup>1</sup></a> .
+
+<p><em>Wichtig</em>: Damit die Befehlseingabe klappt müssen im
+seriellen Monitor die Zeilenden auf <tt><span style="background-color:#f0f0f0;">Neue Zeile</span></tt> oder
+<tt><span style="background-color:#f0f0f0;">Zeilenumbruch (CR)</span></tt> eingestellt worden sein, wie im
+Abschnitt <a href="ersteschritte.html#3.4.1">3.4.1</a> beschrieben.
+
+<p><center>
+  
+  <p><a name="IMG:7.2"><img src="modelle/hochregal_seriell.png"></a>
+  <br><small>Abbildung 7.2: Serielle Kommunikation mit dem Hochregal</small>
+</center>
+
+<p><h2><a name="7.2">7.2 ElectroPneumatic: Flipper</a></h2> 
+
+<p>Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind auch im Schalter-Modus mit den
+fischertechnik-Fototransistoren kompatibel. Ein beleuchteter
+Transistor liefert dann den Wahrheitswert ``wahr'', ein unbeleuchter
+den Wert ``unwahr''. 
+
+<p><center>
+  
+  <p><a name="IMG:7.3"><img src="modelle/flipper.jpg"></a>
+  <br><small>Abbildung 7.3: Flipper auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Basis</small>
+</center>
+
+<p>Der Beispiel-Sketch des Flippers aus dem ElectroPneumatic-Set findet
+sich unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Pinball"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Pinball</span></tt></a>. Er nutzt die Fototransistoren
+als Schaltereingänge für die Lichtschranken. Eine durch eine Kugel
+unterbrochene Lichtschranke liefert dann den Wert ``unwahr'':
+
+<pre>
+     if(!ftduino.input_get(Ftduino::I4)) {
+       if(millis() - loose_timer &gt; 1000) {
+         // ...
+       }
+       loose_timer = millis();
+     }
+</pre>
+Dabei wird ein Timer mitgeführt, der z.B. in diesem Fall dafür sorgt,
+dass frühestens eine Sekunde (1000 Millisekunden) nach einem Ereignis
+ein weiteres Ereignis erkannt wird.
+
+<p>Dieser Sketch nutzt ein OLED-Display, um verbliebene Spielbälle und
+den Punktestand anzuzeigen<a href="#fn2"><sup>2</sup></a> . Da am
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> noch Ausgänge frei sind können stattdessen auch Lampen oder
+Leuchtdioden verwendet werden.
+
+<p><h2><a name="7.3">7.3 ROBOTICS TXT Explorer: Linienfolger</a></h2> 
+
+<p>Der mobile Linienfolger ist an die Modelle des ``ROBOTICS TXT
+Explorer''-Sets angelehnt und nutzt den ``IR Spursensor'' dieses Sets.
+
+<p><center>
+  
+  <p><a name="IMG:7.4"><img src="modelle/linienfolger.jpg"></a>
+  <br><small>Abbildung 7.4: Ein Linienfolger auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Basis</small>
+</center>
+
+<p>Ein passender Beispiel Sketch ist unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/LineSensor"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">LineSensor</span></tt></a> zu
+finden. Dieser Sketch wertet kontinuierlich den Liniensensor aus, um
+eine schwarzen Linie zu folgen<a href="#fn3"><sup>3</sup></a> .
+
+<p>Der Liniensensor wird mit seinen gelben und blauen Kabeln an zwei
+beliebige der Eingänge <tt>I1</tt> bis <tt>I8</tt> angeschlossen. Zusätzlich
+erfolgt über die roten und grünen Kabel die Spannungsversorgung
+durch den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p><center>
+  
+  <p><a name="IMG:7.5"><img src="modelle/linienfolger_svg.png"></a>
+  <br><small>Abbildung 7.5: Verdrahtungsschema des Linienfolgers</small>
+</center>
+
+<p>In diesem Fall ist der Spursensor an die Eingänge <tt>I1</tt> und
+<tt>I2</tt> angeschlossen. Der Sensor liefert nahezu maximale Spannung
+(circa 9 Volt) wenn eine weiße Fläche erkannt wird und nur wenig
+Millivolt, wenn die schwarze Linie erkannt wurde.
+
+<pre>
+       // beiden Eingänge auf Spannungsmessung einstellen
+       ftduino.input_set_mode(Ftduino::I1, Ftduino::VOLTAGE); 
+       ftduino.input_set_mode(Ftduino::I2, Ftduino::VOLTAGE); 
+     
+       // beide Spannungen auslesen
+       uint16_t linker_wert = ftduino.input_get(Ftduino::I1);
+       uint16_t rechter_wert = ftduino.input_get(Ftduino::I2);
+     
+       // eine Spannung kleiner 1 Volt (1000mV) bedeutet 'Linie erkannt'
+       if((linker_wert &lt; 1000) && (rechter_wert &lt; 1000)) {
+         // beide Sensoren haben die Linie erkannt
+         // ...
+       }
+</pre>
+<h2><a name="7.4">7.4 Idas Ampel</a></h2> 
+
+<p>Ein klassisches Modell ist die Ampel bzw. die Fußgängerampel. Das
+Modell bildet eine Bedarfsampel mit je drei Lampen für die Autos und
+zwei für Fußgänger ab.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:7.6"><img src="modelle/idas_ampel_svg.png"></a></td></tr><tr><td align="center"><small>(a) Verdrahtungsschema</small></td></tr></table></td>
+  <td><table><tr><td><a name="IMG:7.6"><img src="modelle/idas_ampel.jpg"></a></td></tr><tr><td align="center"><small>(b) Modell</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 7.6: Idas Ampel</small>
+</center>
+
+<p>Ein passender Beispiel-Sketch ist unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/PedestrianLight"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">PedestrianLight</span></tt></a> zu finden. Er implementiert
+die Ampel in Form eines Zustandsautomaten. Die Lichtfolge entspricht
+dabei dem üblichen Ablauf in acht Schritten von ``Autos haben grün,
+Fußgänger rot'' über die Grünphase für die Fußgänger bis schließlich
+die Autos wieder fahren dürfen.
+
+<p><center>
+  
+  <p><a name="IMG:7.7"><img src="modelle/ampelzustand_svg.png"></a>
+  <br><small>Abbildung 7.7: Die Zustände der Ampel</small>
+</center>
+
+<p><h3><a name="7.5.1">7.5.1 Zustandsautomaten</a></h3>
+
+<p>Die einfache und naheliegenden Umsetzung der Ampelsteuerung in Software
+bestünde aus einem Programm, das dem Verlauf der Ampelzustände direkt folgt.
+Der Programmablauf stoppt, wenn auf den Tastendruck oder auf den Ablauf
+einer Zeit gewartet wird und setzt fort, wenn das entsprechende Ereignis
+eingetreten ist. Im Folgenden ist dies exemplarisch für die ersten zwei Zustände
+der Ampel dargestellt.
+
+<pre>
+     void loop() {
+       // warte auf Tastendruck
+       while(!ftduino.input_get(BUTTON)) {
+       };
+     
+       // Ampel schaltet ein, Autos haben grün, Fußgänger rot
+       cars_green();
+       pedestrians_red();
+       delay(CARS_GREEN_PHASE);
+     
+       // Autos bekommen gelb
+       cars_yellow();
+       delay(YELLOW_PHASE);
+     
+       // ...
+     }
+</pre>
+Dieses Programm ist kurz und leicht zu verstehen. Das ist eigentlich gut, hat
+aber einen entscheidenden Nachteil: Während auf ein Ereignis gewartet wird stoppt
+der gesamte Programmablauf und es ist nicht möglich, weitere Dinge parallel
+zu erledigen.
+
+<p>Der <tt>PedestrianLight</tt>-Sketch soll aber beispielsweise nebenbei mit der
+eingebauten LED des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> blinken. Dies soll unterbrechungsfrei passieren
+und unabhängig davon sein, in welchem Zustand sich die eigentliche Ampel gerade
+befindet.
+
+<p>Die Lösung ist ein Zustandsautomat.
+
+<pre>
+     // die loop-Funktion wird immer wieder aufgerufen
+     void loop() {
+       // Zeitpunkt des nächsten Lichtwechsel-Ereignisses
+       static unsigned long next_event = 0;
+       // Aktueller Zustand der Amepl
+       static char state = 0;
+     
+       // Die interne Leuchtdiode soll einmal pro Sekunde blinken
+       static unsigned long flash_timer = 0;
+       if(millis() &gt; flash_timer + 10)
+         digitalWrite(LED_BUILTIN, LOW);
+       if(millis() &gt; flash_timer + 1000) {
+         digitalWrite(LED_BUILTIN, HIGH);
+         flash_timer = millis();
+       }
+       
+       // Teste ob ein Fussgänger im Zustand 0 (Ampel aus) den
+       // Knopf gedrückt hat
+       if((state == 0) && (ftduino.input_get(BUTTON)))
+         state = 1;   // ja -&gt; wechsel in Zustand 1
+     
+       if(state &gt; 0) {
+       
+         // Teste, ob die eingestellte Zeit vergangen ist
+         if(millis() &gt; next_event) {
+           switch(state) {
+     
+             // Ampel wechselt in Zustand 1: Autos haben grün, Fussgänger haben rot
+             case 1: {
+               // schalte Lampen
+               cars_green();
+               pedestrians_red();
+               // setze Zeitpunkt für nächstes Ereignis
+               next_event = millis() + CARS_GREEN_PHASE;
+               // setze Zustand für nächstes Ereignis
+               state++;   // Kurzschreibweise für "state = state + 1"
+               break;
+             }
+             
+             // Ampel wechselt in Zustand 2: Autos haben gelb, Fussgänger haben rot
+             case 2: {
+               cars_yellow();
+               next_event = millis() + YELLOW_PHASE;
+               state++;
+               break;
+             }
+     
+             // Ampel wechselt in Zustand 3: Autos haben rot, Fussgänger haben rot
+             case 3: {
+               // ...
+               break;
+             }
+     
+             // ...
+           }
+         }
+       } 
+     }
+</pre>
+Dieses Listing ist deutlich komplizierter. Aber es hat den großen
+Vorteil, dass an keiner Stelle aktiv gewartet wird. Stattdessen wird
+die Programmausführung ständig fortgesetzt.  Um trotzdem die einzelnen
+Ampelphasen ablaufen lassen zu können werden zwei Variablen als
+Speicher angelegt (<tt>next_event</tt> und <tt>state</tt>). Hier wir
+permanent vermerkt, in welchem Zustand sich die Ampel befindet und wie
+lange dieser Zustand noch erhalten bleiben soll.
+
+<p>Auf diese Weise ist es möglich, die LED völlig unabhängig blinken zu
+lassen und ggf. auch weitere Steueraufgaben zu erledigen.
+
+<p>Geschuldet ist der große Aufwand der Tatsache, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+über kein eigenes Betriebssystem verfügt, das mehrere Programmteile
+(sogenannte Prozesse oder Threads) gleichzeitig bedienen könnte, wie
+es auf PCs und Smartphones z.B. üblich ist.
+
+<p>Der große Vorteil des einfachen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Ansatzes liegt in der
+seiner exakten Vorhersagbarkeit. Jeder kennt es vom PC oder
+Smartphone, wenn das Betriebssystem im Hintergrund unerwartet
+``beschäftigt'' ist und die Programmausführung stockt. Was bei einer
+Bedienoberfläche nur lästig ist kann bei Steuer- und Regelaufgaben
+leicht zu einem Problem werden, wenn z.B. ein Motor bei Erreichen
+einer bestimmten Position nicht schnell genug gestoppt wird. Aus
+diesem Grund kann der wesentlich einfachere <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auf viele Dinge
+schneller und vorhersagbarer reagieren als z.B. ein vom
+Linux-Betriebssystem angetriebener TXT-Controller oder Raspberry-Pi.
+Ein weiterer positiver Effekt des nicht vorhandenen Betriebssystems
+ist der schnelle Systemstart. Ein <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist sofort nach dem
+Einschalten voll funktionsfähig und man muss keinen
+Betriebssystemstart abwarten, bevor das Gerät seine Aufgaben erfüllen
+kann.
+
+<p>Der schnelle Systemstart und das leicht vorhersagbare Verhalten sind
+die Hauptgründe, warum es auch im kommerziellen Umfeld immer einen
+Bedarf an solch einfachen Systemen wie dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gibt, auch wenn
+der Einsatz komplexer, betriebssystembasierter Lösungen mit sinkenden
+Hardware-Preisen auch in immer einfacheren Geräten möglich wird.
+<hr><small>
+<a name="fn1">1) </a>Hochregal-Video
+  <a href="https://www.youtube.com/watch?v=Sjgv9RnBAbg">https://www.youtube.com/watch?v=Sjgv9RnBAbg</a><br>
+<a name="fn2">2) </a>Flipper-Video
+  <a href="https://www.youtube.com/watch?v=-zmuOhcHRbY">https://www.youtube.com/watch?v=-zmuOhcHRbY</a><br>
+<a name="fn3">3) </a>Linienfolger-Video
+  <a href="https://www.youtube.com/watch?v=JQ8TLt5MC9k">https://www.youtube.com/watch?v=JQ8TLt5MC9k</a><br>
+</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - modelle</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

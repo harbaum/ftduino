@@ -1,0 +1,1507 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>programmierung</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="4">4 Programmierung</a></h1> 
+
+<p>Dieses Kapitel erklärt die Programmierung eigener Programme bzw.
+Sketches für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Wer zunächst keine eigenen Programme
+schreiben möchte und erst einmal die vorgefertigten Beispiele und
+Experimente ausführen möchte ohne deren Programmcode zu verstehen kann
+direkt mit Kapitel <a href="experimente.html#6">6</a> weitermachen.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird mit einer ständig wachsenden Anzahl vorgefertigter
+Beispiel-Sketches ausgeliefert. Für viele Modelle und Versuche reicht
+es daher, wie in den vorhergehenden Kapiteln beschrieben diese
+Beispiele auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden. Aber wie der Spaß beim Bauen
+mit fischertechnik gerade dort beginnt, wo man die vorgegebenen
+Pfade der Bauanleitungen hinter sich lässt, so besteht auch beim
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> der eigentliche Nutzen darin, dass man ihn mit eigenen
+Sketches programmieren kann. Zusammen mit einem selbst entworfenen
+Modell ergeben sich so beeindruckende Möglichkeiten. Und ganz nebenbei
+lernt man nicht nur die mechanische Grundlagen kennen, sondern erhält
+zusätzlich einen realistischen Einblick in die Welt der
+Mikrocontroller-Programmierung.
+
+<p>Dieses Kapitel soll einen ersten Einblick in die Programmierung des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geben. Es werden die wesentlichen Sprachkonstrukte der auf
+dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verwendeten Programmiersprache soweit erklärt, wie sie
+zum Verständnis der Programme der nachfolgenden Kapitel benötigt
+werden. Die Beschreibung beschränkt sich bewusst auf das
+allernötigste. Trotzdem sind Ende dieses recht kurzen Kapitels alle
+nötigen Grundlagen für erste eigene Sketches vorhanden.
+
+<p><h2><a name="4.1">4.1 Textbasierte Programmierung</a></h2>
+
+<p>Im Gegensatz zu den meisten Programmierumgebungen aus der Welt der
+Konstruktionsspielzeuge wird der Arduino nicht grafisch sondern
+textbasiert programmiert. Während die grafischen Umgebungen wie
+fischertechniks RoboPro oder Legos EV3-Programmier-App auf leichte
+Erlernbarkeit ausgelegt sind steht in der Arduino-IDE der Praxisbezug
+im Vordergrund. Arduino zu programmieren bedeutet auf die gleiche Art
+Programme zu schreiben, wie es auch professionelle Entwickler
+kommerzieller Produkte machen.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:4.1"><img src="programmierung/robopro_blinko1.png"></a></td></tr><tr><td align="center"><small>(a) grafisch</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:4.1"><img src="programmierung/cpp_blinko1.png"></a></td></tr><tr><td align="center"><small>(b) textbasiert</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 4.1: Blinken einer Lampe an Ausgang O1</small>
+</center>
+
+<p>Tatsächlich hat die textuelle Darstellung einige signifikante
+Vorteile. Vor allem bei großen Projekten ist eine ansprechend
+formatierte textuelle Darstellung daher wesentlich verständlicher als
+eine grafische.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:4.2"><img src="programmierung/blinko1_in_arduino_ide.png"></a></td></tr><tr><td align="center"><small>(a) in der Arduino-IDE</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:4.2"><img src="programmierung/blinko1_auf_github.png"></a></td></tr><tr><td align="center"><small>(b) auf Github</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 4.2: Darstellung des gleichen Arduino-Sketches</small> 
+</center>
+
+<p>Ein textbasiertes Programm besteht aus unformatiertem Text. Einige
+Programmierumgebungen wie die Arduino-IDE lassen dennoch farbige
+Hervorhebungen oder unterschiedliche Schriftgrößen zu oder zeigen im
+Programmtext Zeilennummern an. Im Gegensatz zu Texten aus einer
+Textverarbeitung sind diese Formatierungen aber nicht Teil des
+erstellten Programms. Stattdessen sind sie Teil der
+Programmierumgebung selbst und die Formatierung geht z.B. bei der
+Weitergabe des Programmcodes verloren. Der gleiche Programmcode kann
+daher in einer anderen Umgebung vollkommen anders aussehen. Für die
+Funktion des Programms ist das bedeutungslos. Es kommt nicht darauf
+an wie der Programmtext dargestellt wird. Für die eigentliche
+Programmfunktion ist ausschließlich der Inhalt des dargestellten Texts
+verantwortlich, nicht sein Aussehen.
+
+<p>Wie in Abbildung <a href="programmierung.html#IMG:4.2">4.2</a> zu sehen unterscheidet sich die
+Darstellung des identischen Programmcodes zwischen der Arduino-IDE und
+z.B. dem Web-Dienst Github deutlich.
+
+<p>Auch dieses Handbuch verwendet eine eigene Darstellung und stellt zum
+Beispiel manchmal Zeilennummern dar. Diese Zeilennummern dienen nur
+der leichteren Bezugnahme auf einzelne Zeilen und dürfen nicht als
+Teil des Programms explizit eingegeben werden:
+
+<pre>
+     <font color="green"> 1</font>  // BlinkO1.ino
+     <font color="green"> 2</font>  //
+     <font color="green"> 3</font>  // Blinken einer Lampe an Ausgang O1
+     <font color="green"> 4</font>  //
+     <font color="green"> 5</font>  // (c) 2018 by Till Harbaum &lt;till@harbaum.org&gt;
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  void setup() {
+     <font color="green">10</font>    // LED initialisieren
+     <font color="green">11</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green">12</font>  }
+     <font color="green">13</font>  
+     <font color="green">14</font>  void loop() {
+     <font color="green">15</font>    // schalte die interne LED und den Ausgang O1 ein (HIGH bzw. HI)
+     <font color="green">16</font>    digitalWrite(LED_BUILTIN, HIGH);
+     <font color="green">17</font>    ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green">18</font>  
+     <font color="green">19</font>    delay(1000);                       // warte 1000 Millisekunden (eine Sekunde)
+     <font color="green">20</font>  
+     <font color="green">21</font>    // schalte die interne LED und den Ausgang O1 aus (LOW bzw. LO)
+     <font color="green">22</font>    digitalWrite(LED_BUILTIN, LOW);
+     <font color="green">23</font>    ftduino.output_set(Ftduino::O1, Ftduino::LO);
+     <font color="green">24</font>    
+     <font color="green">25</font>    delay(1000);                       // warte eine Sekunde
+     <font color="green">26</font>  }
+</pre>
+Wer auch in der Arduino-IDE Zeilennummern dargestellt bekommen möchte
+kann sie in den Voreinstellungen der Arduino-IDE wie in Abbildung
+<a href="programmierung.html#IMG:4.3">4.3</a> dargestellt aktivieren.
+
+<p><center>
+  
+  <p><a name="IMG:4.3"><img src="programmierung/zeilennummern_in_ide.png"></a>
+  <br><small>Abbildung 4.3: Aktivierung von Zeilennummern in der Arduino-IDE</small> 
+</center>
+
+<p><h2><a name="4.2">4.2 Die Programmiersprache C<sup>++</sup></a></h2>
+
+<p>Arduinos und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> werden in der Programmiersprache C<sup>++</sup>,
+genauer dem Standard C<sup>++</sup>11 programmiert. Ein Arduino-Sketch
+unterscheidet sich in einigen wenigen fundamentalen Dingen von
+klassischen C<sup>++</sup>-Programmen, davon abgesehen entspricht die
+Programmierung dem Standard. Die Programmiersprache C<sup>++</sup> ist in der
+professionellen Softwareentwicklung weit verbreitet. Große Teile aller
+gängigen Betriebssysteme wie Windows, Linux oder MacOS sind in C<sup>++</sup>
+bzw. einer eng mit C<sup>++</sup> verwandten Programmiersprache geschrieben. Die
+Arduino-Programmierung liefert dadurch einen realistischen Einblick in
+den professionellen Bereich.
+
+<p>Die Sketches genannten C<sup>++</sup>-Programme der Arduino-Welt werden durch ein
+Compiler genanntes Programm in sogenannten Maschinen- oder Binärcode
+übersetzt, der vom Mikrocontroller des Arduino bzw. <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+verstanden wird. Dieser Binärcode kann dann auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per
+Download übertragen werden.
+
+<p>Der Compiler, der von der Arduino-IDE verwendet wird ist der
+sogenannte GCC<a href="#fn1"><sup>1</sup></a> . Dieser Compiler findet auch in der
+Industrie Verwendung und wird unter anderem zur Übersetzung des
+Linux-Kernels verwendet, wie er auf jedem Android-Smartphone zum
+Einsatz kommt. Es handelt sich bei der Arduino-IDE und deren intern
+verwendeten Werkzeugen also keinesfalls um reine Hobby-Technik. Unter
+der anfängertauglichen Oberfläche verbergen sich im Gegenteil
+leistungsfähige und professionelle Komponenten.
+
+<p><h2><a name="4.3">4.3 Grundlagen</a></h2>
+
+<p>Ein Arduino-Sketch besteht aus einer textuellen Beschreibung. Der
+minimale Text, der einen gültigen Sketch bildet sieht folgendermaßen aus:
+
+<pre>
+     void setup() {
+     }
+     
+     void loop() {
+     }
+</pre>
+Um diesen Sketch einzugeben öffnet man zunächst die Arduino-IDE und
+wählt dann im Menü <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Neu</span></tt>. Es öffnet sich
+ein neues Fenster, das genau die vorher abgebildeten Zeilen bereits
+enthält. Zusätzlich sind noch zwei mit <tt>//</tt> beginnende Zeile
+vorhanden. Diese können entfernt werden, sodass der Text am Ende exakt
+dem obigen Beispiel entspricht.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:4.4"><img src="programmierung/button_compile.png"></a></td></tr><tr><td align="center"><small>(a) Übersetzung</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:4.4"><img src="programmierung/button_download.png"></a></td></tr><tr><td align="center"><small>(b) Download</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 4.4: Schaltflächen der Arduino-IDE</small> 
+</center>
+
+<p>Dieser minimale Sketch lässt sich in der Arduino-IDE erfolgreich
+übersetzen und auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> laden. Dazu gibt es in der
+Arduino-IDE die beiden in Abbildung <a href="programmierung.html#IMG:4.4">4.4</a> dargestellten
+Schaltflächen. Eine Fläche startet die Übersetzung in
+Maschinencode. Diese Funktion benötigt keinen angeschlossenen
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und mit ihr lässt sich schnell feststellen, ob ein Sketch
+keine fundamentalen Fehler enthält, die bereits die Übersetzung
+verhindern. Die zweite Schaltfläche startet den Download auf den
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Sollte der Sketch noch nicht übersetzt sein, so wird bei
+Klick auf die Download-Schaltfläche vorher noch automatisch die
+Übersetzung gestartet. Nur wenn diese Übersetzung erfolgreich ist wird
+der Download begonnen.
+
+<p>Hat man den Sketch per <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Neu</span></tt> frisch
+angelegt, so wird einen die Arduino-IDE nun ggf. fragen, ob man den
+Sketch speichern möchte. Wenn man dem Speichern zustimmt kann man an
+dem Sketch später jederzeit weiter arbeiten.
+
+<p>Nach dem erfolgreichen Download wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> keine sichtbare
+Reaktion zeigen. Der Sketch besteht aus zwei sogenannten Funktionen,
+eine mit dem Namen <tt>setup()</tt> und eine mit dem Namen
+<tt>loop()</tt>. Diese Funktionen bilden das Skelett eines jeden
+Arduino-Sketches. Sie enthalten jeweils in ein Paar geschweifter
+Klammern <tt>{</tt> und <tt>}</tt> eingebettete Anweisungen, die die
+eigentliche Funktionalität des Sketches
+beschreiben. Aufeinanderfolgende Anweisungen werden dabei per
+Semikolon (;) getrennt.
+
+<p>Befinden sich aber wie in diesem einfachen Beispiel überhaupt keine
+Anweisungen zwischen den Klammern, so löst der Sketch folgerichtig
+auch keine erkennbare Reaktion auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aus.
+
+<p><h3><a name="4.4.1">4.4.1 Kommentare</a></h3>
+
+<p>Die beiden zunächst entfernten mit <tt>//</tt> beginnenden Zeilen fügen
+dem Sketch ebenfalls keine Funktionalität zu. Um das zu überprüfen
+kann man noch einmal <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Neu</span></tt> auswählen und
+den Sketch diesmal unverändert lassen:
+
+<pre>
+     void setup() {
+       // put your setup code here, to run once:
+     
+     }
+     
+     void loop() {
+       // put your main code here, to run repeatedly:
+     
+     }
+</pre>
+Ein erneuter Klick auf den Download-Button wird auch diesen Sketch
+übersetzen und auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> laden. Wieder erfolgt am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+keine erkennbare Funktion. Das liegt daran, dass die beiden
+zusätzlichen Zeilen reine Kommentarzeilen sind. Sie sind dazu gedacht,
+einem menschlichen Leser zusätzliche Erklärungen zu geben. Für die
+Übersetzung in Maschinencode sind diese Zeilen bedeutungslos. Alles,
+was in einer Zeile hinter den doppelten Schrägstrichen <tt>//</tt>
+steht wird bei der Erzeugung des Maschinencodes ignoriert.
+
+<p>Zusätzlich kann man Kommentare in <tt>/*</tt> und <tt>*/</tt>
+einschließen. Die Erzeugung von Maschinencode beginnt erst wieder
+hinter dem schließenden Element <tt>*/</tt>. Außerdem dürfen Kommentare
+dieser Art über mehrere Zeilen gehen.
+
+<pre>
+     void setup() {
+       /* mehrzeilige Kommentare
+          sind auch möglich */
+     
+     }
+</pre>
+Einen Hinweis auf Kommentare gibt in der Arduino-IDE die Farbgebung.
+Kommentare sind immer hellgrau dargestellt und damit leicht vom eigentlichen
+Programmcode zu unterscheiden.
+
+<p><h3><a name="4.4.2">4.4.2 Fehlermeldungen</a></h3>
+
+<p>Als nächstes sollen zwei Programmanweisungen zwischen den geschweiften
+Klammern der <tt>setup()</tt>-Funktion eingefügt werden:
+
+<pre>
+     <font color="green"> 1</font>  void setup() {
+     <font color="green"> 2</font>    pinnMode(LED_BUILTIN, OUTPUT);
+     <font color="green"> 3</font>    digitalWrite(LED_BUILTIN, HIGH);
+     <font color="green"> 4</font>  }
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  void loop() {
+     <font color="green"> 7</font>  }
+</pre>
+Was diese beiden kryptischen Zeilen genau bedeuten wird später erklärt
+werden. Zunächst soll der Sketch lediglich wieder übersetzt und auf
+den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geladen werden. Ist das Programm fehlerfrei
+übersetzbar, so wird es erneut auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> übertragen.
+
+<p>Leider ist es in diesem Fall aber nicht fehlerfrei. Wurde das Programm
+exakt wie abgebildet eingegeben, so sollte die Übersetzung des
+Programms mit der in Abbildung <a href="programmierung.html#IMG:4.5">4.5</a> zu sehenden
+Fehlermeldung abbrechen.
+
+<p><center>
+  
+  <p><a name="IMG:4.5"><img src="programmierung/fehlermeldung.png"></a>
+  <br><small>Abbildung 4.5: Anzeige eines Übersetzungsfehlers</small> 
+</center>
+
+<p>im oberen Teil des Bildschirms wird die fehlerhafte Codezeile
+hervorgehoben. Im unteren Teil des Fensters sind die Ausgaben des
+GCC-Compilers zu sehen. Die eigentliche Fehlermeldung lautet
+<tt>'pinnMode' was not declared in this scope</tt>.
+
+<p>Damit teilt der Compiler mit, dass er mit dem Begriff
+<tt>pinnMode</tt> nichts anfangen kann. Schon bei der Eingabe des
+Sketches gab es einen Hinweis auf dieses Problem, denn die Anweisung
+<tt>pinnMode</tt> wurde bei der Eingabe in der IDE lediglich schwarz
+dargestellt während z.B. in der zweiten Zeile das Wort
+<tt>digitalWrite</tt> orange hervorgehoben wurde. Die Arduino-IDE
+färbt die meisten ihr bekannten Anweisungen ein und ein
+nicht-gefärbter Teil kann einen Hinweis auf einen Fehler sein.
+
+<p>Tatsächlich hat sich hier ein Fehler eingeschlichen und statt
+<tt>pinnMode</tt> hätte es <tt>pinMode</tt> heißen müssen. Ändert man
+das Wort entsprechend, so färbt die IDE es erwartungsgemäß orange ein,
+die Übersetzung gelingt und ein Download ist möglich. Der korrigierte
+Sketch sollte nun wie folgt aussehen.
+ 
+<pre>
+     <font color="green"> 1</font>  void setup() {
+     <font color="green"> 2</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green"> 3</font>    digitalWrite(LED_BUILTIN, HIGH);
+     <font color="green"> 4</font>  }
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  void loop() {
+     <font color="green"> 7</font>  }
+</pre>
+Nach dem Download wird die rote Leuchtdiode im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> leuchten,
+denn genau das bewirken die zwei kryptischen Zeilen, die im folgenden
+Abschnitt genauer erklärt werden.
+
+<p><h3><a name="4.4.3">4.4.3 Funktionen</a></h3>
+
+<p>Das im Rahmen der Arduino-Programmierung wichtigste C<sup>++</sup>-Sprachelement
+sind die sogenannten Funktionen. Mit ihnen lassen sich bereits
+sinnvolle einfache Programm-Sketches schreiben.
+
+<p>Funktionsdefinitionen fassen Anweisungen zusammen. Das folgende
+Programmfragment zeigt die Definition einer Funktion namens
+<tt>name</tt>, die in ihrem Funktionskörper die beiden Anweisungen
+<tt>anweisung1</tt> und <tt>anweisung2</tt> enthält. Anweisungen
+werden durch das Semikolon <tt>;</tt> voneinander getrennt.
+
+<pre>
+     void name() {
+       anweisung1;
+       anweisung2;
+     }
+</pre>
+Eine Funktion wird in der Regel genutzt, um alle für eine komplexe
+Aufgabe benötigten Anweisungen zusammenzufassen und einen passenden
+Namen zu geben. Die Anweisungen im Körper einer Funktion werden
+nacheinander von oben nach unten ausgeführt. In diesem Fall wird
+also erst <tt>anweisung1</tt> ausgeführt und dann <tt>anweisung2</tt>.
+
+<p>Da die Ausführung der einzelnen Anweisungen je nach Komplexität nur
+wenige Mikrosekunden dauert entsteht oft der Eindruck, als würden
+Dinge gleichzeitig passieren. Tatsächlich werden alle Anweisungen aber
+der Reihe nach ausgeführt. Dementsprechend können auch
+widersprüchliche Anweisungen konfliktfrei untereinander stehen und
+beispielsweise eine Lampe ein- und unverzüglich danach wieder
+ausgeschaltet werden. Diese Ereignisse passieren so kurz nacheinander,
+dass der Anwender nicht erkennen kann, dass z.B. eine Leuchtdiode für
+wenige Mikrosekunden eingeschaltet war. 
+
+<p>Die Ausführung der Anweisungen kann direkt etwas bewirken und
+z.B. eine Leuchtdiode am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aufleuchten lassen. Eine
+Funktion, die alle Anweisungen zum Einschalten der Leuchtdiode
+zusammenfasst könnte z.B. wie folgt aussehen.
+
+<pre>
+     void SchalteLeuchtdiodeEin() {
+       pinMode(LED_BUILTIN, OUTPUT);     // schalte Pin auf Ausgang
+       digitalWrite(LED_BUILTIN, HIGH);  // setze Ausgangspin auf 'high'
+     }
+</pre>
+Eine Funktion in der Sprache C<sup>++</sup> ist sehr nah an mathematische
+Funktionen angelehnt und kann wie diese ein Ergebnis liefern. Ob und
+was für ein Ergebnis die Funktion zurück liefert steht vor dem
+Funktionsnamen. Im vorliegenden Fall soll kein Ergebnis geliefert
+werden, daher steht vor dem Funktionsnamen <tt>void</tt>, englisch für
+``nichts''. Außerdem kann eine Funktion einen oder mehrere zu
+verarbeitende Eingabewerte erhalten, die zwischen den runden Klammern
+(<tt>()</tt>) angegeben werden. Die vorliegende Funktion benötigt
+keine Eingabewerte, die Klammern bleiben also leer.
+
+<p><center>
+  
+  <p><a name="IMG:4.6"><img src="programmierung/funktionen_svg.png"></a>
+  <br><small>Abbildung 4.6: Funktionsdefinition</small>
+</center>
+
+<p>Die Definition einer Funktion bewirkt, dass der Compiler die
+entsprechenden Anweisungen übersetzt und die nötigen Maschinenbefehle
+hintereinander im Maschinencode ablegt. Damit ist aber noch nichts
+darüber gesagt, wann diese Anweisungen tatsächlich ausgeführt werden.
+
+<p>Ausgeführt werden die Anweisungen der Funktion, sobald die Funktion
+aufgerufen wird. Dazu muss lediglich der Funktionsname mit den
+Parametern als Anweisung eingegeben werden. Da die Funktion
+<tt>SchalteLeuchtdiodeEin</tt> keine Parameter erwartet bleibt der
+Bereich zwischen den runden Klammern beim Aufruf leer. Der
+Funktionsaufruf muss dabei selbst wieder im Funktionskörper einer
+Funktionsdefinition stehen.
+
+<pre>
+     void setup() {
+       SchalteLeuchtdiodeEin();
+     }
+</pre>
+Damit wird klar, dass die Anweisungen <tt>pinMode(LED_BUILTIN,
+  OUTPUT);</tt> und <tt>digitalWrite(LED_BUILTIN, HIGH);</tt> ebenfalls
+Funktionsaufrufe waren. Beide Funktionen bekamen jeweils zwei durch
+Kommata getrennte Parameter mitgegeben.
+
+<p><h3><a name="4.4.4">4.4.4 Die Funktionen <tt>setup()</tt> und <tt>loop()</tt></a></h3> 
+<a href="https://www.arduino.cc/reference/en/language/structure/sketch/setup/">https://www.arduino.cc/reference/en/language/structure/sketch/setup/</a> <br>
+<a href="https://www.arduino.cc/reference/en/language/structure/sketch/loop/">https://www.arduino.cc/reference/en/language/structure/sketch/loop/</a>
+
+<p>Wenn Funktionen selbst immer nur aus anderen Funktionen aufgerufen
+werden dürfen ergibt sich ein Henne-Ei-Problem bei der Frage, von wo
+aus denn der erste Funktionsaufruf erfolgt.
+
+<p><center>
+  
+  <p><a name="IMG:4.7"><img src="programmierung/sketch-ablauf_svg.png"></a>
+  <br><small>Abbildung 4.7: Ablauf eines Sketches</small> 
+</center>
+
+<p>An dieser Stelle kommen die beiden Funktionsdefinitionen
+<tt>setup()</tt> und <tt>loop()</tt> ins Spiel, über die jeder Sketch
+mindestens verfügen muss. Fehlt eine oder beide Definitionen, so bricht
+die Arduino-IDE die Übersetzung mit einer Fehlermeldung ab.
+
+<p>Beiden Funktionen müssen nicht explizit aufgerufen werden. Stattdessen
+wird ihr Aufruf von der Arduino-IDE während der Übersetzung des
+Sketches automatisch in den erzeugte Maschinencode eingefügt. Die
+Funktion <tt>setup()</tt> wird dabei einmal bei Sketch-Start aufgerufen
+und die Funktion <tt>loop()</tt> wird in Folge immer wieder aufgerufen
+wie in Abbildung <a href="programmierung.html#IMG:4.7">4.7</a> dargestellt.
+
+<p>Mit Sketch-Start ist im Falle des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eine von drei Situationen
+gemeint:
+
+<p><ol>
+<li> Direkt nach dem Download eines übersetzten Sketches wird dessen
+  Code gestartet.
+</li><li> Nach dem Anlegen der Stromversorgung an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird ein
+  vorher per Download installierter Sketch-Code gestartet.
+</li><li> Wurde der Bootloader des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> durch Druck auf den
+  Reset-Taster gestartet, so bleibt dieser für acht Sekunden
+  aktiviert.  Wird der Bootloader in dieser Zeit nicht vom PC aus
+  angesprochen, so beendet sich der Bootloader und der zuletzt
+  heruntergeladene Sketch-Code wird stattdessen gestartet.
+</li></ol>
+
+<p><div style="border:1px; border-style:solid; border-color:black; padding: 0px 10px 0px 10px;"><p><center><b>Hinweis für erfahrene Nutzer</b></center><br>
+  Wer schon einmal mit C<sup>++</sup> auf einem PC oder ähnlich zu tun hatte wird
+  an dieser Stelle ggf. überrascht sein. In jenem Fall gab es die
+  speziellen Funktionen <tt>setup()</tt> und <tt>loop()</tt>
+  nicht. Stattdessen gab es eine Funktion namens <tt>main()</tt>, die
+  bei Programmstart automatisch aufgerufen wurde.
+
+  <p>Die Entwickler der Arduino-IDE haben sich entschieden, an dieser
+  Stelle vom üblichen Standard abzuweichen, da das Konzept der
+  <tt>main()</tt>-Funktion eher für nur zeitweilig auf einem komplexen
+  Computer laufende Programme entwickelt wurde und sich nur bedingt in
+  die Welt der Hardware-Programmierung einfügt.
+</div>
+  
+<p><h4>Bibliotheksfunktionen</h4>
+
+<p>Wie im Falle der <tt>name()</tt>-Funktion geschehen kann man eigene
+Funktionen schreiben. Die Arduino-IDE bringt aber bereits eigene
+Funktionssammlungen mit. Die Sammlungen bestehen in erster Linie aus
+häufig benötigten universellen Funktionen. Sie sind dem System von
+vornherein mit Namen bekannt und man kann sie in eigenen Programmen
+einfach aufrufen, ohne sie selbst definieren zu müssen.
+
+<p>Die Funktionen <tt>pinMode()</tt> und <tt>digitalWrite()</tt>
+sind solche Bibliotheksfunktionen. Während die Sprache C<sup>++</sup> universell
+ist und sich bei der Verwendungen auf einem PC oder einem Arduino
+nicht unterscheidet sind die Bibliotheksfunktionen in der Regel
+plattformspezifisch. Die Funktion <tt>pinMode()</tt> steht dem
+Programmierer nur auf dem Arduino zur Verfügung und bei der
+Entwicklung eines Programms für einen Windows-PC würde der Aufruf
+dieser Funktion zu einem Übersetzungsfehler führen.
+
+<p>Dies ist auch der Grund, warum sich viele C<sup>++</sup>-Beispiele und Tutorials
+aus dem Internet nicht direkt auf den Arduino übertragen
+lassen. Handelt es sich bei diesen Programmen nicht zufällig bereits
+um Arduino- sondern um PC-Programme, dann werden dort
+Funktions-Bibliotheken verwendet, die wiederum auf dem Arduino nicht
+vorhanden sind. Das liegt in erster Linie an der deutlich
+unterschiedlichen Hardware der verschiedenen Plattformen. Während ein
+PC-Programm in erster Linie Fenster auf dem Bildschirm öffnet und mit
+Benutzereingaben umgeht wird ein Arduino-Programm eher Hardware-Eingänge
+auswerten und Ausgänge schalten.
+
+<p><div style="border:1px; border-style:solid; border-color:black; padding: 0px 10px 0px 10px;"><p><center><b>Hinweis für erfahrene Nutzer</b></center><br> 
+  Auch bei der Verwendung von Bibliotheken gibt es einen Unterschied
+  zu üblicher C<sup>++</sup>-Programmierung auf PCs. Die Arduino-IDE macht die
+  grundlegenden Arduino-spezifischen Bibliotheken automatisch im
+  Sketch bekannt, so dass sich Funktionen wie <tt>pinMode()</tt> direkt
+  nutzen lassen.
+
+  <p>Gängige C<sup>++</sup>-Compiler binden von sich aus keine Bibliotheken
+  ein. Sie müssen durch sogenannte <tt>#include</tt>-Anweisungen
+  explizit bekannt gemacht werden. Dies ist auf dem Arduino
+  zumindest für die meisten mitgelieferten Bibliotheken nicht nötig.
+</div>
+
+<p><h3><a name="4.4.5">4.4.5 Beispiel</a></h3>
+
+<p>Damit sind die wesentlichen Grundlagen erklärt und das folgende
+Beispiel verständlich.
+
+<pre>
+     <font color="green"> 1</font>  /* Funktion zum Einschalten der LED */
+     <font color="green"> 2</font>  void SchalteLedEin() {
+     <font color="green"> 3</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green"> 4</font>    digitalWrite(LED_BUILTIN, HIGH);
+     <font color="green"> 5</font>  }
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  void setup() {
+     <font color="green"> 8</font>    SchalteLedEin();
+     <font color="green"> 9</font>  }
+     <font color="green">10</font>  
+     <font color="green">11</font>  void loop() {
+     <font color="green">12</font>  }
+</pre>
+Bei Systemstart wird zunächst die <tt>setup()</tt>-Funktion aufgerufen.
+Die Funktion <tt>setup()</tt> enthält eine einzelne Anweisung in Form
+eines Aufrufs der Funktion <tt>SchalteLedEin</tt>. Diese Funktion ist
+wiederum in den Zeilen 2 bis 5 des Sketches definiert und besteht
+ihrerseits aus dem Aufruf zweier Bibliotheksfunktionen, die die
+eingebaute Leuchtdiode des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aufleuchten lassen.
+
+<p>Die <tt>loop()</tt>-Funktion wird nach Systemstart permanent immer
+wieder aufgerufen. Sie ist aber leer, über das Einschalten der
+Leuchtdiode direkt bei Systemstart zeigt der Sketch also keine
+weitergehende Funktion.
+
+<p>Der Kommentar in Zeile eins dient lediglich der Erklärung und hat
+keinen Einfluss auf die Übersetzung des Sketches oder seine Funktion.
+
+<p><h2><a name="4.4">4.4 Hilfreiche Bibliotheksfunktionen</a></h2>
+
+<p>Wie in den vorigen Abschnitten angedeutet bringt die Arduino-IDE
+einige Bibliotheken mit, die Funktionen zur Verwendung spezieller
+Eigenschaften des Arduino bieten. Zusätzlich bringt die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+Installation eigene Bibliotheken mit, um auf die fischertechnik-Ein-
+und -Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zuzugreifen.
+
+<p>Im folgenden werden sieben der am häufigsten benötigten Funktionen
+beschrieben. Mit ihnen lassen sich bereits vielfältige Sketches
+schreiben.
+
+<p>Eine Beschreibung weiterer Funktionen der Arduino-IDE findet man
+online in der Arduino-Language-Reference unter
+<a href="https://www.arduino.cc/reference/en/#functions">https://www.arduino.cc/reference/en/#functions</a> während weitere
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifische Funktionen im Kapitel <a href="bibliotheken.html#9">9</a>
+beschrieben sind.
+
+<p><h3><a name="4.5.1">4.5.1 <tt>pinMode(pin, mode)</tt></a></h3>
+<a href="https://www.arduino.cc/reference/en/language/functions/digital-io/pinMode/">https://www.arduino.cc/reference/en/language/functions/digital-io/pinMode/</a>
+
+<p>Diese Funktion konfiguriert einen Pin des ATmega32u4-Mikrocontrollers
+als Ein- (<tt>mode</tt> = <tt>INPUT</tt>) oder Ausgang (<tt>mode</tt> =
+<tt>OUTPUT</tt>). Diese Funktion wird auf Arduinos sehr häufig
+verwendet, da dort direkt mit den Anschlüssen des Mikrocontrollers
+gearbeitet wird. Auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> befinden sich an den meisten
+Anschlüssen Zusatzschaltungen zur Verbindung mit
+fischertechnik-Komponenten, die die direkte Verwendung der
+<tt>pinMode()</tt>-Funktion unnötig machen. Stattdessen bringen die
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken alle Funktionen mit, um die Ein- und Ausgänge
+fischertechnik-konform zu bedienen.
+
+<p>Die wesentliche Ausnahme bildet der Anschluss der internen roten Leuchtdiode.
+Für <tt>pin</tt> muss in dem Fall <tt>LED_BUILTIN</tt> verwendet werden.
+
+<pre>
+     // internen Anschlusspin der Leuchtdiode zum Ausgang erklären
+     pinMode(LED_BUILTIN, OUTPUT);
+</pre>
+<h3><a name="4.5.2">4.5.2 <tt>digitalWrite(pin, value)</tt></a></h3>
+<a href="https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/">https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/</a>
+
+<p>Die Funktion <tt>digitalWrite()</tt> steuert einen durch die Funktion
+<tt>pinMode()</tt> zum Ausgang erklärten Pin. Sie wird daher im
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> in der Regel für die Leuchtdiode verwendet und in seltenen
+Fällen zur Steuerung der beiden am I²C-Anschluss verfügbaren
+Signale.
+
+<p>Für <tt>pin</tt> gelten die gleichen Werte wie bei
+<tt>pinMode()</tt>-Funktion. Der Wert für <tt>value</tt> kann
+<tt>HIGH</tt> oder <tt>LOW</tt> sein, was den entsprechenden Pin ein-
+oder ausschaltet. 
+
+<pre>
+     // internen Anschlusspin der Leuchtdiode zum Ausgang erklären
+     pinMode(LED_BUILTIN, OUTPUT);
+     // Leuchtdiode einschalten
+     digitalWrite(LED_BUILTIN, HIGH);
+</pre>
+<h3><a name="4.5.3">4.5.3 <tt>delay(ms)</tt></a></h3>
+<a href="https://www.arduino.cc/reference/en/language/functions/time/delay/">https://www.arduino.cc/reference/en/language/functions/time/delay/</a>
+
+<p>Die meisten Aufgaben erledigt auch ein so einfacher Mikrocontroller wie
+der ATmega32u4 schneller als für Menschen wahrnehmbar. Um Abläufe auf ein
+passendes Maß zu senken ist die <tt>delay()</tt>-Funktion hilfreich. Sie
+erwartet als Parameter eine Wartezeit in Millisekunden. 
+
+<p>Wie in Abschnitt <a href="programmierung.html#4.4.4">4.4.4</a> beschrieben wird die Funktion
+<tt>setup()</tt> nur einmal aufgerufen, die Function <tt>loop()</tt> aber
+daraufhin immer wieder.  Der folgende Sketch lässt die Leuchtdiode
+daher kontinuierlich blinken.
+
+<pre>
+     void setup() {
+       // internen Anschlusspin der Leuchtdiode zum Ausgang erklären
+       pinMode(LED_BUILTIN, OUTPUT);
+     }
+     
+     void loop() {
+       // Leuchtdiode einschalten
+       digitalWrite(LED_BUILTIN, HIGH);
+       // 1 Sekunde warten
+       delay(1000);
+       // Leuchtdiode ausschalten
+       digitalWrite(LED_BUILTIN, LOW);
+       // 1 Sekunde warten
+       delay(1000);
+     }
+</pre>
+<h3><a name="4.5.4">4.5.4 <tt>Serial.begin(speed)</tt></a></h3>
+<a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/">https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/</a>
+
+<p>Die Kommunikationsmöglichkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> beschränken sich direkt
+am Gerät im Wesentlichen auf die fischertechnik Ein- und Ausgänge. Bei
+komplexeren Projekten wird es schwierig, nur am Verhalten des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> den Programmfluss zu verfolgen. Ein einfacher Weg, aus dem
+Sketch heraus Informationen an den Benutzer auszugeben ist die
+Verwendung der <tt>Serial</tt>-Bibliothek.
+
+<p>Auf PC-Seite werden die Ausgaben dieser Bibliothek über den
+sogenannten seriellen Monitor angezeigt. Dessen Benutzung wurde in
+Abschnitt <a href="ersteschritte.html#3.4.1">3.4.1</a> genauer beschrieben. Die Funktion
+<tt>Serial.begin()</tt> bereitet den Sketch auf die Verwendung des
+seriellen Monitors vor. Sie sollte daher am Beginn des Sketches
+bzw. in der <tt>setup()</tt>-Funktion aufgerufen werden.
+
+<p>Die Funktion <tt>Serial.begin()</tt> erwartet einen Parameter namens
+<tt>speed</tt>. Dieser Wert ist für die USB-Verbindung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+belanglos und sollte z.B. auf einen Wert von 115200 gesetzt werden.
+
+<pre>
+     void setup() {
+       // Vorbereiten der seriellen Verbindung 
+       Serial.begin(115200);
+     }
+     
+     void loop() {
+     }
+</pre>
+<h3><a name="4.5.5">4.5.5 <tt>Serial.print(val)</tt> und <tt>Serial.println(val)</tt></a></h3>
+<a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/print/">https://www.arduino.cc/reference/en/language/functions/communication/serial/print/</a> <br>
+<a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/println/">https://www.arduino.cc/reference/en/language/functions/communication/serial/println/</a>
+
+<p>Ist eine serielle Verbindung per <tt>Serial.begin()</tt> eingerichtet,
+so können die Funktionen <tt>Serial.print()</tt> und
+<tt>Serial.println()</tt> zur Ausgabe von Nachrichten an den seriellen
+Monitor verwendet werden. Der Unterschied zwischen
+<tt>Serial.print()</tt> und <tt>Serial.println()</tt> liegt darin, dass
+nach der Ausgabe per <tt>Serial.println()</tt> eine neue Ausgabezeile
+begonnen wird, während weitere Ausgaben nach <tt>Serial.print()</tt>
+direkt in der gleichen Zeile erfolgen.  Die Funktion
+<tt>Serial.println()</tt> wird daher oft genutzt, um komplexere Ausgaben
+abzuschließen.
+
+<p>Für <tt>val</tt> können unter anderem Zeichenketten und Zahlen
+verwendet werden. Zeichenketten müssen in doppelte Anführungszeichen (``)
+eingeschlossen werden.
+
+<pre>
+     void setup() {
+       // Vorbereiten der seriellen Verbindung 
+       Serial.begin(115200);
+       // 2 Sekunden Verzögerung, um dem PC Zeit zu geben,
+       // die Verbindung entgegen zu nehmen
+       delay(2000);
+       // ein paar Ausgaben
+       Serial.print("Die Antwort lautet: ");
+       Serial.println(42);
+     }
+     
+     void loop() {
+     }
+</pre>
+<h3><a name="4.5.6">4.5.6 <tt>ftduino.input_get()</tt>, <tt>ftduino.output_set()</tt>
+  und <tt>ftduino.motor_set()</tt></a></h3>
+
+<p>Ein Controller für ein fischertechnik-Modell muss natürlich Eingaben
+aus dem Modell empfangen und Reaktionen im Modell auslösen können. Die
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken sind in allem Detailgrad in Kapitel
+<a href="bibliotheken.html#9">9</a> beschrieben. In diesem Absatz wird daher nur das
+absolute Minimum beschrieben.
+
+<p>Es wurde in Abschnitt <a href="programmierung.html#4.4.4">4.4.4</a> erklärt, dass es eine
+Besonderheit ist, dass Bibliotheksfunktionen ohne weitere Vorbedingungen
+zur Verfügung stehen und im Sketch verwendet werden können. Dies trifft
+aber nur auf die Arduino-eigenen Bibliotheken zu wie sie in den bisherigen
+Beispielen verwendet wurden. Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken stehen nicht
+automatisch zur Verfügung sondern müssen am Anfang des Sketches
+mit einer <tt>#include</tt>-Anweisung bekannt gemacht werden.
+
+<pre>
+     #include &lt;FtduinoSimple.h&gt;
+       
+     void setup() {
+     }
+     
+     void loop() {
+     }
+</pre>
+Erst dann sind die Funktionen aus dieser Bibliothek im Sketch nutzbar.
+
+<p><center>
+  
+  <p><a name="IMG:4.8"><img src="programmierung/output_o1_svg.png"></a>
+  <br><small>Abbildung 4.8: Lampe an Ausgang O1</small> 
+</center>
+
+<p>Die wichtigsten Funktionen dafür sind <tt>ftduino.input_get(port)</tt>
+zum Abfragen eines Eingangs und <tt>ftduino.output_set(port, mode)</tt>
+zum Schalten eines Ausgangs. Bei <tt>ftduino.input_get(port)</tt> sind
+für <tt>port</tt> Werte von <tt>Ftduino::I1</tt> bis <tt>Ftduino::I8</tt>
+erlaubt. Zum Schalten eines Ausgangs gibt es die Funktion
+<tt>ftduino.output_set(port, mode)</tt>, wobei <tt>port</tt> Werte von
+<tt>Ftduino::O1</tt> bis <tt>Ftduino::O8</tt> annehmen darf und
+<tt>mode</tt> auf <tt>Ftduino::HI</tt> gesetzt wird, wenn der Ausgang
+eingeschaltet werden soll und auf <tt>Ftduino::OFF</tt> gesetzt wird,
+um den Ausgang auszuschalten.
+
+<p>Die Funktion <tt>ftduino.motor_set(port, mode)</tt> ist
+<tt>ftduino.output_set(port, mode)</tt> sehr ähnlich, nur dass hier ein
+Motorausgang <tt>M1</tt> bis <tt>M4</tt> geschaltet werden kann. Der
+Wert for <tt>mode</tt> kann dann <tt>Ftduino::LEFT</tt>,
+<tt>Ftduino::RIGHT</tt> oder <tt>Ftduino::OFF</tt> sein, je nachdem, ob
+sich der Motor linksherum, rechtsherum oder gar nicht drehen soll.
+
+<pre>
+     #include &lt;FtduinoSimple.h&gt;
+       
+     void setup() {
+       // Eingang I1 lesen
+       ftduino.input_get(Ftduino::I1);
+       // Ausgang O1 einschalten
+       ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     }
+     
+     void loop() {
+     }
+</pre>
+Dieser Sketch würde eine wie in Abbildung <a href="programmierung.html#IMG:4.8">4.8</a>
+angeschlossene Lampe zum Leuchten bringen. Achtung: Dazu muss der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit 9 Volt versorgt sein.
+
+<p><h2><a name="4.5">4.5 Variablen</a></h2>
+<a href="https://www.arduino.cc/reference/en/#variables">https://www.arduino.cc/reference/en/#variables</a>
+
+<p>Oft besteht der Bedarf in einem Sketch etwas zu ``merken'' bzw. zu
+speichern. Wenn etwas beispielsweise mit einer bestimmten Häufigkeit
+passieren soll, dann muss währenddessen irgendwo vermerkt werden, wie
+oft es schon passiert ist bzw. wie oft es noch zu passieren hat. Ein
+anderes Beispiel sind einmalige Ereignisse wie ``der Benutzer hat
+einen Taster gedrückt''. Auch wenn dieses Ereignis vorübergeht und der
+Benutzer den Taster losgelassen hat soll die Aktion ggf. weitergeführt
+werden. Dazu muss irgendwo vermerkt werden, dass der Taster vor kurzem
+noch gedrückt war.
+
+<p>Für diesen Zweck gibt es sogenannte Variablen. Mit ihnen weist man den
+Compiler an, Platz im Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> für etwas ``gemerktes''
+zu reservieren. Während der Sketch im sogenannten Flash-Speicher des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> abgelegt wird und daher auch über das Ausschalten des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> hinaus erhalten bleibt. Wird der Speicherplatz für
+Variablen im flüchtigen RAM-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> abgelegt. Der
+gespeicherte Wert einer Variablen geht also beim Ausschalten des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verloren.
+
+<p>Eine Variable wird wie eine Funktion im Sketch definiert. Dazu erhält
+sie wie eine Funktion einen Namen. Außerdem muss angeben werden,
+welcher Art die in der Variablen abzulegenden Daten sind. Im folgenden
+Beispiel wird eine Variable namens <tt>variablenName</tt> für Daten
+vom Typ <tt>int</tt> angelegt.
+
+<pre>
+     int variablenName;
+     
+     void setup() {
+     }
+     
+     void loop() {
+     }  
+</pre>
+<h3><a name="4.6.1">4.6.1 Datentyp <tt>int</tt></a></h3>
+<a href="https://www.arduino.cc/reference/en/language/variables/data-types/int/">https://www.arduino.cc/reference/en/language/variables/data-types/int/</a>
+
+<p>Der Datentyp <tt>int</tt> ist der Standard-Datentyp. Beim <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+erlaubt dieser Datentyp das Ablegen ganzzahliger Werte im Bereich von
+-32768 bis +32767. Für die meisten Verwendungen ist das ausreichend.
+
+<p>Eine Variable wird genutzt, um Daten in ihr abzulegen und später
+wieder abzurufen. Das Ablegen von Werte geschieht, indem der Variablen
+ein Wert mit dem Gleichheitszeichen (=) zugewiesen wird. Die Ausdrücke
+auf der rechten Seite der Zuweisung können komplexe mathematische
+Funktionen beinhalten und sogar Funktionsaufrufe, um beispielsweise
+den Zustand eines Eingangs des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu speichern.
+
+<pre>
+     // eine einfache Zuweisung
+     variablenName = 42;
+     // ein komplexer Ausdruck
+     variablenName = (4*8*8+38)/7;
+     // Zustand des Eingangs I1
+     variablenName = ftduino.input_get(Ftduino::I1);
+</pre>
+Außerdem können in den Ausdrücken wiederum Variablen enthalten
+sein. Dabei kann auch die auf der linken Seite stehende Variable auch
+auf der rechten Seite auftauchen, was dem mathematischen Verständnis
+einer Gleichung etwas widerspricht.
+
+<pre>
+     // Wert aus einer anderen Variable übernehmen
+     variablenName = andererVariablenName;
+     // Wert der Variablen verändern und wieder der Variablen zuweisen
+     variablenName = variablenName + 1;
+</pre>
+Man darf diese Art der Zuweisung nicht als mathematischen Vergleich
+lesen, auch wenn die Darstellung das nahelegt. Stattdessen wird
+zunächst der Ausdruck auf der rechten Seite berechnet und das
+Ergebnis wird danach der Variablen auf der linken Seite zugewiesen.
+Dieser zeitliche Ablauf führt dazu, dass eine Zuweisung wie
+<pre>
+     variablenName = variablenName + 1;
+</pre>einen Sinn ergibt.
+
+<p>Variablen können auch als Parameter bei Funktionsaufrufen verwendet
+werden.
+
+<pre>
+     int variablenName;
+     
+     void setup() {
+       Serial.begin(115200);
+       variablenName = 192/4;
+       
+       Serial.print("Variableninhalt: ");
+       Serial.println(variablenName);
+     }
+     
+     void loop() { 
+     }
+</pre>
+Wichtig ist hier die korrekte Verwendung der Anführungszeichen (``).
+Ein Wort oder Text in Anführungszeichen steht für den Text selbst und
+wird nicht weiter interpretiert. Ein Wort ohne Anführungszeichen kann
+u.a. für eine Anweisung, einen Funktionsnamen oder einen
+Variablennamen stehen und der Compiler versucht diesem Wort eine
+Bedeutung zuzuweisen.
+
+<pre>
+       // gib das Wort variablenName aus
+       Serial.println("variablenName");
+       // gib den Inhalt der Variablen namens variablenName aus
+       Serial.println(variablenName);
+</pre>
+<h2><a name="4.6">4.6 Bedingungen</a></h2>
+
+<p>Bisher haben alle Beispiele aus Anweisungen in einer festen
+Reihenfolge bestanden. Alle Anweisung wurden immer auf die gleiche
+Weise ausgeführt und z.B. Leuchtdioden haben geblinkt oder Meldungen
+wurden ausgegeben. Es ist aber zu keiner Zeit etwas abhängig von
+irgendeinem anderen Ereignis passiert.
+
+<p>Es ist aber bei der Robotersteuerung und auch generell in der
+Programmierung oft nötig, dass ein Programm auf Ereignisse
+reagiert. Der C<sup>++</sup>-Mechanismus dafür sind Anweisungen, die auf
+Bedingungen reagieren können.
+
+<p><h3><a name="4.7.1">4.7.1 <tt>if</tt>-Anweisung</a></h3>
+<a href="https://www.arduino.cc/reference/en/language/structure/control-structure/if/">https://www.arduino.cc/reference/en/language/structure/control-structure/if/</a>
+
+<p><center>
+  
+  <p><a name="IMG:4.9"><img src="programmierung/if_svg.png"></a>
+  <br><small>Abbildung 4.9: <tt>if</tt>-Anweisung</small>
+</center>
+
+<p>Die <tt>if</tt>-Anweisungen ist solch eine Anweisung. Sie erwartet eine
+Bedingung in runden Klammern und die auf die <tt>if</tt>-Anweisung
+folgende Anweisung im Bedingungskörper wird nur dann ausgeführt, wenn die
+Bedingung sich als ``wahr'' herausstellt.
+
+<pre>
+       if(12 &gt; 5+3)
+         Serial.println("zwoelf ist groesser als die Summe aus fuenf und drei");
+</pre>
+In der Bedingung können unterschiedliche Vergleichsoperatoren
+verwendet werden.  Die wichtigsten sind:
+
+
+<p><center><table>
+  <tr><td>C<sup>++</sup>-Schreibweise </td><td></td><td> Vergleichsoperation </td></tr>
+  <tr><td>
+  <tt>></tt> </td><td></td><td> größer als</td></tr>
+  <tr><td><tt><</tt> </td><td></td><td> kleiner als</td></tr>
+  <tr><td><tt>==</tt> </td><td></td><td> gleich</td></tr>
+  <tr><td><tt>!=</tt> </td><td></td><td> ungleich</td></tr>
+<tr><td></table></center>
+
+
+<p><center>
+  
+  <p><a name="IMG:4.10"><img src="programmierung/input_i1_svg.png"></a>
+  <br><small>Abbildung 4.10: Taster an Eingang I1</small> 
+</center>
+
+<p>Die Bedingung kann auch Funktionsaufrufe enthalten. Im Falle der
+<tt>ftduino.input_get()</tt>-Funktion ist das Ergebnis des
+Funktionsaufrufs bereits ein Wahrheitswert (wahr oder unwahr) und der
+Funktionsaufruf kann direkt verwendet werden. Soll mehr als eine
+Anweisung von der <tt>if</tt>-Anweisung betroffen sein, so kann man sie
+durch geschweifte Klammern (<tt>{</tt> und <tt>}</tt>) zusammenfassen.
+
+<pre>
+     #include &lt;FtduinoSimple.h&gt;
+     
+     void setup() {
+       // Vorbereiten der seriellen Verbindung 
+       Serial.begin(115200);
+     }  
+     
+     void loop() {
+       // testen, on die Taste an I1 gedrückt ist
+       if(ftduino.input_get(Ftduino::I1)) {
+         Serial.print("Der Taster ist gedrueckt");
+         // eine viertel Sekunde warten
+         delay(250);
+       }
+     }
+</pre>
+<h2><a name="4.7">4.7 Schleifen</a></h2>
+
+<p>Programmschleifen sind ebenfalls ein sehr fundamentales Konzept.
+Erst durch sie wird es möglich, Teile eines Programms mehrfach
+auszuführen. Ohne sie würden alle Anweisungen eines Programms
+einmal der Reihe nach abgearbeitet.
+
+<p>Allerdings gab es in den bisherigen Beispielen bereits das ein
+oder andere Programm, das etwas mehrfach getan hat. Das liegt
+an der Arduino-spezifischen <tt>loop()</tt>-Funktion. Sie wird
+automatisch während des Programmablaufs immer wieder aufgerufen
+wie in Abbildung <a href="programmierung.html#IMG:4.7">4.7</a> abgebildet. Dadurch lassen
+sich in Arduino-Sketches auch ohne den Einsatz von entsprechenden
+C<sup>++</sup>-Anweisungen Programmteile wiederholen.
+
+<p>Dennoch ist es hilfreich, auch auf die C<sup>++</sup>-eigenen Mechanismen
+für Schleifen zurückgreifen zu können. Im Folgenden werden zwei
+davon beschrieben.
+
+<p><h3><a name="4.8.1">4.8.1 <tt>while</tt>-Schleife</a></h3>
+<a href="https://www.arduino.cc/reference/en/language/structure/control-structure/while/">https://www.arduino.cc/reference/en/language/structure/control-structure/while/</a>
+
+<p><center>
+  
+  <p><a name="IMG:4.11"><img src="programmierung/while_svg.png"></a>
+  <br><small>Abbildung 4.11: <tt>while</tt>-Schleife</small>
+</center>
+
+<p>Die <tt>while</tt>-Schleife erlaubt es, den folgenden Befehl im
+sogenannten Schleifenkörper solange zu wiederholen, wie die Bedingung
+zwischen ihren runden Klammern erfüllt ist. Wie schon bei der
+<tt>if</tt>-Anweisung können mehrere folgenden Anweisungen durch
+geschweifte Klammern zusammengefasst werden. Die <tt>while</tt>-Schleife
+gilt dann für den gesamten Anweisungsblock. Ist die Bedingung von
+vornherein nicht erfüllt, so wird der Schleifenkörper nicht
+ausgeführt.
+
+<pre>
+     while(variablenName &lt; 12) {
+       Serial.println("Variable ist kleiner 12");
+       variablenName = variablenName + 1;
+     }
+</pre>
+Die Bedingung gleicht ebenfalls der der <tt>if</tt>-Anweisung und kann
+die gleichen Operatoren enthalten. Das folgende Beispiel erweitert das
+Beispiel aus dem Abschnitt der <tt>if</tt>-Anweisung so, dass auf das
+Loslassen der Taste gewartet wird.
+
+<pre>
+     #include &lt;FtduinoSimple.h&gt;
+     
+     void setup() {
+       // Vorbereiten der seriellen Verbindung 
+       Serial.begin(115200);
+     }  
+     
+     void loop() {
+       // testen, on die Taste an I1 gedrückt ist
+       if(ftduino.input_get(Ftduino::I1)) {
+         Serial.print("Der Taster ist gedrueckt");
+         // eine viertel Sekunde warten
+         delay(250);
+     
+         // warten, bis die Taste wieder losgelassen wird
+         while(ftduino.input_get(Ftduino::I1)) {
+           // der Raum zwischen den geschweiften Klammern kann
+           // auch ganz leer bleiben, wenn während der
+           // Wiederholung keine weiteren Anweisungen aus
+           // geführt werden sollen
+         }
+       }
+     }
+</pre>
+<h3><a name="4.8.2">4.8.2 <tt>for</tt>-Schleife</a></h3>
+<a href="https://www.arduino.cc/reference/en/language/structure/control-structure/for/">https://www.arduino.cc/reference/en/language/structure/control-structure/for/</a>
+
+<p>Etwas komplexer als die <tt>while</tt>-Schleife ist die
+<tt>for</tt>-Schleife. Sie enthält zwischen ihren Runden Klammern gleich
+drei durch Semikolon getrennte Anweisungen. Die erste wird vor
+Schleifenbeginn einmal ausgeführt, die zweite wird während der
+Ausführung der Schleife ausgewertet und bestimmt, wie die Bedingung
+der <tt>while</tt>-Schleife wie häufig die Schleife ausgeführt wird.
+Die dritte Anweisung wird schließlich <em>nach</em> jeder Ausführung des
+Schleifenkörpers ausgeführt. Ist die Bedingung von vornherein nicht
+erfüllt, so wird der Schleifenkörper nicht ausgeführt. Die
+Vor-Anweisung wird in jedem Fall ausgeführt.
+
+<p><center>
+  
+  <p><a name="IMG:4.12"><img src="programmierung/for_svg.png"></a>
+  <br><small>Abbildung 4.12: <tt>for</tt>-Schleife</small>
+</center>
+
+<p>Was recht aufwendig klingt wird verständlich, wenn man sich die übliche
+Anwendung der <tt>for</tt>-Schleife ansieht: Das Wiederholung eines
+Befehls mit einer bestimmten Häufigkeit.
+
+<pre>
+     for(variablenName = 0 ; variablenName &lt; 12; variableName = variableName + 1)
+       Serial.println("Dieser Text wird 12 mal ausgegeben");
+</pre>
+Die drei Anweisungen bzw. Bedingungen innerhalb der runden Klammern
+lauten:
+
+<pre>
+       variablenName = 0;
+       variablenName &lt; 12;
+       variableName = variableName + 1;
+</pre>
+Die erste Anweisung wird nur einmal zu Beginn der Schleife ausgeführt.
+In diesem Fall schreibt sie den Wert 0 in die Variable <tt>variablenName</tt>
+die zweite Anweisung ist die Bedingung, die bestimmt wie oft die Schleife
+ausgeführt wird. In diesem Fall solange der Inhalt der Variable <tt>variablenName</tt>
+kleiner als 12 ist. Und die dritte Anweisung wird schließlich am Ende jedes
+Durchlaufs der <tt>for</tt>-Schleife ausgeführt. In diesem Fall wird dort der
+Inhalt der Variablen <tt>variablenName</tt> um eins erhöht. In diesem
+Beispiel passiert also:
+
+<p><ol>
+<li> Der Inhalt der Variablen <tt>variablenName</tt> wird auf 0 gesetzt
+</li><li> Solange der Inhalt der Variablen <tt>variablenName</tt> kleiner als 12 ist ...
+  <ol>
+    </li><li> ... werden die Anweisungen im Schleifenkörper ausgeführt ...
+    </li><li> ... und danach der Inhalt der Variablen <tt>variablenName</tt> um eins erhöht
+  </li></ol>
+</ol>
+
+<p>Der Schleifenkörper wird also genau 12 mal ausgeführt.
+
+<p><h2><a name="4.8">4.8 Beispiele</a></h2>
+
+<p>Die in diesem Kapitel vorgestellten C<sup>++</sup>-Sprachkonstrukte sowie die ausgewählten
+Funktionen der Arduino- und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken bilden zwar nur einen geringen
+Teil ab. Aber schon diese wenigen Informationen reichen, um einige interessante
+Sketches selbst zu schreiben.
+
+<p><h3><a name="4.9.1">4.9.1 Einfache Ampel</a></h3>
+
+<p>Dieses Beispiel stellt eine eine einfache Bedarfs-Ampel dar.  Nach dem
+Einschalten zeigt sie zunächst rot. Sobald der Taster gedrückt wird
+springt sie für 10 Sekunde auf grün und wechselt dann zurück in den
+Anfangszustand.
+
+<p><center>
+  
+  <p><a name="IMG:4.13"><img src="programmierung/ampel_svg.png"></a>
+  <br><small>Abbildung 4.13: Einfache Ampel</small> 
+</center>
+
+<p>Der dazugehörige Sketch ist sehr einfach. In der
+<tt>setup()</tt>-Funktion wird in Zeile 5 die rote Lampe eingeschaltet.
+
+<p>In der <tt>loop()</tt>-Funktion wird in Zeile 10 permanent getestet, ob
+der Taster gedrückt ist. Ist er gedrückt, so wird der gesamte
+Bedingungskörper in den Zeilen 11 bis 20 ausgeführt.
+
+<p>Dort wird in Zeile 12 die rote Lampe aus- und in Zeile 14 die grüne
+Lampe eingeschaltet. In Zeile 16 wird 10000 Millisekunden, also 10
+Sekunden gewartet, bevor in den Zeilen 18 und 20 die grüne Lampe
+zunächst aus- und die rote dann eingeschaltet wird.
+
+<p>Dies ist ein Beispiel für Dinge, die aufgrund der Geschwindigkeit des
+Mikroprozessors als gleichzeitig wahrgenommen werden. Obwohl die
+Lampen in den Zeilen 12 und 14 bzw. 18 und 20 jeweils nacheinander
+ein- bzw. ausgeschaltet werden ist keine zeitliche Differenz
+erkennbar. Der Abstand von wenigen Mikrosekunden ist nicht erkennbar.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  void setup() {
+     <font color="green"> 4</font>    // beim Start der Ampel leuchtet die rote Lampe
+     <font color="green"> 5</font>    ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green"> 6</font>  }  
+     <font color="green"> 7</font>  
+     <font color="green"> 8</font>  void loop() {
+     <font color="green"> 9</font>    // testen, on die Taste an I1 gedrückt ist
+     <font color="green">10</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">11</font>      // rote Lampe ausschalten
+     <font color="green">12</font>      ftduino.output_set(Ftduino::O1, Ftduino::OFF);
+     <font color="green">13</font>      // grüne Lampe einschalten
+     <font color="green">14</font>      ftduino.output_set(Ftduino::O2, Ftduino::HI);
+     <font color="green">15</font>      // zehn Sekunden warten
+     <font color="green">16</font>      delay(10000); 
+     <font color="green">17</font>      // grüne Lampe ausschalten
+     <font color="green">18</font>      ftduino.output_set(Ftduino::O2, Ftduino::OFF);
+     <font color="green">19</font>      // rote Lampe einschalten
+     <font color="green">20</font>      ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green">21</font>    }
+     <font color="green">22</font>  }
+</pre>
+<h3><a name="4.9.2">4.9.2 Schranke</a></h3>
+
+<p>Das Schrankenbeispiel ist etwas komplexer. Es besteht aus einer
+motorisierten Schranke mit jeweils zwei Endtastern. Der Taster an
+<tt>I2</tt> wird betätigt, wenn sich die Schranke komplett geöffnet hat,
+der an <tt>I3</tt> wird betätigt, wenn die Schranke vollständig
+geschlossen ist.
+
+<p><center>
+  
+  <p><a name="IMG:4.14"><img src="programmierung/schranke_svg.png"></a>
+  <br><small>Abbildung 4.14: Schranke</small> 
+</center>
+
+<p>Achtung: Taster <tt>I2</tt> und <tt>I3</tt> sind so verdrahtet, dass der
+Kontakt im unbetätigten Zustand geschlossen ist. Er öffnet sich,
+sobald die Taster betätigt werden, die Schranke also ganz geöffnet
+oder geschlossen ist.
+
+<p>Bei Sketchstart wird zunächst der Motor in Zeile 10 so lange
+linksherum gedreht, solange der Kontakt des Tasters an <tt>I2</tt> in
+Zeile 15 als geschlossen erkannt wird, also solange die Schranke nicht
+vollständig geöffnet ist. Sobald der Taster betätigt wird wird der
+Motor in Zeile 18 gestoppt.
+
+<p>Sobald die Taste an <tt>I1</tt> in Zeile 23 gedrückt wird wird der
+Motor in Zeile 26 diesmal rechtsherum gestartet bis der Taster an
+<tt>I3</tt> betätigt wird. In Zeile 28 wird der Motor dann gestoppt.
+
+<p>In den Zeilen 31 bis 40 wird die Lampe an <tt>O3</tt> insgesamt fünfmal
+mit einer Pause von jeweils 500 Millisekunden ein- und wieder
+ausgeschaltet.
+
+<p>Danach wird die Schranke schließlich in den Zeilen 43 bis 45 wieder
+geschlossen.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  // Zählervariable zum Blinken
+     <font color="green"> 4</font>  int zaehler;
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  void setup() {
+     <font color="green"> 7</font>    // Beim Start fährt die Schranke auf
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>    // motor linksherum drehen
+     <font color="green">10</font>    ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
+     <font color="green">11</font>    
+     <font color="green">12</font>    // Warten bis Schranke geschlossen offen ist. Da der Taster als
+     <font color="green">13</font>    // Öffner verdrahtet ist läuft der Motor, solange der Taster
+     <font color="green">14</font>    // geschlossen ist
+     <font color="green">15</font>    while(ftduino.input_get(Ftduino::I2)) { }
+     <font color="green">16</font>  
+     <font color="green">17</font>    // Sobald der Taster nicht mehr geschlossen ist Motor stoppen
+     <font color="green">18</font>    ftduino.motor_set(Ftduino::M1, Ftduino::OFF);
+     <font color="green">19</font>  }  
+     <font color="green">20</font>  
+     <font color="green">21</font>  void loop() {
+     <font color="green">22</font>    // testen, on die Taste an I1 gedrückt ist
+     <font color="green">23</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">24</font>      
+     <font color="green">25</font>      // Motor rechtsherum drehen, bis Taster I3 geöffnet ist
+     <font color="green">26</font>      ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT);
+     <font color="green">27</font>      while(ftduino.input_get(Ftduino::I3)) { }
+     <font color="green">28</font>      ftduino.motor_set(Ftduino::M1, Ftduino::OFF);
+     <font color="green">29</font>  
+     <font color="green">30</font>      // fünfmal mit der Lampe blinken
+     <font color="green">31</font>      for(zaehler=0;zaehler&lt;5;zaehler=zaehler+1) {
+     <font color="green">32</font>        // Lampe an
+     <font color="green">33</font>        ftduino.output_set(Ftduino::O3, Ftduino::HI);
+     <font color="green">34</font>        // 500ms warten
+     <font color="green">35</font>        delay(500);
+     <font color="green">36</font>        // Lampe aus
+     <font color="green">37</font>        ftduino.output_set(Ftduino::O3, Ftduino::OFF);
+     <font color="green">38</font>        // 500ms warten
+     <font color="green">39</font>        delay(500);
+     <font color="green">40</font>      }
+     <font color="green">41</font>  
+     <font color="green">42</font>      // Motor linksherum drehen, bis Taster I2 geöffnet ist
+     <font color="green">43</font>      ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
+     <font color="green">44</font>      while(ftduino.input_get(Ftduino::I2)) { }
+     <font color="green">45</font>      ftduino.motor_set(Ftduino::M1, Ftduino::OFF);
+     <font color="green">46</font>    }
+     <font color="green">47</font>  }
+</pre>
+<h2><a name="4.9">4.9 Die Warnung <tt>Wenig Arbeitsspeicher</tt></a></h2>
+
+<p>Bei der Programmierung größerer Projekte und speziell bei der
+großzügigen Verwendung von Bibliotheken kann es leicht zu der in
+Abbildung <a href="programmierung.html#IMG:4.15">4.15</a> dargestellten Warnmeldung kommen.
+
+<p><center>
+  
+  <p><a name="IMG:4.15"><img src="programmierung/wenig_arbeitsspeicher.png"></a>
+  <br><small>Abbildung 4.15: Warnung der Arduino-IDE über geringen Arbeitsspeicher</small> 
+</center>
+
+<p>Da der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lediglich über 2560 Bytes dynamischen Speicher
+(RAM-Speicher) verfügt ist der Umgang mit dieser knappen Resource oft
+nicht einfach.
+
+<p>Die Warnung über den geringen Arbeitsspeicher bezieht ausschließlich
+auf den dynamischen RAM-Speicher und <em>nicht</em> auf den ebenfalls in
+der Meldung erwähnten Programmspeicherplatz (oft auch als
+Flash-Speicher bezeichnet). Der Programmspeicher kann bedenkenlos zu
+100% gefüllt werden.
+
+<p><h3><a name="4.10.1">4.10.1 Auswirkungen</a></h3>
+
+<p>Im Flash-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind zu jeder Zeit zwei Programme
+gespeichert:
+
+<p><dl>
+<dt><b>Bootloader</b></dt><dd>Der Bootloader (siehe Abschnitt <a href="controller.html#1.3.1">1.3.1</a>)
+  ist in einem geschützten Teil des Flashspeichers abgelegt. Er wird
+  genutzt, um Sketches aus der Arduino-IDE über USB in den übrigen
+  Flash-Speicher zu laden.
+</dd><dt><b>Sketch</b></dt><dd>Der Sketch wird vom Anwender mit Hilfe der Arduino-IDE
+  und des Bootloaders installiert und kann sämtlichen Flash-Speicher
+  nutzen, der nicht durch den Bootloader belegt wird. Im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+  stehen neben dem vom Bootloader belegten Bereich noch 28672 Bytes
+  des Flash-Speichers für eigene Sketche zur Verfügung.
+</dd></dl>
+
+<p>Für beide Programme hat die Meldung eine (unterschiedliche) Bedeutung.
+
+<p><h4>Auswirkungen auf den Sketch</h4>
+
+<p>Die genauen Auswirkungen von RAM-Mangel auf den Sketch sind kaum
+vorhersagbar. Problematisch wird der Mangel an dynamischem Speicher
+dadurch, dass während der Sketchausführung immer mal wieder
+zusätzlicher dynamischer Speicher benötigt wird um beispielsweise
+Zwischenergebnisse von Rechnungen zu speichern oder zu speichern, wo
+die Sketchausführung nach dem Aufruf von Unterfunktionen fortgesetzt
+werden muss. Durch den Speichermangel werden dann Zwischenergebnisse
+oder Fortsetzungspunkte verfälscht. Die gesamte Programmausführung
+kann dann zu völlig unerwarteten und unsinnigen Reaktionen führen.
+
+<p>Ein solcher defekter Sketch kann jederzeit durch einen korrigierten
+Sketch ersetzt werden, um eine korrekte Programmausführung wieder
+herzustellen.
+
+<p>Im Zweifelsfall sollte man zunächst einen einfachen und bekanntermaßen
+funktionsfähigen Sketch installieren. Der Blink-Sketch unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/01.&nbsp;Basics/examples/Blink"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">01.&nbsp;Basics</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Blink</span></tt></a> bietet sich dafür an.
+
+<p><h4>Auswirkungen auf den Bootloader</h4>
+
+<p>Der Bootloader selbst ist ein eigenständiges Programm im Flash. Er ist
+von Engpässen beim dynamischen Speicher nicht betroffen, da er sich
+diesen Speicher nicht mit dem Sketch teilen muss. Allerdings gibt es
+einen kleinen zum Bootloader gehörigen Funktionsblock innerhalb eines
+jeden Sketches, der von der Arduino-IDE für den Anwender unsichtbar in
+den Code des Sketches integriert wird.
+
+<p>Dieser Teil realisiert die USB-Kommunikation mit dem PC während der
+Sketchausführung wird. Vor allem reagiert dieser Teil auf den von der
+Arduino-IDE gesendeten Befehl, den Bootloader in Vorbereitung eines
+Sketch-Uploads zu starten. Stellt dieser Teil des laufenden Sketches
+fest, dass die Arduino-IDE einen neuen Sketch übertragen will, so
+aktiviert sie den Bootloader. Der Bootloader wiederum handhabt in
+Folge den eigentlichen Empfang des neuen Sketches.
+
+<p>Bei dynamischem Speichermangel kann es passieren, dass dieser
+verborgene Teil des Sketches nicht korrekt funktioniert. Die
+Arduino-IDE kann dadurch selbst nicht mehr den Start des Bootloaders
+veranlassen und Upload-Versuche durch die Arduino-IDE scheitern.
+Unter Umständen ist die USB-Kommunikation zum PC so sehr
+beeinträchtigt, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> während der Sketch-Ausführung vom
+PC nicht korrekt oder ggf. sogar überhaupt nicht erkannt wird.
+
+<p>Für diesen Fall verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über einen Reset-Taster (siehe
+Abschnitt <a href="controller.html#1.3.3">1.3.3</a>). Ist die Arduino-IDE durch Speichermangel
+im Sketch nicht mehr in der Lage, den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über USB anzusprechen
+und zur Aktivierung des Bootloaders zu veranlassen, so ist es mit dem
+Reset-Taster manuell immer noch möglich, den Bootloader im passenden
+manuell zu aktivieren wie in Abschnitt <a href="controller.html#1.4.2">1.4.2</a> beschrieben.
+Die Funktion des Reset-Tasters ist immer vorhanden und sie kann nicht
+durch einen fehlerhaften Sketch beeinflusst werden. Mit seiner Hilfe
+ist es immer möglich, einen neuen Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden.
+
+<p><h3><a name="4.10.2">4.10.2 Vorbeugende Maßnahmen</a></h3>
+
+<p>Taucht die o.g. Warnung auf, so sollte man im Zweifelsfall davon
+Abstand nehmen, den Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden. Auch wenn es
+mit Hilfe des Reset-Tasters immer möglich ist, den fehlerhaften Sketch
+zu ersetzen, so erfordert dieses Vorgehen ein gutes Timing und es kann
+einige Versuche erfordern, bis der störrische Sketch erfolgreich
+ersetzt ist.
+
+<p><h4>Verwendung von Flash-Speicher für konstante Daten</h4>
+
+<p>In vielen Sketchen werden Textausgaben gemacht, entweder über den
+seriellen Monitor oder z.B. auf ein kleines Display. Üblicherweise
+enthält ein Sketch daher Zeilen wie die folgende.
+
+<pre>
+     Serial.println("Hallo Welt!");
+</pre>
+Dabei ist nicht offensichtlich, dass hier 12 Bytes des kostbaren
+dynamischen RAM-Speichers unnötigerweise belegt werden. Das lässt sich leicht
+in einem minimalen Sketch testen:
+
+<pre>
+     <font color="green"> 1</font>  void setup() {
+     <font color="green"> 2</font>    Serial.begin(9600);
+     <font color="green"> 3</font>  }
+     <font color="green"> 4</font>  void loop() {
+     <font color="green"> 5</font>    Serial.println("Hallo Welt!");
+     <font color="green"> 6</font>    delay(1000);
+     <font color="green"> 7</font>  }
+</pre>
+Dieser Sketch belegt laut Arduino-IDE 163 Bytes bzw. 6% des
+dynamischen Speichers (der genaue Wert kann je nach Version der
+Arduino-IDE etwas schwanken). Kommentiert man Zeile 5 durch
+vorangestellte // aus, so reduziert sich der Speicherverbrauch auf 149
+Bytes, es werden also ganze 14 Bytes des dynamischen Speichers
+gespart.
+
+<p>Der Grund liegt darin, dass die Arduino-IDE davon ausgeht, dass 
+die Zeichenkette ``Hallo Welt!'' weiter verarbeitet werden soll. Daher
+legt die Arduino-IDE die Zeichenkette ``Hallo Welt!'' im dynamischen
+Speicher ab, wo sie vom Sketch verändert werden könnte. Da wir aber
+nicht vor haben, diese Zeichenkette jemals während der Sketch
+ausgeführt wird zu verändern könnte man sie auch im Flash-Speicher
+belassen. Genau dafür gibt es Hilfsfunktionen in der Arduino-IDE. Ein
+schlichtes <tt>F(...)</tt>  um die Zeichenkette herum erledigt genau
+das. Dazu ersetzt man die bisherige ``Hallo-Welt''-Ausgabe durch das
+folgende Konstrukt.
+
+<pre>
+     Serial.println(F("Hallo Welt!"));
+</pre>
+Dieser Sketch verhält sich identisch zur vorherigen Version, er belegt
+aber nur 151 statt 163 Bytes. Die Differenz entspricht genau der Länge
+der Zeichenkette ``Hallo Welt!'' zuzüglich eines weiteren Bytes, das
+die Zeichenkette beendet. In vielen Sketches lässt sich auf diese
+Weise bereits signifikant dynamischer Speicher sparen.
+
+<p>Der Umgang mit dem Flash-Speicher ist allerdings nicht ganz einfach.
+Das folgende Beispiel nutzt einen weiteren Hilfsmechanismus namens
+<tt>PROGMEM</tt> um eine Zeichenkette im Flash abzulegen. Leider lässt
+sich diese dann nicht einfach per <tt>println()</tt> ausgeben.
+
+<pre>
+     // das folgende klappt nicht, denn der ftDuino weiss nicht, ob er RAM
+     // oder Flash lesen soll
+     static const char str[] PROGMEM = "Hallo Welt!";
+     Serial.println(str);
+</pre>
+Das Problem ist, dass <tt>println()</tt> nicht erkennen kann, ob <tt>str</tt>
+auf Flash- oder RAM-Speicher verweist. Eine mögliche Lösung ist, die
+Zeichen einzeln aus dem Flash-Speicher mit Hilfe spezieller Funktionen
+auszulesen und auszugeben wie im folgenden Beispiel:
+
+<pre>
+     static const char str[] PROGMEM = "Hallo Welt!\n";
+     for (char c = 0; c &lt; strlen_P(str); c++)
+       Serial.print((char)pgm_read_byte_near(str + c));
+</pre>
+Die Dokumentation der Arduino-IDE hält viele weitere Beispiel
+zur Nutzung des Flash-Speichers bereit. Unter dem Stichwort
+<tt>PROGMEM</tt> finden sich weiterführende Informationen unter
+anderem unter
+
+<p><a href="https://www.arduino.cc/reference/en/language/variables/utilities/progmem/">https://www.arduino.cc/reference/en/language/variables/utilities/progmem/</a>
+
+<p>und
+
+<p><a href="http://playground.arduino.cc/Main/PROGMEM">http://playground.arduino.cc/Main/PROGMEM</a>.
+
+<p>Diese Technik lässt sich nicht nur auf Zeichenketten anwenden, sondern
+auf alle Arten statischer Daten wie Töne, Werte-Tabellen usw.
+
+<p><h4>Verwendung von alternativen Bibliotheken</h4>
+
+<p>Bibliotheken sind eine praktische Sache, keine Frage. Und bei
+funktionsreichen Bibliotheken ist die Wahrscheinlichkeit umso höher,
+dass man alles findet, das man für sein konkretes Problem benötigt.
+
+<p>Oft sind es aber gerade die besonders umfangreichen Bibliotheken, die
+besonders ressourcenhungrig sind und eine große Menge Speicher belegen.
+Bei Verwendung des OLED-Displays aus Abschnitt <a href="experimente.html#6.14.3">6.14.3</a> am
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind es zum Beispiel die Grafikbibliotheken von Adafruit,
+die alle Funktionen für aufwändige Grafiken mitbringen, aber
+gleichzeitig einen hohen Speicherverbrauch haben.
+
+<p>Mit wenigen Zeile Code bringt das folgende Beispiel die Nachricht
+``Hallo Welt!'' auf den OLED-Bildschirm.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;Adafruit_GFX.h&gt;
+     <font color="green"> 2</font>  #include &lt;Adafruit_SSD1306.h&gt;
+     <font color="green"> 3</font>  Adafruit_SSD1306 display(-1);
+     <font color="green"> 4</font>  
+     <font color="green"> 5</font>  void setup() {
+     <font color="green"> 6</font>    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
+     <font color="green"> 7</font>    display.clearDisplay();
+     <font color="green"> 8</font>    display.setTextColor(WHITE);
+     <font color="green"> 9</font>    display.println("Hallo Welt!");
+     <font color="green">10</font>    display.display();
+     <font color="green">11</font>  }
+     <font color="green">12</font>  
+     <font color="green">13</font>  void loop() { }
+</pre>
+Schon dieses einfache Beispiel belegt 1504 Bytes bzw 58% des
+dynamischen Speichers. Das ist vor allem der Tatsache geschuldet, dass
+die Bibliothek für komplexe Zeichenoperationen eine Kopie des
+Bildschirminhalts im dynamischen Speicher vorhält. Bei 128 x 64 Pixel
+sind das bereits <sup><small>128*64</small></sup>/<sub><small>8</small></sub>=1024 Bytes.
+
+<p>Ist man auf Grafikfähigkeiten aber gar nicht angewiesen, sondern
+kann mit einer Darstellung von 16 x 8 Zeichen auskommen, dann
+bieten sich sparsame Alternativen an.
+
+<p>Eine davon ist die <tt>U8g2</tt>-Bibliothek und dort speziell die
+mitgelieferte <tt>U8x8</tt>-Bibliothek. Sie lässt sich direkt im
+Bibliotheksmanager der Arduino-IDE installieren. Das ``Hallo
+Welt!''-Beispiel sieht in diesem Fall wie folgt aus.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;U8x8lib.h&gt;
+     <font color="green"> 2</font>  U8X8_SSD1306_128X64_NONAME_HW_I2C u8x8(U8X8_PIN_NONE);
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>  void setup(void)
+     <font color="green"> 5</font>  {
+     <font color="green"> 6</font>    u8x8.begin();
+     <font color="green"> 7</font>    u8x8.setPowerSave(0);
+     <font color="green"> 8</font>    u8x8.setFont(u8x8_font_chroma48medium8_r);
+     <font color="green"> 9</font>    u8x8.drawString(0,0,"Hallo Welt!");
+     <font color="green">10</font>  }
+     <font color="green">11</font>  
+     <font color="green">12</font>  void loop() { }
+</pre>
+Hier werden nur 578 Bytes entsprechend 22% des dynamischen Speichers
+belegt und es bleibt wesentlich mehr für andere Bibliotheken und
+eigenen Code übrig.
+
+<p>Bei vielen Bibliotheken ist es ähnlich und es kann sich lohnen, genau
+zu schauen, welche Ansprüche man hat und welche Bibliothek diese
+Ansprüche mit minimalem Aufwand und Ressourceneinsatz erfüllen
+kann. Oft lassen sich mit nur kleinen Einschränkungen bereits große
+Gewinne erzielen.
+
+<p><h2><a name="4.10">4.10 Weiterführende Informationen</a></h2>
+
+<p>Es gibt im Internet viele Tutorials sowohl zur
+C<sup>++</sup>-Programmierung<a href="#fn2"><sup>2</sup></a> 
+als auch zur Arduino-Programmierung<a href="#fn3"><sup>3</sup></a> .
+
+<p>Diese und ähnliche Tutorials erklären viele weitere Sprachkonstrukte
+und Bibliotheksfunktionen. Solche Tutorials sind nicht auf den
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zugeschnitten. Aber dieses Kapitel hat die nötigen
+Grundlagen geliefert, um auch mit anderen Tutorials weiterarbeiten zu
+können. Nicht alles aus der Welt der PC-Programmierung oder der
+Arduino-Programmierung lässt sich auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+übertragen. Zusammen mit den Experimenten und Modellen der folgenden
+Kapitel sowie den fertig mitgelieferten Beispielprogrammen ist der
+tiefere Einstieg in die professionelle C<sup>++</sup>-Programmierung aber
+möglich.
+
+
+<hr><small>
+<a name="fn1">1) </a>GNU-Compiler-Collection GCC:
+  <a href="https://gcc.gnu.org/">https://gcc.gnu.org/</a><br>
+<a name="fn2">2) </a>C<sup>++</sup>-Tutorial
+  <a href="http://www.online-tutorials.net/c-c++-c/c++-tutorial-teil-1/tutorials-t-1-58.html">http://www.online-tutorials.net/c-c++-c/c++-tutorial-teil-1/tutorials-t-1-58.html</a><br>
+<a name="fn3">3) </a>Arduino-Tutorial
+  <a href="http://www.arduino-tutorial.de">http://www.arduino-tutorial.de</a><br>
+</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - programmierung</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

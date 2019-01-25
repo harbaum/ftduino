@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>aufbau</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="10">10 Selbstbau</a></h1>
+
+<p>Es ist möglich, einen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> manuell zu bauen. Die ersten
+Prototypen sind so entstanden. Bei manuellem Aufbau bietet es sich an,
+funktionsgruppenweise vorzugehen und jeweils die Funktionsfähigkeit
+schrittweise sicher zu stellen.
+
+<p>Basis für den Selbstbau ist die industriell gefertigte Platine aus den
+Anhängen <a href="anhang.html#B">B</a> und <a href="anhang.html#C">C</a> basierend auf dem
+Schaltplan entsprechend Anhang <a href="anhang.html#A">A</a>.
+
+<p><h2><a name="10.1">10.1 Erste Baustufe " Spannungsversorgung"</a></h2>
+
+<p>Im ersten Schritt wird die Spannungsversorgung aufgebaut. Sie besteht
+aus den Kondensatoren <tt>C6</tt> bis <tt>C11</tt> sowie <tt>C14</tt>,
+den Dioden <tt>D1</tt> und <tt>D3</tt> bis <tt>D5</tt> sowie dem
+Spannungsregler <tt>U2</tt> und der Sicherung <tt>F1</tt>. Die
+Spannungsversorungs-Leuchtdiode (siehe Abschnitt <a href="controller.html#1.3.4">1.3.4</a>)
+<tt>LED2</tt> mit zugehörigem Vorwiderstand <tt>R35</tt> werden
+ebenfalls montiert. Die Spule <tt>L1</tt> sowie der Kondensator
+<tt>C1</tt> können auch bereits installiert werden.
+
+<p><center>
+  
+  <p><a name="IMG:10.1"><img src="aufbau/supply_svg.png"></a>
+  <br><small>Abbildung 10.1: Komponenten der Spannungsversorgung</small>
+</center>
+
+<p>Die 9V-Steckbuchse <tt>121</tt> sowie die beiden Bundhülsen
+<tt>9VIN+</tt> und <tt>9VIN-</tt> und die USB-Buchse <tt>J1</tt> werden
+ebenfalls jetzt schon bestückt.
+
+<p><h3><a name="10.2.1">10.2.1 Bauteile-Polarität</a></h3>
+
+<p>Bei folgenden Bauteilen ist auf die Polarität zu achten: <tt>D1</tt>
+und <tt>D3</tt> bis <tt>D5</tt>, <tt>C6</tt> bis <tt>C8</tt> und
+<tt>C14</tt> sowie <tt>LED2</tt>.
+
+<p>Der positive Anschluss der Kondensatoren ist durch einen aufgedruckten
+Balken oder Streifen gekennzeichnet. Im Bestückungsplan ist dieser
+Anschluss ebenfalls durch einen Balken und zusätzlich durch
+abgeschrägte Ecken markiert.
+
+<p>Die verschiedenen Dioden des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzen unterschiedliche
+Symbole beim Bestückungsdruck. Aber auch hier ist sowohl auf der
+Diode selbst als auch auf dem Bestückungssymbol ein Balken auf der
+Seite der Kathode vorhanden.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:10.2"><img src="aufbau/tantal_svg.png"></a></td></tr><tr><td align="center"><small>(a) Tantal-Kondensator</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:10.2"><img src="aufbau/diode_svg.png"></a></td></tr><tr><td align="center"><small>(b) Diode</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:10.2"><img src="aufbau/led_svg.png"></a></td></tr><tr><td align="center"><small>(c) Leuchtdiode</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 10.2: Schaltplansymbol, Bauteilepolarität und Bestückungssymbol</small>
+</center>
+
+<p>Bei den Leuchtdioden (LEDs) ist es etwas schwieriger, die korrekte
+Polarität zu bestimmen. Auf der Unterseite der LED ist üblicherweise
+ein Dreieck oder ein "T" aufgedruckt, das jeweils in Richtung
+Kathode weist.
+
+<p>Die Polarität von Leuchtdioden kann man mit einem einfachen Multimeter
+im Dioden-Test-Modus überprüfen. Bringt man die Anode der LED mit dem
+roten Multimeterkabel und die Kathode mit dem schwarzen Kabel in
+Kontakt, so leuchtet die LED schwach.
+
+<p>Sind alle Komponenten der Spannungsversorgung bestückt, dann sollte die
+grüne LED leuchten, sobald der USB-Stecker eingesteckt wird oder sobald
+9 Volt über die Bundhülsen oder den 9-V-Rundstecker eingespeist werden.
+
+<p>Leuchtet die LED in mindestens einem der Fälle nicht, so kann man mit
+Hilfe eines Multimeters leicht verfolgen, wo die Spannung noch
+vorhanden ist und wo nicht mehr. Wahrscheinlichste Fehler liegen in
+der Polarität der Dioden oder der LED.
+
+<p><h3><a name="10.2.2">10.2.2 Kontrollmessungen</a></h3>
+
+<p>Bei einer 9-Volt-Versorgung muss an den zwischen Pin 1 und 2 des
+I²C-Anschlusses am noch unbestückten Wannenstecker <tt>SV1</tt> eine
+Spannung von 5 Volt (&plusmn;0,4 Volt) messbar sein. Auf keinen Fall
+darf mit der Bestückung des Mikrocontrollers fortgefahren werden,
+wenn hier eine deutlich zu hohe Spannung gemessen wird.
+
+<p>Ebenfalls bei einer Versorgung aus einer 9-Volt-Quelle sollten an den
+bisher unbestückten beiden unteren 9-Volt-Ausgängen nahezu 9 Volt zu
+messen sein. Etwas Spannungsverlust gegenüber der Quelle tritt durch
+die Dioden <tt>D3</tt> bzw. <tt>D4</tt> und der Diode <tt>D5</tt> auf.
+
+<p>Zwischen den Pads 14 und 7 am bisher unbestückten <tt>IC1</tt> muss bei
+reiner USB-Versorgung eine Spannung von etwas unter 5 Volt zu messen
+sein. Ist das nicht der Fall, dann besitzt der Spannungsregler
+<tt>U2</tt> keine sogenannte Body-Diode (der empfohlene MCP 1755S hat
+diese) und die Funktion dieser Diode muss durch <tt>D6</tt> extern
+nachgerüstet werden. Bei Verwendung des empfohlenen MCP 1755S kann
+<tt>D6</tt> ersatzlos entfallen.
+
+<p>Die Diode <tt>D5</tt> verhindert, dass der Strom über die Body-Diode zu
+den Ausgangstreiber des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gelangt. Andernfalls würden die
+Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auch aus einer USB-5-Volt-Versorgung gespeist,
+was gegebenenfalls eine Überlastung des USB und/oder der Body-Diode zur Folge
+hätte.
+
+<p><h2><a name="10.2">10.2 Zweite Baustufe " Mikrocontroller"</a></h2>
+
+<p>Ist die Spannungsversorgung sichergestellt und vor allem liegen
+auch im 9-Volt-Betrieb am I²C-Anschluss stabile 5 Volt an, dann
+kann mit dem Mikrocontroller <tt>U1</tt> fortgefahren werden.
+
+<p><center>
+  
+  <p><a name="IMG:10.3"><img src="aufbau/mc_svg.png"></a>
+  <br><small>Abbildung 10.3: Komponenten des Mikrocontrollers</small>
+</center>
+
+<p>Auch der Mikrocontroller darf nicht verpolt werden, was in diesem Fall
+bedeutet, dass er korrekt orientiert aufgelötet werden muss. Sowohl auf
+der Platine als auch auf dem Chip-Gehäuse findet sich in einer Ecke
+eine runde Markierung bzw. Vertiefung. Diese Markierung verweist auf
+den Pin 1 des Mikrocontrollers und bestimmt die korrekte Orientierung.
+Ist <tt>U1</tt> verlötet werden direkt daneben <tt>C5</tt> und
+<tt>R29</tt> montiert.
+
+<p>Die übrigen in dieser Baustufe zu montierenden Komponenten beinhalten
+die Reset-Logik bestehend aus Taster <tt>PB1</tt>, sowie Diode
+<tt>D2</tt> und Widerstand <tt>R9</tt>. Kondensator <tt>C4</tt> und die
+Widerstände <tt>R5</tt> und <tt>R6</tt> vervollständigen die
+USB-Schaltung. Den 16-MHz-Systemtakt erzeugen der Quarz <tt>Q1</tt>
+mit den Kondensatoren <tt>C2</tt> und <tt>C3</tt>.
+
+<p>Der I²C-Anschluss <tt>SV1</tt> mit seinen Pull-Up-Widerständen
+<tt>R30</tt> und <tt>R31</tt> kann ebenfalls jetzt bestückt werden.
+
+<p>Die Leuchtdiode <tt>LED1</tt> mit ihrem Vorwiderstand <tt>R28</tt> wird
+direkt vom Mikrocontroller angesteuert und wird ebenfalls jetzt
+montiert. Bei der Leuchtdiode muss wieder auf korrekte Polarität
+geachtet werden.
+
+<p>Der sogenannte <tt>ISP</tt>-Steckverbinder <tt>SV2</tt> wird lediglich
+zum einmaligen Aufspielen des Bootloaders (siehe Abschnitt
+<a href="controller.html#1.3.1">1.3.1</a> benötigt und muss nicht unbedingt fest montiert
+werden, wenn das Standardgehäuse genutzt werden soll, da es im Gehäuse
+keinen Ausschnitt für diesen Steckverbinder gibt. Die frei verfügbare
+Druckvorlage<a href="#fn1"><sup>1</sup></a>  hat
+einen entsprechenden Ausschnitt und kann auch bei fest montiertem
+<tt>SV2</tt> genutzt werden.
+
+<p><h3><a name="10.3.1">10.3.1 Funktionstest des Mikrocontrollers</a></h3>
+
+<p>Der Mikrocontroller wird von Atmel (bzw. Microchip) mit einem
+USB-Bootloader<a href="#fn2"><sup>2</sup></a>  ausgeliefert. Beim
+Anschluss an einen PC sollte der Mikrocontroller daher vom PC als
+Gerät namens <tt>ATm32U4DFU</tt> erkannt werden. Ist das der Fall,
+dann sind die wesentlichen Komponenten funktionsfähig. Dass Windows
+keinen Treiber für dieses Gerät hat kann ignoriert werden.
+
+<p>Der DFU-Bootloader ist nicht kompatibel zur Arduino-IDE und die
+Arduino-IDE bringt ihren eigenen Bootloader mit. Dieser wird einmalig
+mit einem Programmiergerät über den Steckverbinder <tt>SV2</tt>
+eingespielt (" gebrannt"). 
+
+<p><center>
+  
+  <p><a name="IMG:10.4"><img src="aufbau/arduino_bootloader.png"></a>
+  <br><small>Abbildung 10.4: Brennen des Bootloaders über die Arduino-IDE</small>
+</center>
+
+<p>Zum Brennen des Arduino-Bootloaders unterstützt die Arduino-IDE eine
+ganze Reihe von Programmiergeräten. Es reicht eine einfache Variante,
+wie der USBasp<a href="#fn3"><sup>3</sup></a> . Der USBasp wird
+per USB mit dem PC und über das 10-polige Flachbandkabel mit
+<tt>SV2</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden. Ist <tt>SV2</tt> nicht bestückt,
+so kann man einen entsprechenden Stecker lose in die Platine stecken
+und leicht so verkannten, dass alle Kontakte hergestellt werden. Der
+eigentliche Flashvorgang dauert nur wenige Sekunden und man kann den
+Stecker problemlos so lange leicht verkanntet festhalten.
+
+<p>Nach dem Brennen sollte der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter diesem Namen vom
+Betriebssystems des PC erkannt werden. Er sollte sich von der
+Arduino-IDE ansprechen und mit einem Sketch programmieren lassen. Es
+bietet sich für einen ersten Test der Blink-Sketch unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Blink"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Blink</span></tt></a> an, da die dafür nötige <tt>LED1</tt>
+ebenfalls gerade montiert wurde.
+
+<p><h2><a name="10.3">10.3 Dritte Baustufe " Eingänge"</a></h2>
+
+<p>Die dritte Baustufe ist sehr einfach zu löten und besteht
+primär aus Widerständen, die zum Schutz der Eingänge verwendet
+werden.
+
+<p><center>
+  
+  <p><a name="IMG:10.5"><img src="aufbau/inputs_svg.png"></a>
+  <br><small>Abbildung 10.5: Komponenten der Eingänge</small>
+</center>
+
+<p>Die Komponenten der Analogeingänge <tt>I1</tt> bis <tt>I8</tt> sowie der
+Zählereingänge <tt>C1</tt> bis <tt>C4</tt> werden gleichzeitig montiert.
+
+<p>Die Bestückung beginnt mit den Widerständen ganz links und <tt>IC1</tt>
+nach deren Montage die Eingänge <tt>I1</tt> bis <tt>I8</tt> vollständig sind.
+
+<p>Im zweiten Schritt werden dann die Widerstände <tt>R36</tt> bis
+<tt>R46</tt> sowie der Transistor <tt>T1</tt> bestückt, was die
+Zählereingänge vervollständigt. Die Triggerschaltung für den
+Ultraschall-Entfernungsmesser (siehe Abschnitt <a href="controller.html#1.3.6">1.3.6</a>) ist
+damit auch vollständig.
+
+<p>Mit einem passenden Testprogramm sollte nun jeder Eingang einzeln
+getestet werden, um auch Kurzschlüsse zwischen den Eingängen zu
+erkennen. Sollte ein Eingang nicht wie gewünscht funktionieren, so
+kommt als Fehlerquelle auch der Mikrocontroller aus Baustufe 2 in
+Betracht.
+
+<p><h2><a name="10.4">10.4 Vierte Baustufe " Ausgänge"</a></h2>
+
+<p>In der vierten und letzten Baustufe werden die Komponenten
+montiert, die zum Betrieb der Ausgänge benötigt werden.
+
+<p><center>
+  
+  <p><a name="IMG:10.6"><img src="aufbau/outputs_svg.png"></a>
+  <br><small>Abbildung 10.6: Komponenten der Ausgänge</small>
+</center>
+
+<p>Die Leistungstreiber <tt>U3</tt> und <tt>U4</tt> sollten zuerst bestückt
+werden, da sie nicht ganz einfach zu löten sind. Vor allem sollten die
+Bundhülsen nicht bestückt sein, da sie den Zugang zu den Anschlusspads
+der Treiber sehr erschweren. Ergänzt werden die Treiber durch nur
+wenige Widerstände und Kondensatoren.
+
+<p><h3><a name="10.5.1">10.5.1 Ausgangstests mit 5 Volt</a></h3>
+
+<p>Da die Treiber an der 9-Volt-Versorgung angeschlossen sind sind
+Kurzschlüsse zwischen 9 Volt und 5 Volt führenden Signalen potenziell
+möglich.
+
+<p><center>
+  
+  <p><a name="IMG:10.7"><img src="aufbau/9v5v_svg.png"></a>
+  <br><small>Abbildung 10.7: Testweise Brücke zwischen 5V und 9V</small>
+</center>
+
+<p>Neben der sorgfältigen Kontrolle der Lötstellen ist es daher sinnvoll,
+den 9-Volt-Zweig für erste Funktionstests aus dem 5-Volt-Zweig zu
+versorgen. Kurzschlüsse zwischen 5 Volt führenden Signale führen in
+der Regel nicht zu Beschädigungen während Kurzschlüsse von
+5-Volt-Komponenten mit höheren Spannungen sehr leicht größere Schäden
+nach sich ziehen.
+
+<p><em>Achtung: Dabei darf natürlich keine externe 9-Volt-Quelle
+angeschlossen sein, andernfalls würden die meisten Komponenten des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sofort Schaden nehmen!</em>
+
+<p>Ist die Brücke gesetzt, so werden auch die Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit
+den internen 5 Volt des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> versorgt und Kurzschlüsse zwischen
+den Ausgängen und anderen Teilen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind weniger
+gefährlich. Nun können die Ausgänge mit einer Leuchtdiode auf korrekte
+Funktion getestet werden. Größere Lasten (Motoren oder Glühlampen) sollten
+für diesen Test nicht verwendet werden, da die interne 5-Volt-Versorgung
+nicht daraus ausgelegt ist, solche Lasten zu treiben.
+
+<p>Erst wenn alle Ausgänge bei 5 Volt korrekt funktionieren darf die
+Brücke entfernt und eine echte 9-Volt-Versorgung angeschlossen werden.
+<hr><small>
+<a name="fn1">1) </a>Gehäusedruckvorlage
+  <a href="https://github.com/harbaum/ftduino/tree/master/case">https://github.com/harbaum/ftduino/tree/master/case</a><br>
+<a name="fn2">2) </a>DFU-Bootloader,
+  <a href="http://www.atmel.com/Images/doc7618.pdf">http://www.atmel.com/Images/doc7618.pdf</a><br>
+<a name="fn3">3) </a>USBasp - USB programmer for Atmel AVR
+  controllers, <a href="http://www.fischl.de/usbasp/">http://www.fischl.de/usbasp/</a><br>
+</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - aufbau</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

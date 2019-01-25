@@ -1,0 +1,3199 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>experimente</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="6">6 Experimente</a></h1>  
+
+<p>Die Experimente dieses Kapitels konzentrieren sich auf einzelne
+Aspekte des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Sie veranschaulichen einen Effekt oder ein
+Konzept und verwenden dafür nur minimale externe Komponenten. Die
+Experimente stellen an sich keine vollständigen Modelle dar, können
+aber oft als Basis dafür dienen.
+
+<p>Beispiele für komplexe Modelle finden sich im Kapitel
+<a href="modelle.html#7">7</a>.
+
+<p><h2><a name="6.1">6.1 Lampen-Zeitschaltung</a></h2>
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
+
+<p>Dieses sehr einfache Modell besteht nur aus einem Taster und einer
+Lampe und bildet die Funktion einer typischen Treppenhausbeleuchtung
+nach. Um Energie zu sparen wird hier nicht einfach ein Kippschalter
+genommen, um das Licht zu schalten. Stattdessen wird ein Taster
+verwendet und jeder Druck auf den Taster schaltet das Licht nur für
+z.B. zehn Sekunden ein. Wird während dieser Zeit der Taster erneut
+gedrückt, so verlängert sich die verbleibende Zeit wieder auf volle
+zehn Sekunden. Nach Ablauf der zehn Sekunden verlischt das Licht und
+das Spiel beginnt von vorn.
+
+<p><center>
+  
+  <p><a name="IMG:6.1"><img src="experimente/lamptimer_svg.png"></a>
+  <br><small>Abbildung 6.1: Lampen-Zeitschaltung</small>
+</center>
+
+<p><h3><a name="6.2.1">6.2.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/LampTimer">LampTimer</a></tt></a></h3>
+
+<p>Der folgende Sketch findet sich bei installierter
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Unterstützung im Menü der Arduino-IDE unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/LampTimer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">LampTimer</span></tt></a>.
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    LampTimer - Lampen-Zeitschaltuhr
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    (c) 2017 by Till Harbaum &lt;till@harbaum.org&gt;
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>    Schaltet eine Lampe an Ausgang O1 für 10 Sekunden ein,
+     <font color="green"> 7</font>    sobald ein Taster an Eingang I1 gedrückt wird.
+     <font color="green"> 8</font>  */
+     <font color="green"> 9</font>  
+     <font color="green">10</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green">11</font>  
+     <font color="green">12</font>  uint32_t startzeit = 0;
+     <font color="green">13</font>  
+     <font color="green">14</font>  // Die Setup-Funktion wird einmal ausgeführt, wenn Reset gedrückt oder
+     <font color="green">15</font>  // das Board gestartet wird.
+     <font color="green">16</font>  void setup() { }
+     <font color="green">17</font>  
+     <font color="green">18</font>  // Die Loop-Funktion wird endlos immer und immer wieder ausgeführt
+     <font color="green">19</font>  void loop() {
+     <font color="green">20</font>    // Teste, ob der Taster an I1 gedrückt ist
+     <font color="green">21</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">22</font>      // merke Startzeit
+     <font color="green">23</font>      startzeit = millis();
+     <font color="green">24</font>  
+     <font color="green">25</font>      // schalte Lampe ein (Ausgang HI)
+     <font color="green">26</font>      ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green">27</font>    }
+     <font color="green">28</font>  
+     <font color="green">29</font>    // gültige Startzeit und seitdem mehr als 10 Sekunden
+     <font color="green">30</font>    // (10.000 Millisekunden) verstrichen?
+     <font color="green">31</font>    if((startzeit != 0) &&
+     <font color="green">32</font>       (millis() &gt; startzeit + 10000)) {
+     <font color="green">33</font>      // vergiss Startzeit
+     <font color="green">34</font>      startzeit = 0;
+     <font color="green">35</font>      // schalte Lampe aus (Ausgang OFF)
+     <font color="green">36</font>      ftduino.output_set(Ftduino::O1, Ftduino::OFF);
+     <font color="green">37</font>    }
+     <font color="green">38</font>  }
+     <font color="green">39</font>  
+</pre>
+
+<p><h4>Sketchbeschreibung</h4>
+
+<p>Die für die Lampen-Zeitschaltung nötigen Funktionen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+sind sehr einfach und die Anwendung lässt sich mit der einfachen
+<tt>FtduinoSimple</tt>-Bibliothek (siehe Abschnitt
+<a href="bibliotheken.html#9.1">9.1</a>) abdecken.
+
+<p>Der Arduino-Sketch enthält eine leere <tt>setup()</tt>-Funktion, da
+keine Initialisierung nötig ist. Sämtliche Funktionalität steckt in
+der <tt>loop()</tt>-Funktion.
+
+<p>Die Taste an <tt>I1</tt> wird über <tt>input_get()</tt> permanent
+abgefragt. Ist sie gedrückt, so wird die aktuelle Zeit seit
+Gerätestart in Millisekunden mit der Funktion <tt>millis()</tt>
+abgefragt und in der Variablen <tt>startzeit</tt> gespeichert und die
+Lampe wird eingeschaltet. War die Lampe bereits an, dann bewirkt
+dieses zusätzliche Einschalten nichts, aber der bereits gesetzte
+Zeitwert in <tt>startzeit</tt> wird durch den aktuellen ersetzt.
+
+<p>Unabhängig davon wird permanent getestet, ob <tt>startzeit</tt> einen
+gültigen Wert enthält und ob die aktuelle Systemzeit bereits mehr als
+zehn Sekunden (10.000 Millisekunden) nach dem dort gespeicherten Wert
+liegt. Ist das der Fall, dann sind seit dem letzten Tastendruck mehr
+als zehn Sekunden vergangen und die Lampe wird ausgeschaltet sowie der
+Wert in <tt>startzeit</tt> auf Null gesetzt, um ihn als ungültig zu
+markieren.
+
+<p><h4>Aufgabe 1: 20 Sekunden</h4>
+
+<p>Sorge dafür, dass die Lampe nach jedem Tastendruck 20 Sekunden lang
+an bleibt.
+
+<p><h4>Lösung 1:</h4>
+
+<p>In Zeile 32 muss der Wert 10000 durch den Wert 20000 ersetzt werden,
+damit die Lampe 20000 Millisekunden, also 20 Sekunden eingeschaltet
+bleibt.
+
+<pre>
+     <font color="green">31</font>    if((startzeit != 0) &&
+     <font color="green">32</font>       (millis() &gt; startzeit + 20000)) {
+</pre>
+<h4>Aufgabe 2: Keine Verlängerung</h4>
+
+<p>Sorge dafür, dass ein weiterer Druck auf den Taster, während die Lampe
+bereits leuchtet, die verbleibende Zeit nicht wieder auf 10 Sekunden
+verlängert.
+
+<p><h4>Lösung 2:</h4>
+
+<p>Vor der Zuweisung in Zeile 23 muss eine zusätzliche Abfrage eingefügt
+werden, die nur dann einen neue Wert setzt, wenn bisher keiner gesetzt
+war. Beide Zeilen zusammen sehen dann so aus:
+
+<pre>
+     <font color="green">23</font>    if(startzeit == 0)
+     <font color="green">24</font>      startzeit = millis();
+</pre>
+<h4>Expertenaufgabe:</h4> 
+
+<p>Schließt Du statt der Lampe eine Leuchtdiode an (der rote Anschluss
+der Leuchtdiode muss an Ausgang <tt>O1</tt>), dann wirst Du etwas
+merkwürdiges bemerken, wenn das Licht eigentlich aus sein sollte: Die
+Leuchtdiode leuchtet trotzdem ganz schwach, obwohl der Ausgang doch
+<tt>OFF</tt> ist. Wie kommt das?
+
+<p><h4>Erklärung</h4>
+
+<p>Durch eine Lampe oder Leuchtdiode fließt ein Strom, wenn zwischen den
+beiden Anschlüssen ein Spannungsunterschied besteht. Den einen
+Anschluss haben wir fest mit Masse bzw. 0 Volt verbunden, der andere
+ist offen und wird von den Bauteilen im ftDuino nicht mit Spannung
+versorgt. Anders als bei einem mechanischem Schalter ist diese
+Trennung bei dem im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als sogenannter Ausgangstreiber
+verwendeten Halbleiterbaustein aber nicht perfekt. Ein ganz kleiner
+sogenannter Leckstrom fließt trotzdem zur
+9V-Versorgungsspannung. Dieser kleine Strom reicht nicht, die Lampe
+zum Leuchten zu bringen. Aber er reicht, die wesentlich effizientere
+Leuchtdiode ganz leicht aufleuchten zu lassen.
+
+<p>Lässt sich daran etwas ändern? Ja! Statt den Ausgang komplett
+unbeschaltet zu lassen können wir dem Ausgangstreiber im ftDuino
+sagen, dass er den Ausgang fest auf Masse (0 Volt) schalten
+soll. Beide Anschlüsse der Leuchtdiode liegen dann fest auf Masse und
+die Einflüsse irgendwelcher Leckströme treten nicht mehr in
+Erscheinung. Dazu muss in der Zeile 36 die Konstante <tt>OFF</tt>
+durch <tt>LO</tt> ersetzt werden. <tt>LO</tt> steht für low, englisch
+niedrig und meint in diesem Fall 0 Volt. Die Leuchtdiode erlischt nun
+komplett nach Ablauf der Zeit.
+
+<pre>
+     <font color="green">36</font>      ftduino.output_set(Ftduino::O1, Ftduino::LO);
+</pre>
+Direkt nach dem Einschalten des ftDuino leuchtet die Leuchtdiode aber
+nach wie vor. Vielleicht findest Du selbst heraus, wie sich das ändern
+lässt. Tipp: Die bisher unbenutzte <tt>setup()</tt>-Funktion könnte
+helfen.
+
+<p>Mehr dazu gibt es im Abschnitt <a href="experimente.html#6.8">6.8</a>.
+
+<p><h2><a name="6.2">6.2 Not-Aus</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
+
+<p>Ein Not-Aus-Schalter kann Leben retten und scheint eine einfache Sache
+zu sein: Man drückt einen Taster und die betreffende Maschine schaltet
+sich sofort ab. Im Modell stellt ein XS-Motor mit
+Ventilator an Ausgang <tt>M1</tt> die Maschine dar. Ein Taster
+an Eingang <tt>I1</tt> bildet den Not-Aus-Taster.
+
+<p><center>
+  
+  <p><a name="IMG:6.2"><img src="experimente/emergencystop_svg.png"></a>
+  <br><small>Abbildung 6.2: Not-Aus</small>
+</center>
+
+<p><h3><a name="6.3.1">6.3.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/EmergencyStop">EmergencyStop</a></tt></a></h3>
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    EmergencyStop - Not-Aus
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    (c) 2017 by Till Harbaum &lt;till@harbaum.org&gt;
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>    Schaltet einen Ventilator aus, sobald der Not-Aus-Taster
+     <font color="green"> 7</font>    betätigt wird.
+     <font color="green"> 8</font>  */
+     <font color="green"> 9</font>  
+     <font color="green">10</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green">11</font>  
+     <font color="green">12</font>  // Die Setup-Funktion wird einmal bei Start des Systems ausgeführt
+     <font color="green">13</font>  void setup() { 
+     <font color="green">14</font>    // Ventilator bei Start des Systems einschalten
+     <font color="green">15</font>    ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
+     <font color="green">16</font>  
+     <font color="green">17</font>    // Ausgang der internen roten LED aktivieren
+     <font color="green">18</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green">19</font>    // und LED ausschalten
+     <font color="green">20</font>    digitalWrite(LED_BUILTIN, LOW);
+     <font color="green">21</font>  }
+     <font color="green">22</font>  
+     <font color="green">23</font>  // Die Loop-Funktion wird endlos immer und immer wieder ausgeführt
+     <font color="green">24</font>  void loop() {
+     <font color="green">25</font>    // Teste, ob der Taster an I1 gedrückt ist
+     <font color="green">26</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">27</font>      // Motor bremsen
+     <font color="green">28</font>      ftduino.motor_set(Ftduino::M1, Ftduino::BRAKE);
+     <font color="green">29</font>      // interne rote LED einschalten    
+     <font color="green">30</font>      digitalWrite(LED_BUILTIN, HIGH);
+     <font color="green">31</font>    }
+     <font color="green">32</font>  }
+     <font color="green">33</font>  
+</pre>
+
+<p><h4>Sketchbeschreibung</h4>
+
+<p>Der Sketch ist sehr kurz und einfach. In der <tt>setup()</tt>-Funktion
+wird in Zeile 15 bei Sketchstart der Motor gestartet. Zusätzlich
+wird in den Zeilen 18 bis 20 die rote interne Leuchtdiode des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> für die spätere Verwendung aktiviert, aber zunächst
+ausgeschaltet gelassen.
+
+<p>In der <tt>loop()</tt>-Funktion wird in Zeile 26 permanent abgefragt, ob
+der Not-Aus-Taster geschlossen wurde. Ist das der Fall, dann wird der
+Motor in Zeile 28 sofort gestoppt und in Zeile 30 die rote Leuchtdiode
+eingeschaltet. Der Motor wird bewusst per <tt>BRAKE</tt> gestoppt statt
+<tt>OFF</tt>. Auf diese Weise wird der Motor kurzgeschlossen und aktiv
+gebremst, während er andernfalls langsam auslaufen würde, was im
+Notfall eine Gefahr darstellen würde.
+
+<p><h4>Aufgabe 1: Kabelbruch</h4>
+
+<p>Not-Taster sind zwar an vielen Maschinen vorhanden. Glücklicherweise
+werden sie aber nur sehr selten wirklich benötigt. Das hat den
+Nachteil, dass kaum jemand bemerken wird, wenn mit dem Not-Aus-Taster
+etwas nicht stimmt. Anfälliger als der Taster selbst sind oft die
+Kabel und es kann im Arbeitsalltag leicht passieren, dass ein Kabel
+beschädigt wird. Oft sieht man das dem Kabel nicht an, wenn z.B. die
+Ummantlung unbeschädigt aussieht, durch zu starke Belastung aber
+dennoch die Kupferleiter im Inneren unterbrochen sind. Der Resultat
+ist ein sogenannter Kabelbruch.
+
+<p>Du musst kein Kabel durchreissen. Es reicht, wenn Du einen der Stecker
+am Kabel, das den Taster mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbindet, heraus ziehst.
+Der Not-Aus-Taster funktioniert dann nicht mehr und die Maschine lässt
+sich nicht stoppen. Eine gefährliche Situation.
+
+<p><h4>Lösung 1:</h4>
+
+<p>Die Lösung für das Problem ist überraschend einfach. Wir haben unseren
+Not-Aus-Taster als Schließer angeschlossen. Das bedeutet, dass der
+Kontakt geschlossen wird, wenn der Taster betätigt wird. Man kann den
+fischertechnik-Taster aber auch als Öffner verwenden. Der Kontakt
+ist dann im Ruhezustand geschlossen und wird bei Druck auf den Taster
+geöffnet.
+
+<p><center>
+  
+  <p><a name="IMG:6.3"><img src="experimente/emergencystop_mod_svg.png"></a>
+  <br><small>Abbildung 6.3: Kabelbruch-sicherer Not-Aus-Öffner</small>
+</center>
+
+<p>Mit dem aktuellen Sketch geht die Maschine bei einem Kabelbruch sofort
+in den Notzustand, da der Taster ja sofort als geschlossen erkannt
+wird. Also muss auch im Sketch die Logik herum gedreht werden. Das
+passiert durch folgende Änderung in Zeile 26:
+
+<pre>
+     <font color="green">26</font>    if(!ftduino.input_get(Ftduino::I1)) {
+</pre>
+Man muss genau hinschauen, um den Unterschied zu sehen. Hinter der
+öffnenden Klammer steht nun aus Ausrufezeichen, das in der
+Programmiersprache C für die logische Negation eines Ausdrucks
+steht. Die Bedingung wird nun also ausgeführt, wenn der Taster
+<em>nicht</em> geschlossen ist. Nach dieser Änderung sollte sich die
+Maschine wieder genau wie ursprünglich verhalten. Mit einer kleinen
+Änderung: Zieht man nun einen der Stecker am Not-Aus-Taster heraus, so
+stoppt die Maschine sofort. Bei einem Kabelbruch würde das ebenfalls
+passieren.
+
+<p>So eine Schaltung nennt man auf englisch ``Fail-Safe'': Wenn etwas
+kaputt geht, dann wechselt die Schaltung in einen sicheren Zustand.
+Der fischertechnik-3D-Drucker verwendet diese Schaltung zum Beispiel
+für die Endlagentaster. Ist hier ein Kabel abgerissen, dann fährt der
+Drucker seine Motoren nicht gewaltsam gegen die Endanschläge der
+Achsen. Stattdessen verweigert der Drucker die Arbeit komplett, sobald
+die Verbindung zu einem Endlagentaster unterbrochen ist.
+
+<p><h4>Expertenaufgabe:</h4>
+
+<p>Ein Kabel kann nicht nur unterbrochen werden. Es kann auch passieren,
+dass ein Kabel z.B. so stark gequetscht wird, dass die inneren Leiter
+Kontakt miteinander bekommen. Das passiert wesentlich seltener, stellt
+aber ebenfalls eine realistische Gefahr dar.
+
+<p>Vor diesem Fall würde unsere verbesserte Notschaltung nicht schützen
+und der Not-Aus-Taster würde in dem Fall wieder nicht
+funktionieren. Wir brauchen also eine Variante, bei der weder der
+geschlossene noch der offene Zustand der Verbindung als ``gut''
+erkannt wird.
+
+<p><h4>Lösung:</h4>
+
+<p>Die Lösung ist in diesem Fall etwas aufwändiger. Es müssen nun
+mindestens drei Zustände unterschieden werden: ``normal'',
+``unterbrochen'' und ``kurzgeschlossen''. Reine Schalteingänge können
+aber nur die beiden Zustände ``geschlossen'' und ``offen''
+unterscheiden.
+
+<p>Die Lösung ist, die analogen Fähigkeiten der Eingänge zu nutzen. Dazu
+kann man z.B. direkt am Taster einen 100&#8486;-Widerstand in die Leitung
+integrieren.
+
+<p><center>
+  
+  <p><a name="IMG:6.4"><img src="experimente/emergencystop_res_svg.png"></a>
+  <br><small>Abbildung 6.4: Gegen Kabelbruch und Kurzschluss sicherer Not-Aus</small>
+</center>
+
+<p>Im Normalfall ist der Taster geschlossen und der am Eingang <tt>I1</tt> zu
+messende Widerstand beträgt 100&#8486;. Ist die Leitung unterbrochen,
+dann ist der Widerstand unendlich hoch. Und ist die Leitung
+kurzgeschlossen, dann ist der Widerstand nahe 0&#8486;. Die Maschine
+darf also nur dann laufen, wenn der Widerstand nahe an 100&#8486;
+ist. Etwas Toleranz ist nötig, da der genau Wert des verwendeten
+Widerstands Fertigungstoleranzen unterworfen ist und auch der
+geschlossene Taster sowie sein Anschlusskabel über einen eigenen sehr
+geringen Widerstand verfügen, der den gemessenen Gesamtwiderstand
+beeinflusst.
+
+<p>Warum muss der Widerstand nahe am Taster angebracht werden? Was
+passiert, wenn er nahe am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eingesetzt wird und dann ein
+Kurzschluss im Kabel zwischen Widerstand und Taster auftritt?
+
+<p><h2><a name="6.3">6.3 Pulsweitenmodulation</a></h2> 
+ 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Wenn man eine Lampe mit variierender Helligkeit leuchten lassen möchte
+oder einen Motor mit regelbarer Geschwindigkeit laufen lassen will,
+dann benötigt man eine Möglichkeit, die Energieaufnahme der Lampe oder
+des Motors zu beeinflussen. Am einfachsten klappt das mit einer
+einstellbaren Spannungsquelle. Bei höherer Spannung steigt auch die
+Energieaufnahme der Lampe und sie leuchtet heller und der Motor dreht
+sich schneller, bei niedrigerer Spannung wird die Lampe dunkler und
+der Motor dreht sich langsamer. Für die Analogausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+bedeutet das, dass sie eine zwischen 0 und 9 Volt kontinuierlich
+(analog) einstellbare Spannung ausgeben können sollen, um Lampen und
+Motoren von völliger Dunkelheit bzw. Stillstand bis zu maximaler
+Helligkeit bzw. Drehzahl betreiben zu können.
+
+<p>Der Erzeugung variabler Spannungen ist technisch relativ aufwändig. Es
+gibt allerdings einen einfachen Weg, ein vergleichbares Ergebnis zu
+erzielen. Statt die Spannung zu senken schaltet man die Spannung
+periodisch nur für sehr kurze Momente ein. Schaltet man die Spannung
+z.B. nur 50% der Zeit ein und 50% der Zeit aus, so wird über die
+Gesamtzeit gesehen nur die Hälfte der Energie übertragen. Ob man das
+Ergebnis als Blinken der Lampe oder als Stottern des Motors wahrnimmt
+oder ob die Lampe einfach mit halber Helligkeit leuchtet und der Motor
+mit halber Drehzahl dreht ist von der Geschwindigkeit abhängig, mit
+der man die Spannung ein- und ausschaltet.
+
+<p><center>
+  
+  <p><a name="IMG:6.5"><img src="experimente/pwm_svg.png"></a>
+  <br><small>Abbildung 6.5: Pulsweitenmodulation</small>
+</center>
+
+<p><h3><a name="6.4.1">6.4.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Pwm">Pwm</a></tt></a></h3> 
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    Pwm - Pulsweitenmodulation
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    (c) 2017 by Till Harbaum &lt;till@harbaum.org&gt;
+     <font color="green"> 5</font>  */
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  uint16_t schaltzeit = 8192;   // 8192 entspricht je 1/2 Sekunde an und aus
+     <font color="green">10</font>  
+     <font color="green">11</font>  // Die Setup-Funktion wird einmal ausgeführt, wenn Reset gedrückt oder
+     <font color="green">12</font>  // das Board gestartet wird.
+     <font color="green">13</font>  void setup() { }
+     <font color="green">14</font>  
+     <font color="green">15</font>  // warte die angegebene Zeit. Der "zeit"-Wert 8192 soll dabei einer halben Sekunde
+     <font color="green">16</font>  // entsprechen. Es muss also "zeit" mal 500000/8192 Mikrosekunden gewartet werden
+     <font color="green">17</font>  void warte(uint16_t zeit) {
+     <font color="green">18</font>    while(zeit--)
+     <font color="green">19</font>      _delay_us(500000/8192);
+     <font color="green">20</font>  }
+     <font color="green">21</font>  
+     <font color="green">22</font>  // Die Loop-Funktion wird endlos immer und immer wieder ausgeführt
+     <font color="green">23</font>  void loop() {
+     <font color="green">24</font>    static uint8_t an_aus = false;      // der aktuelle Ausgang-an/aus-Zustand
+     <font color="green">25</font>    static uint8_t i1=false, i2=false;  // letzter Zustand der Tasten an I1 und I2
+     <font color="green">26</font>  
+     <font color="green">27</font>    // ist die Taste an I1 gedrückt?
+     <font color="green">28</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">29</font>      // und war die Taste vorher nicht gedrückt und ist die
+     <font color="green">30</font>      // aktuelle Schaltzeit kleiner 8192?
+     <font color="green">31</font>      if(!i1 && (schaltzeit &lt; 8192)) {
+     <font color="green">32</font>        // dann verdopple die Schaltzeit
+     <font color="green">33</font>        schaltzeit *= 2;
+     <font color="green">34</font>        // warte eine Millisekunde, falls die Taste nachprellt
+     <font color="green">35</font>        _delay_ms(1);
+     <font color="green">36</font>      }
+     <font color="green">37</font>      // merke, dass die Taste an I1 zur Zeit gedrückt ist
+     <font color="green">38</font>      i1 = true;
+     <font color="green">39</font>    } else
+     <font color="green">40</font>      // merke, dass die Taste an I1 zur Zeit nicht gedrückt ist
+     <font color="green">41</font>      i1 = false;
+     <font color="green">42</font>  
+     <font color="green">43</font>    // ist die Taste an I2 gedrückt?
+     <font color="green">44</font>    if(ftduino.input_get(Ftduino::I2)) {
+     <font color="green">45</font>      // und war die Taste vorher nicht gedrückt und ist die
+     <font color="green">46</font>      // aktuelle Schaltzeit größer 1?
+     <font color="green">47</font>      if(!i2 && (schaltzeit &gt; 1)) {
+     <font color="green">48</font>        // dann halbiere die Schaltzeit
+     <font color="green">49</font>        schaltzeit /= 2;
+     <font color="green">50</font>        // warte eine Millisekunde, falls die Taste nachprellt
+     <font color="green">51</font>        _delay_ms(1);
+     <font color="green">52</font>      }
+     <font color="green">53</font>      // merke, dass die Taste an I2 zur Zeit gedrückt ist
+     <font color="green">54</font>      i2 = true;
+     <font color="green">55</font>    } else
+     <font color="green">56</font>      // merke, dass die Taste an I2 zur Zeit nicht gedrückt ist
+     <font color="green">57</font>      i2 = false;
+     <font color="green">58</font>  
+     <font color="green">59</font>    // schalte den Ausgand O2 je nach Zustand der an_aus-Variable an oder aus
+     <font color="green">60</font>    if(an_aus) 
+     <font color="green">61</font>      // wenn der aktuelle an_aus-Zustand wahr ist, dann schalte den Ausgang ein
+     <font color="green">62</font>      ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green">63</font>    else
+     <font color="green">64</font>      // wenn der aktuelle an_aus-Zustand unwahr ist, dann schalte den Ausgang aus
+     <font color="green">65</font>      ftduino.output_set(Ftduino::O1, Ftduino::OFF);
+     <font color="green">66</font>  
+     <font color="green">67</font>    // warte die aktuelle Schaltzeit
+     <font color="green">68</font>    warte(schaltzeit);
+     <font color="green">69</font>  
+     <font color="green">70</font>    // wechsel den an_aus-Zustand
+     <font color="green">71</font>    an_aus = !an_aus;
+     <font color="green">72</font>  }
+     <font color="green">73</font>  
+     <font color="green">74</font>  
+</pre>
+
+<p><h4>Sketchbeschreibung</h4>
+
+<p>Der Sketch schaltet den Ausgang <tt>O1</tt> in der <tt>loop()</tt>-Funktion
+in den Zeilen 60 bis 71 kontinuierlich ein und aus. Je nach Wert der
+Variable <tt>an_aus</tt> wird der Ausgang in Zeile 62 auf 9 Volt
+(<tt>HI</tt>) geschaltet oder in Zeile 65 ausgeschaltet (von der
+Spannungsversorgung getrennt). In Zeile 71 wird in jedem Durchlauf der
+<tt>loop()</tt>-Funktion der Zustand der Variable <tt>an_aus</tt>
+gewechselt, so dass der Ausgang im in jedem Durchlauf im Wechsel ein-
+und ausgeschaltet wird.
+
+<p>Nach jeden An/Aus-Wechsel wird in Zeile 68 etwas gewartet. Wie lange
+gewartet wird steht in der Variablen <tt>schaltzeit</tt> Sie gibt die
+Wartezeit in <sup><small>1</small></sup>/<sub><small>8192</small></sub> halben Sekunden an. Dazu wird in der
+Funktion <tt>wait()</tt> in Zeile 19 so oft <sup><small>500000</small></sup>/<sub><small>8192</small></sub>
+Mikrosekunden gewartet wie in der Variablen <tt>schaltzeit</tt>
+angegeben. Warum halbe Sekunden? Weil zweimal pro Zyklus gewartet
+wird, einmal wenn der Ausgang eingeschaltet ist und einmal wenn er
+ausgeschaltet ist. Wird jeweils eine halbe Sekunde gewartet, so dauert
+der gesamte Zyklus eine Sekunde und der Ausgang wird einmal pro Sekunde
+für eine halbe Sekunde eingeschaltet. Der Ausgang wechselt also mit
+einer Frequenz von <sup><small>1</small></sup>/<sub><small>Sek.</small></sub> oder einem Hertz.
+
+<p>Durch einen Druck auf den Taster an <tt>I1</tt> (Zeile 28) kann der Werte
+der Variablen <tt>schaltzeit</tt> verdoppelt (Zeile 33) und mit einem
+Druck auf den Taster an <tt>I2</tt> (Zeile 44) halbiert (Zeile 49) werden.
+Dabei wird der Wert von Schaltzeit auf den Bereich von 1 (Zeile 47)
+und 8192 (Zeile 31) begrenzt. Nun wird auch klar, warum dieser
+merkwürdig ``krumme'' Wert 8192 gewählt wurde: Da 8192 eine
+Zweierpotenz (2<sup><small>13</small></sup>) ist lässt der Wert sich ohne Rundungsfehler
+bis auf 1 hinunterteilen und wieder hochmultiplizieren.
+
+<p>Da die Tasten nur beim Wechsel zwischen an und aus abgefragt werden
+muss man den Taster bei niedrigen Frequenzen einen Moment gedrückt
+halten, bis sich die Blinkfrequenz verändert.
+
+<p>Wenn der Sketch startet leuchtet die Lampe einmal pro Sekunde für eine
+halbe Sekunde auf. Ein (langer) Druck auf den Taster an <tt>I2</tt>
+halbiert die Wartezeit und die Lampe blinkt zweimal pro Sekunde. Nach
+einem zweiten Druck auf den Taster blinkt sie viermal usw. Nach dem
+sechsten Druck blinkt sie 32 mal pro Sekunde, was nur noch als
+leichtes Flackern wahrnehmbar ist und nach dem siebten Druck gar 64
+mal.  Frequenzen oberhalb circa 50 Hertz kann das menschliche Auge nicht
+mehr auflösen und die Lampe scheint mit halber Helligkeit zu leuchten.
+Die Frequenz weiter zu erhöhen hat dann keinen erkennbaren Effekt
+mehr.
+
+<p><h4>Aufgabe 1: Die träge Lampe</h4>
+
+<p>Es ist in diesem Aufbau nicht nur das menschliche Auge, das träge
+ist. Die Lampe ist ebenfalls träge. Es dauert eine Zeit, bis sich ihr
+Glühfaden aufheizt und die Lampe leuchtet und es dauert auch eine
+Zeit, bis sich der Glühfaden wieder so weit abkühlt, dass die Lampe
+nicht mehr leuchtet.
+
+<p>Wesentlich schneller als Glühlampen sind Leuchtdioden. In ihnen muss
+sich nichts aufheizen oder abkühlen, sondern das Licht entsteht direkt
+durch optoelektrische Effekte im Halbleitermaterial der Leuchtdiode.
+Schließt man statt der Lampe eine Leuchtdiode an (rot markierter
+Anschluss an Ausgang <tt>O1</tt>), dann sieht das Verhalten zunächst
+ähnlich aus und wieder scheint ab einer Frequenz von 64 Hertz die Leuchtdiode
+gleichmäßig mit halber Helligkeit zu leuchten. Viele Menschen nehmen
+64 Hz allerdings noch als leichtes Flimmern wahr und erst ab 100Hz
+redet man von einer wirklich flimmerfreien Darstellung.
+
+<p>Man kann das Flimmern der Leuchtdiode aber auch bei diesen Frequenzen
+noch beobachten, wenn sich die Leuchtdiode bewegt. Nutzt man ein etwas
+längeres Kabel, so dass die Leuchtdiode sich frei bewegen lässt und
+bewegt sie dann in einer etwas abgedunkelten Umgebung schnell hin- und
+her, so wird der Eindruck einer Reihe von unterbrochenen
+Leuchtstreifen entstehen.
+
+<p><center>
+  
+  <p><a name="IMG:6.6"><img src="experimente/pwm_move_svg.png"></a>
+  <br><small>Abbildung 6.6: Muster bei schneller Bewegung der flackernden Leuchtdiode</small>
+</center>
+
+<p>Je höher die PWM-Frequenz ist, desto kürzer sind die sichtbaren
+Leuchtstreifen.
+
+<p>Dieses Experiment kann man auch mit der Lampe wiederholen. Durch die
+Trägheit der Lampe sieht man nur einen durchgehenden Leuchtstreifen.
+Allerdings sollte man nicht allzu wild vorgehen, da der empfindliche
+Glühfaden einer leuchtenden Lampe bei Erschütterung leicht kaputt
+geht. Leuchtdioden sind auch in dieser Beziehung robust und lassen sich selbst
+von starken Erschütterungen nicht beeindrucken.
+
+<p><h4>Aufgabe 2: Töne aus dem Motor</h4>
+
+<p>Ein Motor ist ebenfalls träge und nicht in der Lage, beliebig
+schnellen An-/Aus-Signalen zu folgen. Schon bei recht niedrigen
+PWM-Frequenzen dreht sich der Motor kontinuierlich mit halber
+Drehzahl. Das dabei vornehmlich zu vernehmende Geräusch ist das
+Laufgeräusch des Motors.
+
+<p>Wenn man den Motor aber mechanisch blockiert, indem man ihn z.B. mit
+der Hand festhält, dann wird das Laufgeräusch unterdrückt und ein
+anderer Effekt wird hörbar: Die Spulen im Motor wirken wie ein
+Lautsprecher und man kann die PWM-Frequenz bei blockiertem Motor als
+Ton hören. Eine Veränderung der PWM-Frequenz hat dabei einen deutlich
+hörbaren Unterschied der Tonhöhe zur Folge.
+
+<p>Je höher die PWM-Frequenz, desto höher der am blockierten Motor
+hörbare Ton.
+
+<p><h4>Aufgabe 3: Nachteil hoher PWM-Frequenzen</h4>
+
+<p>Im Fall der Lampe scheint eine höhere PWM-Frequenz ein reiner Vorteil
+zu sein, da das Flimmern mit höherer Frequenz abnimmt. Am Motor kann
+aber ein negativer Effekt beobachtet werden.
+
+<p>Läuft der Motor frei, so hängt die gehörte Tonhöhe des
+Motor-Laufgeräuschs mit seiner Drehgeschwindigkeit zusammen, während
+das PWM-Geräusch der vorigen Aufgabe in den Hintergrund tritt. Je
+schneller der Motor dreht, desto höher die Frequenz des Laufgeräuschs
+und umgekehrt.
+
+<p>Erhöht man nun die PWM-Frequenz, dann sinkt die Frequenz der Töne, die
+der Motor abgibt leicht. Er wird offensichtlich mit steigender
+PWM-Frequenz langsamer. Dieser Effekt ist damit zu erklären, dass der
+Motor eine sogenannte induktive Last darstellt. Er besteht im
+Wesentlichen aus Spulen, sogenannten Induktoren. Der Widerstand einer
+induktiven Last ist abhängig von der Frequenz einer angelegten
+Wechselspannung. Und nichts anderes ist das durch die PWM erzeugte
+An-/Aus-Signal. Je höher die Frequenz, desto höher der Widerstand der
+Spule und es fließt weniger Strom durch die Spule.
+
+<p>Es ist technisch möglich, die Ausgangsspannung zu glätten und diesen
+Effekt zu mildern. Diese Auslegung so einer Glättung ist allerdings
+von der verwendeten PWM-Frequenz und der Stromaufnahme des Motors
+abhängig. Außerdem beeinflusst sie das generelle Schaltverhalten des
+Ausgangs. Der Einsatz einer entsprechenden Glättung im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+kommt daher nicht in Frage, da die universelle Verwendbarkeit der
+Ausgänge dadurch eingeschränkt würde.
+
+<p>Ziel bei der Auswahl der PWM-Frequenz ist also eine Frequenz, die hoch
+genug ist, um Lampenflackern oder Motorstottern zu verhindern, die
+aber dennoch möglichst gering ist, um induktive Widerstände in den
+Wicklungen der Motoren zu minimieren. Eine PWM-Frequenz von 100-200Hz
+erfüllt diese Bedingungen.
+
+<p><h4>Motordrehzahl in Abhängigkeit des PWM-Verhältnisses</h4>
+
+<p>Die Motordrehzahl lässt sich durch das Verhältnis der An- und
+Ausphasen während der Pulsweitenmodulation beeinflussen. In den bisherigen
+Versuchen waren die An- und Ausphase jeweils gleich lang. Verändert
+man das Verhältnis der beiden Phasen, dann lässt sich die Helligkeit
+einer Lampe oder die Drehzahl eines Motors steuern. Die PWM-Frequenz
+kann dabei konstant bleiben. 
+
+<p><center>
+  
+  <p><a name="IMG:6.7"><img src="experimente/pwm_percent_svg.png"></a>
+  <br><small>Abbildung 6.7: Ausgewählte PWM-Verhältnisse von 0 bis 100%</small>
+</center>
+
+<p>Je länger die eingeschaltete Phase gegenüber der ausgeschalteten,
+desto heller leuchtet die Lampe und desto schneller dreht der
+Motor. Der genaue Zusammenhang zwischen Lampenhelligkeit und
+PWM-Verhältnis ist mangels entsprechender Messmöglichkeit nicht
+einfach festzustellen. Die sogenannten Encoder-Motoren haben aber eine
+eingebaute Möglichkeit zur Geschwindigkeitsmessung. Im Fall der
+TXT-Encodermotoren erzeugen diese Encoder 63 Signalimpulse pro
+Umdrehung der Achse. Man kann also durch Auswertung der Encodersignale
+an den Zählereingängen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> die Drehzahl des Motors
+feststellen.
+
+<p><center>
+  
+  <p><a name="IMG:6.8"><img src="experimente/pwmspeed_svg.png"></a>
+  <br><small>Abbildung 6.8: Anschluss des TXT-Encoder-Motors zur PWM-abhängigen Drehzahlmessung</small>
+</center>
+
+<p>Das Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/PwmSpeed"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">PwmSpeed</span></tt></a>
+regelt das An-/Ausverhältnis der PWM langsam von 0 auf 100% hoch und
+misst dabei kontinuierlich für jeweils eine Sekunde die am Eingang
+<tt>C1</tt> anliegenden Impulse. Diese werden in Umdrehungen pro Minute
+umgerechnet und ausgegeben. Dabei kommt die vollständige Bibliothek
+<tt>Ftduino</tt> zum Einsatz, die die eigentliche Erzeugung der
+PWM-Signale bereits mitbringt. Die Erzeugung des PWM-Signals passiert
+vollständig im Hintergrund, so dass der Sketch selbst lediglich den
+Motor startet und dann eine Sekunde wartet.
+
+<p>Speist man die so gewonnenen Daten in den sogenannten ``seriellen
+Plotter'', der sich im Menü der Arduino-IDE unter
+<tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Serieller Plotter</span></tt> befindet, so
+kann man die Messergebnisse anschaulich visualisieren.
+ 
+<p><center>
+  
+  <p><a name="IMG:6.9"><img src="experimente/pwmspeed.png"></a>
+  <br><small>Abbildung 6.9: Leerlaufdrehzahl des TXT-Encoder-Motors in Abhängigkeit des PWM-Verhältnisses</small>
+</center>
+
+<p>Auf der horizontalen Achse ist das PWM-Verhältnis aufgetragen,
+beginnend mit ``dauerhaft aus'' ganz links bis ``dauerhaft an'' ganz
+rechts. Auf der vertikalen Achse ist die gemessene Drehzahl in
+Umdrehungen pro Minute dargestellt. Man sieht, dass der Zusammenhang
+im Leerlauf nicht linear ist. Bereits bei nur circa 25% der Zeit
+eingeschaltetem Signal wird 90% der maximalen Motordrehzahl erreicht.
+
+<p>Man kann z.B. indem man den Motor eine konstante Last anheben lässt
+nachprüfen, wie sich diese Kurve und Last verändert.
+
+<p><h2><a name="6.4">6.4 Schrittmotoransteuerung</a></h2> 
+ 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;
+
+<p>Gängige Elektromotoren, wie sie üblicherweise in Spielzeug eingesetzt
+werden sind sogenannte Asynchronmotoren. Diese in der Regel mit
+Gleichspannung versorgten Motoren zeichnen sich dadurch aus, dass sie
+beim Anlegen einer Spannung sofort anfangen, sich zu drehen. Die
+Drehzahl richtet sich dabei nur indirekt nach äußeren Einflüssen und
+der Motor dreht letztlich so schnell es ihm möglich ist. Für viele
+Anwendungen ist diese Art Motor sehr gut geeignet. Modellautos lassen
+sich ohne weitere Steuerung motorisieren und fahren auf mit diesen
+Motoren so schnell wie gerade möglich. Auch fischertechnik setzt diese
+Motoren in den meisten Fällen ein und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erlaubt es, sie
+direkt an jeweils einen Motorausgang <tt>M1</tt> bis <tt>M4</tt>
+anzuschließen.
+
+<p>Aber es gibt Anwendungen, in denen diese Motorfamilie sehr große
+Schwächen zeigt. So ist es sehr schwierig, mit einfachen
+Asynchronmotoren eine exakte Drehzahl zu erreichen bzw. eine exakte
+Position anzufahren.  Die Encoder-Motoren von fischertechnik versuchen
+dies durch zusätzliche Hardware zu ermöglichen. Aber auch diesem
+Vorgehen sind Grenzen gesetzt, speziell bei den
+fischertechnik-Encoder-Motoren, die nicht in der Lage sind, die
+Drehrichtung zu erfassen.
+
+<p><center>
+  
+  <p><a name="IMG:6.10"><img src="experimente/schrittmotor.jpg"></a>
+  <br><small>Abbildung 6.10: 17HS13-Schrittmotor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Für Aufgaben, bei denen es auf exaktes reproduzierbares Verhalten des
+Motors ankommt, gibt synchron arbeitende Motoren wie die sogenannten
+Schrittmotoren. Gängige Anwendungen dafür sind heutzutage Scanner und
+3D-Drucker, aber auch die früher verwendeten Diskettenlaufwerke und
+frühe Festplatten verwendeten Schrittmotoren. Erkennbar ist die
+Nutzung von Schrittmotoren auch am charakteristischen
+Betriebsgeräusch, das findige Tüftler sogar nutzen, um mit solchen
+Motoren Musik zu erzeugen<a href="#fn1"><sup>1</sup></a> .
+
+<p><center>
+  
+  <p><a name="IMG:6.11"><img src="experimente/schrittmotor_schema_svg.png"></a>
+  <br><small>Abbildung 6.11: Anschluss des Schrittmotors an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Gängige Schrittmotoren bestehen aus einem drehbar gelagerten Anker aus
+Permanentmagneten, der von Elektromagneten umgeben ist. Der
+Permanentmagnet richtet sich entsprechend den ihm umgebenden
+Magnetfeldern aus. Im Spannungslosen Zustand lässt sich die Achse des
+Motors vergleichsweise leicht drehen. Der dabei spürbare Widerstand
+resultiert daraus, dass der Permanentmagnet von den Eisenkernen der
+Elektromagnete auch im spannungslosen Zustand angezogen wird.
+
+<p><center>
+  
+  <p><a name="IMG:6.12"><img src="experimente/schrittmotor_svg.png"></a>
+  <br><small>Abbildung 6.12: Vereinfachtes Schema eines Schrittmotors</small>
+</center>
+
+<p>Der in der Abbildung dargestellte vereinfachte Schrittmotor verfügt
+über einen Permanentmagneten und zwei Elektromagnete. Reale
+Schrittmotoren haben in der Regel mehr als zwei Spulen und der Anker
+bildet auch mehr als nur zwei magnetische Pole ab. Auf das
+Funktionsprinzip hat diese Vereinfachung keine Auswirkungen.
+
+<p>Übliche sogenannte bipolare Schrittmotoren verfügen über vier Anschlüsse,
+jeweils zwei für jeden der beiden Elektromagneten. Durch Anlegen einer Spannung
+werden die Elektromagnete magnetisiert. In der Folge richtet sich der Anker
+entsprechend aus. Die Polarität der angelegten Spannung bestimmt die
+Richtung des Magnetfelds der Elektromagneten.
+
+<p><h3><a name="6.5.1">6.5.1 Vollschrittsteuerung</a></h3>
+
+<p>Sind immer beide Spulen unter Spannung, so gibt es vier verschiedene
+Ausrichtungen der beiden Elektromagnetfelder und der Anker nimmt
+jeweils vier unterschiedliche Positionen ein. Wird eine entsprechende
+sich wiederholende Signalfolge an die Elektromagneten angelegt, so
+folgt der Anker den Signalen und dreht sich. Er folgt dabei exakt den
+sich wechselnden Magnetfeldern und dreht sich synchron zum angelegt
+Signalmuster. Geschwindigkeit und Position des Motors sind auf diese
+Weise exakt vorhersagbar. Sind immer alle Spulen unter Spannung und
+durchläuft der Zyklus daher genau vier Zustände, so spricht man von
+einer Vollschrittsteuerung.
+
+<p><center>
+  
+  <p><a name="IMG:6.13"><img src="experimente/schrittmotor_vollschritt_svg.png"></a>
+  <br><small>Abbildung 6.13: Vollschrittsteuerung eines Schrittmotors</small>
+</center>
+
+<p>Ein Sketch, der kontinuierlich das entsprechende Signalmuster erzeugt
+sieht folgendermaßen aus:
+
+<pre>
+     while(1) {
+       ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
+       delay(5);
+       ftduino.motor_set(Ftduino::M2, Ftduino::LEFT); 
+       delay(5);
+       ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT);
+       delay(5);
+       ftduino.motor_set(Ftduino::M2, Ftduino::RIGHT); 
+       delay(5);
+     }
+</pre>
+Ein vollständiges Beispiel findet sich in der Arduino-IDE unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/StepperMotor"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">StepperMotor</span></tt></a>.
+
+<p>Während sich der dargestellte vereinfachte Schrittmotor pro
+Signaländerung um 90° dreht und daher nach vier Schritten
+eine volle Umdrehung absolviert hat haben reale Schrittmotoren eine
+höhere Auflösung. Gängig ist ein Schrittwinkel von
+1,8°. Erst nach 200 Schritten hat sich so ein Motor einmal
+komplett gedreht. Da im abgebildeten Listing nach jedem Schritt 5ms
+gewartet wird werden genau 200 Schritte pro Sekunde erzeugt. Ein
+gängiger 1,8°-Motor würde sich genau einmal pro Sekunden
+drehen.
+
+<p>Für die Experimente am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> muss ein Motor gewählt werden, der
+mit den 9V-Ausgängen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kompatibel ist. Der hier
+verwendete 17HS13 ist für eine Betriebsspannung von 12V ausgelegt,
+arbeitet aber auch mit den fischertechnik-üblichen 9 Volt
+zuverlässig. Die Motoren des fischertechnik-Plotters 30571<a href="#fn2"><sup>2</sup></a>  von
+1985 waren für 6 Volt ausgelegt. Sollen diese Motoren am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+betrieben werden, so ist dieser mit 6 statt den üblichen 9 Volt zu
+versorgen.
+
+<p>Die Abbildungen der Abläufe beinhalten in der unteren Hälfte jeweils
+die Signalverläufe an den vier Anschlüssen des Motors. Die
+Signalverläufe sind farblich entsprechend der sich ergebenden
+Megnetfeldrichtung hinterlegt. Man sieht, wie die beiden Anschlüsse
+eines Magneten immer genau gegenteilig angesteuert werden und sich das
+Magnetfeld beim Wechsel der Signale ändert. Die abgebildete Farbe
+entspricht jeweils der Polarität der dem Anker zugewandten Seite des
+Elektromagneten.
+
+<p><h3><a name="6.5.2">6.5.2 Halbschrittsteuerung</a></h3>
+
+<p>Eine höhere Winkel-Auflösung erreicht man, wenn man den Schrittmotor
+im sogenannten Halbschrittbetrieb ansteuert. Der Signalzyklus besteht
+in dem Fall nicht mehr aus vier sondern aus acht Schritten. In jedem
+zweiten Schritt wird einer der beiden Elektromagneten abgeschaltet, so
+dass sich der Anker nur nach dem verbliebenen Magneten ausrichtet. Die
+sich dadurch ergebenden vier Zwischenzustände sind von den
+resultierenden Winkel genau zwischen den vier Zuständen der
+Vollschrittsteuerung angeordnet. Der Motor kann also die doppelt so
+viele Winkel ansteuern und entsprechend genauer positioniert werden.
+
+<p><center>
+  
+  <p><a name="IMG:6.14"><img src="experimente/schrittmotor_halbschritt_svg.png"></a>
+  <br><small>Abbildung 6.14: Halbschrittsteuerung eines Schrittmotors</small>
+</center>
+
+<p>In der Abbildung ist sichtbar, dass sich die beiden Signale zur
+Ansteuerung eines Elektromagneten nicht mehr gleichzeitig ändern,
+sondern dass es einen Versatz gibt, währenddessen beide Signale auf
+gleichem Pegel liegen. Der Magnet steht zu dieser Zeit nicht unter
+Spannung und hat kein Magnetfeld. Die Signalverläufe sind zu dieser
+Zeit daher nicht farbig hinterlegt.
+
+<p>Der Nachteil der Halbschrittsteuerung liegt darin, dass in den
+Zeiten, in denen nur ein Elektromagnet aktiv ist die Kraft des Motors
+reduziert ist.
+
+<p><h4>Timer-Interrupt betriebener Schrittmotor</h4>
+
+<p>Der im vorhergehenden Abschnitt verwendete Sketch zur
+Schrittmotoransteuerung hat vor allem einen großen Vorteil: Er ist
+anschaulich. Das Problem ist aber, dass die Ansteuerung Motors
+permanente Signalwechsel benötigt und daher die Motorfunktionen im
+Sketch permanent aktiv sein müssen, damit der Motor sich dreht.  Der
+Sketch verbringt praktisch die ganze Zeit damit in den diversen
+<tt>delay()</tt>-Funktionsaufrufen, auf den nächsten Signalwechsel zu
+warten. Der größte Nachteil: Während der Sketch einen Motor bedient
+kann er kaum etwas anderes tun. Einen zweiten Motor gleichzeitig mit
+gegebenenfalls sogar unterschiedlicher Drehzahl laufen zu lassen ist mit diesem
+einfachen Sketch kaum zu realisieren.
+
+<p>Das gleiche Problem stellte sich während der Entwicklung des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bereits mit den übrigen Komponenten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auch die
+Auswertung der Analogeingänge, die PWM-Drehzahlregelung der
+Motorausgänge und die Auswertung der Zähler beanspruchen permanent eine
+aktive Mitarbeit des Mikrocontrollers. Trotzdem muss der Anwender
+dafür in seinem Sketch keine Funktion vorsehen. All diese Dinge
+passieren weitgehend unbemerkt im Hintergrund. Solch eine
+Hintergrundfunktion wäre auch für den Betrieb des Schrittmotors
+wünschenswert.
+
+<p>Mikrocontroller wie der ATmega32u4 des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bestehen aus einem
+Mikroprozessor (der eigentlichen Recheneinheit) und diversen
+zusätzlichen Hardwarekomponenten wie z.B.
+USB-Schnittstellenfunktionen. Unter anderem verfügt der ATmega32u4
+über einige sogenannte Timer. Einen Timer kann man sich wie eine
+unabhängig vom eigentlichen Prozessor arbeitende Uhr vorstellen. Man
+kann per Software festlegen, wie schnell die Uhr laufen soll und ob zu
+bestimmten Zeitpunkten gegebenenfalls bestimmte Dinge passieren sollen, aber das
+eigentliche Fortschreiten der Uhrzeit geschieht automatisch und ohne
+weiteres Zutun eines auf dem Prozessor ausgeführten Sketches. Eines
+der Dinge, die von so einem Timer regelmäßig ausgelöst werden können
+ist eine sogenannte Unterbrechungsanforderung (englisch
+Interrupt). Sie veranlasst den Prozessor, zu unterbrechen, was auch
+immer er gerade tut und sich für kurze Zeit einer anderen Aufgabe zu
+widmen.
+
+<p>Diese Art von Unterbrechung ist ideal, um z.B. einen Schrittmotor zu
+steuern. Soll der Schrittmotor z.B. 200 Schritte pro Sekunde bewegt
+werden, so kann ein Timer so programmiert werden, dass der Prozessor
+alle 5 Millisekunden unterbrochen wird. In dieser Unterbrechung muss
+der Prozessor dann das Magnetfeld des Motors einen Schritt weiter
+drehen und sich dann wieder seiner normalen Aufgabe widmen.
+
+<p>Das folgende Code-Segment programmiert den Timer 1 des ATmega32u4 so,
+dass die sogenannte Interrupt-Service-Routine exakt alle 5
+Millisekunden ausgeführt wird. Der Motor ließe sich so durch passenden
+Programmcode innerhalb dieser Routine völlig unabhängig vom
+Hauptprogramm des Sketches betreiben.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  // die sogenannte Interrupt-Service-Routine (ISR) wird
+     <font color="green"> 4</font>  // nicht vom Sketch selbst zur Ausführung gebracht, sondern
+     <font color="green"> 5</font>  // die Hardware des ATmega32u$ löst die Ausführung auf Basis
+     <font color="green"> 6</font>  // eines Timer-Ereignisses aus
+     <font color="green"> 7</font>  ISR(TIMER1_COMPA_vect) {
+     <font color="green"> 8</font>    // Diese Funktion wird alle 5ms ausgeführt.
+     <font color="green"> 9</font>    // Das Weiterdrehen des Schrittmotor-Magnetfeldes
+     <font color="green">10</font>    // könnte z.B. hier geschehen.
+     <font color="green">11</font>    // ...
+     <font color="green">12</font>  }
+     <font color="green">13</font>      
+     <font color="green">14</font>  void setup() {
+     <font color="green">15</font>    // Konfiguration des Timer 1 des ATmega32u4, die genaue
+     <font color="green">16</font>    // Beschreibung der Register findet sich in Kapitel 14
+     <font color="green">17</font>    // des Datenblatt:
+     <font color="green">18</font>    // http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7766-8-bit-AVR-ATmega16U4-32U4_Datasheet.pdf
+     <font color="green">19</font>    
+     <font color="green">20</font>    // Timer 1 soll im sogenannten CTC-Modus schalten mit OCR1A
+     <font color="green">21</font>    // als obere Grenze. Der Timer läuft mit 1/256 CPU-Takt. Dieser
+     <font color="green">22</font>    // wiederum beträgt 16 MHz, der Timer läuft also mit 62,5 kHz.
+     <font color="green">23</font>    // Um den Motor 200 Schritte pro Sekunde zu drehen muss der
+     <font color="green">24</font>    // Motor immer dann einen Schritt machen, wenn der Timer 312
+     <font color="green">25</font>    // (62500/200) seiner Zählschritte durchlaufen hat.
+     <font color="green">26</font>    TCCR1A = 0;
+     <font color="green">27</font>    TCCR1B = (1&lt;&lt;WGM12) | (1&lt;&lt;CS12); // Starte Timer 1 mit 1/256 F_CPU = 62.5kHz 
+     <font color="green">28</font>    TCCR1C = 0;
+     <font color="green">29</font>  
+     <font color="green">30</font>    // Ereignis auslösen wenn 62400/200 Zählerschritte erreicht sind
+     <font color="green">31</font>    TCNT1 = 0;
+     <font color="green">32</font>    OCR1A = 62500/200;
+     <font color="green">33</font>  
+     <font color="green">34</font>    // Ereigniserzeugung bei Erreichen der Zielschritte auslösen 
+     <font color="green">35</font>    TIMSK1 = (1&lt;&lt;OCIE1A); 
+     <font color="green">36</font>  }
+     <font color="green">37</font>    
+     <font color="green">38</font>  void loop() {
+     <font color="green">39</font>    // die Hauptroutine kann beliebig genutzt werden und
+     <font color="green">40</font>    // der Timer 1-Interrupt wird unabhängig regelmäßig
+     <font color="green">41</font>    // ausgeführt
+     <font color="green">42</font>  }
+</pre>
+Das vollständige Beispiel findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/StepperMotorSrv"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">StepperMotorSrv</span></tt></a>. Es entspricht weitgehend der
+vorgeschlagenen Nutzung von Timer 1. Ein zweiter Motor ließe sich
+z.B. ebenfalls im Hintergrund und unabhängig vom bereits vorhandenen
+Motor und auch unabhängig vom Hauptprogramm des Sketches durch Timer 3
+steuern. Mit zwei Schrittmotoren ist so recht elegant z.B. ein
+sogenannter Plotter zu realisieren.
+
+<p><h2><a name="6.5">6.5 Servomotoransteuerung</a></h2> 
+ 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
+
+<p>Neben den normalen Gleichspannungsmotoren und den Schrittmotoren aus
+Abschnitt <a href="experimente.html#6.4">6.4</a> gibt es eine dritte vor allem im Modellbau
+verbreitete Art von Motoren, die sogenannten Servos. fischertechnik
+vertreibt einen Servo unter der Artikelnummer 132292<a href="#fn3"><sup>3</sup></a> .
+
+<p>Technisch bestehen Servos aus einfachen Gleichstrommotoren und einer
+einfachen Elektronik. Eine Messmechanik meldet dieser Elektronik
+ständig den aktuellen Stellwert (Winkel) des Servos. Die Elektronik
+vergleicht diesen mit einem externen Sollwert und regelt den Motor bei
+Bedarf nach. Das Servo folgt also mit seinem Drehwinkel einem externen
+Sollwert. 
+
+<p>Servos haben daher ein drei-adriges Anschlusskabel. Zwei Adern werden
+zur Spannungsversorgung (rot = 6 Volt, braun = Masse) verwendet, die
+dritte Ader (orange) überträgt den Sollwert. Es lassen sich
+handelsübliche Servos verwenden, aber auch der fischertechnik-Servo
+132292<a href="#fn4"><sup>4</sup></a>  aus dem 540585<a href="#fn5"><sup>5</sup></a> -PLUS Bluetooth Control Set. Auch der
+fischertechnik RC-Servo 30275<a href="#fn6"><sup>6</sup></a>  von 1983 müsste auf diese Weise
+verwendbar sein. Das wurde jedoch bisher nicht überprüft.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.15"><img src="experimente/servo_svg.png"></a></td></tr><tr><td align="center"><small>(a) Versorgung durch den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.15"><img src="experimente/servo_7806_svg.png"></a></td></tr><tr><td align="center"><small>(b) Versorgung mit 7806-Regler</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.15: Anschluss des Servos an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Da Servos für eine Betriebsspannung von 6 Volt ausgelegt sind und oft
+auch bei 5 Volt noch funktionieren ist eine Versorgung aus den
+internen 5 Volt des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über den I²C-Anschluss möglich wie
+in Abbildung <a href="experimente.html#IMG:6.15">6.15</a> dargestellt. Bei dieser Versorgung ist
+Vorsicht geboten, da die Stromaufnahme des Servos 100mA nicht
+überschreiten darf, um die interne Stromversorgung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+nicht zu überlasten. Die meisten Servos überschreiten diesen Wert
+deutlich und sollten daher nicht direkt aus dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> versorgt
+werden.
+
+<p><h3><a name="6.6.1">6.6.1 Externe 6-Volt-Versorgung</a></h3>
+
+<p>Wesentlich robuster und kaum aufwändiger ist die Versorgung über einen
+externen Spannungsregler z.B. vom Typ 7806, der unter dieser
+Bezeichnung leicht im Online-Handel zu finden ist. Dieser sogenannte
+Längsregler kann direkt an einen der 9-Volt-Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+angeschlossen werden und stellt an seinem Ausgang eine auf 6 Volt
+reduzierte Spannung bereit.
+
+<p>Benötigte Teile:
+
+<p><center><table>
+  <tr><td>1x </td><td></td><td> Spannungsregler 7806 </td></tr>
+  <tr><td>1x </td><td></td><td> Servo-Verlängerungskabel JR-Stecker </td></tr>
+  <tr><td>2x </td><td></td><td> roter ft-Stecker </td></tr>
+  <tr><td>1x </td><td></td><td> grüner ft-Stecker </td></tr>
+  <tr><td>1x </td><td></td><td> rote ft-Buchse </td></tr>
+<tr><td></table></center>
+
+<p>Der 7806 kann mit fischertechnik-üblichen Steckern versehen und dann
+direkt in den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eingesteckt werden. Der
+Steuersignal-Anschluss muss mit dem SDA-Anschluss des I²C-Steckers
+verbunden werden. Die zusätzliche Nutzung des SCL-Anschlusses
+ermöglicht den Anschluss eines zweiten Servos. Trennt man das rote
+Kabel direkt am Stecker des Servos auf und versieht es mit einem
+fischertechnik-Stecker wie in Abbildung <a href="experimente.html#IMG:6.15">6.15</a>
+dargestellt, so lässt sich der Stecker des Servos mit den zwei
+verbliebenen Adern direkt auf den I²C-Anschluss stecken. Will man
+das Anschlusskabel des Servos nicht zerschneiden, dann kann man auch
+ein handelsübliche JR-Servo-Verlängerungskabel zerschneiden wie in
+Abbildung <a href="experimente.html#IMG:6.16">6.16</a> dargestellt. Der aufgetrennte mittlere
+rote Anschluss wird dann mit dem fischertechnik-Stecker an den
+ebenfalls mit fischertechnik-Hülsen versehenen 7806 gesteckt.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.16"><img src="experimente/servo.jpg"></a></td></tr><tr><td align="center"><small>(a) Servo an Regler und Adapterkabel</small></td></tr></table></td>  
+  <td><table><tr><td><a name="IMG:6.16"><img src="experimente/servo_cable.jpg"></a></td></tr><tr><td align="center"><small>(b) Spannungsregler und Adapterkabel</small></td></tr></table></td> 
+  </tr></table><br><small>Abbildung 6.16: Servo-Motor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Das Steuersignal eines Servos entspricht nicht dem
+I²C-Standard. Stattdessen verwenden Servos ein einfaches
+Pulsweitensignal, das alle 20 Millisekunden wiederholt wird. Der Puls
+selbst ist zwischen einer und zwei Millisekunden lang und bestimmt den
+Winkel, den das Servo einnehmen soll. Eine Millisekunde steht dabei
+für den minimalen Wert und zwei Millisekunden für den maximalen. Soll
+der Servomotor in Mittelstellung fahren, so ist dementsprechend ein
+Puls von 1,5 Millisekunden Länge nötig.
+
+<p>Das Servo verfügt über keine weitere Intelligenz und es werden die
+vorgegebenen Steuersignale nicht überprüft. Pulslängen kleiner einer
+Millisekunde oder größer zwei Millisekunden versucht das Servo
+ebenfalls in entsprechende Winkel umzusetzen. Dabei ist zu beachten,
+dass der Bewegung des Servos mechanische Grenzen gesetzt sind und das
+Servo Schaden nehmen kann, wenn es Positionen außerhalb seines
+normalen Arbeitsbereichs anzufahren versucht. Es ist daher nicht
+ratsam, den Bereich von ein bis zwei Millisekunden zu verlassen.
+
+<p><center>
+  
+  <p><a name="IMG:6.17"><img src="experimente/servo_signal_svg.png"></a>
+  <br><small>Abbildung 6.17: Servo-Winkel in Abhängigkeit vom Stellsignal</small>
+</center>
+
+<p>Um das nötige Puls-Signal auf den eigentlich für I²C-Signale
+vorgesehenen Pins zu erzeugen muss auf Software zurückgegriffen
+werden. Ein Programmfragment, das den Servo in die Mittelposition
+bewegt könnte z.B. folgendermaßen aussehen:
+
+<pre>
+     <font color="green"> 1</font>  void setup() {
+     <font color="green"> 2</font>    // Port D.1 (SDA-Anschluss) auf Ausgang schalten    
+     <font color="green"> 3</font>    bitSet(DDRD, 1);
+     <font color="green"> 4</font>  }
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  void loop() {
+     <font color="green"> 7</font>    // Port D.1 auf High-Pegel (5V) legen
+     <font color="green"> 8</font>    bitSet(PORTD, 1);
+     <font color="green"> 9</font>  
+     <font color="green">10</font>    // 1500us (1.5ms) warten
+     <font color="green">11</font>    _delay_us(1500);
+     <font color="green">12</font>    
+     <font color="green">13</font>    // Port D.1 auf Low-Pegel (GND) legen
+     <font color="green">14</font>    bitClear(PORTD, 1);
+     <font color="green">15</font>  
+     <font color="green">16</font>    // 18500us (18.5ms) warten
+     <font color="green">17</font>    _delay_us(20000-1500);
+     <font color="green">18</font>  }
+</pre>
+Hier wird der SDA-Anschluss am I²C zunächst in der
+<tt>setup()</tt>-Funktion zu einem unabhängig verwendbaren Ausgang
+konfiguriert. In der Folge kann in der <tt>loop()</tt>-Funktion der
+Ausgang auf Hi (5 Volt) oder Masse (GND) geschaltet werden, indem das
+entsprechende Bit im Register <tt>PORTD</tt> gesetzt oder gelöscht
+wird. Nach dem Einschalten des Ausgangs wird 1500 Mikrosekunden (1,5
+Millisekunden) gewartet, nach dem Ausschalten 18,5 Millisekunden, so
+dass die Zykluszeit von insgesamt 20 Millisekunden erreicht wird.
+
+<p>Wie schon beim Schrittmotor ergibt sich das Problem, dass der
+Prozessor des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei dieser einfachen Art der Programmierung
+permanent mit der Signalerzeugung ausgelastet wird und nebenbei keine
+anderen Aufgaben erledigen kann.
+
+<p>Die Lösung besteht wie beim Schrittmotor darin, die Signalerzeugung im
+Hintergrund durch einen Hardwaretimer zu veranlassen. Das Beispiel
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/ServoDemo"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ServoDemo</span></tt></a> bringt eine einfache Klasse zur
+Servoansteuerung mit. Das eigentliche Hauptprogramm sieht dann
+folgendermaßen aus:
+
+<pre>
+     <font color="green"> 1</font>  //
+     <font color="green"> 2</font>  // Servo.ino
+     <font color="green"> 3</font>  //
+     <font color="green"> 4</font>  
+     <font color="green"> 5</font>  #include "Servo.h"
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  void setup() {
+     <font color="green"> 8</font>    servo.begin();
+     <font color="green"> 9</font>  }
+     <font color="green">10</font>  
+     <font color="green">11</font>  void loop() {
+     <font color="green">12</font>    static uint8_t value = Servo::VALUE_MAX/2;
+     <font color="green">13</font>    
+     <font color="green">14</font>    if(value &lt; Servo::VALUE_MAX) value++;
+     <font color="green">15</font>    else                         value = 0;
+     <font color="green">16</font>    servo.set(value);
+     <font color="green">17</font>  
+     <font color="green">18</font>    delay(10);   
+     <font color="green">19</font>  }
+</pre>
+Die Ansteuerung des Servos beschränkt sich auf den Aufruf der
+<tt>servo.begin()</tt>-Funktion, die die nötigen Timer im Hintergrund
+einrichtet. Der Winkel des Servos kann dann mit der
+<tt>servo.set()</tt>-Funktion von 0 (minimaler Winkel) bis
+<tt>Servo::VALUE_MAX</tt> (maximaler Winkel) eingestellt werden. Die
+Mittelposition wird z.B. durch <tt>servo.set(Servo::VALUE_MAX/2)</tt>
+angefahren.
+
+<p><h2><a name="6.6">6.6 Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Wer sich schon einmal mit einem Arduino beschäftigt hat weiss, dass
+man dort relativ frei bestimmen kann, welche Anschlüsse man als Ein-
+oder Ausgänge verwenden möchte, da sämtliche Pins am Mikrocontroller
+in der Richtung umgeschaltet werden können. Beim <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> konnte
+diese Fähigkeit nicht erhalten werden, da an den Eingängen zusätzliche
+Schutzschaltungen gegen Überspannung und Kurzschlüsse eingesetzt
+werden und die Signale Ausgänge verstärkt werden, um
+fischertechnik-Lampen und -Motoren betreiben zu können.
+
+<p><center>
+  
+  <p><a name="IMG:6.18"><img src="experimente/eingangsschaltung_pdf.png"></a>
+  <br><small>Abbildung 6.18: Interne Beschaltung der Eingänge <tt>I1</tt> bis <tt>I8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Jeder der acht Eingänge <tt>I1</tt> bis <tt>I8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> führt auf
+einen eigenen Analogeingang des ATmega32u4-Mikrocontrollers und kann
+von diesem unabhängig ausgewertet werden. Dazu kann der
+Mikrocontroller die Spannung des entsprechenden Eingangs messen.
+
+<p><h3><a name="6.7.1">6.7.1 Spannungsmessung</a></h3>
+
+<p>Bevor das Eingangssignal den Mikrocontroller erreicht wird es über
+einen Spannungsteiler aus zwei 47-Kiloohm-Widerständen geführt. Diese
+Widerstände erfüllen zwei Aufgaben. Erstens halbieren sie die Spannung
+eines angelegten Signals bevor es den Mikrocontroller erreicht. Da der
+Mikrocontroller <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-intern mit 5 Volt betrieben wird und auch
+nur Signale im Bereich von 0 bis 5 Volt verarbeiten kann. Die
+Spannungshalbierung erweitert den messbaren Eingangsspannungsbereich
+auf 0 bis 10 Volt, wodurch sich die fischertechnik-üblichen Spannungen
+bis maximal 9 Volt verarbeiten lassen. Zum zweiten schützen diese
+Widerstände im Zusammenspiel mit den Mikrocontroller-internen
+Schutzdioden den Mikrocontroller vor Spannungen, die außerhalb des für
+ihn verträglichen 0 bis 5 Volt-Spannungsbereichs liegen. Spannungen
+bis zu 47 Volt an einem Eingang beschädigen den Mikrocontroller daher
+nicht.
+
+<p><h3><a name="6.7.2">6.7.2 Widerstandsmessung</a></h3>
+
+<p>Die 1k&#8486;- und 2,2k&#8486;-Widerstände sowie der Schalter
+haben keine Bedeutung, solange der Schalter offen ist. Acht dieser
+Schalter, je einer für jeden Eingang, befinden sich im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> im
+Baustein mit der Bezeichnung CD4051 (IC1) wie im Schaltplan in
+Anhang <a href="anhang.html#A">A</a> ersichtlich. Der Mikrocontroller kann
+genau einen der acht Schalter zu jeder Zeit schließen und auf diese
+Weise einen Widerstand von insgesamt 3,2k&#8486; (1k&#8486;
+plus 2,2k&#8486;) vom jeweiligen Eingang gegen 5 Volt aktivieren.
+
+<p>Der Schalter wird geschlossen und die Widerstände werden aktiviert,
+wenn eine Widerstandsmessung erfolgen soll. Der 3,2k&#8486;-Widerstand
+bildet dann mit einem zwischen Eingang und Masse angeschlossenen
+externen Widerstand einen Spannungsteiler. Aus der gemessenen Spannung
+kann dann der unbekannte externe Widerstand bestimmt werden.
+
+<p>Die Widerstandsmessung wird von der <tt>Ftduino</tt>-Bibliothek im
+Hintergrund ausgeführt. Dabei findet auch eine automatische
+Umschaltung der Widerstandsmessung auf all jene Eingänge statt, die im
+Sketch zur Zeit zur Widerstandsmessung genutzt werden. Der
+Programmierer muss sich also um keine Details kümmern und kann
+jederzeit Widerstandswerte mit Hilfe der Funktion
+<tt>ftduino.input_get()</tt> (siehe <a href="bibliotheken.html#9.3.2">9.3.2</a>) abfragen.
+
+<p><h3><a name="6.7.3">6.7.3 Ein Eingang als Ausgang</a></h3>
+
+<p>Die Tatsache, dass im Falle einer Widerstandsmessung ein Widerstand
+gegen 5 Volt geschaltet wird bedeutet, dass über den zu messenden
+extern angeschlossenen Widerstand ein Stromkreis geschlossen wird.
+Der Strom durch diesen Stromkreis ist relativ gering. Wenn der Eingang
+direkt mit Masse verbunden ist beträgt der Gesamtwiderstand
+3,2k&#8486; und es fließt ein Strom von
+I=5V/3,2k&#8486;=1,5625mA.
+
+<p><center>
+  
+  <p><a name="IMG:6.19"><img src="experimente/input_led_svg.png"></a>
+  <br><small>Abbildung 6.19: Anschluss einer LED an Eingang <tt>I1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Dieser Strom reicht zwar nicht, um eine Lampe oder gar einen Motor zu
+betreiben. Aber eine Leuchtdiode kann man damit schwach zum Leuchten
+bringen. Schließt man eine Leuchtdiode direkt zwischen einem
+Eingang und Masse an und schaltet den Eingang auf Widerstandsmessung, so
+wird die LED ganz leicht leuchten.
+
+<p>Der tatsächliche Strom wird noch deutlich unter den vorausgesagten
+1,5mA liegen, da zum einen direkt an der Leuchtdiode die sogenannte
+Vorwärtsspannung von circa 0,7V abfällt und über den Widerständen daher
+nur eine Spannung von etwas über vier Volt anliegt.
+
+<p>Zum anderen fragt die <tt>Ftduino</tt>-Bibliothek im Hintergrund alle
+acht Eingänge ab und aktiviert jeden Eingang dabei nur
+<sup><small>1</small></sup>/<sub><small>8</small></sub> der Zeit. Es fließt im Mittel daher auch nur
+<sup><small>1</small></sup>/<sub><small>8</small></sub> des Stroms.
+
+<p>Die <tt>FtduinoSimple</tt>-Bibliothek schaltet ebenfalls die Widerstände
+ein und zwar für den jeweils zuletzt aktivierten Eingang. Dieser Widerstand
+ist dann dauerhaft aktiviert, bis ein anderer Eingang angefragt wird.
+Das folgenden Code-Fragment lässt eine LED an Eingang <tt>I1</tt> im
+Sekundentakt blinken.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  void loop() {
+     <font color="green"> 4</font>    // lies Wert von Eingang I1, aktiviert Widerstand auf I1
+     <font color="green"> 5</font>    ftduino.input_get(Ftduino::I1);
+     <font color="green"> 6</font>    delay(1000);
+     <font color="green"> 7</font>    // lies Wert von Eingang I2, deaktiviert Widerstand auf I1
+     <font color="green"> 8</font>    // (und aktiviert ihn auf I2)
+     <font color="green"> 9</font>    ftduino.input_get(Ftduino::I2);
+     <font color="green">10</font>    delay(1000);
+     <font color="green">11</font>  }
+</pre>
+<h2><a name="6.7">6.7 Temperaturmessung</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
+
+<p>Fischertechnik vertreibt unter der Artikelnummer 36437<a href="#fn7"><sup>7</sup></a>  einen
+sogenannten NTC. Dieses unscheinbare Bauteil liegt einigen
+Robotics-Baukästen bei.
+
+<p>Ein NTC ist ein elektrischer Widerstand, der seinen Wert abhängig von
+der Umgebungstemperatur ändert. Er eignet sich daher zur
+Temperaturmessung. NTC steht dabei für
+``Negativer-Temperatur-Coeffizient'', was bedeutet, dass der ohmsche
+Widerstand mit steigender Temperatur sinkt. NTCs werden im Deutschen
+auch als Heißleiter bezeichnet, da ihre Leitfähigkeit mit der
+Temperatur steigt.
+
+<p>Der Nennwiderstand R<sub><small>N</small></sub> eines NTCs wird in der Regel bei einer
+Temperatur von 25&nbsp;°C (298,15 K) angegeben. Der für den
+fischertechnik-Sensor angegebene Wert ist 1,5k&#8486;. Der ohmsche
+Widerstand beträgt bei 25&nbsp;°C also 1,5k&#8486;.
+
+<p><center>
+  
+  <p><a name="IMG:6.20"><img src="experimente/temperature_svg.png"></a>
+  <br><small>Abbildung 6.20: Anschluss des Temperatursensors an Eingang <tt>I1</tt></small>
+</center>
+
+<p><h3><a name="6.8.1">6.8.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Temperature">Temperature</a></tt></a></h3>
+
+<p>Der folgende Sketch findet sich bei installierter
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Unterstützung im Menü der Arduino-IDE unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Temperature"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Temperature</span></tt></a>.
+
+<pre>     <font color="green"> 1</font>  //
+     <font color="green"> 2</font>  // Temperaure.ino
+     <font color="green"> 3</font>  //
+     <font color="green"> 4</font>  // Abfrage eines fischertechnik Temperatur-Widerstands an Eingang I1
+     <font color="green"> 5</font>  //
+     <font color="green"> 6</font>  // (c) 2018 by Till Harbaum &lt;till@harbaum.org&gt;
+     <font color="green"> 7</font>  //
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  #include &lt;Ftduino.h&gt;
+     <font color="green">10</font>  #include &lt;math.h&gt;          // Für Fliesspunkt-Arithmetik
+     <font color="green">11</font>  
+     <font color="green">12</font>  #define K2C 273.15         // Offset Kelvin nach Grad Celsius
+     <font color="green">13</font>  #define B 3900.0           // sog. B-Wert des Sensors
+     <font color="green">14</font>  #define R_N 1500.0         // Widerstand bei 25 Grad Celsius Referenztemperatur
+     <font color="green">15</font>  #define T_N (K2C + 25.0)   // Referenztemperatur in Kelvin
+     <font color="green">16</font>  
+     <font color="green">17</font>  float r2deg(uint16_t r) {
+     <font color="green">18</font>    if(r == 0) return NAN;   // ein Widerstand von 0 Ohm ergibt keine sinnvolle Temperatur
+     <font color="green">19</font>          
+     <font color="green">20</font>    // Widerstand in Kelvin umrechnen
+     <font color="green">21</font>    float t = T_N * B / (B + T_N * log(r / R_N));
+     <font color="green">22</font>  
+     <font color="green">23</font>    // Kelvin in Grad Celsius umrechnen
+     <font color="green">24</font>    return t - K2C;
+     <font color="green">25</font>  
+     <font color="green">26</font>    // alternativ: Kelvin in Grad Fahrenheit umrechnen
+     <font color="green">27</font>  //  return t * 9 / 5 - 459.67;
+     <font color="green">28</font>  }
+     <font color="green">29</font>          
+     <font color="green">30</font>  void setup() {
+     <font color="green">31</font>    // LED initialisieren
+     <font color="green">32</font>    pinMode(LED_BUILTIN, OUTPUT);
+     <font color="green">33</font>    digitalWrite(LED_BUILTIN, LOW);
+     <font color="green">34</font>    
+     <font color="green">35</font>    Serial.begin(115200);
+     <font color="green">36</font>    while(!Serial);
+     <font color="green">37</font>  
+     <font color="green">38</font>    ftduino.init();  
+     <font color="green">39</font>  
+     <font color="green">40</font>    // Die Temperaturmessung erfolgt mit einem 
+     <font color="green">41</font>    ftduino.input_set_mode(Ftduino::I1, Ftduino::RESISTANCE);
+     <font color="green">42</font>  }
+     <font color="green">43</font>  
+     <font color="green">44</font>  void loop() {
+     <font color="green">45</font>    uint16_t r = ftduino.input_get(Ftduino::I1);
+     <font color="green">46</font>  
+     <font color="green">47</font>    Serial.print("I1: ");
+     <font color="green">48</font>    Serial.print(r2deg(r));
+     <font color="green">49</font>    Serial.println(" Grad Celsius");
+     <font color="green">50</font>  
+     <font color="green">51</font>    delay(1000);
+     <font color="green">52</font>  }
+</pre>
+
+<p><h4>Sketchbeschreibung</h4>
+
+<p>Der Temperatur-Sketch verwendet an einigen Stellen sogenannte
+Fließkommazahlen, um Temperaturen zu speichern. So wird die in der
+Computertechnik verwendete interne Darstellung von nicht-ganzzahligen
+Werten (Dezimalbrüchen) genannt. Der Sketch bindet dafür in Zeile 10
+die Datei <tt>math.h</tt> ein, um dem Sketch Zugriff auf
+Fließkommafunktionen zu geben. Zur Speicherung der Fließkommazahlen
+wird der Datentyp <tt>float</tt> z.B. in Zeile 21 verwendet.
+
+<p>Da der zur Temperaturmessung verwendete Sensor ein Widerstand ist wird
+in der <tt>setup()</tt>-Funktion in Zeile 41 der Eingang <tt>I1</tt> des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auf Widerstandsmessung eingestellt.
+
+<p>Der eigentlich Widerstandswert wird in Zeile 45 von Eingang <tt>I1</tt>
+ausgelesen und in der ganzzahligen Variablen <tt>r</tt>
+abgelegt. Während der Ausgabe des Wertes in Zeile 48 wird die Funktion
+<tt>r2deg()</tt> aufgerufen. Diese Funktion befindet sich in den Zeilen
+17 bis 28. Sie nimmt einen ganzzahligen Widerstandswert in Ohm
+entgegen und liefert eine Temperatur in Grad Celsius als
+Fließkommawert zurück.
+
+<p>Zunächst erfolgt in Zeile 21 die Umrechnung des Widerstands in Kelvin.
+Dazu wird neben dem Widerstand R<sub><small>N</small></sub> bei 25&nbsp;°C auch der
+sogenannte B-Wert des Sensors benötigt. Dieser Wert beschreibt das
+Verhalten des Sensors außerhalb des 25&nbsp;°C-Punkts und wie
+stark dabei der Widerstand auf Temperaturänderungen reagiert. Dieser
+Wert liegt bei dem von fischertechnik vertriebenen Sensor bei 3900.
+
+<p>Für NTCs gilt näherungsweise<a href="#fn8"><sup>8</sup></a> :
+
+<p>1/T = 1/T<sub><small>N</small></sub> + 1/B log<sub>n</sub>(R<sub><small>T</small></sub>/R<sub><small>N</small></sub>) &harr; T = T<sub><small>N</small></sub> * B/B + T<sub><small>N</small></sub> * log<sub>n</sub>(R<sub><small>T</small></sub>/R<sub><small>N</small></sub>)
+
+<p>mit
+
+<p><ul>
+<dt><b>T</b></dt><dd> ... aktuelle Temperatur
+</dd><dt><b>T<sub><small>N</small></sub></b></dt><dd> ... Nenntemperatur (üblicherweise 25&nbsp;°C)
+</dd><dt><b>B</b></dt><dd> ... B-Wert
+</dd><dt><b>R<sub><small>T</small></sub></b></dt><dd> ... Widerstand bei aktueller Temperatur
+</dd><dt><b>R<sub><small>N</small></sub></b></dt><dd> ... Widerstand bei Nenntemperatur
+</dd></ul>
+
+<p>Nach der Umrechnung liegt die Temperatur in Kelvin vor. Zur Umrechnung
+in Grad Celsius muss Zeile 24 lediglich eine Konstante abgezogen
+werden. Eine Umrechnung in Grad Fahrenheit wäre etwas komplexer und
+ist beispielhaft in Zeile 27 dargestellt.
+
+<p>Die Genauigkeit der Temperaturmessung ist direkt von der Genauigkeit
+der Widerstandsmessung abhängig und diese ist wie in Abschnitt
+<a href="controller.html#1.3.5">1.3.5</a> erklärt von der Spannungsversorgung abhängig. Zur
+Temperaturmessung sollte der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> daher aus einer 9v-Quelle mit
+Spannung versorgt werden. Eine Versorgung nur über die
+USB-Schnittstelle ist nicht ausreichend.
+
+<p><h2><a name="6.8">6.8 Ausgänge an, aus oder nichts davon?</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Einen Ausgang kann man ein- oder ausschalten, das ist die gängige
+Sichtweise. Dass es aber noch einen weiteren Zustand gibt ist auf
+den ersten Blick vielleicht nicht offensichtlich.
+
+<p><center>
+  
+  <p><a name="IMG:6.21"><img src="experimente/tristate_svg.png"></a>
+  <br><small>Abbildung 6.21: Zwei Lampen an Ausgang <tt>O1</tt></small>
+</center>
+
+<p>Die Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lassen sich in drei Zustände schalten:
+<tt>Ftduino::HI</tt>, <tt>Ftduino::LO</tt> und <tt>Ftduino::OFF</tt>.
+
+<p>Am offensichtlichsten ist der Zustand <tt>Ftduino::HI</tt>. In diesem
+Zustand wird der entsprechende Ausgang <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-intern mit der
+9-Volt-Versorgungsspannung verbunden. Ist an diesem Ausgang eine Lampe
+oder ein Motor so angeschlossen, dass der zweite Anschluss an Masse
+liegt, so fließt ein Strom von der 9V-Quelle über den Ausgang durch
+Lampe oder Motor zur Masse. Der Motor dreht sich und die Lampe
+leuchtet. Im abgebildeten Beispiel leuchtet die rote Lampe.
+
+<p>Im Zustand <tt>Ftduino::LO</tt> ist der entsprechende Ausgang mit Masse
+verbunden. Eine wieder mit dem zweiten Anschluss an Masse
+angeschlossene Lampe wird nun nicht mehr leuchten, da beide Anschlüsse
+der Lampe auf Masse liegen und die Spannung zwischen beiden
+Anschlüssen daher 0 Volt beträgt. Schließt man den zweiten Anschluss
+der Lampe aber an 9 Volt an, so leuchtet sie nun. Der Strom fließt von
+der Spannungsversorgung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über den 9-V-Anschluss, durch
+die Lampe und schließlich über den auf Masse liegenden Ausgang. Im
+abgebildeten Beispiel leuchtet nun die blaue Lampe.
+
+<p>Der dritte Zustand ist schließlich der Zustand <tt>Ftduino::OFF</tt>.
+In diesem Fall ist der Ausgang komplett offen. Er ist weder mit Masse
+noch mit 9 Volt verbunden und es fließt kein Strom über ihn.  Als
+Resultat leuchten beiden Lampen mit halber Helligkeit, da der Strom
+nun vom Ausgang völlig unbeeinflusst durch beide Lampen fließt. Dieser
+Zustand wird oft auch mit dem englischen Begriff ``tristate''
+bezeichnet und entsprechende Ausgänge an Halbleitern als
+``tristate-fähig''. Im Deutschen beschreibt der Begriff ``hochohmig''
+diesen dritten Zustand recht gut.
+
+<p>Der folgende Sketch wechselt im Sekundentakt zwischen den drei
+Zuständen. Man kann diesen Effekt zum Beispiel ausnutzen, um zwei
+Motoren oder Lampen an einem Ausgang unabhängig zu steuern, um
+Ausgänge zu sparen. Allerdings lassen sich bei dieser Verschaltung
+niemals beide Lampen gleichzeitig ausschalten
+
+<p><h3><a name="6.9.1">6.9.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/OnOffTristate">OnOffTristate</a></tt></a></h3>
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    OnOffTristate - der dritte Zustand
+     <font color="green"> 3</font>  */
+     <font color="green"> 4</font>  
+     <font color="green"> 5</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  void setup() { }
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  // Die Loop-Funktion wird endlos immer und immer wieder ausgeführt
+     <font color="green">10</font>  void loop() {
+     <font color="green">11</font>    // Ausgang O1 auf 9V schalten
+     <font color="green">12</font>    ftduino.output_set(Ftduino::O1, Ftduino::HI);
+     <font color="green">13</font>    delay(1000);
+     <font color="green">14</font>    // Ausgang O1 auf Masse schalten
+     <font color="green">15</font>    ftduino.output_set(Ftduino::O1, Ftduino::LO);
+     <font color="green">16</font>    delay(1000);
+     <font color="green">17</font>    // Ausgang O1 unbeschaltet lassen
+     <font color="green">18</font>    ftduino.output_set(Ftduino::O1, Ftduino::OFF);
+     <font color="green">19</font>    delay(1000);
+     <font color="green">20</font>  }
+     <font color="green">21</font>  
+</pre>
+
+<p><h3><a name="6.9.2">6.9.2 Leckströme</a></h3>
+
+<p>Ganz korrekt ist die Aussage, dass im hochohmigen
+bzw. Tristate-Zustand kein Strom fließt nicht. Über die
+Leistungsendstufen und deren interne Schutzschaltungen fließt oft
+trotzdem ein geringer Strom. In einigen Fällen wird dies sogar bewusst
+getan, um z.B. mit Hilfe dieses geringen Stromflusses das
+Vorhandensein eines angeschlossenen Verbrauchers feststellen zu können.
+Diese sogenannten Leckströme wurden in Abschnitt <a href="experimente.html#6.2.1">6.2.1</a>
+bereits beobachtet.
+
+<p>Ersetzt man die zwei Lampen im aktuellen Modell durch zwei
+Leuchtdioden, so wird man feststellen, dass die vom Ausgang nach Masse
+angeschlossene LED immer dann leicht glimmt, wenn der entsprechende
+Ausgang hochohmig geschaltet ist. Nur wenn der Ausgang auf Masse
+geschaltet ist leuchtet die LED nicht. Man kann also direkt an der LED
+die drei Zustände unterscheiden.
+
+<p><h2><a name="6.9">6.9 Aktive Motorbremse</a></h2>  
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Das Abschalten eines Motors scheint rein elektrisch trivial zu sein.
+Sobald der Motor von der Spannungsversorgung getrennt wird bleibt er
+stehen. Im Wesentlichen stimmt das auch so. 
+
+<p>Physikalisch bedeutet die Trennung von der Spannungsversorgung
+lediglich, dass dem Motor keine weitere Energie zugeführt wird. Dass
+das letztlich dazu führt, dass der Motor anhält liegt daran, dass die
+in der Rotation des Motors gespeicherte Energie langsam durch Reibung
+z.B. in den Lagern der Motorwelle verloren geht. Wie lange es dauert,
+bis der Motor auf diese Weise zum Stillstand kommt hängt wesentlich
+vom Aufbau des Motors und der Qualität seiner Lager ab.
+
+<p>Zusätzlich wirken viele Gleichstrom-Elektromotoren, wie sie auch
+fischertechnik einsetzt, als Generator. Werden sie gedreht, so wird in
+ihren internen Elektromagneten eine Spannung induziert. 
+
+<p><center>
+  
+  <p><a name="IMG:6.22"><img src="experimente/generator_svg.png"></a>
+  <br><small>Abbildung 6.22: Der TXT-Encoder-Motor als Generator</small>
+</center>
+
+<p>Dieser Effekt lässt sich mit einer Leuchtdiode leicht
+nachvollziehen. Schließt man die Leuchtdiode direkt an den Motor an
+und dreht dann manuell die Motorachse, so leuchtet die Leuchtdiode
+auf, wenn man den Motor in die richtige Richtung dreht und damit eine
+Spannung mit der für die Leuchtdiode passenden Polarität erzeugt. Man
+kann für diesen Versuch auch eine Glühlampe oder gar einen zweiten
+Motor nehmen. Deren gegenüber einer Leuchtdiode höhere Energieaufnahme
+erfordert aber gegebenenfalls ein etwas kräftigeres Drehen.
+
+<p>Je mehr Last ein Generator versorgen soll und je mehr Energie im
+entnommen werden soll, desto größer ist die mechanische Kraft, die
+nötig ist, um den Generator zu drehen. Höhere Last bedeutet in diesem
+Fall ein geringerer elektrischer Widerstand. Die Leuchtdiode mit ihrer
+vergleichsweise geringen Last besitzt einen hohen elektrischen
+Widerstand, die Glühlampe und noch mehr der Motor besitzen einen
+geringen elektrischen Widerstand und belasten bzw. bremsen den
+Generator damit stärker. Die größte denkbare Last ist in diesem Fall
+der Kurzschluss. Er hat einen minimalen elektrischen Widerstand und
+sorgt für maximalen Stromfluss und damit maximale elektrische Last am
+Generator. Auch die Bremswirkung ist dabei maximal.
+
+<p><center>
+  
+  <p><a name="IMG:6.23"><img src="experimente/motorbrake_svg.png"></a>
+  <br><small>Abbildung 6.23: Elektrisch gebremster und ungebremster Elektromotor</small>
+</center>
+
+<p>Dieser Effekt lässt sich nutzen, um einen Elektromotor zu bremsen.
+Wende beide Anschlüsse eines Motors miteinander verbunden, so fließt
+ein Strom, der eine Bremswirkung entwickelt. Das wurde bereits beim
+Not-Aus-Modell aus Abschnitt <a href="experimente.html#6.2">6.2</a> genutzt, um den
+Motor im Notfall schnell zu stoppen.  Ist dagegen z.B. einer der
+Anschlüsse des Motors offen, so ist kein geschlossener Stromkreis
+vorhanden und es fließt kein Strom und es tritt keine Bremswirkung
+auf. Wie groß ist dieser Effekt aber?
+
+<p>Der fischertechnik-Encoder-Motor enthält eine Möglichkeit zur
+Drehzahlmessung wie schon im PWM-Experiment in Abschnitt <a href="experimente.html#6.3">6.3</a>
+genutzt. Das Bremsverhalten dieses Motors lässt sich daher
+experimentell gut verfolgen.
+
+<p><center>
+  
+  <p><a name="IMG:6.24"><img src="experimente/pwmspeed_svg.png"></a>
+  <br><small>Abbildung 6.24: Anschluss des TXT-Encoder-Motors an die Anschlüsse <tt>M1</tt> und <tt>C1</tt></small>
+</center>
+
+<p>Das Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/MotorBrake"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MotorBrake</span></tt></a> lässt den Motor an Ausgang
+<tt>M1</tt> alle fünf Sekunden für drei Umdrehungen laufen und misst
+dann für eine weitere Sekunde, wie viele weitere Impulse der Encoder an
+Eingang <tt>C1</tt> liefert, nachdem er die drei Umdrehungen vollendet
+hat und abgeschaltet wurde.
+
+<p>Die Funktion <tt>motor_counter_set_brake()</tt> (siehe Abschnitt
+<a href="bibliotheken.html#9.3.9">9.3.9</a>) wird dabei im Wechsel so
+aufgerufen, dass der Motor frei ausläuft bzw. dass er aktiv gebremst
+wird.
+
+<p><center>
+  
+  <p><a name="IMG:6.25"><img src="experimente/nachlauf.png"></a>
+  <br><small>Abbildung 6.25: Ausgabe bei Verwendung des TXT-Encoder-Motors</small>
+  
+<p></center>
+
+<p>Wie in Abbildung <a href="experimente.html#IMG:6.25">6.25</a> zu sehen macht die aktive Bremse
+einen deutlichen Unterschied. Während der Encoder-Motor ungebremst
+noch für weitere 90 Impulse weiter dreht, also fast 1,5 volle
+Umdrehungen, kommt er bei aktiver Bremse bereits nach fünf weiteren
+Impulse zum Stillstand. Das entspricht lediglich knapp
+<sup><small>1</small></sup>/<sub><small>13</small></sub> Umdrehung.
+
+<p><h2><a name="6.10">6.10 USB-Tastatur</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist nicht vom klassischen Arduino Uno abgeleitet,
+sondern vom Arduino Leonardo. Der wesentliche technische Unterschied
+zwischen beiden Arduinos liegt in der Tatsache, dass der Arduino Uno
+einen separaten Chip für die USB-Kommunikation mit dem PC verwendet,
+während diese Aufgabe beim Arduino Leonardo allein dem
+ATmega32u4-Mikrocontroller zufällt.
+
+<p>In den meisten Fällen macht das keinen Unterschied und die meisten
+Sketches laufen auf beiden Arduinos gleichermaßen. Es gibt allerdings
+sehr große Unterschiede in den Möglichkeiten, die sich mit beiden
+Arduinos bei der USB-Anbindung bieten. Während der USB-Chip im Uno auf
+das Anlegen eines <tt>COM:</tt>-Ports beschränkt ist zeigt sich der
+Leonardo und damit auch der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sehr viel flexibler und der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann sich unter anderem gegenüber einem PC als USB-Tastatur
+ausgeben.
+
+<p>Da die Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei diesem Modell nicht verwendet
+werden reicht die Stromversorgung über USB und es ist keine weitere
+Versorgung über Batterie oder Netzteil nötig.
+
+<p><center>
+  
+  <p><a name="IMG:6.26"><img src="experimente/keyboardmessage_svg.png"></a>
+  <br><small>Abbildung 6.26: Tastatur-Nachricht</small>
+</center>
+
+<p><h3><a name="6.11.1">6.11.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/KeyboardMessage">USB/KeyboardMessage</a></tt></a></h3>
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    KeyboardMessage - USB-Tastatur
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    Der ftDuino gibt sich als USB-Tastatur aus und "tippt" eine Nachricht, sobald
+     <font color="green"> 5</font>    ein Taster an Eingang I1 für mindestens 10 Millisekunden gedrückt wird.
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>    Basierend auf dem Sketch:
+     <font color="green"> 8</font>    http://www.arduino.cc/en/Tutorial/KeyboardMessage
+     <font color="green"> 9</font>  
+     <font color="green">10</font>    Dieser Beispielcode ist Public-Domain.
+     <font color="green">11</font>  */
+     <font color="green">12</font>  
+     <font color="green">13</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green">14</font>  #include &lt;Keyboard.h&gt;
+     <font color="green">15</font>  
+     <font color="green">16</font>  unsigned long lastButtonEvent = 0;
+     <font color="green">17</font>  uint16_t previousButtonState = Ftduino::OFF;    // for checking the state of a pushButton
+     <font color="green">18</font>  
+     <font color="green">19</font>  void setup() {
+     <font color="green">20</font>    // initialize control over the keyboard:
+     <font color="green">21</font>    Keyboard.begin();
+     <font color="green">22</font>  }
+     <font color="green">23</font>  
+     <font color="green">24</font>  void loop() {
+     <font color="green">25</font>    // Taste an Eingang I1 auslesen
+     <font color="green">26</font>    uint16_t buttonState = ftduino.input_get(Ftduino::I1);
+     <font color="green">27</font>    
+     <font color="green">28</font>    // Hat sich der Zustand der Taste geändert?
+     <font color="green">29</font>    if(buttonState != previousButtonState) {
+     <font color="green">30</font>      // ja, Zeit des Wechsels merken
+     <font color="green">31</font>      lastButtonEvent = millis();
+     <font color="green">32</font>      // und den neuen Zustand merken, damit wir weitere
+     <font color="green">33</font>      // Änderungen erkennen können
+     <font color="green">34</font>      previousButtonState = buttonState;
+     <font color="green">35</font>    }
+     <font color="green">36</font>  
+     <font color="green">37</font>    // Gibt es ein unbearbeitetes Eregnis und hat sich der Zustand der Taste seitdem
+     <font color="green">38</font>    // für mehr als 10 Millisekunden nicht geändert?
+     <font color="green">39</font>    if(lastButtonEvent && ((millis() - lastButtonEvent) &gt; 10)) {
+     <font color="green">40</font>      // Zeit dieses Ereignisses vergessen
+     <font color="green">41</font>      lastButtonEvent = 0;
+     <font color="green">42</font>  
+     <font color="green">43</font>      // Taste wurde gedrückt
+     <font color="green">44</font>      if(buttonState) {
+     <font color="green">45</font>        // Nachricht "tippen"
+     <font color="green">46</font>        Keyboard.println("Hallo vom ftDuino!");
+     <font color="green">47</font>      }
+     <font color="green">48</font>    }
+     <font color="green">49</font>  }
+     <font color="green">50</font>  
+</pre>
+
+<p><h4>Sketchbeschreibung</h4>
+
+<p>Die Arduino-IDE bringt bereits Bibliotheken mit, um USB-Geräte wie
+Mäuse und Tastaturen umzusetzen. Der eigentliche Sketch bleibt so sehr
+einfach und die komplizierten USB-Detail bleiben in den Bibliotheken
+verborgen. Entsprechend kurz ist auch dieser Sketch.
+
+<p>In der <tt>setup()</tt>-Funktion muss lediglich die Methode
+<tt>Keyboard.begin()</tt> aufgerufen werden, um beim Start des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> alle USB-seitigen Vorkehrungen zu treffen, so dass der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> vom PC als USB-Tastatur erkannt wird. Allerdings verfügt
+diese Tastatur zunächst über keine Tasten, so dass man kaum merkt,
+dass der PC nun über eine zusätzliche Tastatur zu verfügen meint.
+
+<p>Um die Tastatur mit Leben zu füllen muss in der <tt>loop()</tt>-Funktion
+bei Bedarf ein entsprechendes Tastensignal erzeugt und an den PC
+gesendet werden. In den Zeilen 25 bis 35 des Sketches wird ein Taster
+an Eingang <tt>I1</tt> abgefragt und sichergestellt, dass nur Tastendrücke
+über 10ms Länge als solche erkannt werden (mehr Details zu diesem
+sogenannten Entprellen findet sich in Abschnitt <a href="experimente.html#6.12">6.12</a>).
+
+<p>Immer wenn die Taste an <tt>I1</tt> gedrückt wurde, werden die
+Sketchzeilen 45 und folgende ausgeführt. Hier wird die Funktion
+<tt>Keyboard.println()</tt> aus der Arduino-Keyboard-Bibliothek
+aufgerufen und ein Text an den PC gesendet. Für den PC sieht es so
+aus, als würde der Text vom Anwender auf der Tastatur
+getippt <a href="#fn9"><sup>9</sup></a> .
+
+<p>Die Möglichkeit, Nachrichten direkt als Tastatureingaben zu senden
+kann sehr praktisch sein, erlaubt sie doch ohne weitere Programmierung
+auf dem PC, die automatische Eingabe z.B. vom Messwerten in eine
+Tabelle oder ähnlich. Natürlich lässt sich diese Fähigkeit aber auch
+für allerlei Schabernack nutzen, indem der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zeitgesteuert
+oder auf andere Ereignisse reagierend den überraschten Anwender mit
+unerwarteten Texteingaben irritiert. Bei solchen Späßen sollte man
+immer eine ordentliche Portion Vorsicht walten lassen, da der falsche
+Tastendruck zur falschen Zeit leicht einen Datenverlust zur Folge
+haben kann.
+
+<p><h2><a name="6.11">6.11 USB-GamePad</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
+
+<p>Aus der PC-Sicht ist der Unterschied zwischen einer USB-Tastatur und
+einen USB-Joystick oder -Gamepad minimal. Beide nutzen das sogenannte
+USB-HID-Protokoll (HID = Human Interface Device, also ein
+Schnittstellengerät für Menschen). Arduino-seitig gibt es aber den
+fundamentalen Unterschied, dass die Arduino-Umgebung zwar
+vorgefertigte Bibliotheksfunktionen für Tastaturen mitbringt, für
+Gamepads und Joysticks aber nicht. Um trotzdem ein USB-Gamepad zu
+implementieren ist daher im Sketch sehr viel mehr Aufwand zu
+treiben.
+
+<p><center>
+  
+  <p><a name="IMG:6.27"><img src="experimente/gamepad_svg.png"></a>
+  <br><small>Abbildung 6.27: GamePad mit vier Richtungstasten und zwei Feuerknöpfen</small>
+</center>
+
+<p><h3><a name="6.12.1">6.12.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/GamePad">USB/GamePad</a></tt></a></h3>
+
+<p>Das entsprechende Beispiel findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/GamePad"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">USB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">GamePad</span></tt></a>. Dieser Sketch besteht aus drei
+Dateien. Während <tt>GamePad.ino</tt> den eigentlichen Sketch enthält
+implementieren <tt>HidGamePad.cpp</tt> und <tt>HidGamePad.h</tt>
+denjenigen Teil der Gamepad-Unterstützung, die die Arduino-IDE nicht
+bietet. Interessant ist vor allem die
+<tt>_hidReportDescriptor</tt>-Struktur in der Datei
+<tt>HidGamePad.cpp</tt>.
+
+<pre>
+     <font color="green"> 9</font>  static const uint8_t _hidReportDescriptor[] PROGMEM = {
+     <font color="green">10</font>    0x05, 0x01,                // USAGE_PAGE (Generic Desktop)
+     <font color="green">11</font>    0x09, 0x05,                // USAGE (Gamepad)
+     <font color="green">12</font>    0x85, REPORT_ID,           // REPORT_ID(3)
+     <font color="green">13</font>    0xa1, 0x01,                // COLLECTION (Application)
+     <font color="green">14</font>    0x09, 0x01,                //   USAGE (Pointer)
+     <font color="green">15</font>    0xa1, 0x00,                //   COLLECTION (Physical)
+     <font color="green">16</font>    0x09, 0x30,                //     USAGE (X)
+     <font color="green">17</font>    0x09, 0x31,                //     USAGE (Y)
+     <font color="green">18</font>    0x15, 0x00,                //     LOGICAL_MINIMUM(0)
+     <font color="green">19</font>    0x26, 0xff, 0x00,          //     LOGICAL_MAXIMUM(255)
+     <font color="green">20</font>    0x35, 0x00,                //     PHYSICAL_MINIMUM(0)
+     <font color="green">21</font>    0x46, 0xff, 0x00,          //     PHYSICAL_MAXIMUM(255)
+     <font color="green">22</font>    0x75, 0x08,                //     REPORT_SIZE(8)
+     <font color="green">23</font>    0x95, 0x02,                //     REPORT_COUNT(2)
+     <font color="green">24</font>    0x81, 0x02,                //     INPUT (Data,Var,Abs)
+     <font color="green">25</font>    0xc0,                      //   END_COLLECTION
+     <font color="green">26</font>    0x05, 0x09,                //   USAGE_PAGE (Button)
+     <font color="green">27</font>    0x19, 0x01,                //   USAGE_MINIMUM (Button 1)
+     <font color="green">28</font>    0x29, 0x02,                //   USAGE_MAXIMUM (Button 2)
+     <font color="green">29</font>    0x15, 0x00,                //   LOGICAL_MINIMUM(0)
+     <font color="green">30</font>    0x25, 0x01,                //   LOGICAL_MAXIMUM(1)
+     <font color="green">31</font>    0x95, 0x02,                //   REPORT_COUNT(2)
+     <font color="green">32</font>    0x75, 0x01,                //   REPORT_SIZE(1)
+     <font color="green">33</font>    0x81, 0x02,                //   INPUT (Data,Var,Abs)
+     <font color="green">34</font>    0x95, 0x06,                //   REPORT_COUNT(6)
+     <font color="green">35</font>    0x81, 0x03,                //   INPUT (Const,Var,Abs)
+     <font color="green">36</font>    0xc0                       // END_COLLECTION
+     <font color="green">37</font>  };
+</pre>
+Diese vergleichsweise kryptische Struktur beschreibt die Fähigkeiten
+eines USB-HID-Geräts<a href="#fn10"><sup>10</sup></a> .
+Sie beschreibt, um welche Art Gerät es sich handelt und im Falle
+eines Joysticks über was für Achsen und Tasten er verfügt.
+
+<p>In diesem Fall meldet das Gerät, dass es über zwei Achsen X und Y
+verfügt, die jede einen Wertebereich von 0 bis 255 abdecken.
+Weiterhin gibt es zwei Buttons, die jeweils nur den Zustand an und aus
+kennen. Für einen einfachen Joystick reicht diese Beschreibung.  Es
+ist aber leicht möglich, die Beschreibung zu erweitern und zusätzliche
+Achsen und Tasten vorzusehen. Mit den insgesamt acht analogen und den
+vier digitalen Eingängen verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über ausreichend
+Verbindungsmöglichkeiten für komplexe Eingabegeräte.
+
+<p>Übliche HID-Geräte sind Tastaturen, Mäuse und Joysticks bzw.
+Gamepads. Aber die Spezifikation der sogenannten
+HID-Usage-Tabellen<a href="#fn11"><sup>11</sup></a> 
+sieht wesentlich originellere Eingabegeräte für diverse Sport-, VR-,
+Simulations- und Medizingeräte und vieles mehr vor. Und natürlich ist
+mit den Ausgängen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auch die Implementierung von
+Rückmeldungen über Lampen oder Motoren in Form von z.B.
+Force-Feedback möglich.
+
+<p><h2><a name="6.12">6.12 Entprellen</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
+
+<p>In einigen der vorherigen Sketches wurde unerwartet viel Aufwand
+betrieben, um Taster abzufragen. Im <tt>Pwm</tt>-Sketch aus Abschnitt
+<a href="experimente.html#6.4.1">6.4.1</a> wurde in den Zeilen 35 und 51 eine Verzögerung von
+einer Millisekunde eingebaut und im <tt>KeyboardMessage</tt>-Sketch in
+Abschnitt <a href="experimente.html#6.10">6.10</a> wurde in den Zeilen 31 und 39-41 ebenfalls
+die Zeit erfasst und in die Auswertung des Tastendrucks eingefügt.
+Die Frage, warum das nötig ist soll etwas näher betrachtet werden.
+
+<p>Der Grund für diese Verwendung von Zeiten bei der Auswertung von
+einzelnen Tastendrücken ist das sogenannte ``Prellen''. Mechanische
+Taster bestehen aus zwei Metallkontakten, die entweder getrennt sind
+oder sich berühren. In Ruhe sind die Kontakte getrennt und wenn der
+Taster betätigt wird, dann sorgt eine Mechanik dafür, dass die beiden
+Metallkontakte in Berührung kommen und der Kontakt geschlossen wird.
+
+<p>Folgender Sketch fragt kontinuierlich einen Taster an Eingang I1
+ab und gibt auf dem <tt>COM:</tt>-Port eine Meldung aus, wenn sich
+der Zustand ändert. Zusätzlich zählt er mit, wie oft sich der Zustand
+insgesamt bereits geändert hat.
+
+<p><center>
+  
+    <p><a name="IMG:6.28"><img src="experimente/keyboardmessage_svg.png"></a>
+  <br><small>Abbildung 6.28: Entprellen</small>
+</center>
+
+<p><h3><a name="6.13.1">6.13.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Debounce">Debounce</a></tt></a></h3>
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    Debounce
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    Demonstriert Tastenprellen
+     <font color="green"> 5</font>  */
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  // die setup-Funktion wird einmal beim Start aufgerufen
+     <font color="green">10</font>  void setup() {
+     <font color="green">11</font>    Serial.begin(9600);
+     <font color="green">12</font>  
+     <font color="green">13</font>    while(!Serial);      // warte auf USB-Verbindung
+     <font color="green">14</font>  
+     <font color="green">15</font>    Serial.println("ftDuino Tastenprell-Beispiel");
+     <font color="green">16</font>  }
+     <font color="green">17</font>  
+     <font color="green">18</font>  uint8_t letzter_zustand = false;
+     <font color="green">19</font>  uint8_t wechselzaehler = 0;
+     <font color="green">20</font>  
+     <font color="green">21</font>  // die loop-Funktion wird immer wieder aufgerufen
+     <font color="green">22</font>  void loop() {
+     <font color="green">23</font>    uint8_t zustand = ftduino.input_get(Ftduino::I1);  // Taster auslesen
+     <font color="green">24</font>    
+     <font color="green">25</font>    if(zustand != letzter_zustand) {         // Hat der Zustand sich geändert?
+     <font color="green">26</font>      wechselzaehler = wechselzaehler + 1;   // Ja, Zähler rum eins erhöhen
+     <font color="green">27</font>      
+     <font color="green">28</font>      Serial.print("I1 ");                   // und eine Meldung ausgeben
+     <font color="green">29</font>      Serial.print(wechselzaehler);
+     <font color="green">30</font>      Serial.println(" mal geändert");
+     <font color="green">31</font>      letzter_zustand = zustand;             // neuen Zustand als letzten merken
+     <font color="green">32</font>    }
+     <font color="green">33</font>  }
+     <font color="green">34</font>  
+</pre>
+
+<p><h4>Sketchbeschreibung</h4>
+
+<p>In den Zeilen 10 bis 16 wird wie schon beim <tt>ComPort</tt>-Beispiel
+aus Abschnitt <a href="ersteschritte.html#3.3">3.3</a> die Ausgabe an den PC vorbereitet
+und für den seriellen Monitor eine Nachricht ausgegeben.
+
+<p>In Zeile 23 wird kontinuierlich der Eingang <tt>I1</tt> abgefragt. Hat
+sich sein Zustand gegenüber dem in der Variablen <tt>letzter_zustand</tt>
+gespeicherten geändert, so wird dies in Zeile 25 festgestellt. In
+der Folge wird die Variable <tt>wechselzaehler</tt> erhöht und der
+neue Wert in den Zeilen 28 bis 30 ausgegeben.
+
+<p><h4>Aufgabe 1: Es zählt zu viel</h4>
+
+<p>Etwas merkwürdiges passiert, wenn man den Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+lädt und ausprobiert: Sobald die Taste gedrückt wird erscheinen gleich
+mehrere Meldungen über Zustandsänderungen des Eingangs und auch der
+Zähler zählt wesentlich weiter als erwartet. Was passiert hier?
+
+<p>Das Problem ist, dass im Moment des Schaltens der Kontakt nicht sofort
+perfekt schließt. Stattdessen berühren sich die Metallflächen kurz,
+federn dann für ein paar Mikrosekunden zurück und öffnen sich wieder
+für einen sehr kurzen Moment. Erst nach mehreren Federvorgängen kommen
+die Kontakte zur Ruhe und sind dauerhaft geschlossen.
+
+<p><h4>Lösung 1:</h4>
+
+<p>Die einfachste Lösung des Problems liegt darin, ein klein wenig zu
+warten, bevor man nach einem Schaltereignis ein weiteres akzeptiert.
+Das erreicht man zum Beispiel, indem man nach Zeile 31 zusätzlich
+etwas wartet, wie es auch im <tt>Pwm</tt>-Sketch aus Abschnitt
+<a href="experimente.html#6.4.1">6.4.1</a> getan wurde.
+
+<pre>
+     <font color="green">31</font>      letzter_zustand = zustand;             // neuen Zustand als letzten merken
+     <font color="green">32</font>      delay(10);                             // warte zehn Millisekunden
+     <font color="green">33</font>    }
+</pre>
+Nach dieser Änderung zählt der Sketch tatsächlich nur noch einzelne
+Tastendrücke. Diese einfache Lösung hat aber einen Nachteil: Die
+Ausführung des gesamten Sketches wird bei jeden Tastendruck für zehn
+Millisekunden pausiert. Hat der Sketch noch andere Aufgaben zu
+erledigen, dann wird die Verarbeitung dieser Aufgaben ebenfalls für
+diese zehn Millisekunden unterbrochen. Je nach verwendetem Taster
+lässt sich die Zeit auf unter eine Millisekunde verkürzen. Aber bei zu
+kurzer Wartezeit werden wieder falsche Ereignisse erkannt.
+
+<p>Eleganter ist es daher, bei jedem Ereignis mit der Funktion
+<tt>millis()</tt> einen Zeitstempel aus dem Systemzeitzähler zu nehmen
+und erst dann ein Ereignis als gültig zu erkennen, wenn das letzte
+Ereignis länger als 10 Millisekunden zurück liegt. Der
+<tt>KeyboardMessage</tt>-Sketch aus Abschnitt <a href="experimente.html#6.10">6.10</a> löst
+das Problem auf genau diese Weise.
+
+<p><h4>Aufgabe 2: Was passiert denn nun genau?</h4>
+
+<p>Wie lange der Taster prellt und wie er sich genau verhält
+konnte wir bisher nur vermuten. Lässt sich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+nutzen, um etwas genauer auf das Schaltverhalten des Tasters
+zu schauen?
+
+<p><h4>Lösung 2:</h4>
+
+<p>Um Signalverläufe zu veranschaulichen verfügt die Arduino-IDE über ein
+sehr einfaches aber interessantes Werkzeug: Den sogenannten
+``seriellen Plotter'' er findet sich im Menü unter
+<tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Serieller Plotter</span></tt> und öffnet wie der
+serielle Monitor ein eigenes Fenstern. Aber statt einen per
+<tt>COM:</tt>-Port empfangenen Text direkt anzuzeigen interpretiert
+der serielle Plotter die eingehenden Daten Zeile für Zeile als Werte,
+die grafisch in einer Kurve dargestellt (geplottet) werden.
+
+<p>Das folgende Beispiel ist unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/BounceVisu"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">BounceVisu</span></tt></a> zu finden.
+
+<pre>     <font color="green"> 1</font>  /*
+     <font color="green"> 2</font>    BounceVisu
+     <font color="green"> 3</font>  
+     <font color="green"> 4</font>    visualisiert Tastenprellen
+     <font color="green"> 5</font>  */
+     <font color="green"> 6</font>  
+     <font color="green"> 7</font>  #include &lt;FtduinoSimple.h&gt;
+     <font color="green"> 8</font>  
+     <font color="green"> 9</font>  #define EVENT_TIME  480    // 480us
+     <font color="green">10</font>  uint8_t event[EVENT_TIME];
+     <font color="green">11</font>  
+     <font color="green">12</font>  // die setup-Funktion wird einmal beim Start aufgerufen
+     <font color="green">13</font>  void setup() {
+     <font color="green">14</font>    Serial.begin(9600);
+     <font color="green">15</font>    while(!Serial);      // warte auf USB-Verbindung
+     <font color="green">16</font>  }
+     <font color="green">17</font>  
+     <font color="green">18</font>  // die loop-Funktion wird immer wieder aufgerufen
+     <font color="green">19</font>  void loop() {
+     <font color="green">20</font>  
+     <font color="green">21</font>    // Warte bis Taster gedrückt
+     <font color="green">22</font>    if(ftduino.input_get(Ftduino::I1)) {
+     <font color="green">23</font>  
+     <font color="green">24</font>      // hole 480 Mikrosekunden lang im MiKrosekundentakt je einen Eingangswert
+     <font color="green">25</font>      for(uint16_t i=0;i&lt;EVENT_TIME;i++) {
+     <font color="green">26</font>        event[i] = ftduino.input_get(Ftduino::I1);
+     <font color="green">27</font>        _delay_us(1);
+     <font color="green">28</font>      }
+     <font color="green">29</font>  
+     <font color="green">30</font>      // gib zunächst 20 Nullen aus
+     <font color="green">31</font>      for(uint16_t i=0;i&lt;20;i++)
+     <font color="green">32</font>        Serial.println(0);
+     <font color="green">33</font>  
+     <font color="green">34</font>      // gib die eingelesenen 480 Werte aus
+     <font color="green">35</font>      for(uint16_t i=0;i&lt;EVENT_TIME;i++) 
+     <font color="green">36</font>        Serial.println(event[i]);
+     <font color="green">37</font>  
+     <font color="green">38</font>      // Warte eine Sekunde
+     <font color="green">39</font>      delay(1000);
+     <font color="green">40</font>    }
+     <font color="green">41</font>  }
+     <font color="green">42</font>  
+</pre>
+
+<p>Der Sketch wartet in Zeile 22 darauf, dass die Taste an Eingang
+<tt>I1</tt> gedrückt wird. Daraufhin zeichnet er für eine kurze Weile den
+Zustand des Eingang <tt>I1</tt> auf. In Zeile 9 ist festgelegt, dass 480
+Werte aufgezeichnet werden. Zwischen zwei Aufzeichnungen wird in Zeile
+27 jeweils eine Mikrosekunde gewartet, so dass insgesamt über 480
+Mikrosekunden aufgezeichnet wird. Ist die Aufzeichnung vollständig,
+dann werden zunächst 20 Zeilen Nullen ausgegeben und danach die vorher
+aufgezeichneten 480 Werte, so dass insgesamt 500 Werte ausgegeben
+werden. Die ersten 20 Werte repräsentieren den Zustand vor der
+Aufzeichnung, als der Taster noch nicht gedrückt wurde.
+
+<p><center>
+  
+  <p><a name="IMG:6.29"><img src="experimente/serieller_plotter.png"></a>
+  <br><small>Abbildung 6.29: Verlauf des Prellens im seriellen Plotter</small>
+</center>
+
+<p>Die insgesamt 500 Werte stellt der serielle Plotter als Kurve dar.
+Der Wert ist null, wenn der Kontakt als offen erkannt wird und eins,
+sobald der Kontakt geschlossen ist. Man sieht in der Grafik, wie der
+Taster zunächst circa 40 Mikrosekunden lang mehrfach öffnet und
+schließt, dann liegt das Signal über 100 Mikrosekunden stabil an,
+bevor der Kontakt noch ein paar mal öffnet, um schließlich nach
+insgesamt 200 Mikrosekunden stabil geschlossen zu bleiben. Die in
+Lösung 1 eingesetzte Pause kann also auf gute 200 Mikrosekunden
+reduziert werden, ohne dass das Prellen Auswirkungen hätte.
+
+<p>Es ist nötig, die Werte vor der Ausgabe komplett zu erfassen und zu
+speichern, da die Übermittlung der Zeichen an den PC vergleichsweise
+viel Zeit in Anspruch nimmt. Würden die Werte sofort an den PC
+übermittelt, dann wäre die Auflösung von einer Mikrosekunde nicht zu
+erreichen, da die Datenübermittlung selbst schon länger
+dauert. Tatsächlich dauert auch das Auslesen des Eingangs <tt>I1</tt>
+etwas Zeit und das Zeitverhalten unser Messung ist nicht sehr genau.
+Es genügt aber, um die prinzipiellen Abläufe darzustellen.
+
+<p><h2><a name="6.13">6.13 Nutzung des I²C-Bus</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
+
+<p>Wie in Abschnitt <a href="controller.html#1.3.6">1.3.6</a> beschrieben verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+über einen I²C-Anschluss. In der Arduino-Welt ist der I²C-Bus
+äußerst beliebt, denn er erlaubt den einfach Anschluss einer
+Vielzahl von preisgünstigen Erweiterungsbausteinen.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird mit einer Schutzkappe auf dem I²C-Anschluss
+ausgeliefert wie in Abschnitt <a href="controller.html#1.3.6">1.3.6</a> abgebildet. Diese Kappe
+muss vor Benutzung des I²C-Anschlusses entfernt werden.
+
+<p>Mit wenig Aufwand lassen sich die meisten Sensoren mit einem passenden
+Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> versehen. In Abbildung
+<a href="experimente.html#IMG:6.30">6.30</a> ist beispielhaft die Verkabelung einer typischen im
+Online-Handel günstig erhältlichen MPU6050-Sensor-Platine
+dargestellt. Der Sensor ist damit direkt an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+anschließbar. 
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.30"><img src="experimente/schema_mpu6050_svg.png"></a></td></tr><tr><td align="center"><small>(a) Verdrahtungsschema</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.30"><img src="experimente/foto_mpu6050.jpg"></a></td></tr><tr><td align="center"><small>(b) fertiger Sensor</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.30: MPU6050-Sensor mit Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
+</center>
+
+<p>Um den jeweiligen Sensor in eigenen Projekten zu verwenden sind in der
+Regel zusätzliche Code-Routinen oder Bibliotheken nötig. Die große
+Verbreitung der Arduino-Plattform führt dazu, dass man zu praktisch
+jedem gängigen Sensor mit wenig Suche passende Beispiele und
+Code-Bibliotheken
+findet<a href="#fn12"><sup>12</sup></a> .
+
+<p><center>
+  
+  <p><a name="IMG:6.31"><img src="experimente/i2c_sensoren.jpg"></a>
+  <br><small>Abbildung 6.31: Diverse I²C-Sensoren mit passendem Anschlusskabel an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p><h3><a name="6.14.1">6.14.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner">I2C/I2cScanner</a></tt></a></h3>
+
+<p>Für einen schnellen Test, ob die elektrische Verbindung zum Sensor
+korrekt ist reicht aber in der Regel ein einfacher Test der
+I²C-Kommunikation aus. Unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cScanner</span></tt></a>
+findet sich ein einfaches I²C-Testprogramm, das am I²C-Bus nach
+angeschlossenen Sensoren sucht und deren Adresse ausgibt. Die jeweilige
+Adresse eines Sensors wird in der Regel vom Sensorhersteller fest
+vergeben. Im Falle des MPU-6050 ist dies die Adresse <tt>0x68</tt>.
+Diese Adresse wird bei korrektem Anschluss des Sensors angezeigt.
+
+<p><center>
+  
+  <p><a name="IMG:6.32"><img src="experimente/i2cscanner_mpu6050.png"></a>
+  <br><small>Abbildung 6.32: Ausgabe von <tt>I2cScanner</tt> bei angeschlossenem MPU-6050</small>
+</center>
+
+<p><h3><a name="6.14.2">6.14.2 MPU-6050-Sensor</a></h3>
+
+<p>Für den MPU6050 liefert die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Umgebung ein eigenes Beispiel
+mit. Der Beispiel-Sketch unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/MPU6050Test"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MPU6050Test</span></tt></a> liest
+die Beschelunigungswerte aus dem MPU-6050 aus und gibt sie
+auf dem seriellen Monitor aus.
+
+<p><center>
+  
+  <p><a name="IMG:6.33"><img src="experimente/mpu6050_serieller_monitor.png"></a>
+  <br><small>Abbildung 6.33: Ausgabe von <tt>MPU6050Test</tt></small>
+</center>
+
+<p><h3><a name="6.14.3">6.14.3 OLED-Display</a></h3> 
+
+<p>Eine weitere naheliegenden Anwendung des I²C-Anschlusses ist der
+Anschluss eines kleinen Displays, mit dem z.B. direkt am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+Messwerte ausgegeben werden können.
+
+<p>Für wenig Geld gibt es im Online-Handel OLED-Displays mit 0,96 Zoll
+Bilddiagonale. Mit einer Größe von etwas unter 3*3cm<sup><small>2</small></sup> eignen sich diese
+Displays auch sehr gut für den Einbau in ein entsprechendes
+fischertechnik-kompatibles Gehäuse
+<a href="#fn13"><sup>13</sup></a> .
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.34"><img src="experimente/oled_schema_front_svg.png"></a><a name="IMG:6.34"><img src="experimente/oled_front.jpg"></a></td></tr><tr><td align="center"><small>(a) Vorderseite</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.34"><img src="experimente/oled_schema_rear_svg.png"></a><a name="IMG:6.34"><img src="experimente/oled_rear.jpg"></a></td></tr><tr><td align="center"><small>(b) Rückseite</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.34"><img src="experimente/oled_case.jpg"></a></td></tr><tr><td align="center"><small>(c) im Gehäuse</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.34: OLED-Display mit Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
+</center>
+
+<p>Beim Anlöten des Kabels muss man sich unbedingt am Aufdruck auf der
+Display-Platine und nicht an den Skizzen hier orientieren, da es in
+der Anschlussbelegung Unterschiede zwischen den ansonsten baugleichen
+Displays gibt.
+
+<p>Dieses Display verwendet als Display-Controller-Baustein den
+SSD1306<a href="#fn14"><sup>14</sup></a> 
+von Solomon Systech.  Diese Display-Sorte ist im Arduino-Umfeld sehr
+beliebt und passende Bibliotheken gibt es im
+Internet<a href="#fn15"><sup>15</sup></a> <a href="#fn16"><sup>16</sup></a> .
+
+<p><font color="red">Wichtig:</font> Wie viele andere I²C-Sensoren auch ist
+das OLED-Display nicht <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifisch, sondern wird auch in
+anderen Arduino-Projekten eingesetzt. Daher ist dessen Unterstützung
+kein Teil der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation, sondern es müssen die
+o.g. Adafruit-Bibliotheken unbedingt separat installiert werden.
+Andernfalls wird die Übersetzung des Sketches mit einer Meldung der Art
+``<tt>fatal error: Adafruit_GFX.h: No such file or directory</tt>'' oder
+ähnlich abgebrochen.
+
+<p>Zum Displaytest bringt die Adafruit_SSD1306-Bibliothek unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit SSD1306/examples/ssd1306_128x64_i2c"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit SSD1306</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ssd1306_128x64_i2c</span></tt></a>
+ein Beispiel. Erscheint vor dem Download die Meldung ``Height incorrect, please fix Adafruit_SSD1306.h!'',
+dann muss in der Datei <tt>Adafruit_SSD1306.h</tt> folgende Änderung vorgenommen werden,
+um die Unterstützung des 128x64-Displays zu aktivieren:
+
+<pre>
+     <font color="green">72</font>  /*-------------------------------------------------------------------------*/
+     <font color="green">73</font>     #define SSD1306_128_64
+     <font color="green">74</font>  //   #define SSD1306_128_32
+     <font color="green">75</font>  //   #define SSD1306_96_16
+     <font color="green">76</font>  /*=========================================================================*/
+</pre>
+Zusätzlich muss im Sketch selbst die I²C-Adresse von <tt>0x3D</tt> nach <tt>0x3C</tt> angepasst werden: 
+<pre>
+     <font color="green">60</font>    // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
+     <font color="green">61</font>    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
+     <font color="green">62</font>    // init done
+</pre>
+Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation selbst bringt ebenfalls ein Beispiel mit,
+das dieses Display verwendet. Das Shootduino-Spiel findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Shootduino"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Shootduino</span></tt></a>. Das Spiel erwartet drei Taster an
+den Eingängen <tt>I1</tt>, <tt>I2</tt> und <tt>I3</tt> zur Steuerung des
+Raumschiffs und gegebenenfalls eine Lampe an <tt>O1</tt>.
+
+<p><h3><a name="6.14.4">6.14.4 VL53L0X LIDAR-Distanzsensor</a></h3>
+
+<p>Fischertechnik liefert einen Ultraschallsensor zur Distanzmessung, der
+wie in Abschnitt <a href="controller.html#1.3.6">1.3.6</a> gezeigt auch am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+betrieben werden kann. Dieser Ultraschallsensor sendet einen
+Ultraschallimpuls aus und misst die Laufzeit, bis die Schallwelle ein
+Hindernis erreicht und zum Sensor zurück reflektiert. Aus der Laufzeit
+und der bekannten Schallgeschwindigkeit lässt sich so die Distanz
+bestimmen.
+
+<p>In der Arduino-Welt gibt es eine interessante Alternative in Form
+des VL53L0X-Laser-Distanzsensors. Das Funktionsprinzip gleicht
+dem des Ultraschallsensors, allerdings kommt kein Schall, sondern
+Laserlicht zu Einsatz. Der VL53L0X lässt sich recht leicht über
+I²C mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbinden.
+
+<p><center>
+  
+  <p><a name="IMG:6.35"><img src="experimente/vl53l0x_schema_svg.png"></a>
+  <br><small>Abbildung 6.35: Anschlussschema des VL53L0X an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Ein passendes Gehäuse zum selbst-drucken findet sich im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Repository<a href="#fn17"><sup>17</sup></a> . 
+
+<p><center>
+  
+  <p><a name="IMG:6.36"><img src="experimente/vl53l0x_cased.jpg"></a>
+  <br><small>Abbildung 6.36: VL53L0X in 3D-gedrucktem Gehäuse</small>
+</center>
+
+<p>Wie für fast alle üblichen I²C-Sensoren findet man auch beim
+VL53L0X bereits fertige Arduino-Bibliotheken und -Sketches im
+Internet<a href="#fn18"><sup>18</sup></a> .
+
+<p><h3><a name="6.14.5">6.14.5 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Client und Kopplung zweier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s</a></h3> 
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann nicht nur andere Geräte über den I²C-Bus
+ansprechen, er kann sich selbst auch als passives Gerät am Bus
+ausgeben, um von einem anderen Gerät angesprochen zu werden.
+
+<p>Am einfachsten lässt sich diese Möglichkeit nutzen, wenn zwei <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s
+direkt über I²C gekoppelt werden.
+
+<p><center>
+  
+  <p><a name="IMG:6.37"><img src="experimente/i2c_master_client_svg.png"></a>
+  <br><small>Abbildung 6.37: Kopplung zweier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C</small>
+</center>
+
+<p>Es wird dazu eine 1:1-Verbindung zwischen den beiden I²C-Anschlüssen
+der beteiligten Controller hergestellt. Ein Controller muss in diesem
+Aufbau als Master konfiguriert werden, einer als Slave. Entsprechende
+Beispiel-Sketches finden sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cMaster"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cMaster</span></tt></a> und
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cSlave"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cSlave</span></tt></a>.
+
+<p>Der Master fragt kontinuierlich einen an Eingang <tt>I1</tt>
+angeschlossenen Taster ab und sendet den Zustand des Tasters über
+I²C an den zweiten, als Slave konfigurierten <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Dieser
+schaltet dann eine Lampe an Ausgang <tt>O1</tt> entsprechend ein oder aus.
+
+<p>Die Spannungsversorgung des Masters kann dabei über die
+I²C-Verbindung erfolgen. Lediglich der Slave muss direkt mit 9 Volt
+versorgt sein, um die Lampe am Ausgang steuern zu können. Die
+Versorgung über I²C entspricht der Versorgung über USB mit den
+bekannten Einschränkungen wie in Abschnitt <a href="controller.html#1.3.5">1.3.5</a>
+beschrieben.
+
+<p><h4>Erweiterter <tt>I2cSlave</tt></h4>
+
+<p>Neben dem einfachen Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cSlave"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cSlave</span></tt></a>,
+das auf der funktionsreduzierten <tt>FtduinoSimple</tt>-Bibliothek
+aufbaut befindet sich unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/I2C/I2cSlave"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cSlave</span></tt></a> ein
+auf der vollwertigen Bibliothek aufbauendes Beispiel, das die
+meisten Ein- und Ausgabefähigkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über I²C
+verfügbar macht.
+
+<p>Dieser erweiterte Sketch eignet sich als Basis für komplexe
+Modelle. Das hier abgebildete Beispiel verwendet drei <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s zur
+Erweiterung des Master-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> um weitere 24 Aus- und 36 Eingänge.
+
+<p><center>
+  
+  <p><a name="IMG:6.38"><img src="experimente/i2c_x4_svg.png"></a>
+  <br><small>Abbildung 6.38: Kopplung von vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C</small>
+</center>
+
+<p>Der erste <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> im Bild ganz links bildet den Master, gefolgt von
+den drei Slaves. Auf dem ersten Slave läuft das unveränderte Beispiel
+aus <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/I2C/I2cSlave"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cSlave</span></tt></a>. Für die weiteren Slaves muss die
+I²C-Adresse im Sketch jeweils angepasst werden. Das geschieht,
+indem in Zeile 16 im <tt>I2cSlave</tt>-Sketch die Adresse 43 ersetzt
+wird durch 44 bzw 45 für die beiden weiteren Slaves.
+
+<pre>
+     <font color="green">13</font>  void setup() {
+     <font color="green">14</font>    pinMode(LED_BUILTIN, OUTPUT); // LED initialisieren
+     <font color="green">15</font>  
+     <font color="green">16</font>    Wire.begin(43);               // tritt I2C-Bus an Adresse #43 als "Slave" bei
+     <font color="green">17</font>    Wire.onReceive(receiveEvent); // Auf Schreib-Ereignisse registrieren
+     <font color="green">18</font>    Wire.onRequest(requestEvent); // Auf Lese-Ereignisse registrieren
+     <font color="green">19</font>  
+     <font color="green">20</font>    ftduino.init();
+     <font color="green">21</font>  
+     <font color="green">22</font>    // alle Ausgänge sind hochohmig
+     <font color="green">23</font>    memset(output_mode, 0, sizeof(output_mode));
+     <font color="green">24</font>  }
+</pre>
+Der Master enthält in diesem Fall die gesamte eigentliche
+Programmlogik und die Slaves nehmen fundamentale Steuerbefehle über
+I²C entgegen. Der Master-Sketch findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/I2C/I2cMaster"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cMaster</span></tt></a>. In Zeile 12 sind dort die Adressen
+43, 44 und 45 der drei Slaves bereits eingestellt. Sollen mehr oder
+weniger Slaves verwendet werden, so ist die Zeile 12 entsprechend
+anzupassen.
+
+<pre>
+     <font color="green"> 9</font>  // Liste der anzusteuernden I2c-Clients, beginnend mit 0 (der Master selbst)
+     <font color="green">10</font>  // und -1 als Endemarkierung. In diesem Fall sind drei Clients unter den Adressen
+     <font color="green">11</font>  // 43, 44 und 45 angeschlossen
+     <font color="green">12</font>  static const int8_t clients[] = { 0, 43, 44, 45, -1 };
+</pre>
+Die Stromversorgung aller vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s kann aus einem
+fischertechnik-Netzteil erfolgen, das an den Master angeschlossen
+wird. Die Slaves werden dann vom 9-Volt-Ausgang des Masters über
+zweipolige fischertechnik-Kabel versorgt.
+
+<p><center>
+  
+  <p><a name="IMG:6.39"><img src="experimente/i2c_x4.jpg"></a>
+  <br><small>Abbildung 6.39: Vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C gekoppelt</small>
+</center>
+
+<p>Das Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/I2C/I2cMaster"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cMaster</span></tt></a> eignet sich als Vorlage
+für komplexe Modelle. Je nach Modell kann es aber praktischer sein,
+auch die Slaves zu verändern und zu erweitern. Geräte bei Modellen mit
+weitgehend eigenständigen Untereinheiten (z.B. Taktstraße) kann es
+einfacher sein, die einzelnen Stationen jeweils von einem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+weitgehend autonom steuern zu lassen und die I²C-Kommunikation auf
+das nötigste zu reduzieren, um z.B. die Ankunft eines neuen Bauteils
+in der Station anzukündigen.
+
+<p>Die folgenden Tabelle listete die I²C-Register, wie sie vom
+<tt>I2cSlave.ino</tt> für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> implementiert werden.  Werte
+mit vorangestelltem 0x sind in Hexadezimalschreibweise dargestellt.
+
+<p><h4>Registerbelegungen für Ausgänge O1 bis O8 bzw. M1 bis M4</h4>
+
+<p><center><table>
+  <tr><td>
+0x00 </td><td></td><td> Ausgangs-Modus O1/M1 </td></tr>
+<tr><td>
+     </td><td></td><td>  0x0x - Betrieb als Einzelausgang </td></tr>
+     <tr><td></td><td></td><td>  0x00 - Einzelausgang offen/hochohmig (tristate) </td></tr>
+     <tr><td></td><td></td><td>  0x01 - Einzelausgang gegen +9V geschaltet (High) </td></tr>
+     <tr><td></td><td></td><td>  0x02 - Einzelausgang gegen Masse geschaltet (Low) </td></tr>
+     <tr><td></td><td></td><td>  0x1x - Ausgang mit O2 zum Motorausgang M1 gekoppelt </td></tr>
+     <tr><td></td><td></td><td>  0x10 - Motorausgang ungebremst aus (off) </td></tr>
+     <tr><td></td><td></td><td>  0x11 - Motorausgang gebremst aus (brake) </td></tr>
+     <tr><td></td><td></td><td>  0x12 - Motorausgang links drehend an </td></tr>
+     <tr><td></td><td></td><td>  0x13 - Motorausgang rechts drehend an </td></tr>
+<tr><td>
+0x01 </td><td></td><td> Ausgangswert (PWM) O1/M1 von 0 (aus) bis 255 (100% an) </td></tr>
+     <tr><td></td><td></td><td> Der Zustand des Hardwareausgangs wird beim Schreiben </td></tr>
+     <tr><td></td><td></td><td> dieses Registers aktualisiert </td></tr>
+<tr><td>
+0x02 </td><td></td><td> Ausgangs-Modus O2 </td></tr>
+     <tr><td></td><td></td><td> Der Inhalt dieses Registers wird ignoriert, wenn Ausgangs-Modus O1/M1 </td></tr>
+     <tr><td></td><td></td><td> (Register 0x00) den Wert 0x1x enthält </td></tr>
+     <tr><td></td><td></td><td> 0x00 - Einzelausgang offen/hochohmig (tristate) </td></tr>
+     <tr><td></td><td></td><td> 0x01 - Einzelausgang gegen +9V geschaltet (High) </td></tr>
+     <tr><td></td><td></td><td> 0x02 - Einzelausgang gegen Masse geschaltet (Low) </td></tr>
+<tr><td>
+0x03 </td><td></td><td> Ausgangswert (PWM) O2 von 0 (aus) bis 255 (100% an) </td></tr>
+     <tr><td></td><td></td><td> Der Inhalt dieses Registers wird ignoriert, wenn Ausgangs-Modus O1/M1 </td></tr>
+     <tr><td></td><td></td><td> (Register 0x00) den Wert 0x1x enthält </td></tr>
+     <tr><td></td><td></td><td> Der Zustand des Hardwareausgangs wird beim Schreiben </td></tr>
+     <tr><td></td><td></td><td> dieses Registers aktualisiert </td></tr>
+<tr><td>
+0x04 </td><td></td><td> Ausgangs-Modus O3/M2, siehe Ausgang-Modus O1 (Register 0x00) </td></tr>
+<tr><td>
+0x05 </td><td></td><td> Ausgangswert O3/M2, siehe Ausgangswert O1 (Register 0x01) </td></tr>
+<tr><td>
+0x06 </td><td></td><td> Ausgangs-Modus O4, siehe Ausgang-Modus O2 (Register 0x02) </td></tr>
+<tr><td>
+0x07 </td><td></td><td> Ausgangswert O4, siehe Ausgangswert O2 (Register 0x03) </td></tr>
+<tr><td>
+0x08 </td><td></td><td> Ausgangs-Modus O5/M3, siehe Ausgang-Modus O1 (Register 0x00) </td></tr>
+<tr><td>
+0x09 </td><td></td><td> Ausgangswert O5/M3, siehe Ausgangswert O1 (Register 0x01) </td></tr>
+<tr><td>
+0x0a </td><td></td><td> Ausgangs-Modus O6, siehe Ausgang-Modus O2 (Register 0x02) </td></tr>
+<tr><td>
+0x0b </td><td></td><td> Ausgangswert O6, siehe Ausgangswert O2 (Register 0x03) </td></tr>
+<tr><td>
+0x0c </td><td></td><td> Ausgangs-Modus O7/M4, siehe Ausgang-Modus O1 (Register 0x00) </td></tr>
+<tr><td>
+0x0d </td><td></td><td> Ausgangswert O7/M4, siehe Ausgangswert O1 (Register 0x01) </td></tr>
+<tr><td>
+0x0e </td><td></td><td> Ausgangs-Modus O8, siehe Ausgang-Modus O2 (Register 0x02) </td></tr>
+<tr><td>
+0x0f </td><td></td><td> Ausgangswert O8, siehe Ausgangswert O2 (Register 0x03) </td></tr>
+<tr><td>
+</table></center>
+
+<p><h4>Registerbelegungen für Eingänge I1 bis I8</h4>
+Es können maximal die beiden Bytes eines Eingangs in einem gemeinsamen
+I2C-Transfer gelesen werden. Jeder Eingang muss einzeln gelesen werden.
+
+<p><center><table>
+  <tr><td>
+  0x10 </td><td></td><td> schreiben: Eingangs-Modus I1 </td></tr>
+         <tr><td></td><td></td><td>  0x00 - Spannung </td></tr>
+         <tr><td></td><td></td><td>  0x01 - Widerstand </td></tr>
+         <tr><td></td><td></td><td>  0x02 - Schalter </td></tr>
+         <tr><td></td><td></td><td>  lesen: Eingangswert I1, Low-Byte (LSB) </td></tr>
+<tr><td>
+  0x11 </td><td></td><td> lesen: Eingangswert I1, High-Byte (MSB) </td></tr>
+<tr><td>
+  0x12 </td><td></td><td> Eingangs-Modus/Eingangswert I2, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x13 </td><td></td><td> Eingangswert I2, siehe Eingangswert I1 (Register 0x11) </td></tr>
+<tr><td>
+  0x14 </td><td></td><td> Eingangs-Modus/Eingangswert I3, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x15 </td><td></td><td> Eingangswert I3, siehe Eingangswert I1 (Register 0x11) </td></tr>
+<tr><td>
+  0x16 </td><td></td><td> Eingangs-Modus/Eingangswert I4, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x17 </td><td></td><td> Eingangswert I4, siehe Eingangswert I1 (Register 0x11) </td></tr>
+<tr><td>
+  0x18 </td><td></td><td> Eingangs-Modus/Eingangswert I5, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x19 </td><td></td><td> Eingangswert I5, siehe Eingangswert I1 (Register 0x11) </td></tr>
+<tr><td>
+  0x1a </td><td></td><td> Eingangs-Modus/Eingangswert I6, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x1b </td><td></td><td> Eingangswert I6, siehe Eingangswert I1 (Register 0x11) </td></tr>
+<tr><td>
+  0x1c </td><td></td><td> Eingangs-Modus/Eingangswert I7, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x1d </td><td></td><td> Eingangswert I7, siehe Eingangswert I1 (Register 0x11) </td></tr>
+<tr><td>
+  0x1e </td><td></td><td> Eingangs-Modus/Eingangswert I8, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
+<tr><td>
+  0x1f </td><td></td><td> Eingangswert I8, siehe Eingangswert I1 (Register 0x11) </td></tr>
+  <tr><td>
+</table></center>
+
+<p><h4>Registerbelegungen für Zählereingänge C1 bis C4</h4>
+
+<p><center><table>
+  <tr><td>
+0x20 </td><td></td><td> schreiben: Zähler-Modus C1 </td></tr>
+      <tr><td></td><td></td><td> 0x00 - aus </td></tr>
+      <tr><td></td><td></td><td> 0x01 - steigende Flanke </td></tr>
+      <tr><td></td><td></td><td> 0x02 - fallende Flanke </td></tr>
+      <tr><td></td><td></td><td> 0x03 - beide Flanken </td></tr>
+      <tr><td></td><td></td><td> 0x04 - Ultraschallsensor aktivieren </td></tr>
+      <tr><td></td><td></td><td> lesen: Eingangszustand C1 </td></tr>
+<tr><td>
+0x21 </td><td></td><td> schreiben: Zähler C1  </td></tr>
+      <tr><td></td><td></td><td> 0x00  - Zähler unverändert lassen </td></tr>
+      <tr><td></td><td></td><td> sonst - Zähler löschen </td></tr>
+      <tr><td></td><td></td><td> lesen: Zählerstand C1/Ultraschall-Distanz, Low-Byte (LSB) </td></tr>
+<tr><td>
+0x22 </td><td></td><td> Zählerstand C1/Ultraschall-Distanz, High-Byte (MSB) </td></tr>
+<tr><td>
+0x24 </td><td></td><td> schreiben: Zähler-Modus C2 </td></tr>
+      <tr><td></td><td></td><td> 0x00 - aus </td></tr>
+      <tr><td></td><td></td><td> 0x01 - steigende Flanke </td></tr>
+      <tr><td></td><td></td><td> 0x02 - fallende Flanke </td></tr>
+      <tr><td></td><td></td><td> 0x03 - beide Flanken </td></tr>
+      <tr><td></td><td></td><td> lesen: Eingangszustand C2 </td></tr>
+<tr><td>
+0x25 </td><td></td><td> schreiben: Zähler C2  </td></tr>
+      <tr><td></td><td></td><td> 0x00  - Zähler unverändert lassen </td></tr>
+      <tr><td></td><td></td><td> sonst - Zähler löschen </td></tr>
+      <tr><td></td><td></td><td> lesen: Zählerstand C2, Low-Byte (LSB) </td></tr>
+<tr><td>
+0x26 </td><td></td><td> Zählerstand C2, High-Byte (MSB) </td></tr>
+<tr><td>
+0x28 </td><td></td><td> Zähler-Modus C3, siehe Zähler-Modus C2 (Register 0x24) </td></tr>
+<tr><td>
+0x29 </td><td></td><td> Zählerstand C3, Low-Byte (LSB), siehe Zählerstand C2 (Register 0x25) </td></tr>
+<tr><td>
+0x2a </td><td></td><td> Zählerstand C3, High-Byte (MSB), siehe Zählerstand C2 (Register 0x26) </td></tr>
+<tr><td>
+0x2c </td><td></td><td> Zähler-Modus C4, siehe Zähler-Modus C2 (Register 0x24) </td></tr>
+<tr><td>
+0x2d </td><td></td><td> Zählerstand C4, Low-Byte (LSB), siehe Zählerstand C2 (Register 0x25) </td></tr>
+<tr><td>
+0x2e </td><td></td><td> Zählerstand C4, High-Byte (MSB), siehe Zählerstand C2 (Register 0x26) </td></tr>
+<tr><td>
+</table></center>
+
+
+<p><h4><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Slave am PC</h4>
+
+<p>Natürlich lässt sich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Slave nicht nur an
+anderen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s betreiben, sondern auch an PCs und anderen
+Geräten, wenn sie mit einer entsprechenden I²C-Schnittstelle
+ausgerüstet sind. Im Fall eines PCs lässt sich die nötige
+I²C-Schnittstelle auch mit Hilfe eines einfachen Adapters
+über USB nachrüsten. Ein solcher Adapter ist der
+<tt>i2c_tiny_usb</tt><a href="#fn19"><sup>19</sup></a> .
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.40"><img src="experimente/i2c_digispark_svg.png"></a></td></tr><tr><td align="center"><small>(a) Verdrahtungsschema</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.40"><img src="experimente/i2c_digispark.jpg"></a></td></tr><tr><td align="center"><small>(b) fertiger Adapter</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.40: Digispark/<tt>i2c_tiny_usb</tt> zum Anschluss an den I²C des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Auf einem Linux PC<a href="#fn20"><sup>20</sup></a>  kann das Programm
+<tt>i2c_detect</tt> verwendet werden. Mit dem Parameter <tt>-l</tt>
+kann man sich zunächst eine Liste aller im PC installierten I²C-Busse
+ausgeben lassen.
+
+<pre>
+     <font color="green"> 1</font>      $ i2cdetect -l
+     <font color="green"> 2</font>      i2c-3   unknown         i915 gmbus dpc                          N/A
+     <font color="green"> 3</font>      i2c-1   unknown         i915 gmbus vga                          N/A
+     <font color="green"> 4</font>      i2c-8   i2c             em2860 #0                               I2C adapter
+     <font color="green"> 5</font>      i2c-6   unknown         DPDDC-B                                 N/A
+     <font color="green"> 6</font>      i2c-4   unknown         i915 gmbus dpb                          N/A
+     <font color="green"> 7</font>      i2c-2   unknown         i915 gmbus panel                        N/A
+     <font color="green"> 8</font>      i2c-0   unknown         i915 gmbus ssc                          N/A
+     <font color="green"> 9</font>      i2c-9   i2c             i2c-tiny-usb at bus 001 device 023      I2C adapter
+     <font color="green">10</font>      i2c-7   unknown         DPDDC-C                                 N/A
+     <font color="green">11</font>      i2c-5   unknown         i915 gmbus dpd                          N/A
+</pre>
+Der Digispark/<tt>i2c_tiny_usb</tt> erscheint in diesem Fall als
+<tt>i2c-9</tt>.  Unter dieser Bus-Nummer lässt sich der I²C-Bus des
+<tt>i2c_tiny_usb</tt> nach Geräten absuchen.
+
+<pre>
+     <font color="green"> 1</font>      $ i2cdetect -y 9
+     <font color="green"> 2</font>           0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+     <font color="green"> 3</font>      00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+     <font color="green"> 4</font>      10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+     <font color="green"> 5</font>      20: -- -- -- -- -- -- -- -- -- -- 2a -- -- -- -- -- 
+     <font color="green"> 6</font>      30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+     <font color="green"> 7</font>      40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+     <font color="green"> 8</font>      50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+     <font color="green"> 9</font>      60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+     <font color="green">10</font>      70: -- -- -- -- -- -- -- --                         
+</pre>
+In diesem Fall wurde unter Adresse $2a (dezimal 42) der auf der
+<tt>FtduinoSimple</tt>-Bibliothek basierende einfache
+<tt>I2cSlave</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erkannt.
+
+<p>Im Repository<a href="#fn21"><sup>21</sup></a> 
+findet sich ein Python-Beispiel, mit dem vom PC aus auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+zugegriffen werden kann. Für die umfangreichere auf der
+<tt>Ftduino</tt>-Bibliothek basierende Variante gibt es ebenfalls ein
+Python-Beispiel im Repository<a href="#fn22"><sup>22</sup></a> .
+
+<p><h4><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Slave am TXT</h4>
+
+<p>Wie im Abschnitt <a href="experimente.html#6.13">6.13</a> erwähnt ist mit 3,3 Volt betriebene
+I²C-Anschluss des fischertechnik-TXT-Controllers nicht elektrisch
+kompatibel zum mit 5 Volt betriebenen I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p><h4>Einfacher Levelshifter</h4> 
+
+<p>Mit Hilfe eines passenden Pegel-Wandlers kann man aber leicht die
+nötige Signalanpassung vornehmen. Die Elektronik dazu ist preisgünstig
+im Online-Handel erhältlich. Man sollte darauf achten, dass die
+Elektronik die Spannungsversorgung der 3,3-Volt-Seite selbst aus der
+Versorgung der 5-Volt-Seite erzeugt, da der TXT selbst keine 3,3 Volt
+zur Verfügung stellt.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.41"><img src="experimente/i2c_level_shifter_svg.png"></a></td></tr><tr><td align="center"><small>(a) Kabelschema</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.41"><img src="experimente/ftduino_txt_i2c.jpg"></a></td></tr><tr><td align="center"><small>(b) Anschluss an den TXT</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.41: Levelshifter zur Verbindung von TXT und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p><h3><a name="6.14.6">6.14.6 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Expander</a></h3> 
+
+<p>Die Funktion eines Levelshifters erfüllt auch der sogenannte
+I²C-Expander<a href="#fn23"><sup>23</sup></a> .
+Dieses Gerät wurde zum Einsatz am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> entworfen, kann aber
+auch am TXT oder TX betrieben werden.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.42"><img src="experimente/i2cexpander.jpg"></a></td></tr><tr><td align="center"><small>(a) fertiges Gerät</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.42"><img src="experimente/i2cexpander_parts.jpg"></a></td></tr><tr><td align="center"><small>(b) Einzelteile</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.42: I²C-Expander für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Der I²C-Expander stellt einen TXT-kompatiblen 10-poligen
+I²C-Anschluss bereit und vier 6-polige TX-
+bzw. <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-kompatible. Die vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-kompatiblen Anschlüsse
+sind 1-zu-1 verbunden und können zum Anschluss mehrerer I²C-Geräte an
+den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verwendet werden. Zusätzlich ist eine Levelshifter
+enthalten, der einen Anschluss an den TXT bzw. an dessen Sensoren
+erlaubt. Die Spannungsversorgung des Levelshifters erfolgt vom
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p>Eine passende App für die Community-Firmware des
+fischertechnik-TXT-Controllers findet sich im
+cfw-apps-Repository<a href="#fn24"><sup>24</sup></a> .
+
+<p>Da I²C-Geräte am TXT auch unter RoboPro und der Originalfirmware
+angesteuert werden können lässt sich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auf diese Weise
+auch unter RoboPro als Erweiterung des TXT nutzen.
+
+<p><h3><a name="6.14.7">6.14.7 fischertechnik-Orientierungssensor</a></h3>
+
+<p>Das Kabel zum Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an den TXT und der
+I²C-Expander sind nicht auf eines feste Richtung festgelegt. Sie
+können daher auch dazu verwendet werden, für den TXT entworfene
+Sensoren an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> anzuschließen.
+
+<p><center>
+  
+  <p><a name="IMG:6.43"><img src="experimente/i2c_ext_sens_svg.png"></a>
+  <br><small>Abbildung 6.43: Anschluss eines fischertechnik-Sensors via I²C-Expander</small>
+</center>
+
+<p>Getestet wurde dies z.B. mit dem ``Kombisensor 158402<a href="#fn25"><sup>25</sup></a>  3-in-1
+Orientierungssensor''<a href="#fn26"><sup>26</sup></a> 
+basierend auf dem Bosch BMX055, für den es auch fertige
+Arduino-Sketches
+gibt<a href="#fn27"><sup>27</sup></a> .
+Der Anschluss der 9-Volt-Versorgungsspannung erfolgt dabei exakt wie
+beim TXT an einem der 9-Volt-Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.44"><img src="experimente/orientierungssensor.jpg"></a></td></tr><tr><td align="center"><small>(a) am Levelshifter</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.44"><img src="experimente/orientierungssensor_i2cexp.jpg"></a></td></tr><tr><td align="center"><small>(b) am I²C-Expander</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.44: Orientierungssensor von fischertechnik am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p><h3><a name="6.14.8">6.14.8 fischertechnik-Umweltsensor</a></h3>
+
+<p>Der Umweltsensor aus dem ``ROBOTICS TXT Smart Home''-Baukasten
+544624<a href="#fn28"><sup>28</sup></a>  basiert auf dem BME680<a href="#fn29"><sup>29</sup></a> 
+von Bosch Sensortec. Er beinhaltet Sensoren für Temperatur, Luftdruck,
+Luftfeuchtigkeit und Luftqualität.
+
+<p>Auch für diesen Sensor gibt es im Arduino-Umfeld diverse Bibliotheken, die
+über den Bibliotheks-Manager der Arduino-IDE leicht zu installieren sind, wie
+in Abbildung <a href="experimente.html#IMG:6.45">6.45</a> zu sehen. Für erste Experimente empfielt sich
+die Bibliothek von Adafruit.
+
+<p><center>
+  
+  <p><a name="IMG:6.45"><img src="experimente/bme680_libs.png"></a>
+  <br><small>Abbildung 6.45: Arduino-Bibliotheken für den BME680</small> 
+</center>
+
+<p>Die I²C-Adresse des BME680 ist durch entsprechende Verdrahtung
+verstellbar.  Fischertechnik stellt die Adresse auf <tt>0x76</tt> ein
+während die Adafruit-Bibliothek den Sensor standardmäßig unter der
+Adresse <tt>0x77</tt> erwartet. In den Beispielen unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit BME680 Library/examples/"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit BME680 Library</span></tt></a> muss daher jeweils die von
+fischertechnik verwendete Adresse explizit angegeben werden. Der
+Aufruf der Funktion <tt>bme.begin()</tt> ist in den Beispielen wie
+folgt zu ändern:
+
+<pre>
+     if (!bme.begin(0x76)) {
+       Serial.println("Could not find a valid BME680 sensor, check wiring!");
+       while (1);
+     }
+</pre>
+Der Sensor lässt sich mit dem Levelshifter als auch mit dem I²C-Expander
+betreiben sowie mit dem ft-Extender (siehe Abschnitt <a href="community.html#8.5">8.5</a>).
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.46"><img src="experimente/bme680_foto.jpg"></a></td></tr><tr><td align="center"><small>(a) Anschluss per Levelshifter</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.46"><img src="experimente/bme680_serial.png"></a></td></tr><tr><td align="center"><small>(b) Ausgabe von <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit BME680 Library/examples/bme680test"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit BME680 Library</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">bme680test</span></tt></a></small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.46: fischertechnik-Umweltsensor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Die Luftqualität wertet der BME680 durch Erhitzen und
+Widerstandsmessung aus. Die Adafruit-Bibliothek liefert hier lediglich
+den wenig aussagekräftigen Widerstandswert. Bosch selbst liefert eine
+Closed-Source-Bibliothek, um den Wert in den ACQ-Qualitätswert
+umzurechnen, den auch fischertechnik selbst in seinen Baukästen nutzt. Diese
+Bibliothek ist auch für den Arduino erhältlich, allerdings ist die
+Bibliothek zu groß für den Flash-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p>Eine alternative Berechnung eines abstrakten ``Air-Quality''-Wertes
+<tt>airq</tt> sieht wie folgt aus.
+
+<pre>
+     gas_baseline   = 200000.0;
+     hum_baseline   = 40.0;
+     hum_weighting  = 0.25;
+     gas_offset     = gas_baseline - gas_resistance;
+     hum_offset     = humidity - hum_baseline;
+     hum_score      = (100 - hum_baseline - hum_offset) /
+                      (100 - hum_baseline) * (hum_weighting * 100);
+     gas_score      = (gas_resistance / gas_baseline) * (100 - (hum_weighting * 100));
+     airq           = hum_score + gas_score;
+</pre>
+
+<p><h2><a name="6.14">6.14 WS2812B-Vollfarb-Leuchtdioden</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
+
+<p>Die Nutzung von WS2812B-Leuchtdioden am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erfordert etwas
+Lötarbeit sowie die Installation von Hilfs-Bibliotheken. Dieses
+Projekt wird daher nur einem fortgeschrittenen Nutzer empfohlen.
+
+<p>Der I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist zwar primär zum Anschluss von
+I²C-Geräten gedacht. Da die dort angeschlossenen Signale <tt>SDA</tt>
+und <tt>SCL</tt> aber auf frei benutzbaren Anschlüsse des
+ATmega32u4-Mikrocontrollers liegen können sie auch für andere
+Signalarten zweckentfremdet werden. Ein solches Signal ist der
+serielle synchrone Datenstrom, wie ihn die WS2812B-Leuchtdioden
+verwenden. Diese Leuchtdioden gibt es für kleines Geld als Meterware
+bei diversen Online-Anbietern.
+
+<p>Um die interne Stromversorgung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nicht zu überlasten
+sollten maximal zwei WS2812B-Leuchtdioden an der 5-Volt-Versorgung des
+I²C-Anschlusses des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> betrieben werden. Sollen mehr
+Leuchtdioden verwendet werden, so ist eine separate externe
+5-Volt-Versorgung vorzusehen.
+
+<p><center>
+  
+  <p><a name="IMG:6.47"><img src="experimente/ws2812b_svg.png"></a>
+  <br><small>Abbildung 6.47: Anschluss von zwei WS2812B-Vollfarb-Leuchtdioden</small>
+</center>
+
+<p>Jeder WS2812B-Leuchtdiodenstreifen verfügt über drei Eingangssignale:
+<tt>Masse</tt>, <tt>+5V</tt> und <tt>DI</tt>. Versorgungssignale
+<tt>Masse</tt> und <tt>+5V</tt> werden direkt mit ihren Gegenstücken
+am I²C-Anschluss verbunden. Das Signal <tt>DI</tt> steht für ``Data
+In'' und ist der Datensignaleingang der Leuchtdioden. Der ebenfalls am
+anderen Ende des Leuchtdiodenstreifens vorhandene Datenausgang
+(<tt>DO</tt>) darf nicht verwendet werden. Er leitet das über
+<tt>DI</tt> empfangene Signal gegebenenfalls an zusätzliche
+Leuchtdioden weiter. Das <tt>DI</tt>-Signal kann wahlweise mit dem
+<tt>SCL</tt> oder <tt>SDA</tt>-Pin des I²C-Anschluss verbunden
+werden.  Der entsprechende Signalname muss später im Sketch
+eingetragen werden. 
+
+<p>Die Leuchtdioden sollten mit Vorsicht angeschlossen
+werden. Kurzschlüsse oder falsche Verbindungen können die Leuchtdioden
+und den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> beschädigen.
+
+<p><h3><a name="6.15.1">6.15.1 Sketch <tt>WS2812FX</tt></a></h3>
+
+<p>Das Beispiel zu Ansteuern der WS2812B-Leuchtdioden sowie die nötige
+Code-Bibliothek können beispielsweise der
+WS2812BFX-Bibliothek<a href="#fn30"><sup>30</sup></a> 
+entnommen werden.  Andere Bibliotheken zur Ansteuerung der
+WS2812B-Leuchtdioden dürften gleichermaßen zu nutzen sein.
+
+<p>Die Installation der Bibliothek erfordert etwas Erfahrung mit der
+Arduino-IDE. Wurde die Bibliothek korrekt installiert, dann finden
+sich diverse Beispiele unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WS2812FX/examples/"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WS2812FX</span></tt></a>. Das Beispiel
+<tt><span style="background-color:#f0f0f0;">auto_mode_cycle</span></tt> ist gut geeignet, die Funktion der
+Leuchtdioden zu überprüfen.
+
+<p>Am Beginn des Sketches sind lediglich zwei kleine Änderungen
+vorzunehmen, um die Zahl und den verwendeten Anschluss der Leuchtdioden
+anzupassen.
+
+<pre>
+     <font color="green"> 1</font>  #include &lt;WS2812FX.h&gt;
+     <font color="green"> 2</font>  
+     <font color="green"> 3</font>  #define LED_COUNT 2
+     <font color="green"> 4</font>  #define LED_PIN SCL
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  #define TIMER_MS 5000
+</pre>
+<h2><a name="6.15">6.15 Musik aus dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verfügt über keinen eingebauten Lautsprecher und kann
+daher ohne Hilfe keine Töne ausgeben. Es ist aber problemlos möglich,
+einen Lautsprecher an einen der Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+anzuschließen. Dazu eignet sich natürlich besonders gut die
+fischertechnik Lautsprecherkassette 36936.
+
+<p><center>
+  
+  <p><a name="IMG:6.48"><img src="experimente/music_svg.png"></a>
+  <br><small>Abbildung 6.48: Anschluss der Lautsprecherkassette an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p>Wichtig ist, dass ein Vorwiderstand von mindestens 100&#8486; zwischen
+den Lautsprecher und den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geschaltet wird.  Werden die 9
+Volt des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> direkt auf den Lautsprecher gelegt, dann kann der
+Lautsprecher sehr leicht Schaden nehmen und erzeugte Töne wären extrem
+laut. Der Vorwiderstand begrenzt den maximal fließenden Strom und
+schützt Lautsprecher und Gehör.
+
+<p>Schaltet man nun den Ausgang O2 mit 50% PWM-Verhältnis ein, so
+kann man das PWM-Signal direkt hören.
+
+<pre>
+     ftduino.output_set(Ftduino::O2, Ftduino::HI, Ftduino::MAX/2);
+</pre>
+Durch das 50% PWM-Signal wird der Ausgang permanent zwischen
+<tt>HI</tt> und <tt>OFF</tt> umgeschaltet (siehe auch Abschnitt
+<a href="experimente.html#6.3">6.3</a>). Nur wenn der Ausgang <tt>HI</tt> ist fließt ein Strom
+vom Ausgang über den Lautsprecher zum Masse-Anschluss. Da die
+PWM-Frequenz der <tt>Ftduino</tt>-Bibliothek circa 200 Hertz beträgt
+hört man dann einen Ton in dieser Frequenz.
+
+<p>Die PWM-Erzeugung wird wie im Abschnitt <a href="experimente.html#6.3">6.3</a> beschrieben
+nicht über dafür vorgesehene PWM-Ausgänge des
+ATmega32u4-Mikrocontrollers erzeugt sondern durch Signale, die der
+Mikrocontroller kontinuierlich über seinen SPI-Bus an die
+Ausgangstreiber sendet. Dieses Vorgehen ist sehr flexibel und erlaubt
+es, alle acht Ausgänge mit unabhängigen Signalen zu steuern, es
+erfordert aber ein konstantes Mitarbeiten des Mikrocontrollers und
+nimmt einen gewissen Prozentsatz seiner Rechenzeit permanent in
+Anspruch. Je höher die PWM-Frequenz, desto häufiger muss der
+Mikrocontroller die Signale ändern und desto höher ist der Bedarf an
+Rechenzeit, die nicht im eigentlichen Sketch zur Verfügung steht.  Bei
+200 Hertz ist dieser Effekt zu vernachlässigen. Für eine Tonerzeugung
+sind aber Frequenzen im Kilohertzbereich nötig. Sollen nicht nur
+digitale an/aus-Rechtecksignale sondern z.B. auch analoge Sinussignale
+erzeugt werden, dann sind sogar PWM-Signale im Megahertz-Bereich
+nötig. Das kann der ATmega32u4 über den SPI-Bus nicht leisten.
+
+<p>Die MC33879-Ausgangstreiber haben jeweils zwei
+Eingänge<a href="#fn31"><sup>31</sup></a> ,
+die am SPI-Bus vorbei direkt angesteuert werden können.  Im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+liegen die meisten dieser Eingänge auf Masse, aber der für den Ausgang
+<tt>O2</tt> zuständige Eingang <tt>EN6</tt> des Ausgangstreibers <tt>U3</tt> ist
+mit dem Pin <tt>PB7</tt> des ATmega32u4 verbunden. Damit lässt sich einer
+der Ausgangstransistoren des Ausgangstreibers über diesen Pin am
+ATmega32u4 direkt schalten. In der Arduino-Welt hat dieser Pin die
+Nummer 11 und lässt sich mit den üblichen Arduino-Funktionen schalten.
+
+<pre>
+     // Highside-Treiber von Ausgang O2 für eine Sekunde aktivieren
+     pinMode(11, OUTPUT);
+     digitalWrite(11, HIGH);
+     delay(1000);
+     digitalWrite(11, LOW);
+</pre>
+Um den Effekt am Ausgang zu sehen muss die
+<tt>FtduinoSimple</tt>-Bibliothek in den Sketch eingebunden sein, da
+die nach wie vor nötige Initialisierung der Ausgangstreiber durch die
+Bibliothek erfolgt.
+
+<p><h3><a name="6.16.1">6.16.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Music">Music</a></tt></a></h3>
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
+
+<p>Alternativ können auf diesen Pin auch die Arduino-Befehle zur
+Ton-Erzeugung angewendet werden. Der Beispielsketch unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Music"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Music</span></tt></a> nutzt dies.
+
+<pre>
+     // Kammerton A für eine Sekunde spielen
+     tone(11, 440, 1000);
+</pre>
+<h3><a name="6.16.2">6.16.2 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MusicPwm">MusicPwm</a></tt></a></h3>
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
+
+<p>Der verwendete Pin <tt>PB7</tt> ist Teil des ATmega32u4-internen Timer
+1. Das bedeutet, dass spezielle Hardware des ATmega32u4 zur
+Signalerzeugung herangezogen werden kann. Damit können Signale hoher
+Frequenz ganz ohne Einsatz von Rechenleistung erzeugt werden.
+
+<p>Der Beispiel-Sketch <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt></a> nutzt das, um
+die exakt gleiche Melodie wie der vorige Sketch zu erzeugen. Der Code
+ist deutlich kryptischer und sieht komplizierter aus. Während die
+Arduino-<tt>tone()</tt>-Funktion aber im Hintergrund in einem sogenannten
+Timer-Interrupt Rechenleistung benötigt, um den Ton zu erzeugen werden
+die Töne in diesem Beispiel allein aus der sogenannten Timer-Hardware
+des ATmega32u4-Prozessors erzeugt. Lediglich zum Ändern der Tonhöhe
+oder zum Stoppen der Tonausgabe ist der eigentliche Rechenteil des
+Prozessors verantwortlich.
+
+<p>In einem einfachem Musik-Beispiel wie diesem ist der Hintergrundbedarf
+an Rechenleistung zu vernachlässigen. Sollen aber sehr hohe
+Frequenzen, z.B. im Ultraschallbereich oder höher erzeugt werden, so
+steigt der Bedarf an Rechenleistung im Hintergrund, da mit höheren
+Frequenzen häufiger das Signal geändert werden muss. Die Verwendung
+der Timer-Hardware hat dieses Problem nicht. Die zur Tonerzeugung
+nötigen Signalwechsel, also das permanente Ein- und Ausschalten des
+Ausgangs in der gewünschten Ton-Frequenz wird automatisch erledigt und
+benötigt daher auch bei hohen Frequenzen keinerlei Rechenzeit des
+Mikrocontrollers.
+
+<p><h2><a name="6.16">6.16 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als MIDI-Instrument</a></h2> 
+
+<p>Einen Lautsprecher anzuschließen ist nur eine Art, Töne zu
+erzeugen. Baukastensysteme wie fischertechnik laden natürlich ein, auf
+elektromechanische Weise Töne auszugeben z.B. mit Hilfe der Klangrohre
+aus der Dynamic-Baukastenserie.
+
+<p>Mit seiner flexiblen USB-Schnittstelle bietet der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eine
+elegante Methode, solche Fähigkeiten nutzbar zu machen. Die sogenannte
+MIDI-Schnittstelle<a href="#fn32"><sup>32</sup></a>  wurde
+entwickelt, um Computer und elektronische Musikinstrumente zu
+verbinden. Neben der elektrisch sehr speziellen MIDI-Verbindung gibt
+es eine Variante von MIDI über USB. Die Arduino-Umgebung bietet dafür
+die <tt>MIDIUSB</tt>-Bibliothek an, die über die Bibliotheksverwaltung
+der IDE direkt installiert werden kann.
+
+<p><center>
+  
+  <p><a name="IMG:6.49"><img src="experimente/installieren_midiusb.png"></a>
+  <br><small>Abbildung 6.49: Installation der MIDIUSB-Bibliothek in der Arduino-IDE</small>
+</center>
+
+<p><h3><a name="6.17.1">6.17.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MidiInstrument">MidiInstrument</a></tt></a></h3>
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Beispielsketch unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MidiInstrument"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MidiInstrument</span></tt></a>
+nutzt diese Bibliothek, um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als MIDI-Gerät für den PC
+nutzbar zu machen. Treiber für entsprechende Geräte bringen die
+gängigen Betriebssysteme bereits mit und Windows, Linux und MacOS
+erkennen einen zum MIDI-Gerät konfigurierten <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ohne weitere
+Treiberinstallation als USB-Audio-Gerät.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist ein sogenanntes USB-Verbundgerät. Das bedeutet,
+dass er mehrere USB-Funktionen gleichzeitig umsetzen kann. Im
+MIDI-Fall bedeutet das, dass er gegenüber dem PC als MIDI-Gerät
+erscheint und <em>gleichzeitig</em> weiterhin über die
+USB-<tt>COM:</tt>-Schnittstelle verfügt, was speziell während der
+Sketchentwicklung sehr praktisch sein kann.
+
+<p>Ein mit dem <tt>MidiInstrument</tt>-Sketch versehener <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird
+z.B. von einem Linux-PC mit den gängigen MIDI-Werkzeugen erkannt:
+
+<pre>
+     <font color="green"> 1</font>  $ aplaymidi -l
+     <font color="green"> 2</font>   Port    Client name                      Port name
+     <font color="green"> 3</font>   14:0    Midi Through                     Midi Through Port-0
+     <font color="green"> 4</font>   24:0    ftDuino                          ftDuino MIDI 1
+     <font color="green"> 5</font>  
+     <font color="green"> 6</font>  $ aplaymidi -p 24:0 demosong.mid
+     <font color="green"> 7</font>  ...
+</pre>
+Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird eine Stimme des Songs auf einem an <tt>O2</tt>
+angeschlossenen Lautsprecher abspielen und gleichzeitig auf dem
+<tt>COM:</tt>-Port Informationen über die empfangenen Befehle ausgeben
+und damit als Basis für eine elektromechanisches Instrument dienen.
+
+<p>Nur wenige MIDI-Dateien lassen sich mit diesem einfachen Setup
+befriedigend abspielen, weil dieses einfache Beispiel nur monophon ist
+und nur einen Ton zur Zeit abspielen kann. Mehrstimmige Lieder können
+nicht abgespielt werden. Diese Beschränkung lässt sich in einem
+mehrstimmigen mechanischen Musikmodell natürlich aufheben und ergibt
+sich allein aus der sehr simplen hier verwendeten Art der
+Tonerzeugung.
+
+<p>Eine monophone Beispieldatei <tt>song.mid</tt> findet sich im
+Verzeichnis des Sketches.
+
+<p><h2><a name="6.17">6.17 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Android-Smartphone</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Mit den meisten modernen Android-Smartphones und -Tabletts lässt sich
+der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über ein passendes Kabel direkt verbinden. Dafür ist
+ein sogenanntes USB-On-the-Go(USB-OTG)-Kabel notwendig. Für den
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eignet sich das Lindy 31717 gut. Es verfügt an beiden Enden
+über die passenden Stecker und ist mit 50cm kurz genug, um in einem
+Modell untergebracht zu werden.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.50"><img src="experimente/android-screenshot.png"></a></td></tr><tr><td align="center"><small>(a) Screenshot</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.50"><img src="experimente/android.jpg"></a></td></tr><tr><td align="center"><small>(b) Smartphone am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.50: Android-Demo zur Nutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Smartphone</small>
+</center>
+
+<p>Mit USB-OTG übernimmt das Smartphone die Rolle des PCs. Es beim
+Anschluss eines entsprechenden Kabels eine Spannung am USB-Anschluss
+bereit und übernimmt die Steuerung des USB-Bus als aktiver sogenannter
+USB-Host. Werden die Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nicht benötigt, so kann
+auf diese Weise sogar auf eines eigenen Stromversorgung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+verzichtet werden. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird dann vom Handy mit Strom versorgt.
+
+<p>Die gesamte Kommunikation zwischen Smartphone und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> läuft über
+die serielle USB-Verbindung (COM-Port) und wird <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-seitig nicht anders
+behandelt als die übliche Kommunikation mit dem PC. In einigen Fällen mag
+es sinnvoll sein, wenn dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bekannt ist, ob die USB-Verbindung
+zum Smartphone besteht oder nicht, wenn z.B. ohne Smartphone eine automatische
+Funktion ausgeführt werden soll während mit angeschlossenem Smartphone eine
+manuelle Bedienung erwünscht ist. Das ist im Sketch über die Abfrage der
+USB-Stromversorgung möglich.
+
+<pre>
+     // Abfrage der USB-Stromversorgung vorbereiten (z.B. in der setup()-Funktion)
+     USBCON |= (1&lt;&lt;OTGPADE);
+     
+     // Abfrage der USB-Stromversorgung
+     if(USBSTA & (1&lt;&lt;VBUS)) {
+       // USB ist verbunden
+       // ...
+     } else {
+       // USB ist nicht verbunden
+       // ...
+     }
+</pre>
+Ein kompletter einfacher Demo-Sketch findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/AndroidDemo"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">USB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">AndroidDemo</span></tt></a>. Er sendet über USB einmal pro
+Sekunde eine Nachricht (``COUNTER: XX'') und erwartet die Nachricht
+``ON'' oder ``OFF'' und schaltet den Ausgang <tt>O1</tt> entsprechend.
+
+<p>Im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Repository findet sich die dazu passende Android-App<a href="#fn33"><sup>33</sup></a> .  Sie lässt sich im
+AndroidStudio übersetzen und als Basis für eigene Entwicklungen
+nutzen. Die Android-App basiert auf
+der UsbSerial-Bibliothek<a href="#fn34"><sup>34</sup></a>  und kann nach minimalen
+Anpassungen neben dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auch die meisten Arduinos anbinden.
+
+<p>Die Benutzung ist sehr viel einfacher als die sonst verwendeten
+Bluetooth- oder WLAN-Verbindungen, da sie keine weitere Konfiguration
+erfordert. Sobald Smartphone und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden werden startet
+die entsprechende App und die Verbindung ist vollständig.
+
+<p><h2><a name="6.18">6.18 WebUSB: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> via Webbrowser steuern</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
+
+<p>Die übliche Weise, auf USB-Geräte wie den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zuzugreifen folgt
+einem festen Schema: Auf dem PC werden passenden Treiber installiert,
+die dem PC mitteilen, wie die Kommunikation mit dem dem Gerät
+abzulaufen hat. Eine PC-Anwendung wie die Arduino-IDE nutzt diesen
+Treiber, um auf das Gerät zuzugreifen.
+
+<p>WebUSB<a href="#fn35"><sup>35</sup></a> 
+ist der Versuch, die Benutzung von USB-Geräten massiv zu vereinfachen,
+indem auf Treiber- und Softwareinstallation komplett komplett
+verzichtet wird. Stattdessen bringt eine spezielle Webseite alles mit,
+um direkt mit einem entsprechend angepassten USB-Gerät zu
+kommunizieren. Dabei kann das USB-Gerät dem PC mitteilen, unter
+welcher URL die steuernde Webseite zu finden ist. Für den Anwender
+ergibt sich so eine echte Plug-'n-Play-Lösung. Nach dem Anstecken
+eines bisher unbekannten WebUSB-Gerätes öffnet der Browser direkt die
+passende Webseite und das Gerät kann sofort ohne Treiber- oder
+Softwareinstallation verwendet werden.
+
+<p><h3><a name="6.19.1">6.19.1 Chrome-Browser</a></h3> 
+
+<p>WebUSB ist kein offizieller Web-Standard und wird daher lediglich von
+Googles Chromebrowser<a href="#fn36"><sup>36</sup></a> 
+unterstützt. Chrome muss für dieses Experiment nicht auf dem PC
+installiert sein, es reicht, die sogenannte
+Portable-Version<a href="#fn37"><sup>37</sup></a> 
+z.B. von einem USB-Stick zu starten. Aus Sicherheitsgründen hat Google
+in aktuellen Versionen die Möglichkeit zum automatischen Start der
+vom Gerät gemeldeten URL unterbunden. Die URL <a href="https://harbaum.github.io/ftduino/webusb/console">https://harbaum.github.io/ftduino/webusb/console</a> muss daher
+manuell im Browser angegeben werden.
+
+<p>Der Chrome-Browser ist der von Google mitgelieferte Browser auf
+Anrdoid-Smartphones und -Tabletts. Diese Version eignet sich ebenfalls
+für WebUSB-Experimente. Zum Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an das Smartphone
+wird ein USB-Host-Kabel (z.B. Lindy 31717, siehe Abschnitt
+<a href="experimente.html#6.17">6.17</a>) benötigt.
+
+<p><center>
+  
+  <p><a name="IMG:6.51"><img src="experimente/webusb_chrome_icon.png"></a>
+  <br><small>Abbildung 6.51: Der Chrome-Browser ist auf den meisten Android-Geräten vorinstalliert</small>
+</center>
+
+<p>Auf Linux-PCs erfüllt den gleichen Zweck der Chromium-Browser. Er
+lässt sich normalerweise über den Paketmanager nachinstallieren. Im
+Gegensatz zur Windows-Version funktioniert hier auch das automatische
+Weiterleiten an die vom USB-Gerät bereitgestellte URL wie in Abbildung
+<a href="experimente.html#IMG:6.52">6.52</a> zu sehen.
+
+<p><center>
+  
+  <p><a name="IMG:6.52"><img src="experimente/webusb_hinweis.png"></a>
+  <br><small>Abbildung 6.52: Meldung beim Eistecken des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei laufendem Chromium-Browser</small> 
+</center>
+
+<p>Auf Linux-PCs hat der Webbrowser normalerweise keine ausreichenden
+Rechte, um USB-Geräte direkt ansprechen zu dürfen. Die Installation der
+<tt>udev</tt>-Regeln wie in Abschnitt <a href="installation.html#2.2.3">2.2.3</a> beschrieben
+ermöglicht den Zugriff.
+
+<p><h3><a name="6.19.2">6.19.2 WebUSB-Sketches</a></h3>
+
+<p>Einige WebUSB-Beispiel-Sketches werden als Beispiel in der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation der Arduino-IDE unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt></a>
+mitgeliefert.
+
+<p>Die URL eines WebUSB-Projektes wird im Sketch direkt angegeben und
+kann in eigenen Sketches entsprechend angepasst werden.
+
+<pre>
+     WebUSB WebUSBSerial(1 /* https:// */, "harbaum.github.io/ftduino/webusb/console");
+</pre>
+Neben dem passenden Sketch verlangt die WebUSB-Spezifikation weitere
+Anpassungen an der USB-Konfiguration des Geräts. Die nötigen
+Änderungen nimmt die Arduino-IDE vor, wenn man in der Board-Auswahl
+den Board-Typ <tt>ftDuino (WebUSB)</tt> wie in Abbildung
+<a href="experimente.html#IMG:6.53">6.53</a> dargestellt auswählt. Diese Einstellung sollte
+nur für WebUSB verwendet werden, da die Anpassungen nur in
+Zusammenhang mit der WebUSB-Bibliothek vollständig sind und Windows
+das Gerät andernfalls nicht erkennt.
+
+<p><center>
+  
+  <p><a name="IMG:6.53"><img src="experimente/webusb_board.png"></a>
+  <br><small>Abbildung 6.53: Auswahl der WebUSB-Konfiguration</small> 
+</center>
+
+<p><h3><a name="6.19.3">6.19.3 Console</a></h3>
+
+<p>Der <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/ Console"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;"> Console</span></tt></a>-Sketch bietet eine einfache
+Kommandoschnittstelle über USB, mit der die eingebaute Leuchtdiode
+ein- und ausgeschaltet werden kann.
+
+<p>Ist der Sketch auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> installiert, der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an den
+PC angeschlossen und der Chrome- oder Chromium-Browser geöffnet, so
+reicht ein Klick auf <tt>Connect</tt>, um die Verbindung zum Gerät aus
+dem Browser herzustellen. Die Leuchtdiode kann dann über direkt in der
+Console eigegebene Befehle gesteuert oder durch Klick auf die Buttons
+geschaltet werden.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.54"><img src="experimente/webusb_console.png"></a></td></tr><tr><td align="center"><small>(a) Chromium-Browser unter Linux</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.54"><img src="experimente/webusb_android.png"></a></td></tr><tr><td align="center"><small>(b) Chrome-Browser unter Android</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.54: WebUSB-Console des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  
+<p></center>
+
+<p><h3><a name="6.19.4">6.19.4 Brickly-lite</a></h3> 
+
+<p>Das in Abschnitt <a href="community.html#8.3">8.3</a> beschriebene
+Brickly-Projekt<a href="#fn38"><sup>38</sup></a> 
+hat seinen Ausgangspunkt bei der Community-Firmware für den
+TXT-Controller. Brickly basiert auf Blockly<a href="#fn39"><sup>39</sup></a> , einer grafischen
+Programmierumgebung zur Nutzung per Webbrowser. Im Falle des TXTs
+können so per Smartphone, PC oder Tablett mit Hilfe des Webbrowsers
+Programmer erstellt und auf dem TXT laufen gelassen werden.
+
+<p>Brickly-lite wurde für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> völlig neu konzipiert. Auf die
+Ausführung von Blockly-generiertem Code auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wurde dabei
+verzichtet. Stattdessen werden die Brickly-lite-Programme am Browser
+erstellt und auch im Browser ausgeführt. Lediglich zur Bedienung der
+fischertechnik-Sensoren und -Aktoren greift der Browser per USB auf
+einen angeschlossenen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zurück. Auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> muss dabei
+der Sketch <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/IoServer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">IoServer</span></tt></a> laufen. Da dieser Sketch mit
+einem internen OLED-Display (siehe Abschnitt <a href="controller.html#1.3.7">1.3.7</a>)
+umgehen kann wird die ``Adafruit GFX Library''<a href="#fn40"><sup>40</sup></a> 
+zum Übersetzen des Sketches benötigt.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:6.55"><img src="experimente/brickly_chromium.png"></a></td></tr><tr><td align="center"><small>(a) im Chrome-Browser am PC</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.55"><img src="experimente/brickly_lite_tablet.jpg"></a></td></tr><tr><td align="center"><small>(b) am Android-Tablett mit Lindy-31717-Kabel</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.55: Brickly-lite für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  
+<p></center>
+
+<p>Die Brickly-lite-Webseiten finden sich unter
+<a href="https://harbaum.github.io/ftduino/webusb/brickly-lite/">https://harbaum.github.io/ftduino/webusb/brickly-lite/</a>. Zur
+Benutzung muss der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit installiertem
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/IoServer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">IoServer</span></tt></a>-Sketch direkt an PC, Smartphone oder Tablett
+angeschlossen sein. Der Chrome-Browser verbindet sich dann mit dem
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und sobald Ein- oder Ausgaben am Modell erfolgen sollen
+sendet der Browser enstprechende Befehle an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<p>Den Anspruch eines echten ``Plug-n-Play''-Erlebnisses kann die
+Festlegung auf den Chrome-Browser und der fehlende Auto-Start der vom
+Gerät gesendeten URL unter Windows leider nicht erfüllen. Mit einer
+vorbereitenen Portable-Installation des passenden Browsers auf einem
+USB-Stick kann man dennoch auch für Anfänger leicht und ohne
+Installation zu nutzende Szenarien schaffen, die sich z.B. auf
+PC-Pools in Schulen einsetzen lassen. Das Beispiel unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/Console"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Console</span></tt></a> kann dafür als Ausgangspunkt für
+Browser-bedienbare einfache Modelle dienen.
+
+<p>Ein ähnliches grafisches Programmiersystem ist ``Scratch for
+Arduino''. Mehr Informationen finden sich in Abschnitt <a href="community.html#8.6">8.6</a>.
+<hr><small>
+<a name="fn1">1) </a>Im Internet leicht zu finden
+unter dem Stichwort ``Floppymusik''<br>
+<a name="fn2">2) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30571">https://ft-datenbank.de/tickets?fulltext=30571</a><br>
+<a name="fn3">3) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=132292">https://ft-datenbank.de/tickets?fulltext=132292</a><br>
+<a name="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=132292">https://ft-datenbank.de/tickets?fulltext=132292</a><br>
+<a name="fn5">5) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=540585">https://ft-datenbank.de/tickets?fulltext=540585</a><br>
+<a name="fn6">6) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30275">https://ft-datenbank.de/tickets?fulltext=30275</a><br>
+<a name="fn7">7) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=36437">https://ft-datenbank.de/tickets?fulltext=36437</a><br>
+<a name="fn8">8) </a><a href="https://de.wikipedia.org/wiki/Hei%C3%9Fleiter">https://de.wikipedia.org/wiki/Hei%C3%9Fleiter</a><br>
+<a name="fn9">9) </a>Weitere Informationen und tiefergehenden Erklärungen
+  zu den Arduino-Bibliotheken zur Maus- und Tastaturnachbildung finden
+  sich unter
+  <a href="https://www.arduino.cc/en/Reference/MouseKeyboard">https://www.arduino.cc/en/Reference/MouseKeyboard</a><br>
+<a name="fn10">10) </a>Mehr Info unter <a href="http://www.usb.org/developers/hidpage/">http://www.usb.org/developers/hidpage/</a><br>
+<a name="fn11">11) </a><a href="http://www.usb.org/developers/hidpage/Hut1_12v2.pdf">http://www.usb.org/developers/hidpage/Hut1_12v2.pdf</a><br>
+<a name="fn12">12) </a>Eine große Sammlung von Sensorbibliotheken
+findet sich unter <a href="https://github.com/ControlEverythingCommunity">https://github.com/ControlEverythingCommunity</a>.<br>
+<a name="fn13">13) </a><a href="https://www.thingiverse.com/thing:2542260">https://www.thingiverse.com/thing:2542260</a><br>
+<a name="fn14">14) </a>Datenblatt des SSD1306: <a href="https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf">https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf</a><br>
+<a name="fn15">15) </a>Adafruit-SSD1306-Bibliothek: <a href="https://github.com/adafruit/Adafruit_SSD1306">https://github.com/adafruit/Adafruit_SSD1306</a><br>
+<a name="fn16">16) </a>Adafruit-GFX-Bibliothek: <a href="https://github.com/adafruit/Adafruit-GFX-Library">https://github.com/adafruit/Adafruit-GFX-Library</a><br>
+<a name="fn17">17) </a>VL53L0X-Gehäuse: <a href="https://github.com/harbaum/ftduino/tree/master/addons/vl53l0x">https://github.com/harbaum/ftduino/tree/master/addons/vl53l0x</a><br>
+<a name="fn18">18) </a>Adafruit-Bibliothek für den VL53L0X: <a href="https://github.com/adafruit/Adafruit_VL53L0X">https://github.com/adafruit/Adafruit_VL53L0X</a><br>
+<a name="fn19">19) </a>Weitere Infos zum
+<tt>i2c_tiny_usb</tt> finden sich unter <a href="https://github.com/harbaum/I2C-Tiny-USB">https://github.com/harbaum/I2C-Tiny-USB</a><br>
+<a name="fn20">20) </a>Auch der Raspberry-Pi oder der
+  fischertechnik TXT sind Linux-PCs<br>
+<a name="fn21">21) </a>
+  <a href="https://harbaum.github.io/ftduino/ftduino/libraries/FtduinoSimple/examples/I2C/I2cSlave/master.py">https://harbaum.github.io/ftduino/ftduino/libraries/FtduinoSimple/examples/I2C/I2cSlave/master.py</a><br>
+<a name="fn22">22) </a>
+  <a href="https://harbaum.github.io/ftduino/ftduino/libraries/Ftduino/examples/I2C/I2cSlave/master.py">https://harbaum.github.io/ftduino/ftduino/libraries/Ftduino/examples/I2C/I2cSlave/master.py</a><br>
+<a name="fn23">23) </a>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Expander:
+  <a href="https://github.com/harbaum/ftduino/tree/master/addons/i2c-expander">https://github.com/harbaum/ftduino/tree/master/addons/i2c-expander</a><br>
+<a name="fn24">24) </a>
+  <a href="https://github.com/harbaum/cfw-apps/tree/master/packages/ftDuinoI2C">https://github.com/harbaum/cfw-apps/tree/master/packages/ftDuinoI2C</a><br>
+<a name="fn25">25) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=158402">https://ft-datenbank.de/tickets?fulltext=158402</a><br>
+<a name="fn26">26) </a><a href="https://content.ugfischer.com/cbfiles/fischer/Zulassungen/ft/158402-Kombisensor-Kurzanleitung-BMX055-2017-06-09.pdf">https://content.ugfischer.com/cbfiles/fischer/Zulassungen/ft/158402-Kombisensor-Kurzanleitung-BMX055-2017-06-09.pdf</a><br>
+<a name="fn27">27) </a><a href="https://github.com/ControlEverythingCommunity/BMX055">https://github.com/ControlEverythingCommunity/BMX055</a><br>
+<a name="fn28">28) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=544624">https://ft-datenbank.de/tickets?fulltext=544624</a><br>
+<a name="fn29">29) </a>Bosch BME680:
+  <a href="https://www.bosch-sensortec.com/bst/products/all_products/bme680">https://www.bosch-sensortec.com/bst/products/all_products/bme680</a><br>
+<a name="fn30">30) </a><a href="https://github.com/kitesurfer1404/WS2812FX">https://github.com/kitesurfer1404/WS2812FX</a><br>
+<a name="fn31">31) </a><tt>EN5</tt> und <tt>EN6</tt>, siehe
+  <a href="http://cache.freescale.com/files/analog/doc/data_sheet/MC33879.pdf">http://cache.freescale.com/files/analog/doc/data_sheet/MC33879.pdf</a><br>
+<a name="fn32">32) </a>MIDI, Musical Instrument Digital
+  Interface, <a href="https://en.wikipedia.org/wiki/MIDI">https://en.wikipedia.org/wiki/MIDI</a><br>
+<a name="fn33">33) </a><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Android-App: <a href="https://github.com/harbaum/ftduino/tree/master/android">https://github.com/harbaum/ftduino/tree/master/android</a><br>
+<a name="fn34">34) </a>UsbSerial für Android:  <a href="https://github.com/felHR85/UsbSerial">https://github.com/felHR85/UsbSerial</a><br>
+<a name="fn35">35) </a>WebUSB:
+  <a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web</a><br>
+<a name="fn36">36) </a>Google-Chrome-Browser:
+  <a href="https://www.google.com/intl/de_ALL/chrome/">https://www.google.com/intl/de_ALL/chrome/</a><br>
+<a name="fn37">37) </a>Chrome-Portable:
+  <a href="https://portableapps.com/apps/internet/google_chrome_portable">https://portableapps.com/apps/internet/google_chrome_portable</a><br>
+<a name="fn38">38) </a>Brickly für den TXT:
+  <a href="https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/">https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/</a><br>
+<a name="fn39">39) </a>Blockly:
+  <a href="https://developers.google.com/blockly/">https://developers.google.com/blockly/</a><br>
+<a name="fn40">40) </a>Adafruit GFX
+  Library: <a href="https://github.com/adafruit/Adafruit-GFX-Library">https://github.com/adafruit/Adafruit-GFX-Library</a><br>
+</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - experimente</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

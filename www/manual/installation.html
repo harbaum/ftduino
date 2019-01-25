@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>installation</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="2">2 Installation</a></h1> 
+
+<p>Die Installation der Software zur Benutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erfolgt in
+mehreren Schritten. Zu allererst muss der Computer mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+bekannt gemacht werden, in dem ein passender Treiber dafür sorgt, dass
+der Computer erfährt wie er mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu kommunizieren hat.
+
+<p>Im zweiten Schritt wird dann die sogenannte Arduino-IDE installiert,
+also die eigentliche Programmierumgebung sowie die Arduino-IDE mit
+dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden.
+
+<p>Für die Installation und auch für die im Kapitel <a href="ersteschritte.html#3">3</a>
+folgenden ersten Schritte reicht es, den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per USB mit dem PC
+zu verbinden. Eine zusätzliche Stromversorgung per Netzteil oder
+Batterie ist erst nötig, wenn die Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verwendet
+werden sollen.
+
+<p><h2><a name="2.1">2.1 Treiber</a></h2>
+
+<p>Unter den meisten Betriebssystemen wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> vom Computer
+direkt erkannt, sobald er angesteckt wird. Das trifft unter anderem
+auf Linux, MacOS&nbsp;X und Windows&nbsp;10 zu, aber nicht für Windows&nbsp;7.
+
+<p><h3><a name="2.2.1">2.2.1 Windows&nbsp;10</a></h3> 
+
+<p>Die Verwendung des ftDuinos unter Windows&nbsp;10 erfordert keine
+Treiberinstallation durch den Anwender.
+
+<p>Sobald der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an einen PC unter Windows&nbsp;10 angesteckt wird
+werden die passenden Treiber automatisch installiert. Windows&nbsp;10 zeigt
+dies beim ersten Anschließen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> durch eine entsprechende
+Meldung am unteren rechten Bildschirmrand an. Nach einigen Sekunden
+ist die Installation abgeschlossen und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> benutzbar.
+
+<p>Weiteres An- und Abstecken erzeugt keine weiteren Meldungen,
+allerdings ist die erfolgreiche Erkennung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter
+Windows&nbsp;10 jederzeit an der typischen Melodie zu erkennen, die ein
+Windows-PC beim Erkennen von Hardware ausgibt.
+
+<p><h3><a name="2.2.2">2.2.2 Windows&nbsp;7 und Windows&nbsp;Vista</a></h3> 
+
+<p>Windows&nbsp;7 und Windows&nbsp;Vista bringen den passenden Treiber ebenfalls
+bereits mit.  Allerdings muss eine passende <tt>.inf</tt>-Datei
+geladen werden, um dafür zu sorgen, dass Windows diesen Treiber für
+den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzt.
+
+<p>Dass kein Treiber geladen ist erkennt man u.a. daran, dass der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> im Gerätemanager unter ``Andere Geräte'' aufgeführt wird.
+
+<p><center>
+  
+  <p><a name="IMG:2.1"><img src="installation/geraetemanager_unknown.png"></a>
+  <br><small>Abbildung 2.1: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ohne passenden Treiber unter Windows&nbsp;7</small>
+</center>
+
+<p>Die <tt>.inf</tt>-Datei ist unter <a href="https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf">https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf</a> zu finden.
+
+
+
+<p>Nach dem Download reicht ein Rechtsklick auf die Datei und die Auswahl von
+``Installieren'' im folgenden Menü.
+
+<p><center>
+  
+  <p><a name="IMG:2.2"><img src="installation/installieren.png"></a>
+  <br><small>Abbildung 2.2: Rechtsklick auf <tt>ftduino.inf</tt></small>
+</center>
+
+<p>Windows bietet daraufhin an, den Treiber zu installieren.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:2.3"><img src="installation/driver_install.png"></a></td></tr><tr><td align="center"><small>(a) Bestätigungsabfrage</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:2.3"><img src="installation/sicherheitsabfrage.png"></a></td></tr><tr><td align="center"><small>(b) Ggf. folgende Sicherheitsabfrage</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 2.3: Installation des Treibers</small>
+</center>
+
+<p>Ggf. erfolgt noch eine Sicherheitsabfrage. Dieser Frage kann man
+getrost zustimmen, da der eigentliche Treiber bereits Teil von Windows
+7 bzw. Windows&nbsp;Vista ist. Die <tt>ftduino.inf</tt>-Datei fordert
+Windows lediglich auf, ihn zu verwenden.
+
+<p>Sobald die Installation erfolgreich war wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als
+sogenannter <tt>COM:</tt>-Port eingebunden.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:2.4"><img src="installation/ftduino_detected.png"></a></td></tr><tr><td align="center"><small>(a) Anwendungsmodus</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:2.4"><img src="installation/ftduino_bootloader_detected.png"></a></td></tr><tr><td align="center"><small>(b) Bootloader</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 2.4: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit passendem Treiber unter Windows&nbsp;7</small>
+</center>
+
+<p>Je nach Betriebsmodus des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und je nach installierter
+Anwendung auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> befindet er sich im Anwendungsmodus oder
+im Bootloader. Windows unterscheidet zwischen beiden Zuständen und
+weist zwei unterschiedliche <tt>COM:</tt>-Ports zu. Das ist so gewollt
+und soll nicht weiter irritieren. In den meisten Fällen wird der
+Benutzer nur den Anwendungsmodus zu sehen bekommen.
+
+<p><h3><a name="2.2.3">2.2.3 Linux</a></h3> 
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird von einem handelsüblichen Linux-PC ohne weitere
+manuelle Eingriffe erkannt. Da er das sogenannte ``Abstract Control
+Model'' (ACM) implementiert taucht er im Linux-System unter
+<tt>/dev/ttyACMX</tt> auf, wobei X eine fortlaufende Nummer ist. Sind
+keine weiteren ACM-Geräte verbunden, so wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als
+<tt>/dev/ttyACM0</tt> eingebunden.
+
+<p>Mehr Details erfährt man z.B. direkt nach dem Anstecken des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+mit dem <tt>dmesg</tt>-Kommando:
+
+<pre>
+     <font color="green"> 1</font>  $ dmesg
+     <font color="green"> 2</font>  ...
+     <font color="green"> 3</font>  [15822.397956] usb 3-1: new full-speed USB device number 9 using xhci_hcd
+     <font color="green"> 4</font>  [15822.540331] usb 3-1: New USB device found, idVendor=1c40, idProduct=0538
+     <font color="green"> 5</font>  [15822.540334] usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+     <font color="green"> 6</font>  [15822.540336] usb 3-1: Product: ftDuino
+     <font color="green"> 7</font>  [15822.540337] usb 3-1: Manufacturer: Till Harbaum
+     <font color="green"> 8</font>  [15822.541084] cdc_acm 3-1:1.0: ttyACM0: USB ACM device
+</pre>
+Die genauen Meldungen variieren von System zu System, aber der
+generelle Inhalt wird vergleichbar sein.
+
+<p>Weitere Details zum erkannten USB-Gerät liefert das
+<tt>lsusb</tt>-Kommando:
+
+<pre>
+     <font color="green"> 1</font>  $ lsusb -vd 1c40:0538
+     <font color="green"> 2</font>  Bus 003 Device 009: ID 1c40:0538 EZPrototypes 
+     <font color="green"> 3</font>  Device Descriptor:
+     <font color="green"> 4</font>    bLength                18
+     <font color="green"> 5</font>    bDescriptorType         1
+     <font color="green"> 6</font>    bcdUSB               2.00
+     <font color="green"> 7</font>    bDeviceClass          239 Miscellaneous Device
+     <font color="green"> 8</font>    bDeviceSubClass         2 ?
+     <font color="green"> 9</font>    bDeviceProtocol         1 Interface Association
+     <font color="green">10</font>    bMaxPacketSize0        64
+     <font color="green">11</font>    idVendor           0x1c40 EZPrototypes
+     <font color="green">12</font>    idProduct          0x0538 
+     <font color="green">13</font>  ...
+</pre>
+Diese Ausgaben sind besonders interessant, wenn man wie in Abschnitt
+<a href="experimente.html#6.10">6.10</a> oder <a href="experimente.html#6.16">6.16</a> beschrieben die erweiterten
+USB-Möglichkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzt.
+
+<p><h4>``Device or resource busy''</h4>
+
+<p>Auch wenn Linux bereits den eigentlichen Gerätetreiber mitbringt kann
+es trotzdem nötig sein, die Systemkonfiguration anzupassen. Das
+Symptom ist, dass es beim Versuch, auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zuzugreifen, in
+der Arduino-IDE zu der folgenden Fehlermeldung kommt.
+
+<p><center>
+  
+  <p><a name="IMG:2.5"><img src="installation/device_busy.png"></a>
+  <br><small>Abbildung 2.5: Fehlermeldung bei installiertem ModemManager</small>
+</center>
+
+<p>In diesem Fall ist die wahrscheinlichste Ursache, dass der
+<tt>ModemManager</tt>, ein Programm zur Bedienung von Modems,
+installiert ist und sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden hat. Um zu
+verhindern, dass der ModemManager versucht, sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu
+verbinden, ist die Eingabe des folgenden Kommandos nötig:
+
+<p><pre>
+     <font color="green"> 1</font>    sudo wget -P /etc/udev/rules.d https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/99-ftduino.rules
+</pre>
+
+<p>Die Datei <tt>/etc/udev/rules.d/99-ftduino.rules</tt> muss danach
+exakt folgenden Inhalt haben:
+
+<pre>
+     <font color="green"> 1</font>  ATTRS{idVendor}=="1c40" ATTRS{idProduct}=="0537", ENV{ID_MM_DEVICE_IGNORE}="1"
+     <font color="green"> 2</font>  ATTRS{idVendor}=="1c40" ATTRS{idProduct}=="0538", ENV{ID_MM_DEVICE_IGNORE}="1", MODE="0666"
+</pre>
+Danach muss der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> einmal kurz vom PC getrennt und wieder
+angesteckt werden und sollte in der Folge ohne Probleme zu verwenden
+sein.
+
+<p>Das Kommando legt eine Datei namens
+<tt>/etc/udev/rules.d/99-ftduino.rules</tt> an. Diese Datei enthält
+Regeln, wie der Linux-Kernel mit bestimmten Ereignissen umgehen
+soll. In diesem Fall soll beim Einstecken eines USB-Gerätes mit der
+Hersteller-Identifikation <tt>1c40</tt> und den Geräteidentifikationen
+<tt>0537</tt> und <tt>0538</tt> dieses vom ModemManager ignoriert
+werden. Zusätzlich werden die Zugriffsrechte auf das USB-Gerät etwas
+ausgeweitet, so dass der in Abschnitt <a href="experimente.html#6.19.1">6.19.1</a> beschriebene
+Zugriff aus dem Web-Browser funktioniert.
+
+
+
+<p><h2><a name="2.2">2.2 Arduino-IDE</a></h2>
+
+<p>Die integrierte Entwicklungsumgebung (IDE) für den Arduino bekommt man
+kostenlos für die gängigsten Betriebssysteme unter
+<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a>. Die Windows-Version
+mit eigenem Installer ist dort z.B. direkt unter dem Link
+<a href="https://www.arduino.cc/download_handler.php">https://www.arduino.cc/download_handler.php</a> erreichbar. Diese
+Arduino-IDE wird zunächst installiert.
+
+<p>Um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter der Arduino-IDE nutzen zu können muss eine
+entsprechende Konfiguration vorgenommen werden. Die Arduino-IDE
+erlaubt es, diesen Vorgang weitgehend zu automatisieren.
+
+<p><h3><a name="2.3.1">2.3.1 Installation mit dem Boardverwalter</a></h3>
+
+<p>Für die einfache Installation zusätzlicher Boards bringt die
+Arduino-IDE den sogenannten Boardverwalter mit. Zunächst muss
+dem Boardverwalter in den Arduino-Voreinstellungen mitgeteilt
+werden, wo die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration zu finden ist.
+
+<p>Dazu trägt man <a href="https://harbaum.github.io/ftduino/package_ftduino_index.json">https://harbaum.github.io/ftduino/package_ftduino_index.json</a> in den
+Voreinstellungen wie folgt ein.  Beim Eintragen der entsprechende
+Zeile ist darauf zu achten, dass die URL Unterstriche (_) enthält,
+die ggf. beim Kopieren (Copy'n Paste) der URL aus diesem PDF-Dokument
+verloren gehen. In diesem Fall sollte die URL manuell eingegeben
+werden.
+
+<p><center>
+  
+  <p><a name="IMG:2.6"><img src="installation/ide_voreinstellungen.png"></a>
+  <br><small>Abbildung 2.6: URL der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration in den Arduino-Voreinstellungen</small>
+</center>
+
+<p>Den eigentlichen Boardverwalter erreicht man danach direkt über das
+Menü der IDE unter
+<tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Board: ...</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Boardverwalter...</span></tt>.
+
+<p><center>
+  
+  <p><a name="IMG:2.7"><img src="installation/boardverwalter.png"></a>
+  <br><small>Abbildung 2.7: Den Boardverwalter startet man aus dem Menü</small>
+</center>
+
+<p>Nachdem die <tt>JSON</tt>-Datei in den Voreinstellungen eingetragen wurde
+bietet der Boardverwalter automatisch die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration an.
+
+<p><center>
+  
+  <p><a name="IMG:2.8"><img src="installation/boardverwalter_ftduino.png"></a>
+  <br><small>Abbildung 2.8: Im Boardverwalter kann das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Board installiert werden</small>
+</center>
+
+<p>Durch Klick auf <tt>Installieren...</tt> werden alle für den
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nötigen Dateien automatisch heruntergeladen und
+installiert.
+
+<p>Nach erfolgreicher Installation kann der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter den Boards
+ausgewählt werden.
+
+<p><center>
+  
+  <p><a name="IMG:2.9"><img src="installation/auswahl_ftduino.png"></a>
+  <br><small>Abbildung 2.9: Auswahl des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Boards unter Windows</small>
+</center>
+
+<p>Ist bereits ein <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angeschlossen und wurde der nötige Treiber
+installiert, so lässt sich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nun unter <tt><span style="background-color:#f0f0f0;">Port</span></tt> auswählen.
+
+<p><center>
+  
+  <p><a name="IMG:2.10"><img src="installation/mac_ports.jpg"></a>
+  <br><small>Abbildung 2.10: Auswahl des Ports unter MacOS</small>
+</center>
+
+<p>Die Installation ist damit abgeschlossen. Während der Installation wurden
+bereits einige Beispielprogramme installiert. Diese finden sich im Menü
+unter <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Examples for ftDuino</span></tt>.
+
+<p><center>
+  
+  <p><a name="IMG:2.11"><img src="installation/beispiele_ftduino.png"></a>
+  <br><small>Abbildung 2.11: Beispiele zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Board</small>
+</center>
+
+<p>Diese Beispiele können direkt geladen und auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+hinuntergeladen werden.
+
+<p><h3><a name="2.3.2">2.3.2 Updates</a></h3>
+
+<p>Die Arduino-IDE benachrichtigt automatisch über Softwareupdates der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration. Mit wenig Aufwand bleibt man so immer auf
+dem aktuellen Stand.
+<hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - installation</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

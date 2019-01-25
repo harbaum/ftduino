@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>schule</title></head><body>
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
+<table><tr>
+<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
+<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
+<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
+<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
+<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
+<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
+<td><a href="community.html">7.&nbsp;Community</a></td><td>-</td>
+<td><a href="bibliotheken.html">8.&nbsp;Bibliotheken</a></td><td>-</td>
+<td><a href="aufbau.html">9.&nbsp;Aufbau</a></td><td>-</td>
+<td><a href="anhang.html">Anhang</a></td>
+</tr></table><h1><a name="5">5 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> in der Schule</a></h1> 
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wurde wie alle Mitglieder der Arduino-Familie in erster
+Linie zur Programmierung in der Sprache C<sup>++</sup> entworfen wie in
+Kapitel <a href="programmierung.html#4">4</a> beschrieben. Wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> im
+Vorfeld mit einem entsprechende Sketch versehen, so kann er mit
+wesentlich geringerem Anspruch aber auch ohne Programmierwissen
+verwendet werden. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich so sehr flexibel in
+unterschiedlichen Klassenstufen einsetzen.
+
+<p><center>
+  
+  <p><a name="IMG:5.1"><img src="schule/schwierigkeit_svg.png"></a>
+  <br><small>Abbildung 5.1: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Programmierumgebungen mit unterschiedlichem Schwierigkeitsgrad</small>
+</center>
+
+<p>In allen Fällen bedient sich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> dabei etablierten
+Projekten (Scratch, Blockly, ...). Dadurch bildet der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+keine Insellösung sondern kann neben anderen z.B. Arduino-basierten
+Projekten gleichberechtigt eingesetzt werden. Wissen und Werkzeuge aus
+dem Arduino-Einsatz können auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> übertragen werden und
+umgekehrt. Oft erlaubt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> so einen leichten Einstieg mit
+Hilfe eines fischertechnik-Modells und erst später folgt dann der
+elektrisch und mechanisch anspruchsvollere Aufbau auf Basis eines
+klassischen Arduinos.
+
+<p><h2><a name="5.1">5.1 Grafische Programmierung mit Scratch</a></h2>
+
+<p>Wikipedia schreibt zur Programmiersprache Scratch:
+
+<p><blockqote><div style="padding:0px 40px 0px 40px;">
+  <h3><a name="5.2.1">5.2.1 Zielsetzung</a></h3>
+
+  <p>Ihr Ziel ist es, Neueinsteiger -- besonders Kinder und Jugendliche
+  -- mit den Grundkonzepten der Programmierung vertraut zu
+  machen. Unter dem Motto imagine, program, share („Ausdenken,
+  Entwickeln, Teilen“) wird die kreative und explorative Erstellung
+  eigener Spiele und Multimedia-Anwendungen, verbunden mit dem
+  gegenseitigen Austausch darüber, als Motivation genutzt. Kostenlos
+  und werbefrei können die Ergebnisse in einer internationalen
+  Online-Community mit dem Scratch-Player abgespielt, diskutiert und
+  weiterentwickelt werden. Außerdem gibt es einige Beispiele, die
+  Anregungen für Einsteiger schaffen und das Prinzip des
+  Programmierens näher bringen.
+
+  <p><em><a href="https://de.wikipedia.org/wiki/Scratch_(Programmiersprache)">https://de.wikipedia.org/wiki/Scratch_(Programmiersprache)</a></em>
+</div></blockqote>
+
+<p>Scratch wurde im Original als reine Simulationsumgebung ausgelegt. Die
+Programmierung erfolgt grafisch mit der Maus am PC. Die
+Programmausführung sowie die Darstellung von Ergebnissen übernimmt
+ebenfalls der PC. Scratch sieht zunächst nicht vor, reale Hardware wie
+den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> in die Programmentwicklung einzubinden.
+
+<p><center>
+  
+  <p><a name="IMG:5.2"><img src="schule/scratch_screenshot.png"></a>
+  <br><small>Abbildung 5.2: Die Scratch-Programmierumgebung</small>
+</center>
+
+<p>Scratch stammt aus dem englischsprachigen Umfeld und ist im Original
+unter <a href="https://scratch.mit.edu/">https://scratch.mit.edu/</a> zu finden. Es gibt aber auch
+deutschsprachige Portale wie das <tt>DACH-Scratch-Wiki</tt> unter
+<a href="https://scratch-dach.info">https://scratch-dach.info</a> und <tt>INF-Schule</tt> unter
+<a href="https://www.inf-schule.de/programmierung/scratch">https://www.inf-schule.de/programmierung/scratch</a>, die sich
+speziell an Lehrer und Schüler aus dem deutschen Sprachraum richten
+und einen Scratch-Einstieg in der Schule unterstützen.
+
+<p>Scratch läuft komplett im Web-Browser und benötigt neben dem Browser
+und einem sogenannten Flash-Player keine weitere Software auf dem PC.
+
+<p><h3><a name="5.2.2">5.2.2 Scratch for Arduino (S4A)</a></h3>
+
+<p>Das Projekt <tt>Scratch for Arduino</tt>, kurz S4A baut auf Scratch
+auf und hat sich zum Ziel gesetzt, eine Interaktion zwischen
+virtueller Scratch-Welt auf dem PC und physischer an den PC
+angeschlossener Hardware herzustellen. Das S4A-Projekt greift dazu auf
+Arduinos zurück und integriert diese in die virtuelle
+Scratch-Umgebung. Das Scratch-Programm am PC kann dadurch auf
+Sensoreingaben (z.B. Tastendrücke) des angeschlossenen Arduino
+reagieren bzw. Aktionen an Aktoren (z.B. Lampen) am Arduino auslösen.
+
+<p>S4A ist mit den meisten gängigen Arduinos kompatibel. Diese müssen im
+Vorfeld mit einem entsprechenden Sketch versehen und per USB an den PC
+angeschlossen werden. Der entsprechende Sketch ist unter
+<a href="http://s4a.cat/">http://s4a.cat/</a> erhältlich.
+
+<p>Im Gegensatz zu Scratch läuft S4A nicht im Browser sondern erfordert
+die Installation eines separaten Programms auf dem PC. Entsprechende
+Downloads finden sich unter <a href="http://s4a.cat/">http://s4a.cat/</a>.
+
+<p>S4A stammt aus dem spanischsprachigen Raum und ist im Original unter
+<a href="http://s4a.cat/">http://s4a.cat/</a> erhältlich. Deutschsprachige Informationen
+finden sich z.B. unter <a href="https://scratch-dach.info/wiki/S4A">https://scratch-dach.info/wiki/S4A</a>.
+
+<p><h3><a name="5.2.3">5.2.3 Scratch for <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+
+<p>Die Anpassung von S4A an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> betrifft nur den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+selbst und den dort zu installierenden Sketch. PC-seitig besteht kein
+Unterschied zwischen S4A und dessen Verwendung mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Es
+können problemlos Arduinos und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gemeinsam genutzt werden.
+
+<p>Da Arduino und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unterschiedliche Anschlüsse haben muss der
+Benutzer wissen, unter welcher Bezeichnung die Anschlüsse des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter S4A angesprochen werden können. Das folgende Bild
+zeigt die entsprechende Zuordnung.
+
+<p><center>
+  
+  <p><a name="IMG:5.3"><img src="schule/s4a_pins_svg.png"></a>
+  <br><small>Abbildung 5.3: Zuordnung der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Pins an S4A</small>
+</center>
+
+<p>Weiterführende Informationen zu Einsatz von S4A mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+finden sich in Abschnitt <a href="community.html#8.6">8.6</a>.
+
+<p><h3><a name="5.2.4">5.2.4 Die Zukunft von Scratch</a></h3>
+
+<p>Die aktuelle Scratch-Version 2.0 läuft im Webbrowser, basiert aber
+technisch auf der nicht mehr aktuellen Flash-Technologie. Es ist
+absehbar, dass Scratch in dieser Form nicht mehr mit zukünftigen
+Web-Browsern funktionieren wird. Es gibt Arbeiten, Scratch mit
+modernen Technologien wie HTML5 umzusetzen.
+
+<p>Scratch for Arduino basiert auf der älteren Version 1.4 von
+Scratch. Diese läuft nicht im Browser sondern ist ein eigenständiges
+PC-Programm auf Basis der Programmiersprache Squeak.
+
+<p>Scratch wird in der Form, wie sie für S4A und damit für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+verwendet werden kann nicht weiterentwickelt. Es ist daher nicht mit
+nennenswerten Erweiterungen zu rechnen.
+
+<p><h2><a name="5.2">5.2 Grafische Programmierung mit Blockly/Brickly</a></h2>
+
+<p>Google hat sowohl das Potenzial der Scratch-Idee erkannt als auch die
+technischen Beschränkungen, denen es inzwischen unterworfen ist.
+
+<p>Blockly ist Googles Versuch, die Scratch-Philosophie auf eine moderne
+technische Basis zu heben. Blockly basiert auf HTML5 und ist damit auf
+absehbare Zeit in allen gängigen Webbrowsern und auf allen gängigen
+Plattformen (u.a. Windows, Apple MacOS, Linux, Android und IOS)
+lauffähig.
+
+<p><center>
+  
+  <p><a name="IMG:5.4"><img src="schule/blockly.png"></a>
+  <br><small>Abbildung 5.4: Die Blockly-Benutzeroberfläche</small>
+</center>
+
+<p>Scratch bildet eine komplette Umgebung und beinhaltet neben der
+grafischen Code-Darstellung auch gleich die Möglichkeit, die
+erstellten Programme auszuführen und deren Ergebnisse
+darzustellen. Blockly selbst ist dagegen ein reiner Code-Editor. Der
+mit Blockly erzeugte Code kann von Blockly selbst daher nicht
+ausgeführt werden und Blockly bringt auch keine Mechanismen mit, um
+Programmausgaben darzustellen. Beides muss von einem
+Softwareentwickler erst hinzugefügt werden, um eine für den
+Endbenutzer verwendbare Umgebung zu schaffen.
+
+<p>Brickly (siehe Abschnitt <a href="community.html#8.3">8.3</a>) und Brickly-Lite (siehe
+Abschnitt <a href="experimente.html#6.19.4">6.19.4</a>) sind zwei auf Blockly basierende
+komplette Umgebungen, die speziell für den
+fischertechnik-TXT-Controller bzw. den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> entwickelt wurden.
+Auch wenn beide Umgebungen bewusst ähnlich gehalten wurden und sich
+für den Anwender sehr ähnlich darstellen ist die technische Funktion
+sehr unterschiedlich.
+
+<p><h3><a name="5.3.1">5.3.1 Brickly</a></h3>
+
+<p>Im Falle von Brickly wird Blockly genutzt, um Code für den
+TXT-Controller zu entwickeln. Brickly ist erzeugt im Browser
+sogenannten Python-Code, der auf den TXT übertragen und dort
+ausgeführt wird. Einmal erstellte Brickly-Programme befinden sich
+dauerhaft auf dem TXT und können zu jedem späteren Zeitpunkt auch
+direkt am TXT manuell gestartet werden. Ein Web-Browser wird nur
+benötigt, um neue Programme zu erstellen. Während der
+Programmausführung auf dem TXT können Ausgaben auf dem Bildschirm des
+TXT erfolgen. Ist der Benutzer mit dem Web-Browser mit dem TXT
+verbunden, so werden diese Ausgaben vom TXT zusätzlich zurück an den
+Browser gesendet und dort ausgegeben.
+
+<p><center>
+  
+  <p><a name="IMG:5.5"><img src="schule/brickly.png"></a>
+  <br><small>Abbildung 5.5: Die Brickly-Benutzeroberfläche</small>
+</center>
+
+<p>Sämtliche im Browser dargestellten Informationen werden vom TXT an den
+Browser übertragen. Es werden keine Daten mit dem übrigen Internet
+ausgetauscht.
+
+<p>Brickly wurde primär dazu entwickelt, die Ein- und Ausgänge des TXT zu
+bedienen. Bricklys auf Blockly basierender grafischer Editor wurde
+daher um Blöcke erweitert, die sich zur Bedienung der Anschlüsse des
+TXT eignen. Durch zusätzliche Installation eines sogenannten
+Brickly-Plugins auf dem TXT (siehe
+<a href="https://github.com/harbaum/brickly-plugins">https://github.com/harbaum/brickly-plugins</a>) kann Brickly
+erweitert werden. Ein solches Plugin erlaubt es, einen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per
+USB mit dem TXT zu koppeln und aus dem Brickly-Programm heraus neben
+dem TXT selbst auch die Anschlüsse des angeschlossenen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu
+bedienen.
+
+<p>Brickly ist auch von jungen Schülern leicht zu bedienen und verfügt
+gegenüber Scratch über eine einfachere und leichter zu nutzenden
+Benutzeroberfläche. Die Nutzung von Brickly erfordert aber zuvor die
+Installation der Brickly-Software auf dem TXT, was wiederum die
+Nutzung der sogenannten Community-Firmware auf dem TXT voraussetzt
+(siehe <a href="https://cfw.ftcommunity.de/ftcommunity-TXT/de/">https://cfw.ftcommunity.de/ftcommunity-TXT/de/</a>). Für die
+Nutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am TXT ist zusätzlich die Installation des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Plugins nötig. Sehr erfahrene Nutzer können statt des
+TXT-Controllers auch den wesentlich günstigeren Raspberry-Pi
+nutzen. Für den Endanwender ergibt sich kein Unterschied, auch dieses
+Setup ist von Schülern leicht zu bedienen.
+
+<p>Zur späteren Nutzung von Brickly sind folgende vorbereitende Schritte
+nötig:
+
+<p><ul>
+<li> Installation des Community-Firmware auf dem TXT (alternativ auf dem Raspberry-Pi, siehe <a href="https://github.com/harbaum/tx-pi">https://github.com/harbaum/tx-pi</a>)
+</li><li> Installation von Brickly auf dem TXT (siehe <a href="https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/">https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/</a>)
+</li><li> Zugriff auf den TXT per beliebigem Browser
+</li></ul>
+
+<p>Soll zusätzlich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> von TXT aus angesprochen werden sind
+weiterhin folgende Schritte nötig:
+
+<p><ul>
+<li> Installation des <tt>ftduino_direct</tt>-Sketches auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> (siehe <a href="https://github.com/PeterDHabermehl/ftduino_direct">https://github.com/PeterDHabermehl/ftduino_direct</a>)
+</li><li> Installation des ftduino-Brickly-Plugins (siehe <a href="https://github.com/harbaum/brickly-plugins">https://github.com/harbaum/brickly-plugins</a>)
+</li></ul>
+
+<p><h3><a name="5.3.2">5.3.2 Brickly-Lite</a></h3>
+
+<p>Wesentlich geringer als bei Brickly ist der administrative Aufwand bei
+der Nutzung von Brickly-Lite. Aus Schülersicht ist der Unterschied
+zwischen Brickly und Brickly-Lite minimal. Brickly-Lite bietet eine
+nochmal vereinfachte Darstellung.
+
+<p><center>
+  
+  <p><a name="IMG:5.6"><img src="schule/brickly_lite.png"></a>
+  <br><small>Abbildung 5.6: Die Brickly-Lite-Benutzeroberfläche</small>
+</center>
+
+<p>Im Gegensatz zu Brickly bezieht Brickly-Lite alle Daten aus dem
+Internet. Für die Benutzung von Brickly-Lite ist daher eine
+Internet-Verbindung Voraussetzung. Und während bei Brickly der Browser
+lediglich zur Code-Eingabe und zur Ergebnisausgabe verwendet wird
+übernimmt er bei Brickly-Lite fast alle Aufgaben inklusive der
+eigentlichen Programmausführung. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> stellt daher bei
+Brickly-Lite dem Browser seine Ein- und Ausgänge zur Verfügung, führt
+aber das eigentliche Brickly-Programm nicht aus. Aus diesem Grund ist
+zur späteren Programmausführung der Browser immer nötig. Ein mit
+Brickly-Lite erstelltes Programm kann ohne Browser nicht ausgeführt
+werden.
+
+<p>Der Schüler merkt von diesen Unterschieden nichts. Für den Lehrer ist
+aber der Vorbereitungsaufwand gegenüber Brickly sehr viel geringer, da
+neben <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und Browser keine weiteren Komponenten benötigt
+werden. Größte Einschränkung ist die Festlegung auf den Chrome-Browser
+(siehe <a href="https://www.google.com/intl/de_ALL/chrome/">https://www.google.com/intl/de_ALL/chrome/</a>).  Dieser
+wird benötigt, da nur dieser Browser-Typ mit lokal per USB
+abgeschlossenen Geräten wie in diesem Fall dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+kommunizieren kann.
+
+<p>Zur Nutzung von Brickly-Lite sind folgende Schritte nötig:
+
+<p><ul>
+<li> Installation des <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/IoServer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">IoServer</span></tt></a>-Sketches auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+</li><li> Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per USB an den PC oder das Smartphone
+</li><li> Öffnen der Brickly-Lite-Webseite <a href="https://harbaum.github.io/ftduino/webusb/brickly-lite/">https://harbaum.github.io/ftduino/webusb/brickly-lite/</a> im Chrome-Browser
+</li></ul>
+
+<p><h2><a name="5.3">5.3 Spielerische Programmierung in Minecraft</a></h2>
+
+<p>Minecraft ist ein extrem populäres Aufbauspiel. Es beinhaltet unter
+anderem eine Art elektrischer Schaltungssimulation in Form des
+sogenannten Redstone. Mit diesem leitfähigen virtuellen Material
+lassen sich entsprechende Blöcke im Spiel verbinden und es lassen sich
+Spiel-interne Sensoren wie Taster und Schalter mit Aktoren wie Lampen
+und Druckzylindern verbinden. Zusätzliche Logikelemente wie die
+Redstone-Fackel (Inverter, Negierer), ein Vergleicher oder ein
+Verzögerungselement erlauben komplexe Schaltungen.
+
+<p>Mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich Minecraft mit der physischen Welt
+verbinden und virtuelle Sensoren in Minecraft können physische
+fischertechnik-Aktoren auslösen und umgekehrt.
+
+<p><center>
+  
+  <p><a name="IMG:5.7"><img src="schule/minecraft.png"></a>
+  <br><small>Abbildung 5.7: Minecraft mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Schnittstelle</small>
+</center>
+
+<p>Die Vorbereitungszeit auf Lehrerseite beschränkt sich auf das
+Ausspielen des passenden Sketches auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sowie die
+Installation der entsprechenden <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod in eine bestehende
+Minecraft-Installation wie in Abschnitt <a href="community.html#8.7">8.7</a>
+beschrieben. Minecraft ist eine kommerzielle Software und benötigt
+eine seperat zu erwerbende Lizenz. Die Modifikation des Spiels durch
+Erweiterungen wie der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod wurde vom Hersteller explizit
+vorgesehen und verletzt keine Lizenzbedingungen.
+
+<p>Auf Schülerseite ist die Einarbeitung theoretisch recht aufwändig. In
+der Praxis ist ein großer Teil der Schüler mit den Konzepten von
+Minecraft bis ins kleinste Detail vertraut und versteht die Logik der
+zusätzlichen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Blöcke sofort. In der Regel sind
+Minecraft-erfahrene Schüler in wenigen Minuten in der Lage einfache
+Schaltungen wie Lauflichter zu realisieren und mit dem physischen
+Modell zu verbinden.
+
+<p>Der Einsatz von Minecraft eignet sich vor allem zur Motivation bereits
+Minecraft-affiner Schüler. Als Lehrer hat man hier besonders mit
+Schülern zu rechnen, die ein extrem großes Fachwissen und erstaunliche
+Fähigkeiten mitbringen. Minecraft lädt geradezu dazu ein, unorthodoxe
+Lösungen zu erstellen und z.B. virtuelle Lebewesen oder Fahrzeuge
+(Loren) in die Signbalverarbeitung einzubinden.
+
+<p>Zur Nutzung von Minecraft sind folgende im Abschnitt
+<a href="community.html#8.7">8.7</a> im Detail beschriebenen Schritte nötig:
+
+<p><ul>
+<li> Installation einer lizensierten Minecraft-Version 1.12.2
+</li><li> Installation des Forge-Mod-Systems
+</li><li> Installation der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Mod
+</li><li> Installation des <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/IoServer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">IoServer</span></tt></a>-Sketches auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+</li><li> Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per USB an den PC
+</li></ul>
+
+<p><h2><a name="5.4">5.4 Textbasierte Programmierung mit der Arduino-IDE</a></h2>
+
+<p>Scratch und Brickly sind selbst komplexe Konstrukte. Sie werden als
+Programm auf dem PC oder als aktive Webseite im Browser z.B. eines
+Mobilgeräts ausgeführt. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> fungiert in beiden Fällen nur
+als relativ passiver Schnittstellenbaustein. Er nimmt Befehle über
+seinen USB-Anschluss vom PC entgegen und sendet Ergebnisse zurück.
+
+<p>Für den Anwender bleibt damit -- wie bei der Benutzung von PCs üblich
+-- der größte Teil der Technik in den Programmen verborgen. Während
+sich so die Grundlagen der Programmierung verstehen lassen ist es
+einem Anfänger kaum möglich, alle zugrundeliegenden Komponenten und
+Verfahren zu verstehen.
+
+<p><h3><a name="5.5.1">5.5.1 Die Arduino-Idee</a></h3>
+
+<p>Das ursprüngliche Konzept der Arduinos zielt darauf ab, ein
+fundamentales Verständnis zu vermitteln. Der Arduino und der davon
+abgeleitete <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gehören zu den technisch einfachsten
+programmierbaren Geräten. Die Technik auf der sie basieren entspricht
+derjenigen, die auch in vielen alltäglichen Geräten wie
+Computermäusen, Kaffeemaschinen oder Getränkeautomaten nahezu
+unsichtbar und unbemerkt eingesetzt wird.
+
+<p>Die Zahl und Komplexität der auf einem Arduino verwendeten Bauteile
+ist so gering wie möglich gehalten, so dass das gesamte Gerät auch von
+interessierten Laien weitgehend durchschaut werden kann. Trotzdem
+liegen die für diese Art der Verwendung nötigen Fähigkeiten deutlich
+über denen zur Benutzung von Scratch oder Brickly. Der direkte Umgang
+mit dem Arduino erfordert größeres Know-How bei Schüler und Lehrer und
+ist ungefähr ab Klasse 7 bis 8 sinnvoll möglich.
+
+<p><center>
+  
+  <p><a name="IMG:5.8"><img src="schule/arduino-ide.png"></a>
+  <br><small>Abbildung 5.8: Die Arduino-IDE</small>
+</center>
+
+<p><h4>Arduino in der Schule</h4>
+
+<p>Arduinos werden bereits in breitem Maße in der Schule
+eingesetzt. Speziell der geringe Preis und die Verbreitung in
+Privathaushalten führt zu einer geringen Einstiegshürde.
+
+<p>Allerdings ist die Lernkurve relativ steil und das erforderliche
+Know-How steigt mit der Komplexität der Aufgabenstellungen schnell an.
+Arduinos werden als unverkleidete Platinen vertrieben und ihre
+Elektronik und Anschlüsse sind gegen äußere Einflüsse weitgehend
+ungeschützt. Vor allem der geringe Preis relativiert diese Nachteile,
+da sich versehentlich zerstörte Teile mit geringen Kosten ersetzen
+lassen. Die einfachsten Arduinos sind für unter drei Euro erhältlich,
+weitere Kosten fallen zunächst nicht an.
+
+<p>Die Programmierumgebung Arduino-IDE ist als kostenloser Download unter
+<a href="https://www.arduino.cc/en/Main/Software">https://www.arduino.cc/en/Main/Software</a> für alle gängigen
+PC-Betriebssysteme verfügbar. Viele Dokumentationen und Beispiele sind
+im Internet frei verfügbar. Arduino-Soft- und Hardware ist unter
+gängigen Open-Source-Lizenzen verfügbar und darf lizenzfrei geteilt
+werden. Der Einsatz in der Schule ist damit bedenkenlos möglich und
+der freie Austausch der meisten Unterlagen unterliegt keinen im
+Schul-Umfeld relevanten Beschränkungen.
+
+<p><h3><a name="5.5.2">5.5.2 Arduino und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist eine Erweiterung des Arduino-Konzepts in Richtung
+fischertechnik. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird programmiert wie ein Arduino,
+nutzt aber elektrische und mechanische fischertechnik-Komponenten, um
+den Aufbau komplexer Modell zu ermöglichen.
+
+<p>Dabei bietet der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gegenüber einem Arduino einige
+Vereinfachungen, die die Einstiegshürde senkt. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist aus
+Anwendersicht nicht zwangsläufig als Fortführung des Arduino-Gedankens
+zu verstehen. Er eröffnet vielmehr einen einfacheren Einstieg in die
+Arduino-Welt.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lehnt sich nah an den Arduino Leonardo an. Er erweitert
+den Leonardo um folgende Eigenschaften:
+
+<p><dl>
+<dt><b>Robustheit</b></dt><dd> Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist robust. Seine Anschlüsse sind
+  entgegen denen des Arduino kurzschlussfest und die Elektronik wird
+  durch ein geschlossenes Gehäuse geschützt.
+</dd><dt><b>Versorgungsspannung</b></dt><dd> Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird mit
+  fischertechnik-üblichen 9 Volt betrieben und kann diese Spannungen
+  auch an allen Ein- und Ausgängen nutzen während der Arduino für
+  maximal 5 Volt ausgelegt ist und mit vielen fischertechnik-Elementen
+  nicht direkt verbunden werden darf.
+</dd><dt><b>Eingänge</b></dt><dd> Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verfügt über 8 dedizierte
+  Analogeingänge <tt>I1</tt> bis <tt>I8</tt> und 4 Zählereingänge
+  <tt>C1</tt> bis <tt>C4</tt>, die bereits für die Spannungs-,
+  Widerstands- bzw. Ereignismessung vorbereitet sind. Der Arduino
+  verfügt dagegen über universell verwendbare Ein- und Ausgänge, die
+  jedoch durch entsprechende zusätzliche Beschaltung an die konkrete
+  Verwendung angepasst werden können.
+</dd><dt><b>Ausgänge</b></dt><dd> Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verfügt über 8 dedizierte
+  Analogausgänge <tt>O1</tt> bis <tt>O8</tt>, die leistungsstark genug
+  zur Ansteuerung von Lampen und Motoren sind. Die universellen Ein-
+  und Ausgänge benötigen zusätzliche Beschaltung, um leistungsstarke
+  Verbraucher ansteuern zu können.
+</dd></dl>
+
+<p><h3><a name="5.5.3">5.5.3 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als Einstiegs-Arduino</a></h3>
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erlaubt den einfachen und unproblematischen Einstieg in
+den Arduino-Einsatz in der Schule. Er ist robust genug für den
+Schulalltag und erfordert zusammen mit dem fischertechnik-System keine
+weiteren elektrischen, elektronischen oder mechanischen
+Voraussetzungen. Alle mechanischen und elektrischen Verbindungen
+werden gesteckt und es wird kein Werkzeug benötigt. Viele direkt
+mitgelieferte Beispiele u.a. in dieser Anleitung erlauben einen
+einfachen und sicheren Start.
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann dabei den Einsatz des klassischen Arduino
+vorbereiten. Der Aufbau eines Prototypen aus <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und Arduino
+bietet einen sicheren Start. Eine spätere Umsetzung mit klassischen
+Arduinos, zusätzlicher Elektronik und speziell aufgebauter Mechanik
+erfolgt dann auf Basis der mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gewonnenen
+Erkenntnissen.
+<hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - schule</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
