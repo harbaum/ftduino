@@ -18,7 +18,7 @@ The 45mm version featuring two I²C ports:
 By default the adapter uses I²C address 0x11 (dec 17).
 
 | Register | Description |
-|:---:|:---:|
+|---|---|
 | 0x00/0x01 | Set servo pulse width of output 1 or 2 in 16us steps. E.g. 63 is 1ms (typical min value of a servo) and 125 is 2ms (typical max value of a servo). By default the adapter will not allow values < 53 and values > 125 to protect the servo. Example set PWM1 to 1.5ms: 0x11 0x00 0x5e |
 | 0x02/0x03 | Set lower limit for servo 1 or servo 2 in 16us steps. Default value is 63. Values written to registers  0x00/0x01 lower than the limits specified here are mapped to this limit. |
 | 0x04/0x05 | Set upper limit for servo 1 or servo 2 in 16us steps. Default value is 125. Values written to registers  0x00/0x01 higher than the limits specified here are mapped to this limit. |
