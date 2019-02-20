@@ -22,6 +22,7 @@ By default the adapter uses I²C address 0x11 (dec 17).
 |:---:|:---:|
 | 0x02/0x03 | Set lower limit for servo 1 or servo 2 in 16us steps. Default value is 63. Values written to registers  0x00/0x01 lower than the limits specified here are mapped to this limit. |
 |:---:|:---:|
+
 | 0x04/0x05 | Set upper limit for servo 1 or servo 2 in 16us steps. Default value is 125. Values written to registers  0x00/0x01 higher than the limits specified here are mapped to this limit. |
 |:---:|:---:|
 | 0x06/0x07 | Set offset for servo 1 or servo 2. Default value is 0. The offset is added to the PWM value written to registers 0 or 1 _after_ the limit takes place. This is useful to adjust the center position of a servo. |
