@@ -2474,33 +2474,33 @@ kann man sich zunächst eine Liste aller im PC installierten I²C-Busse
 ausgeben lassen.
 
 <pre>
-     <font color="green"> 1</font>      $ i2cdetect -l
-     <font color="green"> 2</font>      i2c-3   unknown         i915 gmbus dpc                          N/A
-     <font color="green"> 3</font>      i2c-1   unknown         i915 gmbus vga                          N/A
-     <font color="green"> 4</font>      i2c-8   i2c             em2860 #0                               I2C adapter
-     <font color="green"> 5</font>      i2c-6   unknown         DPDDC-B                                 N/A
-     <font color="green"> 6</font>      i2c-4   unknown         i915 gmbus dpb                          N/A
-     <font color="green"> 7</font>      i2c-2   unknown         i915 gmbus panel                        N/A
-     <font color="green"> 8</font>      i2c-0   unknown         i915 gmbus ssc                          N/A
-     <font color="green"> 9</font>      i2c-9   i2c             i2c-tiny-usb at bus 001 device 023      I2C adapter
-     <font color="green">10</font>      i2c-7   unknown         DPDDC-C                                 N/A
-     <font color="green">11</font>      i2c-5   unknown         i915 gmbus dpd                          N/A
+         $ i2cdetect -l
+         i2c-3   unknown         i915 gmbus dpc                          N/A
+         i2c-1   unknown         i915 gmbus vga                          N/A
+         i2c-8   i2c             em2860 #0                               I2C adapter
+         i2c-6   unknown         DPDDC-B                                 N/A
+         i2c-4   unknown         i915 gmbus dpb                          N/A
+         i2c-2   unknown         i915 gmbus panel                        N/A
+         i2c-0   unknown         i915 gmbus ssc                          N/A
+         i2c-9   i2c             i2c-tiny-usb at bus 001 device 023      I2C adapter
+         i2c-7   unknown         DPDDC-C                                 N/A
+         i2c-5   unknown         i915 gmbus dpd                          N/A
 </pre>
 Der Digispark/<tt>i2c_tiny_usb</tt> erscheint in diesem Fall als
 <tt>i2c-9</tt>.  Unter dieser Bus-Nummer lässt sich der I²C-Bus des
 <tt>i2c_tiny_usb</tt> nach Geräten absuchen.
 
 <pre>
-     <font color="green"> 1</font>      $ i2cdetect -y 9
-     <font color="green"> 2</font>           0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
-     <font color="green"> 3</font>      00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
-     <font color="green"> 4</font>      10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-     <font color="green"> 5</font>      20: -- -- -- -- -- -- -- -- -- -- 2a -- -- -- -- -- 
-     <font color="green"> 6</font>      30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-     <font color="green"> 7</font>      40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-     <font color="green"> 8</font>      50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-     <font color="green"> 9</font>      60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
-     <font color="green">10</font>      70: -- -- -- -- -- -- -- --                         
+         $ i2cdetect -y 9
+              0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+         00:          -- -- -- -- -- -- -- -- -- -- -- -- -- 
+         10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+         20: -- -- -- -- -- -- -- -- -- -- 2a -- -- -- -- -- 
+         30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+         40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+         50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+         60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- 
+         70: -- -- -- -- -- -- -- --                         
 </pre>
 In diesem Fall wurde unter Adresse $2a (dezimal 42) der auf der
 <tt>FtduinoSimple</tt>-Bibliothek basierende einfache
@@ -2689,10 +2689,10 @@ benötigt. Der I2cScanner-Sketch sollte nun unter Adresse 0x11 den
 Adapter finden:
 
 <pre>
-     <font color="green"> 1</font>  I2C Scanner
-     <font color="green"> 2</font>  Scanning...
-     <font color="green"> 3</font>  I2C device found at address 0x11  !
-     <font color="green"> 4</font>  done
+     I2C Scanner
+     Scanning...
+     I2C device found at address 0x11  !
+     done
 </pre>
 Jedesmal wenn der Adapter vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angesprochen wird sollte die
 Leuchtdiode im Adapter kurz aufleuchten. Sollte dieser Test nicht
@@ -2986,13 +2986,13 @@ Sketchentwicklung sehr praktisch sein kann.
 z.B. von einem Linux-PC mit den gängigen MIDI-Werkzeugen erkannt:
 
 <pre>
-     <font color="green"> 1</font>  $ aplaymidi -l
-     <font color="green"> 2</font>   Port    Client name                      Port name
-     <font color="green"> 3</font>   14:0    Midi Through                     Midi Through Port-0
-     <font color="green"> 4</font>   24:0    ftDuino                          ftDuino MIDI 1
-     <font color="green"> 5</font>  
-     <font color="green"> 6</font>  $ aplaymidi -p 24:0 demosong.mid
-     <font color="green"> 7</font>  ...
+     $ aplaymidi -l
+      Port    Client name                      Port name
+      14:0    Midi Through                     Midi Through Port-0
+      24:0    ftDuino                          ftDuino MIDI 1
+     
+     $ aplaymidi -p 24:0 demosong.mid
+     ...
 </pre>
 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird eine Stimme des Songs auf einem an <tt>O2</tt>
 angeschlossenen Lautsprecher abspielen und gleichzeitig auf dem

@@ -124,14 +124,14 @@ keine weiteren ACM-Geräte verbunden, so wird der <font color="red">f</font><fon
 mit dem <tt>dmesg</tt>-Kommando:
 
 <pre>
-     <font color="green"> 1</font>  $ dmesg
-     <font color="green"> 2</font>  ...
-     <font color="green"> 3</font>  [15822.397956] usb 3-1: new full-speed USB device number 9 using xhci_hcd
-     <font color="green"> 4</font>  [15822.540331] usb 3-1: New USB device found, idVendor=1c40, idProduct=0538
-     <font color="green"> 5</font>  [15822.540334] usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-     <font color="green"> 6</font>  [15822.540336] usb 3-1: Product: ftDuino
-     <font color="green"> 7</font>  [15822.540337] usb 3-1: Manufacturer: Till Harbaum
-     <font color="green"> 8</font>  [15822.541084] cdc_acm 3-1:1.0: ttyACM0: USB ACM device
+     $ dmesg
+     ...
+     [15822.397956] usb 3-1: new full-speed USB device number 9 using xhci_hcd
+     [15822.540331] usb 3-1: New USB device found, idVendor=1c40, idProduct=0538
+     [15822.540334] usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+     [15822.540336] usb 3-1: Product: ftDuino
+     [15822.540337] usb 3-1: Manufacturer: Till Harbaum
+     [15822.541084] cdc_acm 3-1:1.0: ttyACM0: USB ACM device
 </pre>
 Die genauen Meldungen variieren von System zu System, aber der
 generelle Inhalt wird vergleichbar sein.
@@ -140,19 +140,19 @@ generelle Inhalt wird vergleichbar sein.
 <tt>lsusb</tt>-Kommando:
 
 <pre>
-     <font color="green"> 1</font>  $ lsusb -vd 1c40:0538
-     <font color="green"> 2</font>  Bus 003 Device 009: ID 1c40:0538 EZPrototypes 
-     <font color="green"> 3</font>  Device Descriptor:
-     <font color="green"> 4</font>    bLength                18
-     <font color="green"> 5</font>    bDescriptorType         1
-     <font color="green"> 6</font>    bcdUSB               2.00
-     <font color="green"> 7</font>    bDeviceClass          239 Miscellaneous Device
-     <font color="green"> 8</font>    bDeviceSubClass         2 ?
-     <font color="green"> 9</font>    bDeviceProtocol         1 Interface Association
-     <font color="green">10</font>    bMaxPacketSize0        64
-     <font color="green">11</font>    idVendor           0x1c40 EZPrototypes
-     <font color="green">12</font>    idProduct          0x0538 
-     <font color="green">13</font>  ...
+     $ lsusb -vd 1c40:0538
+     Bus 003 Device 009: ID 1c40:0538 EZPrototypes 
+     Device Descriptor:
+       bLength                18
+       bDescriptorType         1
+       bcdUSB               2.00
+       bDeviceClass          239 Miscellaneous Device
+       bDeviceSubClass         2 ?
+       bDeviceProtocol         1 Interface Association
+       bMaxPacketSize0        64
+       idVendor           0x1c40 EZPrototypes
+       idProduct          0x0538 
+     ...
 </pre>
 Diese Ausgaben sind besonders interessant, wenn man wie in Abschnitt
 <a href="experimente.html#6.10">6.10</a> oder <a href="experimente.html#6.16">6.16</a> beschrieben die erweiterten
@@ -178,15 +178,15 @@ verhindern, dass der ModemManager versucht, sich mit dem <font color="red">f</fo
 verbinden, ist die Eingabe des folgenden Kommandos nötig:
 
 <p><pre>
-     <font color="green"> 1</font>    sudo wget -P /etc/udev/rules.d https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/99-ftduino.rules
+       sudo wget -P /etc/udev/rules.d https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/99-ftduino.rules
 </pre>
 
 <p>Die Datei <tt>/etc/udev/rules.d/99-ftduino.rules</tt> muss danach
 exakt folgenden Inhalt haben:
 
 <pre>
-     <font color="green"> 1</font>  ATTRS{idVendor}=="1c40" ATTRS{idProduct}=="0537", ENV{ID_MM_DEVICE_IGNORE}="1"
-     <font color="green"> 2</font>  ATTRS{idVendor}=="1c40" ATTRS{idProduct}=="0538", ENV{ID_MM_DEVICE_IGNORE}="1", MODE="0666"
+     ATTRS{idVendor}=="1c40" ATTRS{idProduct}=="0537", ENV{ID_MM_DEVICE_IGNORE}="1"
+     ATTRS{idVendor}=="1c40" ATTRS{idProduct}=="0538", ENV{ID_MM_DEVICE_IGNORE}="1", MODE="0666"
 </pre>
 Danach muss der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> einmal kurz vom PC getrennt und wieder
 angesteckt werden und sollte in der Folge ohne Probleme zu verwenden
