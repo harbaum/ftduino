@@ -296,6 +296,48 @@ die Hauptgründe, warum es auch im kommerziellen Umfeld immer einen
 Bedarf an solch einfachen Systemen wie dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gibt, auch wenn
 der Einsatz komplexer, betriebssystembasierter Lösungen mit sinkenden
 Hardware-Preisen auch in immer einfacheren Geräten möglich wird.
+
+<p><h2><a name="7.5">7.5 Klassischer 2D-Plotter</a></h2> 
+
+<p>Der fischertechnik-Plotter 30571<a href="#fn4"><sup>4</sup></a>  von 1985 war eines der ersten
+Computing-Modelle von fischertechnik. Die Bewegung in X- und Y-Achse
+wurde von 6-Volt-Schrittmotoren realisiert, der Stift wurde durch
+einen Magneten gehoben und gesenkt. Die Ansteuerung erfolgte über
+die acht Ausgänge des damaligen Computing-Interface, wobei der Stift
+recht trickreich mit einem der Motoren kombiniert wurde, um mit den
+insgesamt 8 Ausgängen auszukommen.
+
+<p><center>
+  
+  <p><a name="IMG:7.8"><img src="modelle/plotter_detail.jpg"></a>
+  <br><small>Abbildung 7.8: Der Stift wird von einem fischertechnik-Servo gehoben</small>
+</center>
+
+<p>Das hier vorgestellte Modell hat die gleichen Maße und verwendet eine
+sehr ähnliche Grundmechanik. Es werden ebenfalls zwei Schrittmotoren
+eingesetzt, allerdings 12-Volt-Varianten, die auch an 9 Volt genug
+Kraft für den Plotterbetrieb entwickeln. Die Schrittmotoren werden wir
+in Abschnitt <a href="experimente.html#6.4">6.4</a> beschrieben angesteuert und
+angeschlossen.
+
+<p><center>
+  
+  <p><a name="IMG:7.9"><img src="modelle/plotter_ganz.jpg"></a>
+  <br><small>Abbildung 7.9: Das Design orientiert sich stark am Plotter von 1985</small>
+</center>
+
+<p>Der Stift wird in diesem Modell von einem fischertechnik-Servo gehoben
+und gesenkt. Dabei könnte der Ansatz aus Abschnitt <a href="experimente.html#6.5">6.5</a>
+verwendet werden. In diesem Fall wurde stattdessen das
+I²C-Servo-Shield<a href="#fn5"><sup>5</sup></a>  verwendet. Es ist
+etwas unhandlicher, erlaubt aber einen echten I²C-Betrieb und ist
+so mit dem OLED-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kompatibel.
+
+<p>Der passenden Sketch unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Plotter"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Plotter</span></tt></a> ist sehr
+einfach gehalten und hat großes Verbesserungspotenzial. Er akzeptiert
+auf der USB-/COM-Schnittstelle plotterübliche
+HP-GL-Kommandos<a href="#fn6"><sup>6</sup></a> 
+und kann daher direkt aus vielen PC-Programmen angesprochen werden.
 <hr><small>
 <a name="fn1">1) </a>Hochregal-Video
   <a href="https://www.youtube.com/watch?v=Sjgv9RnBAbg">https://www.youtube.com/watch?v=Sjgv9RnBAbg</a><br>
@@ -303,4 +345,9 @@ Hardware-Preisen auch in immer einfacheren Geräten möglich wird.
   <a href="https://www.youtube.com/watch?v=-zmuOhcHRbY">https://www.youtube.com/watch?v=-zmuOhcHRbY</a><br>
 <a name="fn3">3) </a>Linienfolger-Video
   <a href="https://www.youtube.com/watch?v=JQ8TLt5MC9k">https://www.youtube.com/watch?v=JQ8TLt5MC9k</a><br>
+<a name="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30571">https://ft-datenbank.de/tickets?fulltext=30571</a><br>
+<a name="fn5">5) </a>Servo-Shield auf Thingiverse:
+  <a href="https://www.thingiverse.com/thing:3316758">https://www.thingiverse.com/thing:3316758</a><br>
+<a name="fn6">6) </a>HP-GL auf Wikipedia:
+  <a href="https://de.wikipedia.org/wiki/Hewlett-Packard_Graphics_Language">https://de.wikipedia.org/wiki/Hewlett-Packard_Graphics_Language</a><br>
 </small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - modelle</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>

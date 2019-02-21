@@ -951,7 +951,8 @@ vorgeschlagenen Nutzung von Timer 1. Ein zweiter Motor ließe sich
 z.B. ebenfalls im Hintergrund und unabhängig vom bereits vorhandenen
 Motor und auch unabhängig vom Hauptprogramm des Sketches durch Timer 3
 steuern. Mit zwei Schrittmotoren ist so recht elegant z.B. ein
-sogenannter Plotter zu realisieren.
+sogenannter Plotter zu realisieren wie in Abschnitt <a href="modelle.html#7.5">7.5</a>
+gezeigt.
 
 <p><h2><a name="6.5">6.5 Servomotoransteuerung</a></h2> 
  
@@ -2657,6 +2658,102 @@ Bibliothek zu groß für den Flash-Speicher des <font color="red">f</font><font 
      airq           = hum_score + gas_score;
 </pre>
 
+
+<p><h3><a name="6.14.9">6.14.9 Mini-I²C-Servo-Adapter</a></h3>
+
+<p>Speziell für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wurde der Mini-I²C-Servo-Adapter
+entworfen. Er vereint trotz seiner geringen Größe eine
+Spannungsversorgung und eine Servosteuerung in einem Gehäuse.
+
+<p><center>
+  
+  <p><a name="IMG:6.47"><img src="experimente/mini_i2c_adapter.jpg"></a>
+  <br><small>Abbildung 6.47: Der Mini-I²C-Adapter am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+</center>
+
+<p><h4>Anschluss und Inbetriebnahme</h4>
+
+<p>Zur Erstinbetriebnahme sollte nur die I²C-Verbindung zwischen
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und Mini-I²C-Adapter hergestellt werden. Generell ist es
+ratsam, den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> von der Spannungs- und USB-Versorgung zu
+trennen, während die I²C-Verbindungen hergestellt und getrennt
+werden. Sobald die Verbindung hergestellt ist kann der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+eingeschaltet werden. Die Leuchtdiode im Mini-I²C-Adapter sollte
+für ca. eine Sekunde aufleuchten und dann verlöschen.
+
+<p>Auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sollte für den ersten Test der
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cScanner</span></tt></a>-Sketch installiert
+werden. Weder 9 Volt noch der Servoanschluss werden für erste Tests
+benötigt. Der I2cScanner-Sketch sollte nun unter Adresse 0x11 den
+Adapter finden:
+
+<pre>
+     <font color="green"> 1</font>  I2C Scanner
+     <font color="green"> 2</font>  Scanning...
+     <font color="green"> 3</font>  I2C device found at address 0x11  !
+     <font color="green"> 4</font>  done
+</pre>
+Jedesmal wenn der Adapter vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angesprochen wird sollte die
+Leuchtdiode im Adapter kurz aufleuchten. Sollte dieser Test nicht
+klappen sollte das I²C-Kabel überprüft werden (sind beiden Stecker
+korrekt orientiert?). Funktionieren andere Gerät am I²C-Anschluss
+des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>?
+
+<p>War dieser Test erfolgreich, dann können Servo und 9-Volt-Versorgung
+angeschlossen werden wie in Abbildung <a href="experimente.html#IMG:6.48">6.48</a> zu
+sehen. Auch hier sollte der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> während der Umverkabelung von
+der Strom- und USB-Versorgung getrennt werden.
+
+<p><center>
+  
+  <p><a name="IMG:6.48"><img src="experimente/mini_servo_adapter_svg.png"></a>
+  <br><small>Abbildung 6.48: Anschluss des Mini-I²C-Adapters an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
+</center>
+
+<p>Der Mini-I²C-Adapter wird zwischen den I²C-Ausgang des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und den Anschluss des Servos gesteckt. Zusätzlich wird eine
+9-Volt-Verbindung zur Spannungsversorgung des Servos benötigt. Der
+Mini-I²C-Adapter reduziert die fischertechnik-üblichen 9 Volt auf
+Servo-verträgliche 5 Volt.
+
+<p>Sind alle Verbdidungen hergesellt kann z.B. der Sketch unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/MiniServoAdapter"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MiniServoAdapter</span></tt></a> verwendet werden. Er
+steuert kontiniertlich beide Servoausgänge gegenläufg an.
+
+<p><h4>Programmierung</h4>
+
+<p>Die Programmierung des Mini-I²C-Servo-Adapters ist recht einfach,
+ein simples Beispiel findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/MiniServoAdapter"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MiniServoAdapter</span></tt></a>. Das Setzen eines Ausgangs
+auf einen Wert benötigt lefiglich folgenden Code:
+
+<pre>
+       Wire.beginTransmission(ADDRESS);
+       Wire.write(0x00);                 // 0 = servo 1, 1 = servo 2
+       Wire.write(94);                   // Mitte, 63 (ganz links) bis 125 (ganz rechts)
+       Wire.endTransmission();
+</pre>
+<h4>Registerbelegung</h4>
+
+<p>Die Standard-Adresse des Mini-I²C-Servo-Adapters ist hex 0x11
+bzw. dezimal 17. Diese Adresse kann permanent geändert werden
+(s.u.). Sollte man die Adresse vergessen haben, dann hilft der
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cScanner</span></tt></a>-Sketch, die Adresse des
+Adapters zu bestimmen.
+
+<p><center><table>
+<tr><td>Register </td><td></td><td> Beschreibung </td></tr>
+<tr><td>
+0x00/0x01 </td><td></td><td> Setzen der Pulsweite der Servoausgänge 1 oder 2 in Schritten von 16µs. In der Standardeinstellung werden nur Werte im für Servos geeigneten Bereich von 63 (1ms) bis 125 (2ms) akzeptiert. Werte außerhalb dieses Bereiches werden gekappt. Die Grenzen können verändert werden (s.u.).</td></tr>
+<tr><td>0x02/0x03 </td><td></td><td> Setzen der unteren Grenze der Pulsweise von Servo 1 bzw. Servo 2 in 16µs-Schritten. Standardwert ist 63. Werte größer als diese Grenze, die in die Register 0x00 und 0x01 geschrieben werden werden auf diese untere Grenze beschränkt.</td></tr>
+<tr><td>0x04/0x05 </td><td></td><td> Setzen der oberen Grenze der Pulsweise von Servo 1 bzw. Servo 2 in 16µs-Schritten. Standardwert ist 125. Werte kleiner als diese Grenze, die in die Register 0x00 und 0x01 geschrieben werden werden auf diese obere Grenze beschränkt.</td></tr>
+<tr><td>0x06/0x07 </td><td></td><td> Das Schreiben dieses Registers setzt einen Offset für Servo 1 oder 2. Der Standardwert ist 0. Der Offset wird zu der durch Register 0x00 oder 0x01 gesetzen Pulsweise addiert <em>nachdem</em> die Grenzen überprüft wurden. Auf diese Weise lässt sich z.B. die Mittelstellung an die individuallen Eigenschaften eines Servos anpassen.</td></tr>
+<tr><td>0x08 </td><td></td><td> Setzen der I²C-Adresese. Die neue Adresse muss im Bereich von 0x03 bis 0x77 liegen mit Ausnahme von 0x3c (diese Adresse wird vom internen OLED-Display entsprechender <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s verwendet). </td></tr>
+<tr><td>0x09 </td><td></td><td> Das Schreiben von 0xa5 in Register 0x09 überträgt speichert die über Register 0x02 bis 0x08 gemachten Einstellungen permanent im EEPROM. Ab diesem Zeitpunkt bleiben die Einstellungen auch über einen Neustart und Stromlosigkeit erhalten.</td></tr>
+<tr><td>0x00 lesen </td><td></td><td> Das Lesen von Register 0x00 liefert die Firmwareversion in BCD-Kodierung zurück.  Also beispielsweise 0x10 für Version 1.0 </td></tr>
+<tr><td>0x01+ lesen </td><td></td><td> Alle anderen Register liefern beim Lesen 0x5a </td></tr>
+<tr><td></table></center>
+
 <p><h2><a name="6.14">6.14 WS2812B-Vollfarb-Leuchtdioden</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
@@ -2682,8 +2779,8 @@ Leuchtdioden verwendet werden, so ist eine separate externe
 
 <p><center>
   
-  <p><a name="IMG:6.47"><img src="experimente/ws2812b_svg.png"></a>
-  <br><small>Abbildung 6.47: Anschluss von zwei WS2812B-Vollfarb-Leuchtdioden</small>
+  <p><a name="IMG:6.49"><img src="experimente/ws2812b_svg.png"></a>
+  <br><small>Abbildung 6.49: Anschluss von zwei WS2812B-Vollfarb-Leuchtdioden</small>
 </center>
 
 <p>Jeder WS2812B-Leuchtdiodenstreifen verfügt über drei Eingangssignale:
@@ -2741,8 +2838,8 @@ fischertechnik Lautsprecherkassette 36936.
 
 <p><center>
   
-  <p><a name="IMG:6.48"><img src="experimente/music_svg.png"></a>
-  <br><small>Abbildung 6.48: Anschluss der Lautsprecherkassette an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  <p><a name="IMG:6.50"><img src="experimente/music_svg.png"></a>
+  <br><small>Abbildung 6.50: Anschluss der Lautsprecherkassette an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
 </center>
 
 <p>Wichtig ist, dass ein Vorwiderstand von mindestens 100&#8486; zwischen
@@ -2864,8 +2961,8 @@ der IDE direkt installiert werden kann.
 
 <p><center>
   
-  <p><a name="IMG:6.49"><img src="experimente/installieren_midiusb.png"></a>
-  <br><small>Abbildung 6.49: Installation der MIDIUSB-Bibliothek in der Arduino-IDE</small>
+  <p><a name="IMG:6.51"><img src="experimente/installieren_midiusb.png"></a>
+  <br><small>Abbildung 6.51: Installation der MIDIUSB-Bibliothek in der Arduino-IDE</small>
 </center>
 
 <p><h3><a name="6.17.1">6.17.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MidiInstrument">MidiInstrument</a></tt></a></h3>
@@ -2925,9 +3022,9 @@ Modell untergebracht zu werden.
 
 <p><center>
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.50"><img src="experimente/android-screenshot.png"></a></td></tr><tr><td align="center"><small>(a) Screenshot</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.50"><img src="experimente/android.jpg"></a></td></tr><tr><td align="center"><small>(b) Smartphone am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.50: Android-Demo zur Nutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Smartphone</small>
+  <p><table><tr><td><table><tr><td><a name="IMG:6.52"><img src="experimente/android-screenshot.png"></a></td></tr><tr><td align="center"><small>(a) Screenshot</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.52"><img src="experimente/android.jpg"></a></td></tr><tr><td align="center"><small>(b) Smartphone am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.52: Android-Demo zur Nutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Smartphone</small>
 </center>
 
 <p>Mit USB-OTG übernimmt das Smartphone die Rolle des PCs. Es beim
@@ -3017,20 +3114,20 @@ wird ein USB-Host-Kabel (z.B. Lindy 31717, siehe Abschnitt
 
 <p><center>
   
-  <p><a name="IMG:6.51"><img src="experimente/webusb_chrome_icon.png"></a>
-  <br><small>Abbildung 6.51: Der Chrome-Browser ist auf den meisten Android-Geräten vorinstalliert</small>
+  <p><a name="IMG:6.53"><img src="experimente/webusb_chrome_icon.png"></a>
+  <br><small>Abbildung 6.53: Der Chrome-Browser ist auf den meisten Android-Geräten vorinstalliert</small>
 </center>
 
 <p>Auf Linux-PCs erfüllt den gleichen Zweck der Chromium-Browser. Er
 lässt sich normalerweise über den Paketmanager nachinstallieren. Im
 Gegensatz zur Windows-Version funktioniert hier auch das automatische
 Weiterleiten an die vom USB-Gerät bereitgestellte URL wie in Abbildung
-<a href="experimente.html#IMG:6.52">6.52</a> zu sehen.
+<a href="experimente.html#IMG:6.54">6.54</a> zu sehen.
 
 <p><center>
   
-  <p><a name="IMG:6.52"><img src="experimente/webusb_hinweis.png"></a>
-  <br><small>Abbildung 6.52: Meldung beim Eistecken des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei laufendem Chromium-Browser</small> 
+  <p><a name="IMG:6.54"><img src="experimente/webusb_hinweis.png"></a>
+  <br><small>Abbildung 6.54: Meldung beim Eistecken des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei laufendem Chromium-Browser</small> 
 </center>
 
 <p>Auf Linux-PCs hat der Webbrowser normalerweise keine ausreichenden
@@ -3054,15 +3151,15 @@ Neben dem passenden Sketch verlangt die WebUSB-Spezifikation weitere
 Anpassungen an der USB-Konfiguration des Geräts. Die nötigen
 Änderungen nimmt die Arduino-IDE vor, wenn man in der Board-Auswahl
 den Board-Typ <tt>ftDuino (WebUSB)</tt> wie in Abbildung
-<a href="experimente.html#IMG:6.53">6.53</a> dargestellt auswählt. Diese Einstellung sollte
+<a href="experimente.html#IMG:6.55">6.55</a> dargestellt auswählt. Diese Einstellung sollte
 nur für WebUSB verwendet werden, da die Anpassungen nur in
 Zusammenhang mit der WebUSB-Bibliothek vollständig sind und Windows
 das Gerät andernfalls nicht erkennt.
 
 <p><center>
   
-  <p><a name="IMG:6.53"><img src="experimente/webusb_board.png"></a>
-  <br><small>Abbildung 6.53: Auswahl der WebUSB-Konfiguration</small> 
+  <p><a name="IMG:6.55"><img src="experimente/webusb_board.png"></a>
+  <br><small>Abbildung 6.55: Auswahl der WebUSB-Konfiguration</small> 
 </center>
 
 <p><h3><a name="6.19.3">6.19.3 Console</a></h3>
@@ -3080,9 +3177,9 @@ geschaltet werden.
 
 <p><center>
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.54"><img src="experimente/webusb_console.png"></a></td></tr><tr><td align="center"><small>(a) Chromium-Browser unter Linux</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.54"><img src="experimente/webusb_android.png"></a></td></tr><tr><td align="center"><small>(b) Chrome-Browser unter Android</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.54: WebUSB-Console des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  <p><table><tr><td><table><tr><td><a name="IMG:6.56"><img src="experimente/webusb_console.png"></a></td></tr><tr><td align="center"><small>(a) Chromium-Browser unter Linux</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.56"><img src="experimente/webusb_android.png"></a></td></tr><tr><td align="center"><small>(b) Chrome-Browser unter Android</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.56: WebUSB-Console des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
   
 <p></center>
 
@@ -3109,9 +3206,9 @@ zum Übersetzen des Sketches benötigt.
 
 <p><center>
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.55"><img src="experimente/brickly_chromium.png"></a></td></tr><tr><td align="center"><small>(a) im Chrome-Browser am PC</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.55"><img src="experimente/brickly_lite_tablet.jpg"></a></td></tr><tr><td align="center"><small>(b) am Android-Tablett mit Lindy-31717-Kabel</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.55: Brickly-lite für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  <p><table><tr><td><table><tr><td><a name="IMG:6.57"><img src="experimente/brickly_chromium.png"></a></td></tr><tr><td align="center"><small>(a) im Chrome-Browser am PC</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:6.57"><img src="experimente/brickly_lite_tablet.jpg"></a></td></tr><tr><td align="center"><small>(b) am Android-Tablett mit Lindy-31717-Kabel</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 6.57: Brickly-lite für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
   
 <p></center>
 
