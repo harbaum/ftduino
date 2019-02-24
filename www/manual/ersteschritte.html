@@ -70,7 +70,7 @@ und es öffnet sich ein neues Fenster mit dem ausgewählten Beispiel.
      <font color="green">24</font>  }
 </pre> 
 
-<p><h3><a name="3.2.1">3.2.1 Download des Blink-Sketches auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+<p><h3><a name="3.1.1">3.1.1 Download des Blink-Sketches auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
 
 <p>Der Blink-Sketch sollte nun geöffnet sein. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sollte an
 den PC angeschlossen sein und im Menü unter
@@ -109,7 +109,7 @@ die Übersetzung erfolgreich war wird der Maschinencode über die USB-Verbindung
 auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> übertragen und dort im Flash-Speicher abgelegt.
 
 <p>Während des Downloads zeigt die interne rote Leuchtdiode des
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wie in Abschnitt <a href="controller.html#1.3.4">1.3.4</a> beschrieben an, dass der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wie in Abschnitt <a href="controller.html#1.2.4">1.2.4</a> beschrieben an, dass der
 Bootloader aktiviert wird und dass der Download stattfindet.
 
 <p>Nach erfolgreichem Download startet der Sketch sofort und die interne
@@ -121,7 +121,7 @@ rote Leuchtdiode blinkt langsam.
   <br><small>Abbildung 3.5: Blinkende interne rote Leuchtdiode im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
 </center>
 
-<p><h3><a name="3.2.2">3.2.2 Die Funktionsweise des Sketches</a></h3>
+<p><h3><a name="3.1.2">3.1.2 Die Funktionsweise des Sketches</a></h3>
 
 <p>Der Sketch-Code besteht zum überwiegenden Teil aus erklärenden
 Kommentaren, die für die Funktion des Sketches völlig unbedeutend sind
@@ -133,7 +133,7 @@ sind Kommentare an ihrer hellgrauen Färbung leicht zu
 erkennen. Tatsächlicher Code befindet sich lediglich in den Zeilen 12
 bis 15 sowie den Zeilen 18 bis 24.
 
-<p><h3><a name="3.2.3">3.2.3 Die Funktionen <tt>setup()</tt> und <tt>loop()</tt></a></h3>
+<p><h3><a name="3.1.3">3.1.3 Die Funktionen <tt>setup()</tt> und <tt>loop()</tt></a></h3>
 
 <p>Jeder Arduino-Sketch enthält mindestens die beiden Funktionen
 <tt>setup()</tt> (englisch für Einrichtung) und <tt>loop()</tt> (englisch
@@ -162,7 +162,7 @@ ausgeschaltet und es wird eine weitere Sekunde gewartet. Dies passiert
 immer und immer wieder, so dass die Leuchtdiode mit einer Frequenz von
 0,5 Hertz blinkt.
 
-<p><h3><a name="3.2.4">3.2.4 Anpassungen am Sketch</a></h3>
+<p><h3><a name="3.1.4">3.1.4 Anpassungen am Sketch</a></h3>
 
 <p>Für den Einstieg ist es oft sinnvoll, mit einem vorgefertigten Sketch
 zu starten und dann eigene Änderungen vorzunehmen. Die Beispiele der
@@ -238,7 +238,7 @@ kann z.B.  über ein übliches fischertechnik-Netzteil erfolgen oder
 speziell beim Anschluss der Batterie kann man also keinen Schaden
 anrichten.
 
-<p><h3><a name="3.3.1">3.3.1 Der Sketch</a></h3>
+<p><h3><a name="3.2.1">3.2.1 Der Sketch</a></h3>
 
 <p>Der folgende Beispiel-Sketch <tt>BlinkO1</tt> findet sich auch im
 <tt><span style="background-color:#f0f0f0;">Datei</span></tt>-Menü der Arduino-IDE unter
@@ -287,9 +287,9 @@ zur extern angeschlossenen Lampe blinkt.
 
 <p>Weitere einfache Beispiele und Erklärungen zur Benutzung der Ein- und
 Ausgänge in eigenen Sketches finden sich in Abschnitt
-<a href="bibliotheken.html#9.2.1">9.2.1</a>.
+<a href="bibliotheken.html#9.1.1">9.1.1</a>.
 
-<p><h3><a name="3.3.2">3.3.2 Eingänge</a></h3>
+<p><h3><a name="3.2.2">3.2.2 Eingänge</a></h3>
 
 <p>Zum Anschluss an übliche fischertechnik-Taster, -Fototransistoren und
 ähnlich verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über die acht Eingänge <tt>I1</tt> bis
@@ -394,7 +394,7 @@ daher neben der USB-Verbindung keinerlei weitere Spannungsversorgung.
      <font color="green">23</font>  }
 </pre> 
 
-<p><h3><a name="3.4.1">3.4.1 Der serielle Monitor</a></h3> 
+<p><h3><a name="3.3.1">3.3.1 Der serielle Monitor</a></h3> 
 
 <p>Man kann ein beliebiges sogenanntes Terminalprogramm auf dem PC
 nutzen, um Textausgaben des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> via <tt>COM:</tt>-Port zu
@@ -455,7 +455,7 @@ diese Einstellungen und kommuniziert trotzdem fehlerfrei. Einige
 andere Mitglieder der Arduino-Familie wie der Arduino-Uno benötigen
 hier aber übereinstimmende Einstellungen.
 
-<p><h3><a name="3.4.2">3.4.2 Sketchbeschreibung</a></h3>
+<p><h3><a name="3.3.2">3.3.2 Sketchbeschreibung</a></h3>
 
 <p>Der Sketch besteht aus wenig mehr als den eigentlich Aufrufen zur
 Bedienung des <tt>COM:</tt>-Ports. Da der <tt>COM:</tt>-Port auch oft
@@ -479,7 +479,7 @@ am Beginn der nächsten Bildschirmzeile.
 <p>Schließlich wird in Zeile 20 die <tt>zaehler</tt>-Variable um eins
 erhöht und eine Sekunde (1000 Millisekunden) gewartet.
 
-<p><h3><a name="3.4.3">3.4.3 USB-Verbindungsaufbau</a></h3>
+<p><h3><a name="3.3.3">3.3.3 USB-Verbindungsaufbau</a></h3>
 
 <p>Bei Geräten wie dem Arduino Uno, die einen separaten
 USB-Kommunikationsbaustein für die USB-Kommunikation nutzen, besteht

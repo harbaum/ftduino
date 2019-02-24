@@ -218,7 +218,7 @@ Semikolon (;) getrennt.
 Anweisungen zwischen den Klammern, so löst der Sketch folgerichtig
 auch keine erkennbare Reaktion auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aus.
 
-<p><h3><a name="4.4.1">4.4.1 Kommentare</a></h3>
+<p><h3><a name="4.3.1">4.3.1 Kommentare</a></h3>
 
 <p>Die beiden zunächst entfernten mit <tt>//</tt> beginnenden Zeilen fügen
 dem Sketch ebenfalls keine Funktionalität zu. Um das zu überprüfen
@@ -261,7 +261,7 @@ Einen Hinweis auf Kommentare gibt in der Arduino-IDE die Farbgebung.
 Kommentare sind immer hellgrau dargestellt und damit leicht vom eigentlichen
 Programmcode zu unterscheiden.
 
-<p><h3><a name="4.4.2">4.4.2 Fehlermeldungen</a></h3>
+<p><h3><a name="4.3.2">4.3.2 Fehlermeldungen</a></h3>
 
 <p>Als nächstes sollen zwei Programmanweisungen zwischen den geschweiften
 Klammern der <tt>setup()</tt>-Funktion eingefügt werden:
@@ -324,7 +324,7 @@ Nach dem Download wird die rote Leuchtdiode im <font color="red">f</font><font c
 denn genau das bewirken die zwei kryptischen Zeilen, die im folgenden
 Abschnitt genauer erklärt werden.
 
-<p><h3><a name="4.4.3">4.4.3 Funktionen</a></h3>
+<p><h3><a name="4.3.3">4.3.3 Funktionen</a></h3>
 
 <p>Das im Rahmen der Arduino-Programmierung wichtigste C<sup>++</sup>-Sprachelement
 sind die sogenannten Funktionen. Mit ihnen lassen sich bereits
@@ -408,7 +408,7 @@ Damit wird klar, dass die Anweisungen <tt>pinMode(LED_BUILTIN,
 Funktionsaufrufe waren. Beide Funktionen bekamen jeweils zwei durch
 Kommata getrennte Parameter mitgegeben.
 
-<p><h3><a name="4.4.4">4.4.4 Die Funktionen <tt>setup()</tt> und <tt>loop()</tt></a></h3> 
+<p><h3><a name="4.3.4">4.3.4 Die Funktionen <tt>setup()</tt> und <tt>loop()</tt></a></h3> 
 <a href="https://www.arduino.cc/reference/en/language/structure/sketch/setup/">https://www.arduino.cc/reference/en/language/structure/sketch/setup/</a> <br>
 <a href="https://www.arduino.cc/reference/en/language/structure/sketch/loop/">https://www.arduino.cc/reference/en/language/structure/sketch/loop/</a>
 
@@ -505,7 +505,7 @@ auswerten und Ausgänge schalten.
   zumindest für die meisten mitgelieferten Bibliotheken nicht nötig.
 </div>
 
-<p><h3><a name="4.4.5">4.4.5 Beispiel</a></h3>
+<p><h3><a name="4.3.5">4.3.5 Beispiel</a></h3>
 
 <p>Damit sind die wesentlichen Grundlagen erklärt und das folgende
 Beispiel verständlich.
@@ -557,7 +557,7 @@ online in der Arduino-Language-Reference unter
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifische Funktionen im Kapitel <a href="bibliotheken.html#9">9</a>
 beschrieben sind.
 
-<p><h3><a name="4.5.1">4.5.1 <tt>pinMode(pin, mode)</tt></a></h3>
+<p><h3><a name="4.4.1">4.4.1 <tt>pinMode(pin, mode)</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/functions/digital-io/pinMode/">https://www.arduino.cc/reference/en/language/functions/digital-io/pinMode/</a>
 
 <p>Diese Funktion konfiguriert einen Pin des ATmega32u4-Mikrocontrollers
@@ -578,7 +578,7 @@ Für <tt>pin</tt> muss in dem Fall <tt>LED_BUILTIN</tt> verwendet werden.
      // internen Anschlusspin der Leuchtdiode zum Ausgang erklären
      pinMode(LED_BUILTIN, OUTPUT);
 </pre>
-<h3><a name="4.5.2">4.5.2 <tt>digitalWrite(pin, value)</tt></a></h3>
+<h3><a name="4.4.2">4.4.2 <tt>digitalWrite(pin, value)</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/">https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/</a>
 
 <p>Die Funktion <tt>digitalWrite()</tt> steuert einen durch die Funktion
@@ -598,7 +598,7 @@ oder ausschaltet.
      // Leuchtdiode einschalten
      digitalWrite(LED_BUILTIN, HIGH);
 </pre>
-<h3><a name="4.5.3">4.5.3 <tt>delay(ms)</tt></a></h3>
+<h3><a name="4.4.3">4.4.3 <tt>delay(ms)</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/functions/time/delay/">https://www.arduino.cc/reference/en/language/functions/time/delay/</a>
 
 <p>Die meisten Aufgaben erledigt auch ein so einfacher Mikrocontroller wie
@@ -606,7 +606,7 @@ der ATmega32u4 schneller als für Menschen wahrnehmbar. Um Abläufe auf ein
 passendes Maß zu senken ist die <tt>delay()</tt>-Funktion hilfreich. Sie
 erwartet als Parameter eine Wartezeit in Millisekunden. 
 
-<p>Wie in Abschnitt <a href="programmierung.html#4.4.4">4.4.4</a> beschrieben wird die Funktion
+<p>Wie in Abschnitt <a href="programmierung.html#4.3.4">4.3.4</a> beschrieben wird die Funktion
 <tt>setup()</tt> nur einmal aufgerufen, die Function <tt>loop()</tt> aber
 daraufhin immer wieder.  Der folgende Sketch lässt die Leuchtdiode
 daher kontinuierlich blinken.
@@ -628,7 +628,7 @@ daher kontinuierlich blinken.
        delay(1000);
      }
 </pre>
-<h3><a name="4.5.4">4.5.4 <tt>Serial.begin(speed)</tt></a></h3>
+<h3><a name="4.4.4">4.4.4 <tt>Serial.begin(speed)</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/">https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/</a>
 
 <p>Die Kommunikationsmöglichkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> beschränken sich direkt
@@ -640,7 +640,7 @@ Verwendung der <tt>Serial</tt>-Bibliothek.
 
 <p>Auf PC-Seite werden die Ausgaben dieser Bibliothek über den
 sogenannten seriellen Monitor angezeigt. Dessen Benutzung wurde in
-Abschnitt <a href="ersteschritte.html#3.4.1">3.4.1</a> genauer beschrieben. Die Funktion
+Abschnitt <a href="ersteschritte.html#3.3.1">3.3.1</a> genauer beschrieben. Die Funktion
 <tt>Serial.begin()</tt> bereitet den Sketch auf die Verwendung des
 seriellen Monitors vor. Sie sollte daher am Beginn des Sketches
 bzw. in der <tt>setup()</tt>-Funktion aufgerufen werden.
@@ -658,7 +658,7 @@ belanglos und sollte z.B. auf einen Wert von 115200 gesetzt werden.
      void loop() {
      }
 </pre>
-<h3><a name="4.5.5">4.5.5 <tt>Serial.print(val)</tt> und <tt>Serial.println(val)</tt></a></h3>
+<h3><a name="4.4.5">4.4.5 <tt>Serial.print(val)</tt> und <tt>Serial.println(val)</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/print/">https://www.arduino.cc/reference/en/language/functions/communication/serial/print/</a> <br>
 <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/println/">https://www.arduino.cc/reference/en/language/functions/communication/serial/println/</a>
 
@@ -692,7 +692,7 @@ eingeschlossen werden.
      void loop() {
      }
 </pre>
-<h3><a name="4.5.6">4.5.6 <tt>ftduino.input_get()</tt>, <tt>ftduino.output_set()</tt>
+<h3><a name="4.4.6">4.4.6 <tt>ftduino.input_get()</tt>, <tt>ftduino.output_set()</tt>
   und <tt>ftduino.motor_set()</tt></a></h3>
 
 <p>Ein Controller für ein fischertechnik-Modell muss natürlich Eingaben
@@ -701,7 +701,7 @@ aus dem Modell empfangen und Reaktionen im Modell auslösen können. Die
 <a href="bibliotheken.html#9">9</a> beschrieben. In diesem Absatz wird daher nur das
 absolute Minimum beschrieben.
 
-<p>Es wurde in Abschnitt <a href="programmierung.html#4.4.4">4.4.4</a> erklärt, dass es eine
+<p>Es wurde in Abschnitt <a href="programmierung.html#4.3.4">4.3.4</a> erklärt, dass es eine
 Besonderheit ist, dass Bibliotheksfunktionen ohne weitere Vorbedingungen
 zur Verfügung stehen und im Sketch verwendet werden können. Dies trifft
 aber nur auf die Arduino-eigenen Bibliotheken zu wie sie in den bisherigen
@@ -798,7 +798,7 @@ vom Typ <tt>int</tt> angelegt.
      void loop() {
      }  
 </pre>
-<h3><a name="4.6.1">4.6.1 Datentyp <tt>int</tt></a></h3>
+<h3><a name="4.5.1">4.5.1 Datentyp <tt>int</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/variables/data-types/int/">https://www.arduino.cc/reference/en/language/variables/data-types/int/</a>
 
 <p>Der Datentyp <tt>int</tt> ist der Standard-Datentyp. Beim <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
@@ -883,7 +883,7 @@ Programmierung oft nötig, dass ein Programm auf Ereignisse
 reagiert. Der C<sup>++</sup>-Mechanismus dafür sind Anweisungen, die auf
 Bedingungen reagieren können.
 
-<p><h3><a name="4.7.1">4.7.1 <tt>if</tt>-Anweisung</a></h3>
+<p><h3><a name="4.6.1">4.6.1 <tt>if</tt>-Anweisung</a></h3>
 <a href="https://www.arduino.cc/reference/en/language/structure/control-structure/if/">https://www.arduino.cc/reference/en/language/structure/control-structure/if/</a>
 
 <p><center>
@@ -964,7 +964,7 @@ C<sup>++</sup>-Anweisungen Programmteile wiederholen.
 für Schleifen zurückgreifen zu können. Im Folgenden werden zwei
 davon beschrieben.
 
-<p><h3><a name="4.8.1">4.8.1 <tt>while</tt>-Schleife</a></h3>
+<p><h3><a name="4.7.1">4.7.1 <tt>while</tt>-Schleife</a></h3>
 <a href="https://www.arduino.cc/reference/en/language/structure/control-structure/while/">https://www.arduino.cc/reference/en/language/structure/control-structure/while/</a>
 
 <p><center>
@@ -1018,7 +1018,7 @@ Loslassen der Taste gewartet wird.
        }
      }
 </pre>
-<h3><a name="4.8.2">4.8.2 <tt>for</tt>-Schleife</a></h3>
+<h3><a name="4.7.2">4.7.2 <tt>for</tt>-Schleife</a></h3>
 <a href="https://www.arduino.cc/reference/en/language/structure/control-structure/for/">https://www.arduino.cc/reference/en/language/structure/control-structure/for/</a>
 
 <p>Etwas komplexer als die <tt>while</tt>-Schleife ist die
@@ -1081,7 +1081,7 @@ Funktionen der Arduino- und der <font color="red">f</font><font color="blue">t</
 Teil ab. Aber schon diese wenigen Informationen reichen, um einige interessante
 Sketches selbst zu schreiben.
 
-<p><h3><a name="4.9.1">4.9.1 Einfache Ampel</a></h3>
+<p><h3><a name="4.8.1">4.8.1 Einfache Ampel</a></h3>
 
 <p>Dieses Beispiel stellt eine eine einfache Bedarfs-Ampel dar.  Nach dem
 Einschalten zeigt sie zunächst rot. Sobald der Taster gedrückt wird
@@ -1136,7 +1136,7 @@ erkennbar. Der Abstand von wenigen Mikrosekunden ist nicht erkennbar.
      <font color="green">21</font>    }
      <font color="green">22</font>  }
 </pre>
-<h3><a name="4.9.2">4.9.2 Schranke</a></h3>
+<h3><a name="4.8.2">4.8.2 Schranke</a></h3>
 
 <p>Das Schrankenbeispiel ist etwas komplexer. Es besteht aus einer
 motorisierten Schranke mit jeweils zwei Endtastern. Der Taster an
@@ -1243,13 +1243,13 @@ der Meldung erwähnten Programmspeicherplatz (oft auch als
 Flash-Speicher bezeichnet). Der Programmspeicher kann bedenkenlos zu
 100% gefüllt werden.
 
-<p><h3><a name="4.10.1">4.10.1 Auswirkungen</a></h3>
+<p><h3><a name="4.9.1">4.9.1 Auswirkungen</a></h3>
 
 <p>Im Flash-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind zu jeder Zeit zwei Programme
 gespeichert:
 
 <p><dl>
-<dt><b>Bootloader</b></dt><dd>Der Bootloader (siehe Abschnitt <a href="controller.html#1.3.1">1.3.1</a>)
+<dt><b>Bootloader</b></dt><dd>Der Bootloader (siehe Abschnitt <a href="controller.html#1.2.1">1.2.1</a>)
   ist in einem geschützten Teil des Flashspeichers abgelegt. Er wird
   genutzt, um Sketches aus der Arduino-IDE über USB in den übrigen
   Flash-Speicher zu laden.
@@ -1308,16 +1308,16 @@ beeinträchtigt, dass der <font color="red">f</font><font color="blue">t</font><
 PC nicht korrekt oder ggf. sogar überhaupt nicht erkannt wird.
 
 <p>Für diesen Fall verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über einen Reset-Taster (siehe
-Abschnitt <a href="controller.html#1.3.3">1.3.3</a>). Ist die Arduino-IDE durch Speichermangel
+Abschnitt <a href="controller.html#1.2.3">1.2.3</a>). Ist die Arduino-IDE durch Speichermangel
 im Sketch nicht mehr in der Lage, den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über USB anzusprechen
 und zur Aktivierung des Bootloaders zu veranlassen, so ist es mit dem
 Reset-Taster manuell immer noch möglich, den Bootloader im passenden
-manuell zu aktivieren wie in Abschnitt <a href="controller.html#1.4.2">1.4.2</a> beschrieben.
+manuell zu aktivieren wie in Abschnitt <a href="controller.html#1.3.2">1.3.2</a> beschrieben.
 Die Funktion des Reset-Tasters ist immer vorhanden und sie kann nicht
 durch einen fehlerhaften Sketch beeinflusst werden. Mit seiner Hilfe
 ist es immer möglich, einen neuen Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden.
 
-<p><h3><a name="4.10.2">4.10.2 Vorbeugende Maßnahmen</a></h3>
+<p><h3><a name="4.9.2">4.9.2 Vorbeugende Maßnahmen</a></h3>
 
 <p>Taucht die o.g. Warnung auf, so sollte man im Zweifelsfall davon
 Abstand nehmen, den Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden. Auch wenn es
@@ -1418,7 +1418,7 @@ dass man alles findet, das man für sein konkretes Problem benötigt.
 
 <p>Oft sind es aber gerade die besonders umfangreichen Bibliotheken, die
 besonders ressourcenhungrig sind und eine große Menge Speicher belegen.
-Bei Verwendung des OLED-Displays aus Abschnitt <a href="experimente.html#6.14.3">6.14.3</a> am
+Bei Verwendung des OLED-Displays aus Abschnitt <a href="experimente.html#6.13.3">6.13.3</a> am
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind es zum Beispiel die Grafikbibliotheken von Adafruit,
 die alle Funktionen für aufwändige Grafiken mitbringen, aber
 gleichzeitig einen hohen Speicherverbrauch haben.
