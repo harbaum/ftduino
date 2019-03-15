@@ -217,6 +217,75 @@
         set_button(null, null, false);
       });
     }
+
+    function parse(data) {
+  
+      // run result through json decoder
+      result = JSON.parse(data);
+
+      // if there's a pending callback
+      if(ftduino.callback) {
+        var reply_ok = true;
+    
+        // check if all expected entries are in this reply (e.g. correct port)
+        if(ftduino.callback["expect"]) {
+          // iterate over all expected keys
+          var keys = Object.keys(ftduino.callback["expect"]);
+          for(var i=0; i < keys.length ; i++) {
+	    if(result[keys[i]].toLowerCase() !== ftduino.callback["expect"][keys[i]].toLowerCase()) {
+	      console.log("Missing expected reply parameter:",
+	  	       keys[i], ":", ftduino.callback["expect"][keys[i]]);
+              reply_ok = false;
+   	    }
+	  }
+        }
+
+        if(result[ftduino.callback["value"]] === undefined) {
+          console.log("Missing value parameter: ", ftduino.callback["value"]);
+          reply_ok = false;
+        }
+			       
+        if(reply_ok) {
+          // call it callback ...
+          ftduino.callback["func"](result[ftduino.callback["value"]]);
+          // ... and forget about it
+          ftduino.callback = null;
+
+          // cancel any pending timeout
+          clearTimeout(ftduino.reply_timeout);
+          ftduino.reply_timeout = null;
+        }
+      }
+    }
+
+    function clean_buffer() {
+	// buffer must begin with "{". Skip everything else
+	while((ftduino.buffer.length > 0) && (ftduino.buffer.charAt(0) != '{'))
+	    ftduino.buffer = ftduino.buffer.substr(1);
+    }
+
+    function buffer_contains_message() {
+	// check if there's a matching closing brace in buffer
+	if(ftduino.buffer.length < 2)
+	    return 0;
+
+	depth = 0;
+	index = 0;
+	while(index < ftduino.buffer.length) {
+	    // just increase the depth if another opening brace is found
+	    if(ftduino.buffer.charAt(index) == '{')
+		depth++;
+			
+	    if(ftduino.buffer.charAt(index) == '}') {
+		// returning to level 0 means end of message
+		depth--;
+		if(depth == 0)
+		    return index;
+	    }
+	    index++;
+	}
+	return 0;
+    }
     
     function connect() {   
       ftduino.port.connect().then(() => {
@@ -229,41 +298,23 @@
           let textDecoder = new TextDecoder();
           if(ftduino.debug) console.log("RX:"+textDecoder.decode(data));
 
-          // run result through json decoder
-          result = JSON.parse(textDecoder.decode(data));
+//          parse(textDecoder.decode(data));
 
-          // if there's a pending callback
-          if(ftduino.callback) {
-            var reply_ok = true;
-    
-            // check if all expected entries are in this reply (e.g. correct port)
-            if(ftduino.callback["expect"]) {
-              // iterate over all expected keys
-              var keys = Object.keys(ftduino.callback["expect"]);
-              for(var i=0; i < keys.length ; i++) {
-		if(result[keys[i]].toLowerCase() !== ftduino.callback["expect"][keys[i]].toLowerCase()) {
-	          console.log("Missing expected reply parameter:",
-			       keys[i], ":", ftduino.callback["expect"][keys[i]]);
-                  reply_ok = false;
-		}
-	      }
-            }
+ 	  // append all data received to buffer
+	  ftduino.buffer = ftduino.buffer + textDecoder.decode(data);
 
-	    if(result[ftduino.callback["value"]] === undefined) {
-              console.log("Missing value parameter: ", ftduino.callback["value"]);
-              reply_ok = false;
-            }
-			       
-            if(reply_ok) {
-              // call it callback ...
-              ftduino.callback["func"](result[ftduino.callback["value"]]);
-              // ... and forget about it
-              ftduino.callback = null;
+   	  clean_buffer();
+	  index = buffer_contains_message();
+	  while(index > 0) {		
+	     // extract the string and parse it
+	     parse(ftduino.buffer.substr(0, index+1));
+		    
+	     // and keep the rest in the buffer
+	     ftduino.buffer = ftduino.buffer.substr(index+1);
 
-              // cancel any pending timeout
-              clearTimeout(ftduino.reply_timeout);
-              ftduino.reply_timeout = null;
-            }
+	     // check if there's another message
+	     clean_buffer();
+	     index = buffer_contains_message();
           }
         }
         ftduino.port.onReceiveError = error => {
@@ -348,6 +399,8 @@
     }
 
     function ftdCheckVersionCallback(ver) {
+      ftduino.buffer = ""
+    
       // enable run button after successful connection
       set_button(null, null, true);
       status('Connected to ' + ftduino.port.device_.productName + ' V' + ver);
