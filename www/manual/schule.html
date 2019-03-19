@@ -69,7 +69,7 @@ den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">
 <p><center>
   
   <p><a name="IMG:5.2"><img src="schule/scratch_screenshot.png"></a>
-  <br><small>Abbildung 5.2: Die Scratch-Programmierumgebung</small>
+  <br><small>Abbildung 5.2: Die Scratch-2.0-Programmierumgebung</small>
 </center>
 
 <p>Scratch stammt aus dem englischsprachigen Umfeld und ist im Original
@@ -80,13 +80,45 @@ deutschsprachige Portale wie das <tt>DACH-Scratch-Wiki</tt> unter
 speziell an Lehrer und Schüler aus dem deutschen Sprachraum richten
 und einen Scratch-Einstieg in der Schule unterstützen.
 
-<p>Scratch läuft komplett im Web-Browser und benötigt neben dem Browser
-und einem sogenannten Flash-Player keine weitere Software auf dem PC.
+<p><h3><a name="5.1.2">5.1.2 Scratch-Versionen</a></h3>
 
-<p><h3><a name="5.1.2">5.1.2 Scratch for Arduino (S4A)</a></h3>
+<p>Scratch ist inzwischen in drei unabhängigen Versionen erschienen.
+
+<p><dl>
+<dt><b>Scratch 1.x</b></dt><dd> wurde 2007 veröffentlicht und kam als
+  eigenständiges PC-Programm. Auf der letzten Version 1.4 dieser Reihe
+  basiert Scratch-for-Arduino (S4A), das sich auch mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+  verwenden lässt wie in Abschnitt <a href="schule.html#5.1.3">5.1.3</a>
+  beschrieben. Scratch 1 wird seit 2009 nicht mehr weiterentwickelt.
+</dd><dt><b>Scratch 2.0</b></dt><dd> erschien 2013 und war eine komplette
+  Neuentwicklung. Scratch 2.0 ist Browser-basiert und nutzt das
+  sogenannte Flash-Framework. Vor allem aus Sicherheitsgründen wird
+  Flash in vielen modernen Browsers nicht mehr unterstützt.  Die
+  Nutzung von Scratch 2.0 gestaltet sich damit zunehmend schwieriger.
+  Zur Nutzung externer Geräte wurde von Scratch 2.0 die Variante
+  ScratchX (siehe <a href="https://scratchx.org/">https://scratchx.org/</a>) abgeleitet. Eine
+  <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Anbindung wurde für Scratch 2.0 bzw. ScratchX (bisher)
+  nicht entwickelt.
+</dd><dt><b>Scratch 3.0</b></dt><dd> wurde 2019 veröffentlicht und ist wiederum eine
+  komplette Neuentwicklung. Scratch 3.0 ist ebenfalls Browser-basiert,
+  verzichtet aber auf Flash und verwendet stattdessen HTML5. Es ist
+  daher in jedem modernen Browser nutzbar. Eine <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Anbindung
+  ist in Abschnitt <a href="schule.html#5.1.4">5.1.4</a> beschrieben.
+</dd></dl>
+
+<p>Für neue Projekte sollte Scratch 3.0 verwendet werden. Die Nutzung
+von Scratch for Arduino (S4A) ist nur dann sinnvoll, wenn auf eine
+bestehende S4A-Installtion aufgebaut werden soll. S4A ist in vielen
+Schulen mit regulären Arduinos im Einsatz und kann ohne Änderungen
+direkt auch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angewendet werden.
+
+<p>Scratch 3.0 ist dagegen in aktiver Entwicklung und auch die
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Anbindung wird aktiv weiterentwickelt.
+
+<p><h3><a name="5.1.3">5.1.3 Scratch 1.4 for Arduino (S4A)</a></h3> 
 
 <p>Das Projekt <tt>Scratch for Arduino</tt>, kurz S4A baut auf Scratch
-auf und hat sich zum Ziel gesetzt, eine Interaktion zwischen
+1.4 auf und hat sich zum Ziel gesetzt, eine Interaktion zwischen
 virtueller Scratch-Welt auf dem PC und physischer an den PC
 angeschlossener Hardware herzustellen. Das S4A-Projekt greift dazu auf
 Arduinos zurück und integriert diese in die virtuelle
@@ -107,7 +139,7 @@ Downloads finden sich unter <a href="http://s4a.cat/">http://s4a.cat/</a>.
 <a href="http://s4a.cat/">http://s4a.cat/</a> erhältlich. Deutschsprachige Informationen
 finden sich z.B. unter <a href="https://scratch-dach.info/wiki/S4A">https://scratch-dach.info/wiki/S4A</a>.
 
-<p><h3><a name="5.1.3">5.1.3 Scratch for <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+<p><h4>Scratch for <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></h4>
 
 <p>Die Anpassung von S4A an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> betrifft nur den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 selbst und den dort zu installierenden Sketch. PC-seitig besteht kein
@@ -128,21 +160,91 @@ zeigt die entsprechende Zuordnung.
 <p>Weiterführende Informationen zu Einsatz von S4A mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 finden sich in Abschnitt <a href="community.html#8.6">8.6</a>.
 
-<p><h3><a name="5.1.4">5.1.4 Die Zukunft von Scratch</a></h3>
+<p><h3><a name="5.1.4">5.1.4 Scratch 3.0</a></h3> 
 
-<p>Die aktuelle Scratch-Version 2.0 läuft im Webbrowser, basiert aber
-technisch auf der nicht mehr aktuellen Flash-Technologie. Es ist
-absehbar, dass Scratch in dieser Form nicht mehr mit zukünftigen
-Web-Browsern funktionieren wird. Es gibt Arbeiten, Scratch mit
-modernen Technologien wie HTML5 umzusetzen.
+<p>Scratch 3.0 ist eine Online-Anwendung und kann direkt mit jedem
+gängigen Browser auf <a href="https://scratch.mit.edu">https://scratch.mit.edu</a> geöffnet
+werden.
 
-<p>Scratch for Arduino basiert auf der älteren Version 1.4 von
-Scratch. Diese läuft nicht im Browser sondern ist ein eigenständiges
-PC-Programm auf Basis der Programmiersprache Squeak.
+<p><center>
+  
+  <p><a name="IMG:5.4"><img src="schule/scratch3_main.png"></a>
+  <br><small>Abbildung 5.4: Der Hauptbildschirm vom Scratch3 mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Extension</small>
+</center>
 
-<p>Scratch wird in der Form, wie sie für S4A und damit für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
-verwendet werden kann nicht weiterentwickelt. Es ist daher nicht mit
-nennenswerten Erweiterungen zu rechnen.
+<p>Scratch 3.0 lehnt sich trotz der kompletten Neuentwicklung und
+der völlig unterschiedlichen darunterliegenden Technologie sehr stark
+an Scratch 2.0 an und der Umstieg ist ggf. recht unproblematisch.
+
+<p>Die Verbreitung von Scratch in Schulen auch außerhalb des Einsatzes
+mit fischertechnik oder ähnlichen Systemen sorgt in der Regel für
+einen leichten und schnellen Start. Die Schüler können zunächst ohne
+zusätzliche Hardware direkt in der Scratch-Umgebung Erfahrungen
+sammeln und sich mit dem prinzipiellen Umgang vertraut machen.
+Der Einsatz des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann dann fließend erfolgen und es
+ist kein Wechsel der Softwareumgebung nötig, wenn der Einsatz
+von realer Hardware in Scratch gewechselt werden soll.
+
+<p><h4>Einsatz des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter Scratch 3.0</h4>
+
+<p>Für den Einsatz des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind zwei zusätzliche Dinge
+nötig. Zum einen muss auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> der passende Sketch
+installiert sein. Zum zweiten muss die verwendete Scratch-3.0-Variante
+eine passende sogenannte Extension beinhalten.
+
+<p>Zur Nutzung von Scratch 3.0 sind folgende Schritte nötig:
+
+<p><ul>
+<li> Installation des <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/IoServer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">IoServer</span></tt></a>-Sketches auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+</li><li> Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per USB an den PC oder das Smartphone
+</li><li> Öffnen der Scratch-Webseite <a href="https://harbaum.github.io/ftduino/webusb/scratch3/">https://harbaum.github.io/ftduino/webusb/scratch3/</a> im Chrome-Browser
+</li></ul>
+
+<p>Weitere Informationen zu WebUSB und zur Installation des passenden
+Sketches finden sich in Abschnitt <a href="experimente.html#6.18">6.18</a>.
+
+<p>Nach dem Start sind zunächst keine Extensions eingebunden. Die Extensions
+erreicht man über den Auswahlbildschirm. 
+
+<p><center>
+  
+  <p><a name="IMG:5.5"><img src="schule/scratch3_extsel.png"></a>
+  <br><small>Abbildung 5.5: Button zur Extension-Auswahl in Scratch 3.0</small>
+</center>
+
+<p><center>
+  
+  <p><a name="IMG:5.6"><img src="schule/scratch3_extensions.png"></a>
+  <br><small>Abbildung 5.6: Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Extension im Auswahlbildschirm</small>
+</center>
+
+<p>Ein Klick auf die Extension installiert diese in Scratch. Der Zustand
+des angeschlossenen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird durch ein drittes Symbol neben
+der grünen Start-Flagge und dem roten Stop-Symbol angezeigt.
+
+<p>Das Symbol untscheidet drei Zustände. Das rote Kreuz zeigt an, dass
+ein generelles Problem mit der USB-Anbindung vorliegt. Das orange
+``nicht verbunden''-Symbol zeigt an, dass ein <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ausgewählt
+werden kann. Ein Klick dieses Symbol öffnet eine Liste der
+angeschlossenen Geräte, in diesem Fall dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Wird der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ausgewählt, so ändert sich das Symbol zu dem grünen
+Verbunden-Symbol und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann verwendet werden.
+
+<p><center>
+  
+  <p><table><tr><td><table><tr><td><a name="IMG:5.7"><img src="schule/ftduino-nowebusb_svg.png"></a></td></tr><tr><td align="center"><small>(a) Kein WebUSB</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:5.7"><img src="schule/ftduino-disconnected_svg.png"></a></td></tr><tr><td align="center"><small>(b) Nicht verbunden</small></td></tr></table></td> 
+  <td><table><tr><td><a name="IMG:5.7"><img src="schule/ftduino-connected_svg.png"></a></td></tr><tr><td align="center"><small>(c) Verbunden</small></td></tr></table></td>
+  </tr></table><br><small>Abbildung 5.7: Das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Status-Symbol neben den Start-Stop-Symbolen</small>
+</center>
+
+<p>Die Auswahl ist in der Regel nur einmal notwendig. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann
+während der Benutzung an- und abgesteckt werden und sollte in der
+Folge automatisch eingebunden werden.
+
+<p><h4>Offline-Nutzung von Scratch 3.0</h4>
+
+<p>Die Offline-Nutzung ist zur Zeit in Entwicklung ...
 
 <p><h2><a name="5.2">5.2 Grafische Programmierung mit Blockly/Brickly</a></h2>
 
@@ -157,8 +259,8 @@ lauffähig.
 
 <p><center>
   
-  <p><a name="IMG:5.4"><img src="schule/blockly.png"></a>
-  <br><small>Abbildung 5.4: Die Blockly-Benutzeroberfläche</small>
+  <p><a name="IMG:5.8"><img src="schule/blockly.png"></a>
+  <br><small>Abbildung 5.8: Die Blockly-Benutzeroberfläche</small>
 </center>
 
 <p>Scratch bildet eine komplette Umgebung und beinhaltet neben der
@@ -195,8 +297,8 @@ Browser gesendet und dort ausgegeben.
 
 <p><center>
   
-  <p><a name="IMG:5.5"><img src="schule/brickly.png"></a>
-  <br><small>Abbildung 5.5: Die Brickly-Benutzeroberfläche</small>
+  <p><a name="IMG:5.9"><img src="schule/brickly.png"></a>
+  <br><small>Abbildung 5.9: Die Brickly-Benutzeroberfläche</small>
 </center>
 
 <p>Sämtliche im Browser dargestellten Informationen werden vom TXT an den
@@ -252,8 +354,8 @@ nochmal vereinfachte Darstellung.
 
 <p><center>
   
-  <p><a name="IMG:5.6"><img src="schule/brickly_lite.png"></a>
-  <br><small>Abbildung 5.6: Die Brickly-Lite-Benutzeroberfläche</small>
+  <p><a name="IMG:5.10"><img src="schule/brickly_lite.png"></a>
+  <br><small>Abbildung 5.10: Die Brickly-Lite-Benutzeroberfläche</small>
 </center>
 
 <p>Im Gegensatz zu Brickly bezieht Brickly-Lite alle Daten aus dem
@@ -302,8 +404,8 @@ fischertechnik-Aktoren auslösen und umgekehrt.
 
 <p><center>
   
-  <p><a name="IMG:5.7"><img src="schule/minecraft.png"></a>
-  <br><small>Abbildung 5.7: Minecraft mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Schnittstelle</small>
+  <p><a name="IMG:5.11"><img src="schule/minecraft.png"></a>
+  <br><small>Abbildung 5.11: Minecraft mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Schnittstelle</small>
 </center>
 
 <p>Die Vorbereitungszeit auf Lehrerseite beschränkt sich auf das
@@ -375,8 +477,8 @@ ist ungefähr ab Klasse 7 bis 8 sinnvoll möglich.
 
 <p><center>
   
-  <p><a name="IMG:5.8"><img src="schule/arduino-ide.png"></a>
-  <br><small>Abbildung 5.8: Die Arduino-IDE</small>
+  <p><a name="IMG:5.12"><img src="schule/arduino-ide.png"></a>
+  <br><small>Abbildung 5.12: Die Arduino-IDE</small>
 </center>
 
 <p><h4>Arduino in der Schule</h4>
