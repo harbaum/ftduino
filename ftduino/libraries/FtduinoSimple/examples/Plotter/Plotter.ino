@@ -8,10 +8,11 @@
 // #define NOHW
 
 #define NONE         0
-#define SERVOSHIELD  1
-#define I2CCLIENT    2  // this gas never been fully implemented and my need some work
+#define SERVOSHIELD  1  // Peters adafruit based servo shield
+#define I2CCLIENT    2  // this has never been fully implemented and may need some work
+#define I2CMINI      3  // the mini i2c servo adapter
 
-#define PEN  SERVOSHIELD   // can be NONE, SERVOSHIELD, I2CCLIENT, ...
+#define PEN  I2CMINI   // can be NONE, SERVOSHIELD, I2CCLIENT, ...
 
 #if PEN == SERVOSHIELD
 #include <Adafruit_PWMServoDriver.h>
@@ -19,6 +20,12 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define SERVO_NUM    0    // leftmost connector
 #define SERVO_UP   350
 #define SERVO_DOWN 410
+#elif PEN == I2CMINI
+#include <Wire.h>
+#define SERVO_ADDR 0x11    // default address
+#define SERVO_NUM     0    // servo 1
+#define SERVO_UP     95
+#define SERVO_DOWN  110
 #endif
 
 // enable xon/xoff signalling
@@ -230,8 +237,7 @@ void pen(bool down) {
   if(down) pwm.setPWM(SERVO_NUM, 0, SERVO_DOWN);
   else     pwm.setPWM(SERVO_NUM, 0, SERVO_UP);
   delay(100);  // give pen some time to move
-#endif
-#if PEN == I2CCLIENT
+#elif PEN == I2CCLIENT
   if(down) {
     pen_set_m1(Ftduino::LEFT);    
     // wait for switch on I1 to close
@@ -241,6 +247,13 @@ void pen(bool down) {
     delay(500);
   }
   pen_set_m1(Ftduino::BRAKE);  
+#elif PEN == I2CMINI
+  Wire.beginTransmission(SERVO_ADDR);
+  Wire.write(SERVO_NUM);
+  if(down) Wire.write(SERVO_DOWN);
+  else     Wire.write(SERVO_UP);
+  Wire.endTransmission();
+  delay(100);  // give pen some time to move
 #endif
 }
 
@@ -256,17 +269,17 @@ bool pen_init(void) {
   Wire.write(0x10);   // config I1
   Wire.write(0x02);   // switch
   Wire.endTransmission();
-#endif
-
-#if PEN == SERVOSHIELD
+#elif PEN == SERVOSHIELD
   pwm.begin();  
   pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+#elif PEN == I2CMINI
+  Wire.begin();
 
 #if 0
   while(1) {    
-    pwm.setPWM(SERVO_NUM, 0, SERVO_DOWN);
+    pen(true);
     delay(2000);
-    pwm.setPWM(SERVO_NUM, 0, SERVO_UP);
+    pen(false);
     delay(500);
   }
 #endif
@@ -314,7 +327,16 @@ void setup() {
      failure(PSTR("Pen init failed"), 2);
 
   pen(false); 
-  
+
+#if 0  // PEN UP/DOWN test
+  while(1) {
+    pen(false); 
+    delay(2000);
+    pen(true); 
+    delay(500);
+  }
+#endif
+
   // reset state
   buffer[0] = 0;
   bcnt = 0;  
