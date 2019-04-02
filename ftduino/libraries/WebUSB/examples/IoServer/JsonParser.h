@@ -41,11 +41,13 @@ class JsonParser
 	   MODE_LEFT, MODE_RIGHT, MODE_BRAKE,  // M1-M4 motor modes
     } mode;
     enum { PARM_NONE,
-	   PARM_PORT, PARM_VALUE, PARM_MODE,
+	   PARM_PORT, PARM_VALUE, PARM_MODE, PARM_TYPE,
     } parm;
     enum { REQ_NONE,
 	   REQ_DEVS, REQ_VER
     } req;
+    enum { TYPE_NONE, TYPE_STATE, TYPE_COUNTER,
+    } type;
     struct port {
       enum { PORT_NONE, PORT_I, PORT_C, PORT_O, PORT_M, PORT_LED } type:3;
       uint8_t index:5;

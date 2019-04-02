@@ -21,15 +21,15 @@ extern WebUSB WebUSBSerial;
 #endif
 
 // generic JSON error codes
-#define ERR_UNEXP_STATE 1  // unexpected state
-#define ERR_EXP_OBJ     2  // expecting object
-#define ERR_EXP_STR     3  // expecting string
-#define ERR_EXP_SEP     4  // expecting ':'
-#define ERR_UNEXP_SUB   5  // unexpected substate
-#define ERR_UNEXP_ESTR  6  // unexpected state at end of string
-#define ERR_UNEXP_CONT  7  // unexpected continuation
-#define ERR_UNEXP_VAL   8  // unexpected value
-#define ERR_UNEXP_ACONT 9  // unexpected array continuation
+#define ERR_UNEXP_STATE  1  // unexpected state
+#define ERR_EXP_OBJ      2  // expecting object
+#define ERR_EXP_STR      3  // expecting string
+#define ERR_EXP_SEP      4  // expecting ':'
+#define ERR_UNEXP_SUB    5  // unexpected substate
+#define ERR_UNEXP_ESTR   6  // unexpected state at end of string
+#define ERR_UNEXP_CONT   7  // unexpected continuation
+#define ERR_UNEXP_VAL    8  // unexpected value
+#define ERR_UNEXP_ACONT  9  // unexpected array continuation
 
 // ftDuino specific errors
 #define ERR_UNK_CMD     10  // unknown command
@@ -40,6 +40,7 @@ extern WebUSB WebUSBSerial;
 #define ERR_INV_MODE    15  // mode invalid for port
 #define ERR_INT         16  // internal error
 #define ERR_ILL_REQ     17  // illegal get request
+#define ERR_ILL_TYPE    18  // illegal (counter) type specification
 
 void JsonParser::reply_error(char id) {
 #ifdef ARDUINO
@@ -79,6 +80,7 @@ void JsonParser::cmd_reset(void) {
   cmd = CMD_NONE;
   mode = MODE_NONE;
   parm = PARM_NONE;
+  type = TYPE_NONE;
   req = REQ_NONE;
   port.type = port::PORT_NONE;
   value.valid = false;
@@ -94,6 +96,12 @@ void JsonParser::reset(void) {
   cmd_reset();
 
 #ifdef ARDUINO
+  // all counter inputs trigger on falling edge and clear them
+  for(uint8_t c=0;c<4;c++) {
+    ftduino.counter_set_mode(Ftduino::C1+c, Ftduino::C_EDGE_FALLING);
+    ftduino.counter_clear(Ftduino::C1+c);
+  }
+
   // reset all ftduino ports
   digitalWrite(LED_BUILTIN, LOW);
   for(uint8_t i=0;i<8;i++)
@@ -143,6 +151,8 @@ void JsonParser::check_name(void) {
       parm = PARM_VALUE;
     else if(strcmp(substate_value.value.str, "mode") == 0)
       parm = PARM_MODE;
+    else if(strcmp(substate_value.value.str, "type") == 0)
+      parm = PARM_TYPE;
     else
       reply_error(ERR_UNK_PARM);   
   }
@@ -161,6 +171,18 @@ void JsonParser::check_value(void) {
   lowercase_str();  // value string are all case insensitive
 
   if(cmd == CMD_GET) {
+	
+    if((depth == 1) && parm == PARM_TYPE) {
+      printf("PARM TYPE %s\n", substate_value.value.str);
+
+      if(startsWith(substate_value.value.str, "state"))
+	type = TYPE_STATE;
+      else if(startsWith(substate_value.value.str, "counter"))
+	type = TYPE_COUNTER;
+      else
+	reply_error(ERR_ILL_TYPE);
+    }
+      
     if((depth == 1) && (parm == PARM_PORT)) {
       port.type = port::PORT_NONE;
       port.index = substate_value.value.str[1] -'0' - 1;
@@ -345,6 +367,26 @@ void JsonParser::cmd_complete(void) {
 #endif      
     }
     
+    if(port.type == port::PORT_C) {
+      if((type == TYPE_NONE) || (type == TYPE_STATE)) {     
+#ifdef ARDUINO
+	uint16_t v = ftduino.counter_get_state(Ftduino::C1 + port.index);
+	char port_name[3] = { 'C', (char)('1' + port.index), 0 };
+	reply_value(port_name, true, v);
+#else
+      printf("get counter state %d\n", port.index);
+#endif
+      } else if(type == TYPE_COUNTER) {
+#ifdef ARDUINO
+	uint16_t v = ftduino.counter_get(Ftduino::C1 + port.index);
+	char port_name[3] = { 'C', (char)('1' + port.index), 0 };
+	reply_value(port_name, false, v);
+#else
+	printf("get counter value %d\n", port.index);
+#endif
+      }
+    }
+
     if(req == REQ_DEVS) {
 #ifdef ARDUINO
       // currently only one master is supported
@@ -363,7 +405,7 @@ void JsonParser::cmd_complete(void) {
     if(req == REQ_VER) {
 #ifdef ARDUINO
       // currently only one master is supported
-      Serial.print("{ \"version\": \"0.9.0\" }");
+      Serial.print("{ \"version\": \"0.9.1\" }");
       Serial.flush();
 #else
       printf("Version request\n");
@@ -389,6 +431,14 @@ void JsonParser::cmd_complete(void) {
       	}
         break;
     
+      case port::PORT_C:
+#ifdef ARDUINO
+	ftduino.counter_clear(Ftduino::C1+port.index);
+#else
+	printf("setting counter port\n");
+#endif
+	break;
+	
       // act according to output set commands
     case port::PORT_O:
       if(mode != MODE_NONE) {
@@ -439,7 +489,7 @@ void JsonParser::cmd_complete(void) {
 	        reply_error(ERR_INV_MODE);
       }
       break;
-
+		
       // act according to output set commands
     case port::PORT_M:
       if(mode != MODE_NONE) {
