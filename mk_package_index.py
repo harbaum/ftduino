@@ -16,7 +16,8 @@ BOARDNAME = "ftDuino fischertechnik compatible controller"
 ARCHITECTURE = "avr"
 PLATFORM_NAME = "ftDuino"
 
-GITHUB = "https://raw.githubusercontent.com/harbaum/ftduino/master/"
+GITHUB_OLD = "https://raw.githubusercontent.com/harbaum/ftduino/master/"
+GITHUB = "https://github.com/harbaum/ftduino/releases/download/"
 INDEXJSON = "package_" + PACKAGE_NAME + "_index.json"
 RELEASES_PATH = "releases"
 
@@ -59,7 +60,13 @@ for version in versions:
     archivefilename = "ftduino-" + version + ".zip"
     archivepath = RELEASES_PATH + "/" + version + "/" + archivefilename
 
-    release["url"] = GITHUB + archivepath
+    # since 0.0.13 the files are release files
+    vparts = version.split('.')
+    if int(vparts[0]) == 0 and int(vparts[1]) == 0 and int(vparts[2]) < 13: 
+        release["url"] = GITHUB_OLD + archivepath
+    else:
+        release["url"] = GITHUB + '/'.join(archivepath.split('/')[1:])
+    
     release["archiveFileName"] = archivefilename
 
     # get file hash and size
@@ -78,3 +85,4 @@ index["packages"].append( ftduino )
 print("Writing", INDEXJSON)
 with open(INDEXJSON, 'w') as outfile:
     json.dump(index, outfile, indent=4, ensure_ascii=False)
+    print("", file=outfile)
