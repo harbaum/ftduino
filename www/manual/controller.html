@@ -658,8 +658,8 @@ verwendete Akku geladen werden.
 
 <p><h3><a name="1.3.4">1.3.4 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich nicht flashen</a></h3> 
 
-<p>Es kommt vor, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zwar vom PC (zettweise) erkannt
-wird, sich einfach nicht flashen lässt. Die Ursachen dafür können
+<p>Es kommt vor, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zwar vom PC (zeitweise) erkannt
+wird, sich aber einfach nicht flashen lässt. Die Ursachen dafür können
 vielfältig sein, in der Regel ist es aber eine der folgenden zwei
 Ursachen:
 
@@ -668,17 +668,18 @@ Ursachen:
 </li><li> Ein anderes Programm auf dem Computer kommuniziert ebenfalls mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>  
 </li></ul>
 
-<p>Mechanisch oder elektrisch instabile Verbinungen werden in der Regel
-von lose sitzenden USB-Kaeln verursacht. Meistens reicht es bei in diesem
-Fall, leicht am USB-Kabel zu wacheln, um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kurz die Spannung
-verlieren und ihn neu starten zu lassen. Passiert das während des Sketch-Uploads,
-so ist der Sketch nicht lauffähig und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird wie in Abschnitt
-<a href="controller.html#1.3.2">1.3.2</a> beschrieben nur noch nach Druck auf den Reset-Taster vom PC erkannt.
+<p>Mechanisch oder elektrisch instabile Verbindungen werden in der Regel
+von lose sitzenden USB-Kabeln verursacht. Meistens reicht es in diesem
+Fall, leicht am USB-Kabel zu wacheln, um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kurz die
+Spannung verlieren und neu starten zu lassen. Passiert das während des
+Sketch-Uploads, so ist der Sketch nicht lauffähig und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+wird wie in Abschnitt <a href="controller.html#1.3.2">1.3.2</a> beschrieben nur noch nach Druck
+auf den Reset-Taster vom PC erkannt.
 
 <p>In der Regel flackert dabei auch die Power-LED etwas. In Abbildung
 <a href="controller.html#IMG:1.17">1.17</a> wurde der entsprechende Fehler provoziert, indem
 während des Flashens der USB-Stecker abgezogen wurde. Die Verwendung
-eines anderen USB-Kabels schafft in der Regel Abhilfe.
+eines anderen USB-Kabels schafft dann in der Regel Abhilfe.
 
 <p><center>
   
@@ -686,7 +687,7 @@ eines anderen USB-Kabels schafft in der Regel Abhilfe.
   <br><small>Abbildung 1.17: Fehler beim Hochladen</small> 
 </center>
 
-<p>Liegt kein Wackelkontakt am USB-Port vor, dann geben die ``ausführilichen
+<p>Liegt kein Wackelkontakt am USB-Port vor, dann geben die ``ausführlichen
 Ausgaben'' beim Upload ggf. zusätzliche Informationen. Diese Ausgaben
 werden in den Voreinstellungen aktiviert.
 
@@ -719,15 +720,16 @@ werden in den Voreinstellungen aktiviert.
       ***failed;  
       ***failed;
 </pre>
-Hier treten mitten in der Datenübertragung Fehler auf. Am häufigsten tritt dies
-auf Linux-PCs auf. Ursache ist in der Regel der sogenannte Modem-Manager, eine
-Software, die zur Verwaltung von Modems verwendet wird und sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
-verbindet, um festzustellen, ob es sich bei ihm um ein Modem handelt.
-Einige Tipps dazu finden sich bereits in Abschnitt <a href="installation.html#2.1.3">2.1.3</a>.
+Hier treten mitten in der Datenübertragung Fehler auf. Am häufigsten
+tritt dies auf Linux-PCs auf. Ursache ist in der Regel der sogenannte
+Modem-Manager, eine Software, die zur Verwaltung von Modems verwendet
+wird und sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbindet, um festzustellen, ob es
+sich bei ihm um ein Modem handelt.  Einige Tipps dazu finden sich
+bereits in Abschnitt <a href="installation.html#2.1.3">2.1.3</a>.
 
 <p>Neben der dort beschriebenen Installation der Datei
 <tt>/etc/udev/rules.d/99-ftduino.rules</tt> hilft es oft, den
-Modem-Manager-Dienst komplett per <tt>systemctrl</tt>-Kommando
+Modem-Manager-Dienst per <tt>systemctrl</tt>-Kommando zunächst
 testweise zu stoppen:
 
 <pre>
