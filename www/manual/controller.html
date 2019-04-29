@@ -655,6 +655,114 @@ ist keine 9-Volt-Versorgung gegeben und es muss sichergestellt werden,
 dass Polarität und Spannung korrekt bzw. ausreichend
 sind. Gegebenenfalls muss die Batterie ausgetauscht oder der
 verwendete Akku geladen werden.
+
+<p><h3><a name="1.3.4">1.3.4 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich nicht flashen</a></h3> 
+
+<p>Es kommt vor, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zwar vom PC (zettweise) erkannt
+wird, sich einfach nicht flashen lässt. Die Ursachen dafür können
+vielfältig sein, in der Regel ist es aber eine der folgenden zwei
+Ursachen:
+
+<p><ul>
+<li> Die USB-Verbindung ist elektrisch oder mechanisch instabil
+</li><li> Ein anderes Programm auf dem Computer kommuniziert ebenfalls mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>  
+</li></ul>
+
+<p>Mechanisch oder elektrisch instabile Verbinungen werden in der Regel
+von lose sitzenden USB-Kaeln verursacht. Meistens reicht es bei in diesem
+Fall, leicht am USB-Kabel zu wacheln, um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kurz die Spannung
+verlieren und ihn neu starten zu lassen. Passiert das während des Sketch-Uploads,
+so ist der Sketch nicht lauffähig und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird wie in Abschnitt
+<a href="controller.html#1.3.2">1.3.2</a> beschrieben nur noch nach Druck auf den Reset-Taster vom PC erkannt.
+
+<p>In der Regel flackert dabei auch die Power-LED etwas. In Abbildung
+<a href="controller.html#IMG:1.17">1.17</a> wurde der entsprechende Fehler provoziert, indem
+während des Flashens der USB-Stecker abgezogen wurde. Die Verwendung
+eines anderen USB-Kabels schafft in der Regel Abhilfe.
+
+<p><center>
+  
+  <p><a name="IMG:1.17"><img src="controller/fehler_beim_hochladen.png"></a>
+  <br><small>Abbildung 1.17: Fehler beim Hochladen</small> 
+</center>
+
+<p>Liegt kein Wackelkontakt am USB-Port vor, dann geben die ``ausführilichen
+Ausgaben'' beim Upload ggf. zusätzliche Informationen. Diese Ausgaben
+werden in den Voreinstellungen aktiviert.
+
+<p><center>
+  
+  <p><a name="IMG:1.18"><img src="controller/ausfuehrliche_ausgabe.png"></a>
+  <br><small>Abbildung 1.18: Ausführliche Debug-Ausgaben während des Hochladens aktivieren</small> 
+</center>
+
+<p>Eine mögliche Ausgabe sieht danach so aus:
+
+<pre>
+     Writing | #####################avrdude: error: programmer did not respond to command: set addr
+     avrdude: error: programmer did not respond to command: write block
+     ## ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;  
+     avrdude: Error: butterfly programmer uses avr_write_page() but does not
+     provide a cmd() method.
+      *** page 127 (addresses 0x0000 - 0x007f) failed to write
+      ***failed;  
+      ***failed;  
+      ***failed;  
+      ***failed;
+</pre>
+Hier treten mitten in der Datenübertragung Fehler auf. Am häufigsten tritt dies
+auf Linux-PCs auf. Ursache ist in der Regel der sogenannte Modem-Manager, eine
+Software, die zur Verwaltung von Modems verwendet wird und sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+verbindet, um festzustellen, ob es sich bei ihm um ein Modem handelt.
+Einige Tipps dazu finden sich bereits in Abschnitt <a href="installation.html#2.1.3">2.1.3</a>.
+
+<p>Neben der dort beschriebenen Installation der Datei
+<tt>/etc/udev/rules.d/99-ftduino.rules</tt> hilft es oft, den
+Modem-Manager-Dienst komplett per <tt>systemctrl</tt>-Kommando
+testweise zu stoppen:
+
+<pre>
+       sudo systemctl stop ModemManager.service
+</pre>
+bzw. bei Erfolg dauerhaft:
+
+<pre>
+       sudo systemctl disable ModemManager.service
+</pre>
+Dieses Problem ist nicht <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifisch, sondern betrifft
+z.B. auch den Arduino-Leonardo. Entsprechende Lösungen im Internet bei
+Leonardo-Problemen lassen sich daher oft auch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+übertragen.
+
+<p><h3><a name="1.3.5">1.3.5 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird als Leonardo erkannt</a></h3> 
+
+<p>Es ist möglich, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sich seiner Identität nicht so ganz
+sicher zu sein scheint und in der IDE statt als <tt>ftDuino</tt>
+als Leonardo angeszeigt wird wie in Abbildung <a href="controller.html#IMG:1.19">1.19</a> beispielhaft
+auf einem Linux-System zu sehen.
+
+<p><center>
+  
+  <p><a name="IMG:1.19"><img src="controller/ftduino_als_leonardo.png"></a>
+  <br><small>Abbildung 1.19: Die IDE erkennt den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als Leonardo</small> 
+</center>
+
+<p>Das passiert, wenn man vor dem Upload eines Sketches in der IDE nicht den
+<tt>ftDuino</tt> als Board ausgewählt hatte sondern den Arduino Leonardo.
+
+<p>Dieser Zustand ist völlig unkritisch. Sobald man das Board wie unter
+anderem in Abschnitt <a href="installation.html#2.2.1">2.2.1</a> beschrieben auf
+<tt>ftDuino</tt> einstellt wird dieser nach dem nächsten erfolgreichen
+Sketch-Upload wieder als <tt>ftDuino</tt> erkannt.
 <hr><small>
 <a name="fn1">1) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505287">https://ft-datenbank.de/tickets?fulltext=505287</a><br>
 <a name="fn2">2) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505283">https://ft-datenbank.de/tickets?fulltext=505283</a><br>

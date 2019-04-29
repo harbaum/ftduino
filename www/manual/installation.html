@@ -158,7 +158,7 @@ Diese Ausgaben sind besonders interessant, wenn man wie in Abschnitt
 <a href="experimente.html#6.10">6.10</a> oder <a href="experimente.html#6.16">6.16</a> beschrieben die erweiterten
 USB-Möglichkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzt.
 
-<p><h4>``Device or resource busy''</h4>
+<p><h4>Uploadfehler oder ``Device or resource busy''</h4> 
 
 <p>Auch wenn Linux bereits den eigentlichen Gerätetreiber mitbringt kann
 es trotzdem nötig sein, die Systemkonfiguration anzupassen. Das
@@ -202,6 +202,24 @@ werden. Zusätzlich werden die Zugriffsrechte auf das USB-Gerät etwas
 ausgeweitet, so dass der in Abschnitt <a href="experimente.html#6.18.1">6.18.1</a> beschriebene
 Zugriff aus dem Web-Browser funktioniert.
 
+<p>In einigen Linux-Setups reicht die Installation der Datei nicht, um den
+ModemManager von seinen Störungen abzuhalten. In dem Fall hilft es,
+den ModemManager zu deaktivieren, auf den in der Regel problemlos
+verzichtet werden kann. Das folgende Kommando stoppt den ModemManager
+auf vielen gängigen Linux-Installationen bis zu nächsten Systemstart:
+
+<pre>
+       sudo systemctl stop ModemManager.service
+</pre>
+Bringt das Kommando den erwünschten Effekt, dann kann die Einstellung
+mit dem folgenden Kommando dauerhaft gemacht werden:
+
+<pre>
+       sudo systemctl disable ModemManager.service
+</pre>
+Der ModemManager wird dann auch nach einem Systemstart nicht wieder
+gestartet. 
+
 
 
 <p><h2><a name="2.2">2.2 Arduino-IDE</a></h2>
@@ -217,7 +235,7 @@ Arduino-IDE wird zunächst installiert.
 entsprechende Konfiguration vorgenommen werden. Die Arduino-IDE
 erlaubt es, diesen Vorgang weitgehend zu automatisieren.
 
-<p><h3><a name="2.2.1">2.2.1 Installation mit dem Boardverwalter</a></h3>
+<p><h3><a name="2.2.1">2.2.1 Installation mit dem Boardverwalter</a></h3> 
 
 <p>Für die einfache Installation zusätzlicher Boards bringt die
 Arduino-IDE den sogenannten Boardverwalter mit. Zunächst muss
