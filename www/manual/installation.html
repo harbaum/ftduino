@@ -51,7 +51,41 @@ allerdings ist die erfolgreiche Erkennung des <font color="red">f</font><font co
 Windows&nbsp;10 jederzeit an der typischen Melodie zu erkennen, die ein
 Windows-PC beim Erkennen von Hardware ausgibt.
 
-<p><h3><a name="2.1.2">2.1.2 Windows&nbsp;7 und Windows&nbsp;Vista</a></h3> 
+<p><h3><a name="2.1.2">2.1.2 Windows&nbsp;8.1</a></h3> 
+
+<p>Die Treiberinstallation unter Windows&nbsp;8.1 ist recht undankbar. Und falls
+möglich sollte auf Windows&nbsp;10 ausgewichen werden.
+
+<p>Das Problem unter Windows&nbsp;8.1 ist die Tatsache, dass die
+<tt>.inf</tt>-Datei unter <a href="https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf">https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf</a> nicht
+von Microsoft signiert wurde und Windows&nbsp;8.1 es dem Benutzer deutlich
+schwerer als z.B. Windows&nbsp;7 macht, einen nicht-signierten Treiber zu
+installieren. Das ist in diesem Fall besonders ärgerlich, da es sich
+beim eigentlichen Treiber über eine bereits von Microsoft
+mitgelieferte Komponente handelt und die <tt>.inf</tt>-Datei
+Windows&nbsp;8.1 lediglich auffordert, diese auch zu benutzen. Der
+eigentliche Treiber kommt von Microsoft und ist entsprechend signiert.
+
+<p>Diverse Anleitungen im Internet zur Installation nicht-signierter
+Treiber sind unter dem Suchbegriff ``windows 8.1 nicht signierte
+treiber installieren'' leicht zu finden. Im folgenden sind die
+wesentlichen Schritte kurz zusammengefasst:
+
+<p><ol>
+<li> Öffnen des Einstellungsbereich des Charms-Menüs mit
+  <tt>Windows-Taste + Taste 'I'</tt>. Klick auf <tt>Ausschalten</tt>.
+</li><li> Shift-Taste gedrückt halten und <tt>Neustart</tt>
+  auswählen. Danach erscheint ein Menü, in dem nacheinander
+  <tt>Problembehandlung</tt>, dann <tt>Erweiterte Optionen</tt>,
+  <tt>Starteinstellungen</tt> und schließlich <tt>Neustart</tt>
+  gewählt werden muss.
+</li><li> Nach dem Bootvorgang erscheint ein neues Menü, in dem man mit
+  Eingabe der Taste <tt>'7'</tt> (<tt>F7</tt> oder <tt>7</tt> auf
+  Ziffernblock) die Treibersignierung ausschalten kann, um so den
+  unsignierten Treiber zulassen zu können.
+</li></ol>
+
+<p><h3><a name="2.1.3">2.1.3 Windows&nbsp;7 und Windows&nbsp;Vista</a></h3> 
 
 <p>Windows&nbsp;7 und Windows&nbsp;Vista bringen den passenden Treiber ebenfalls
 bereits mit.  Allerdings muss eine passende <tt>.inf</tt>-Datei
@@ -68,8 +102,6 @@ den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">
 </center>
 
 <p>Die <tt>.inf</tt>-Datei ist unter <a href="https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf">https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf</a> zu finden.
-
-
 
 <p>Nach dem Download reicht ein Rechtsklick auf die Datei und die Auswahl von
 ``Installieren'' im folgenden Menü.
@@ -111,7 +143,7 @@ weist zwei unterschiedliche <tt>COM:</tt>-Ports zu. Das ist so gewollt
 und soll nicht weiter irritieren. In den meisten Fällen wird der
 Benutzer nur den Anwendungsmodus zu sehen bekommen.
 
-<p><h3><a name="2.1.3">2.1.3 Linux</a></h3> 
+<p><h3><a name="2.1.4">2.1.4 Linux</a></h3> 
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird von einem handelsüblichen Linux-PC ohne weitere
 manuelle Eingriffe erkannt. Da er das sogenannte ``Abstract Control
