@@ -737,13 +737,6 @@ erlaubt. Zum Schalten eines Ausgangs gibt es die Funktion
 eingeschaltet werden soll und auf <tt>Ftduino::OFF</tt> gesetzt wird,
 um den Ausgang auszuschalten.
 
-<p>Die Funktion <tt>ftduino.motor_set(port, mode)</tt> ist
-<tt>ftduino.output_set(port, mode)</tt> sehr ähnlich, nur dass hier ein
-Motorausgang <tt>M1</tt> bis <tt>M4</tt> geschaltet werden kann. Der
-Wert for <tt>mode</tt> kann dann <tt>Ftduino::LEFT</tt>,
-<tt>Ftduino::RIGHT</tt> oder <tt>Ftduino::OFF</tt> sein, je nachdem, ob
-sich der Motor linksherum, rechtsherum oder gar nicht drehen soll.
-
 <pre>
      #include &lt;FtduinoSimple.h&gt;
        
@@ -761,7 +754,27 @@ Dieser Sketch würde eine wie in Abbildung <a href="programmierung.html#IMG:4.8"
 angeschlossene Lampe zum Leuchten bringen. Achtung: Dazu muss der
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit 9 Volt versorgt sein.
 
-<p><h2><a name="4.5">4.5 Variablen</a></h2>
+<p>Die Funktion <tt>ftduino.motor_set(port, mode)</tt> ist
+<tt>ftduino.output_set(port, mode)</tt> sehr ähnlich, nur dass hier ein
+Motorausgang <tt>M1</tt> bis <tt>M4</tt> geschaltet werden kann. Der
+Wert for <tt>mode</tt> kann dann <tt>Ftduino::LEFT</tt>,
+<tt>Ftduino::RIGHT</tt> oder <tt>Ftduino::OFF</tt> sein, je nachdem, ob
+sich der Motor linksherum, rechtsherum oder gar nicht drehen soll.
+
+<pre>
+     #include &lt;FtduinoSimple.h&gt;
+       
+     void setup() {
+       // Eingang I1 lesen
+       ftduino.input_get(Ftduino::I1);
+       // Motor an M1 linksdrehend einschalten
+       ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
+     }
+     
+     void loop() {
+     }
+</pre>
+<h2><a name="4.5">4.5 Variablen</a></h2>
 <a href="https://www.arduino.cc/reference/en/#variables">https://www.arduino.cc/reference/en/#variables</a>
 
 <p>Oft besteht der Bedarf in einem Sketch etwas zu ``merken'' bzw. zu

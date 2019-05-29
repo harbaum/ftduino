@@ -5,12 +5,10 @@
 
 #include <Ftduino.h>
 
+#include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-Adafruit_SSD1306 display(-1);
-#if (SSD1306_LCDHEIGHT != 64)
-#error("Height incorrect, please fix Adafruit_SSD1306.h!");
-#endif
+Adafruit_SSD1306 display(128, 64, &Wire, -1);
 
 #define SCORE_Y  16
 #define BALLS_Y  34

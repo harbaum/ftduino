@@ -51,23 +51,28 @@ allerdings ist die erfolgreiche Erkennung des <font color="red">f</font><font co
 Windows&nbsp;10 jederzeit an der typischen Melodie zu erkennen, die ein
 Windows-PC beim Erkennen von Hardware ausgibt.
 
-<p><h3><a name="2.1.2">2.1.2 Windows&nbsp;8.1</a></h3> 
+<p><h3><a name="2.1.2">2.1.2 Windows&nbsp;8.0 und Windows&nbsp;8.1</a></h3> 
 
-<p>Die Treiberinstallation unter Windows&nbsp;8.1 ist recht undankbar. Und falls
+<p>Die Treiberinstallation unter Windows&nbsp;8 ist recht undankbar. Und falls
 möglich sollte auf Windows&nbsp;10 ausgewichen werden.
 
-<p>Das Problem unter Windows&nbsp;8.1 ist die Tatsache, dass die
+<p>Das Problem unter Windows&nbsp;8 ist die Tatsache, dass die
 <tt>.inf</tt>-Datei unter <a href="https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf">https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf</a> nicht
-von Microsoft signiert wurde und Windows&nbsp;8.1 es dem Benutzer deutlich
+von Microsoft signiert wurde und Windows&nbsp;8 es dem Benutzer deutlich
 schwerer als z.B. Windows&nbsp;7 macht, einen nicht-signierten Treiber zu
 installieren. Das ist in diesem Fall besonders ärgerlich, da es sich
 beim eigentlichen Treiber über eine bereits von Microsoft
 mitgelieferte Komponente handelt und die <tt>.inf</tt>-Datei
-Windows&nbsp;8.1 lediglich auffordert, diese auch zu benutzen. Der
+Windows&nbsp;8 lediglich auffordert, diese auch zu benutzen. Der
 eigentliche Treiber kommt von Microsoft und ist entsprechend signiert.
 
+<p>Beim Download der <tt>.inf</tt>-Datei ist darauf zu achte, dass sie
+nicht als <tt>.txt</tt>-Datei gespeichert wird. Einige Windows- und
+Browserversionen hängen beim Download der Datei oft unsichtbar die
+<tt>.txt</tt>-Endung an.
+
 <p>Diverse Anleitungen im Internet zur Installation nicht-signierter
-Treiber sind unter dem Suchbegriff ``windows 8.1 nicht signierte
+Treiber sind unter dem Suchbegriff ``windows 8 nicht signierte
 treiber installieren'' leicht zu finden. Im folgenden sind die
 wesentlichen Schritte kurz zusammengefasst:
 
@@ -102,6 +107,11 @@ den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">
 </center>
 
 <p>Die <tt>.inf</tt>-Datei ist unter <a href="https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf">https://harbaum.github.io/ftduino/ftduino/driver/ftduino.inf</a> zu finden.
+
+<p>Beim Download der <tt>.inf</tt>-Datei ist darauf zu achte, dass sie
+nicht als <tt>.txt</tt>-Datei gespeichert wird. Einige Windows- und
+Browserversionen hängen beim Download der Datei oft unsichtbar die
+<tt>.txt</tt>-Endung an.
 
 <p>Nach dem Download reicht ein Rechtsklick auf die Datei und die Auswahl von
 ``Installieren'' im folgenden Menü.

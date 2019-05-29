@@ -2130,19 +2130,16 @@ Andernfalls wird die Übersetzung des Sketches mit einer Meldung der Art
 ähnlich abgebrochen.
 
 <p>Zum Displaytest bringt die Adafruit_SSD1306-Bibliothek unter
-<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit SSD1306/examples/ssd1306_128x64_i2c"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit SSD1306</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ssd1306_128x64_i2c</span></tt></a>
-ein Beispiel. Erscheint vor dem Download die Meldung ``Height incorrect, please fix Adafruit_SSD1306.h!'',
-dann muss in der Datei <tt>Adafruit_SSD1306.h</tt> folgende Änderung vorgenommen werden,
-um die Unterstützung des 128x64-Displays zu aktivieren:
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit SSD1306/examples/ssd1306_128x64_i2c"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit SSD1306</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ssd1306_128x64_i2c</span></tt></a> ein Beispiel.
 
-<pre>
-     <font color="green">72</font>  /*-------------------------------------------------------------------------*/
-     <font color="green">73</font>     #define SSD1306_128_64
-     <font color="green">74</font>  //   #define SSD1306_128_32
-     <font color="green">75</font>  //   #define SSD1306_96_16
-     <font color="green">76</font>  /*=========================================================================*/
-</pre>
-Zusätzlich muss im Sketch selbst die I²C-Adresse von <tt>0x3D</tt> nach <tt>0x3C</tt> angepasst werden: 
+<p>Hinweis: In früheren Versionen dieses Handbuchs wurde an dieser Stelle
+eine manuelle Änderung der Bibliothek beschrieben, die für das
+128x64-Display nötig war. In der aktuellen Version der
+Adafruit-SSD1306-Bibliothek ist diese Anpassung nicht mehr nötig. Die
+Beispiele wurden ebenfalls entsprechend angepasst.
+
+<p>Dabei muss im Sketch selbst die I²C-Adresse von <tt>0x3D</tt> nach
+<tt>0x3C</tt> angepasst werden:
 <pre>
      <font color="green">60</font>    // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
      <font color="green">61</font>    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)

@@ -17,7 +17,7 @@
 const uint8_t I2C_ADDRESS_DISPLAY = 0x3C;
 const int8_t OLED_RESET = -1;
 
-Adafruit_SSD1306 display(OLED_RESET);
+Adafruit_SSD1306 display(128, 64, &Wire, OLED_RESET);
 Game shootduino;
 
 void fire_bullet() {
@@ -379,4 +379,3 @@ void loop() {
   }
   display.display();
 }
-
