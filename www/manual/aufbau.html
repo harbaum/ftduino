@@ -246,7 +246,7 @@ wenige Widerstände und Kondensatoren.
 
 <p>Da die Treiber an der 9-Volt-Versorgung angeschlossen sind sind
 Kurzschlüsse zwischen 9 Volt und 5 Volt führenden Signalen potenziell
-möglich.
+bei Lötfehlern möglich.
 
 <p><center>
   
@@ -271,10 +271,38 @@ den Ausgängen und anderen Teilen des <font color="red">f</font><font color="blu
 gefährlich. Nun können die Ausgänge mit einer Leuchtdiode auf korrekte
 Funktion getestet werden. Größere Lasten (Motoren oder Glühlampen) sollten
 für diesen Test nicht verwendet werden, da die interne 5-Volt-Versorgung
-nicht daraus ausgelegt ist, solche Lasten zu treiben.
+nicht darauf ausgelegt ist, solche Lasten zu treiben.
 
 <p>Erst wenn alle Ausgänge bei 5 Volt korrekt funktionieren darf die
 Brücke entfernt und eine echte 9-Volt-Versorgung angeschlossen werden.
+
+<p><h3><a name="10.4.2">10.4.2 Platinenhistorie</a></h3>
+
+<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird kontinuierlich weiterentwickelt. Daher ändert sich
+auch die Platine geringfügig. Bisher existieren folgenden Varianten:
+
+<p><dl>
+<dt><b>0.1</b></dt><dd>Die Testversion des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> basierte noch auf dem Atmega328
+  und verwendete auch für die Ein- und Ausgänge eine andere Hardware. Von
+  dieser Version wurden 8 Prototypen aufgebaut.
+</dd><dt><b>1.0</b></dt><dd>Die erste Version der seriennahen Platine wurde wegen eines
+  Design-Fehlers nur für zehn Prototypen verwendet.
+</dd><dt><b>1.1</b></dt><dd>Die erste Serienversion ist in diesem Kapitel abgebildet
+  und die ersten Seriengeräte basierten auf dieser Version. Diese
+  Version konnte optional mit Zenerdioden D10 bis D17 an den Eingängen
+  bestückt werden, was aber in der Serie nicht genutzt wurde.
+</dd><dt><b>1.2</b></dt><dd>Die zweite Serienversion verzichtet auf die optionalen
+  und in der Serie nicht genutzten Zenerdioden. Stattdessen erhält
+  diese Version zusätzlich Kontakte für ein internes OLED-Display
+  wie in Abschnitt <a href="controller.html#1.2.7">1.2.7</a> beschrieben.
+</dd><dt><b>1.3</b></dt><dd>Die dritte Serienversion kann optional mit einem internen
+  Servoadapter wie in Abschnitt <a href="experimente.html#6.13.9">6.13.9</a> beschrieben
+  versehen werden. Außerdem enthält diese Version einen zusätzlichen
+  ESD-Schutz in der Spannungsversorgung.   
+</dd></dl>
+
+<p>Alle Board-Versionen ab Version 1.0 sind logisch und elektrisch
+kompatibel und verhalten sich aus Anwendersicht identisch.
 <hr><small>
 <a name="fn1">1) </a>Gehäusedruckvorlage
   <a href="https://github.com/harbaum/ftduino/tree/master/case">https://github.com/harbaum/ftduino/tree/master/case</a><br>
