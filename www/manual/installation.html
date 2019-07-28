@@ -200,7 +200,7 @@ Diese Ausgaben sind besonders interessant, wenn man wie in Abschnitt
 <a href="experimente.html#6.10">6.10</a> oder <a href="experimente.html#6.16">6.16</a> beschrieben die erweiterten
 USB-Möglichkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzt.
 
-<p><h4>Uploadfehler oder ``Device or resource busy''</h4> 
+<p><h4>Uploadfehler oder ``Device or resource busy''</h4>
 
 <p>Auch wenn Linux bereits den eigentlichen Gerätetreiber mitbringt kann
 es trotzdem nötig sein, die Systemkonfiguration anzupassen. Das
@@ -213,7 +213,9 @@ der Arduino-IDE zu der folgenden Fehlermeldung kommt.
   <br><small>Abbildung 2.5: Fehlermeldung bei installiertem ModemManager</small>
 </center>
 
-<p>In diesem Fall ist die wahrscheinlichste Ursache, dass der
+<p><h4>Mögliche Ursache: Der Modemmanager</h4> 
+
+<p>In diesem Fall ist eine wahrscheinlichste Ursache, dass der
 <tt>ModemManager</tt>, ein Programm zur Bedienung von Modems,
 installiert ist und sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden hat. Um zu
 verhindern, dass der ModemManager versucht, sich mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu
@@ -262,7 +264,39 @@ mit dem folgenden Kommando dauerhaft gemacht werden:
 Der ModemManager wird dann auch nach einem Systemstart nicht wieder
 gestartet. 
 
+<p><h4>Mögliche Ursache: Fehlende Gruppenmitgliedschaft</h4> 
 
+<p>Eine weitere verbreitet Hürde unter Linux sind die Zugriffsrechte auf
+die Hardware, die zum Zugriff auf die USB-Schnittstelle des
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nötig sind.
+
+<p>Ist der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an den Linux-PC angechlossen, so wird ihm wie in
+Abschnitt <a href="installation.html#2.1.4">2.1.4</a> erwähnt ein Device <tt>ttyACM</tt>
+zugewiesen. Ist dies z.B. <tt>ttyACM0</tt> so erhält man mit dem
+<tt>ls</tt>-Kommando mehr Informationen:
+
+<pre>
+     $ ls -l /dev/ttyACM0
+     crw-rw---- 1 root dialout 166, 0 Jul 27 23:06 /dev/ttyACM0
+</pre>
+Wichtig ist hier das Wort <tt>dialout</tt>, denn das ist der
+Name der Gruppe, die Zugriff auf diese Schnittstelle hat. Ob man
+selbst dazu gehört sagt einem das <tt>groups</tt>-Kommando:
+
+<pre>
+     $ groups
+     harbaum adm dialout cdrom sudo dip plugdev lpadmin sambashare
+</pre>
+In diesem Fall taucht <tt>dialout</tt> in der Liste auf und der
+Nutzer hat die damit entsprechenden Rechte. Taucht <tt>dialout</tt>
+nicht auf, so kann z.B. der Benutzer <tt>harbaum</tt> der Gruppe
+beitreten mit dem Kommando:
+
+<pre>
+     $ sudo adduser harbaum dialout
+</pre>
+Danach muss man sich einmal vom System ab- und wieder anmelden, um
+die neuen Rechte nutzen zu können.
 
 <p><h2><a name="2.2">2.2 Arduino-IDE</a></h2>
 
@@ -273,11 +307,51 @@ mit eigenem Installer ist dort z.B. direkt unter dem Link
 <a href="https://www.arduino.cc/download_handler.php">https://www.arduino.cc/download_handler.php</a> erreichbar. Diese
 Arduino-IDE wird zunächst installiert.
 
+<p><h3><a name="2.2.1">2.2.1 Arduino-IDE für Linux aus dem Ubuntu-Software-Store</a></h3>
+
+<p>Unter Linux hat man neben den Download von <a href="http://arduino.cc">http://arduino.cc</a>
+oft auch die Möglichkeit, die IDE direkt aus einem Repository oder
+Store der entsprechenden Linux-Distribution zu beziehen. Das hat
+theoretisch den Vorteil einer einfachen und schnellen Installation.
+Der Ubuntu-Store bietet zum Beispiel die in Abbildung
+<a href="installation.html#IMG:2.6">2.6</a> dargestellte Version an. Das Benutzerrating von
+nur drei Sternen oben rechts im Bild hat dabein einen guten Grund.
+
+<p><center>
+  
+  <p><a name="IMG:2.6"><img src="installation/ubuntu_software_arduino.png"></a>
+  <br><small>Abbildung 2.6: Die Arduino-IDE aus dem Ubuntu-Software-Store hat ihre Tücken</small> 
+</center>
+
+<p>Diese Version der Arduino-IDE wurde in die relativ neue auf dem
+sogenannten SNAP-Format basierende Paketverwaltung aufgebaut. Neu in
+SNAP ist, dass die Rechte der Programme verwaltet wird, wie man es
+auch von Smartphone-Apps kennt. Nun benötigt die Arduino-IDE für eine
+korrekte Funktion Zugriff aud die USB-Aschlüsse, an denen der
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angeschlossen ist. Eben solche Rechte zu vergeben
+unterstützt Ubuntu-Linux aber zur Zeit (28.7.2019) nicht. Daher lässt
+sie sich die Arduino-IDE zwar installieren, aber der Zugriff auf den
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> (sowie jeden anderen Arduino) ist nicht möglich. Es gibt
+zwei Lösungen dieses Problems:
+
+<p><ol>
+<li> Man installiert das Programm aus dem Store nicht in der
+  grafischen Oberfläche sondern in der Kommandozeile durch Eingabe von
+  <tt>snap install --devmode arduino-mhall119</tt>. Mehr Infos dazu
+  finden sich z.B. unter <a href="#fn1"><sup>1</sup></a> .
+</li><li> Man installiert die Arduino-IDE aus dem Archiv auf
+  <a href="https://www.arduino.cc/en/main/software">https://www.arduino.cc/en/main/software</a>
+</li></ol>
+
+<p>In beiden Fällen muss man unter Ubuntu die Rechte anpassen wie in
+Abschnitt <a href="installation.html#2.1.4">2.1.4</a> beschrieben und den Modemmanger
+deinstalliern wie in Abschnitt <a href="installation.html#2.1.4">2.1.4</a> beschrieben.
+
+<p><h3><a name="2.2.2">2.2.2 Installation mit dem Boardverwalter</a></h3> 
+
 <p>Um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unter der Arduino-IDE nutzen zu können muss eine
 entsprechende Konfiguration vorgenommen werden. Die Arduino-IDE
 erlaubt es, diesen Vorgang weitgehend zu automatisieren.
-
-<p><h3><a name="2.2.1">2.2.1 Installation mit dem Boardverwalter</a></h3> 
 
 <p>Für die einfache Installation zusätzlicher Boards bringt die
 Arduino-IDE den sogenannten Boardverwalter mit. Zunächst muss
@@ -293,8 +367,8 @@ werden.
 
 <p><center>
   
-  <p><a name="IMG:2.6"><img src="installation/ide_voreinstellungen.png"></a>
-  <br><small>Abbildung 2.6: URL der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration in den Arduino-Voreinstellungen</small>
+  <p><a name="IMG:2.7"><img src="installation/ide_voreinstellungen.png"></a>
+  <br><small>Abbildung 2.7: URL der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration in den Arduino-Voreinstellungen</small>
 </center>
 
 <p>Den eigentlichen Boardverwalter erreicht man danach direkt über das
@@ -303,8 +377,8 @@ Menü der IDE unter
 
 <p><center>
   
-  <p><a name="IMG:2.7"><img src="installation/boardverwalter.png"></a>
-  <br><small>Abbildung 2.7: Den Boardverwalter startet man aus dem Menü</small>
+  <p><a name="IMG:2.8"><img src="installation/boardverwalter.png"></a>
+  <br><small>Abbildung 2.8: Den Boardverwalter startet man aus dem Menü</small>
 </center>
 
 <p>Nachdem die <tt>JSON</tt>-Datei in den Voreinstellungen eingetragen wurde
@@ -312,8 +386,8 @@ bietet der Boardverwalter automatisch die <font color="red">f</font><font color=
 
 <p><center>
   
-  <p><a name="IMG:2.8"><img src="installation/boardverwalter_ftduino.png"></a>
-  <br><small>Abbildung 2.8: Im Boardverwalter kann das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Board installiert werden</small>
+  <p><a name="IMG:2.9"><img src="installation/boardverwalter_ftduino.png"></a>
+  <br><small>Abbildung 2.9: Im Boardverwalter kann das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Board installiert werden</small>
 </center>
 
 <p>Durch Klick auf <tt>Installieren...</tt> werden alle für den
@@ -325,8 +399,8 @@ ausgewählt werden.
 
 <p><center>
   
-  <p><a name="IMG:2.9"><img src="installation/auswahl_ftduino.png"></a>
-  <br><small>Abbildung 2.9: Auswahl des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Boards unter Windows</small>
+  <p><a name="IMG:2.10"><img src="installation/auswahl_ftduino.png"></a>
+  <br><small>Abbildung 2.10: Auswahl des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Boards unter Windows</small>
 </center>
 
 <p>Ist bereits ein <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angeschlossen und wurde der nötige Treiber
@@ -334,8 +408,8 @@ installiert, so lässt sich der <font color="red">f</font><font color="blue">t</
 
 <p><center>
   
-  <p><a name="IMG:2.10"><img src="installation/mac_ports.jpg"></a>
-  <br><small>Abbildung 2.10: Auswahl des Ports unter MacOS</small>
+  <p><a name="IMG:2.11"><img src="installation/mac_ports.jpg"></a>
+  <br><small>Abbildung 2.11: Auswahl des Ports unter MacOS</small>
 </center>
 
 <p>Die Installation ist damit abgeschlossen. Während der Installation wurden
@@ -344,16 +418,20 @@ unter <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt>
 
 <p><center>
   
-  <p><a name="IMG:2.11"><img src="installation/beispiele_ftduino.png"></a>
-  <br><small>Abbildung 2.11: Beispiele zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Board</small>
+  <p><a name="IMG:2.12"><img src="installation/beispiele_ftduino.png"></a>
+  <br><small>Abbildung 2.12: Beispiele zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Board</small>
 </center>
 
 <p>Diese Beispiele können direkt geladen und auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 hinuntergeladen werden.
 
-<p><h3><a name="2.2.2">2.2.2 Updates</a></h3>
+<p><h3><a name="2.2.3">2.2.3 Updates</a></h3>
 
 <p>Die Arduino-IDE benachrichtigt automatisch über Softwareupdates der
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konfiguration. Mit wenig Aufwand bleibt man so immer auf
 dem aktuellen Stand.
-<hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - installation</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
+<hr><small>
+<a name="fn1">1) </a>Ankündigung ``Snap package for
+    Arduino IDE'':
+    <a href="https://groups.google.com/a/arduino.cc/forum/#!topic/developers/Qp-G910Mt9c">https://groups.google.com/a/arduino.cc/forum/#!topic/developers/Qp-G910Mt9c</a><br>
+</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - installation</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
