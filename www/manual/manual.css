@@ -52,4 +52,14 @@ body, html {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
-} 
+}
+
+/* hide the google translate stuff */
+#google_translate_element{width:300px;float:right;text-align:right;display:block}
+.goog-te-banner-frame.skiptranslate { display: none !important;} 
+body { top: 0px !important; }
+#goog-gt-tt{display: none !important; top: 0px !important; } 
+.goog-tooltip skiptranslate{display: none !important; top: 0px !important; } 
+.activity-root { display: hide !important;} 
+.status-message { display: hide !important;}
+.started-activity-container { display: hide !important;}
