@@ -85,7 +85,7 @@ void receiveEvent(int num) {
               }
         
               if( output_mode[port] & 0x10)   
-                ftduino.motor_set(Ftduino::M1+port, mode, pwm);
+                ftduino.motor_set(Ftduino::M1+(port>>1), mode, pwm);
               else
                 ftduino.output_set(Ftduino::O1+port, mode, pwm);
           }
