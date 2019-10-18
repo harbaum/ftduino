@@ -1,21 +1,22 @@
 <!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>controller</title></head><body>
-<div class="google_translate_element" id="google_translate_element"></div><div id="goog-gt-tt" class="goog-tooltip skiptranslate"  ></div>
-<script type="text/javascript"> function googleTranslateElementInit() { new google.translate.TranslateElement ({pageLanguage: 'id', includedLanguages: 'af,ar,de,en,eo,es,et,fa,fr,id,it,ja,jv,ka,kn,la,mn,ms,ne,nl,pa,ru,so,sr,su,ta,th,tl,tr,uk,vi,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js cb=googleTranslateElementInit"></script>
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
-<table><tr>
-<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
-<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
-<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
-<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
-<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
-<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
-<td><a href="modelle.html">7.&nbsp;Modelle</a></td><td>-</td>
-<td><a href="community.html">8.&nbsp;Community</a></td><td>-</td>
-<td><a href="bibliotheken.html">9.&nbsp;Bibliotheken</a></td><td>-</td>
-<td><a href="aufbau.html">10.&nbsp;Aufbau</a></td><td>-</td>
-<td><a href="anhang.html">Anhang</a></td>
-</tr></table><h1><a name="1">1 Einleitung</a></h1>
+<header>
+	<p><a id="backlink" href="http://ftduino.de/"><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung</a> (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF-Version</a>)
+</header>
+
+<nav>
+<a aria-current="page" href="controller.html">1.&nbsp;Controller</a> -
+<a href="installation.html">2.&nbsp;Installation</a> -
+<a href="ersteschritte.html">3.&nbsp;Erste Schritte</a> -
+<a href="programmierung.html">4.&nbsp;Programmierung</a> -
+<a href="schule.html">5.&nbsp;Schule</a> -
+<a href="experimente.html">6.&nbsp;Experimente</a> -
+<a href="modelle.html">7.&nbsp;Modelle</a> - 
+<a href="community.html">8.&nbsp;Community</a> -
+<a href="bibliotheken.html">9.&nbsp;Bibliotheken</a> -
+<a href="aufbau.html">10.&nbsp;Aufbau</a>  -
+<a href="anhang.html">Anhang</a>
+</nav>
+<h1><a id="1">1 Einleitung</a></h1>
 
 <p>Elektronik- und Computermodule für Konstruktionsbaukästen gibt es seit
 den Anfängen der privat genutzten Heimcomputer der 80er Jahre.  Diese
@@ -58,7 +59,7 @@ erfordert der Einsatz dieser Controller oft einiges an handwerklichem
 Geschick beim Aufbau der Elektronik selbst sowie speziell bei
 Robotik-Projekten bei der Umsetzung von mechanischen Komponenten.
 
-<p><h2><a name="1.1">1.1 Das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konzept</a></h2>
+<p><h2><a id="1.1">1.1 Das <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Konzept</a></h2>
 
 <p>Die Idee hinter dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist es, die Brücke zwischen zwei Welten
 zu schlagen. Auf der einen Seite integriert er sich mechanisch und
@@ -67,13 +68,13 @@ fischertechnik-Konstruktionsbaukästen. Auf der anderen Seite fügt er
 sich perfekt in das Arduino-Ökosystem zur Software-Entwicklung von
 eingebetteten Systemen ein.
 
-<p><center>
+<figure id="IMG:1.1">
   
-  <p><a name="IMG:1.1"><img src="controller/foto.jpg"></a>
-  <br><small>Abbildung 1.1: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/foto.jpg">
+  <figcaption>Abbildung 1.1: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
-<p><h3><a name="1.1.1">1.1.1 Das fischertechnik-Baukastensystem</a></h3>
+<p><h3><a id="1.1.1">1.1.1 Das fischertechnik-Baukastensystem</a></h3>
 
 <p>Fischertechnik ist ein technikorientiertes Konstruktionsspielzeug.
 Der Schwerpunkt liegt auf Mechanik, Elektromechanik, Elektronik und
@@ -96,12 +97,12 @@ Verbindung mit dem Modell. Die Modelle aller aktuellen
 Robotics-Baukästen sind auf diese Anschlüsse ausgelegt und 
 untereinander kombinierbar.
 
-<p><center>
+<figure id="IMG:1.2">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:1.2"><img src="controller/tx.jpg"></a></td></tr><tr><td align="center"><small>(a) TX-Controller</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:1.2"><img src="controller/txt.jpg"></a></td></tr><tr><td align="center"><small>(b) TXT-Controller</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 1.2: Original-Controller von fischertechnik</small>
-</center>
+  <figure><img src="controller/tx.jpg"><figcaption>(a) TX-Controller</figcaption></figure> 
+  <figure><img src="controller/txt.jpg"><figcaption>(b) TXT-Controller</figcaption></figure>
+  <figcaption>Abbildung 1.2: Original-Controller von fischertechnik</figcaption>
+</figure>
 
 <p>Beide Original-Controller verfügen über acht analoge Eingänge, acht
 analoge Ausgänge, vier schnelle Zählereingänge und einen
@@ -115,7 +116,7 @@ inhaltlich anspruchsvolle Projekte in weiterführenden Schulen,
 Universitäten und der Berufsausbildung geht. In diesen Bereichen haben
 sich Systeme wie die Arduino-Plattform etabliert.
 
-<p><h3><a name="1.1.2">1.1.2 Das Arduino-System</a></h3>
+<p><h3><a id="1.1.2">1.1.2 Das Arduino-System</a></h3>
 
 <p>Das Arduino-Ökosystem hat sich in den letzten Jahren zum
 De-Facto-Standard für den Einstieg und die semiprofessionelle
@@ -125,12 +126,12 @@ Computer und informationsverarbeitende Module, die innerhalb einer
 Maschine Steuer- und Regelaufgaben übernehmen und immer häufiger auch
 mit der Außenwelt kommunizieren.
 
-<p><center>
+<figure id="IMG:1.3">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:1.3"><img src="controller/arduino_ide.png"></a></td></tr><tr><td align="center"><small>(a) Arduino-Entwicklungsumgebung (IDE)</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:1.3"><img src="controller/leonardo.jpg"></a></td></tr><tr><td align="center"><small>(b) Arduino-Leonardo-Controller</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 1.3: Die Arduino-Entwicklungsumgebung und -Controller</small>
-</center>
+  <figure><img src="controller/arduino_ide.png"><figcaption>(a) Arduino-Entwicklungsumgebung (IDE)</figcaption></figure> 
+  <figure><img src="controller/leonardo.jpg"><figcaption>(b) Arduino-Leonardo-Controller</figcaption></figure>
+  <figcaption>Abbildung 1.3: Die Arduino-Entwicklungsumgebung und -Controller</figcaption>
+</figure>
 
 <p>Die Arduino-IDE ist eine übersichtliche und leicht zu bedienende
 Programmieroberfläche, die sich auf Windows-, Linux- und Apple-PCs
@@ -153,20 +154,20 @@ bestens geeignet. Schwieriger ist oft eine mechanisch befriedigende
 Umsetzung selbst einfachster Robotik-Projekte. Diese Lücke kann
 das fischertechnik-System schließen.
 
-<p><h2><a name="1.2">1.2 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Controller</a></h2>
+<p><h2><a id="1.2">1.2 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Controller</a></h2>
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Controller wurde bewusst mechanisch und elektrisch an
 den TX- und den TXT-Controller angelehnt, um ihn ebenfalls direkt mit
 den aktuellen Robotics-Kästen kombinieren zu können. Gleichzeitig
 wurde er softwareseitig mit dem Arduino-System kompatibel gehalten.
 
-<p><center>
+<figure id="IMG:1.4">
   
-  <p><a name="IMG:1.4"><img src="controller/anschluesse_svg.png"></a>
-  <br><small>Abbildung 1.4: Die Anschlüsse des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/anschluesse_svg.png">
+  <figcaption>Abbildung 1.4: Die Anschlüsse des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
-<p><h3><a name="1.2.1">1.2.1 Mikrocontroller</a></h3>
+<p><h3><a id="1.2.1">1.2.1 Mikrocontroller</a></h3>
 
 <p>Das Herz des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ist ein Mikrocontroller des Typs
 ATmega32u4. Dieser Mikrocontroller wird von Microchip (ehemals Atmel)
@@ -174,11 +175,11 @@ hergestellt und findet auch im Arduino-Leonardo Verwendung. Sketches,
 die für den Leonardo übersetzt wurden, sind oft direkt auf dem
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lauffähig.
 
-<p><center>
+<figure id="IMG:1.5">
   
-  <p><a name="IMG:1.5"><img src="controller/schema_svg.png"></a>
-  <br><small>Abbildung 1.5: Blockdiagramm des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/schema_svg.png">
+  <figcaption>Abbildung 1.5: Blockdiagramm des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Der ATmega32u4-Controller ist ein Mitglied der sogenannten AVR-Familie,
 auf der die meisten Arduino-Bords basieren. Die AVR-Controller sind
@@ -214,20 +215,20 @@ ermöglicht auf diese Weise das Hinunterladen von Sketches in den
 ausgeführt wird, ist am Zustand der internen LEDs erkennbar (siehe
 <a href="controller.html#1.2.4">1.2.4</a>).
 
-<p><h3><a name="1.2.2">1.2.2 USB-Anschluss</a></h3> 
+<p><h3><a id="1.2.2">1.2.2 USB-Anschluss</a></h3> 
 
 <p>Die Verbindung zum PC zur Programmierung und Datenübertragung wird
 über USB hergestellt. Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verfügt über eine sogenannte
 Mini-USB-Buchse und wird über ein handelsübliches Mini-USB-Kabel mit
 dem PC verbunden.
 
-<p><center>
+<figure id="IMG:1.6">
   
-  <p><a name="IMG:1.6"><img src="controller/usb-anschluss.jpg"></a>
-  <br><small>Abbildung 1.6: Strom- und USB-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/usb-anschluss.jpg">
+  <figcaption>Abbildung 1.6: Strom- und USB-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
-<p><h3><a name="1.2.3">1.2.3 Reset-Taster</a></h3> 
+<p><h3><a id="1.2.3">1.2.3 Reset-Taster</a></h3> 
 
 <p>Normalerweise kann die Arduino-IDE durch entsprechende Kommandos über
 den USB-Anschluss den Bootloader des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aktivieren, um einen
@@ -246,7 +247,7 @@ problemlos mit einem korrigierten Sketch versehen werden, indem kurz
 vor dem Hinunterladen der Reset-Taster kurz gedrückt wird. Mehr Details
 dazu finden sich im Abschnitt <a href="controller.html#1.3">1.3</a>.
 
-<p><h3><a name="1.2.4">1.2.4 Interne LEDs</a></h3> 
+<p><h3><a id="1.2.4">1.2.4 Interne LEDs</a></h3> 
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verfügt über je eine grüne und rote interne Leuchtdiode
 (LED). Die grüne Spannungsversorungs-LED zeigt an, dass der interne
@@ -262,15 +263,15 @@ Anwender aus eigenen Sketches heraus unter der Bezeichnung
 verwendet. Ist der Bootloader aktiv, so leuchtet die LED im
 Sekundentakt sanft heller und dunkler (``fading'').
 
-<p><h3><a name="1.2.5">1.2.5 Spannungsversorgung</a></h3> 
+<p><h3><a id="1.2.5">1.2.5 Spannungsversorgung</a></h3> 
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann auf vier Arten mit Spannung versorgt werden:
 
-<p><center>
+<figure id="IMG:1.7">
   
-  <p><a name="IMG:1.7"><img src="controller/ft_versorgungen.jpg"></a>
-  <br><small>Abbildung 1.7: Für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> empfohlene Original-fischertechnik-Stromversorgungen</small>
-</center>
+  <img src="controller/ft_versorgungen.jpg">
+  <figcaption>Abbildung 1.7: Für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> empfohlene Original-fischertechnik-Stromversorgungen</figcaption>
+</figure>
 
 <p><dl>
 <dt><b>USB</b></dt><dd> Über USB wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> immer dann versorgt, wenn
@@ -305,11 +306,11 @@ Sekundentakt sanft heller und dunkler (``fading'').
   möglich (siehe Abschnitt <a href="experimente.html#6.13.5">6.13.5</a>).
 </dd></dl>
 
-<p><center>
+<figure id="IMG:1.8">
   
-  <p><a name="IMG:1.8"><img src="controller/stecker_svg.png"></a>
-  <br><small>Abbildung 1.8: 3,45mm fischertechnik-Hohlstecker</small>
-</center>
+  <img src="controller/stecker_svg.png">
+  <figcaption>Abbildung 1.8: 3,45mm fischertechnik-Hohlstecker</figcaption>
+</figure>
 
 <p><font color="red">Vorsicht</font> ist bei der Verwendung unbekannter oder sehr
 alter Spannungsquellen geboten. Oftmals weichen die aufgedruckten
@@ -323,33 +324,33 @@ dass die Spannung kurzfristig sogar 27,2 Volt erreicht. Während Ein-
 und Ausschaltvorgängen können noch wesentlich höhere Spannungen
 auftreten und den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> beschädigen.
 
-<p><center>
+<figure id="IMG:1.9">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:1.9"><img src="controller/ft_trafo_1.jpg"></a></td></tr><tr><td align="center"><small>(a) Das Multimeter zeigt gute 9 Volt an</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:1.9"><img src="controller/ft_trafo_2.jpg"></a></td></tr><tr><td align="center"><small>(b) Das Oszilloskop zeigt Spitzen von über 27 Volt</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 1.9: Vorsicht: Ein alter fischertechnik-Trafo liefert über 27V am 6,8-Volt-Ausgang und ist für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ungeeignet</small> 
-</center>
+  <figure><img src="controller/ft_trafo_1.jpg"><figcaption>(a) Das Multimeter zeigt gute 9 Volt an</figcaption></figure> 
+  <figure><img src="controller/ft_trafo_2.jpg"><figcaption>(b) Das Oszilloskop zeigt Spitzen von über 27 Volt</figcaption></figure>
+  <figcaption>Abbildung 1.9: Vorsicht: Ein alter fischertechnik-Trafo liefert über 27V am 6,8-Volt-Ausgang und ist für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ungeeignet</figcaption> 
+</figure>
 
 <p>Aus diesem Grund sollte man bei Einsatz solcher alten oder unbekannten
 Spannungsquellen sehr vorsichtig sein und im Zweifelsfall auf den
 Einsatz verzichten.
 
-<p><center>
+<figure id="IMG:1.10">
   
-  <p><a name="IMG:1.10"><img src="controller/alte_trafos.jpg"></a>
-  <br><small>Abbildung 1.10: Alte und für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ungeeignete Stromversorgungen</small>
-</center>
+  <img src="controller/alte_trafos.jpg">
+  <figcaption>Abbildung 1.10: Alte und für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ungeeignete Stromversorgungen</figcaption>
+</figure>
 
 <p>Im Zweifel sollte unbedingt eine aktuelle Spannungsversorung von
 fischertechnik eingesetzt werden. Das aktuelle Fischertechnik Power
 Netzgerät 9V 505287<a href="#fn5"><sup>5</sup></a>  ist bestens geeignet, ebenso wie der Akku
 aus dem Akku-Set 34969<a href="#fn6"><sup>6</sup></a>  oder ein 9-Volt-Block im Batteriehalter.
 
-<p><center>
+<figure id="IMG:1.11">
   
-  <p><a name="IMG:1.11"><img src="controller/dritthersteller.jpg"></a>
-  <br><small>Abbildung 1.11: Für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geeignetes Universalnetzteil aus dem Onlineversand</small> 
-</center>
+  <img src="controller/dritthersteller.jpg">
+  <figcaption>Abbildung 1.11: Für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geeignetes Universalnetzteil aus dem Onlineversand</figcaption> 
+</figure>
 
 <p>Soll es unbedingt ein Fremdgerät sein, so ist auf eine stabilisierte
 9Volt-Spannung zu achten. Die Stromstärke sollte 1,5 Ampere nicht
@@ -358,7 +359,7 @@ Beispiel das in Abbildung <a href="controller.html#IMG:1.11">1.11</a> dargestell
 Universal-Schaltnetzteil aus dem
 Reichelt-Onlineversand<a href="#fn7"><sup>7</sup></a> .
 
-<p><h3><a name="1.2.6">1.2.6 Anschlüsse</a></h3>
+<p><h3><a id="1.2.6">1.2.6 Anschlüsse</a></h3>
 
 <p>Die Anschlüsse des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> teilen sich in die
 fischertechnik-kompatiblen Ein- und Ausgänge auf, die für die üblichen
@@ -466,11 +467,11 @@ Sensor mit vierpoligem Kabel. Dieser sehr alte Sensor seit langem
 nicht mehr erhältliche Sensor ist zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nicht kompatibel (und
 auch zu keinem der aktuellen Original-fischertechnik-Controller).
 
-<p><center>
+<figure id="IMG:1.12">
   
-  <p><a name="IMG:1.12"><img src="controller/ultraschall_svg.png"></a>
-  <br><small>Abbildung 1.12: Anschluss des Ultraschallsensors 133009</small>
-</center>
+  <img src="controller/ultraschall_svg.png">
+  <figcaption>Abbildung 1.12: Anschluss des Ultraschallsensors 133009</figcaption>
+</figure>
 
 <p><h4>I²C-Anschluss</h4> 
 
@@ -484,11 +485,11 @@ und ähnlich. Außerdem ist über den I²C-Bus eine Kopplung mehrerer
 TX-Controller und dem TXT-Controller wie in Abschnitt <a href="experimente.html#6.13">6.13</a>
 beschrieben.
 
-<p><center>
+<figure id="IMG:1.13">
   
-  <p><a name="IMG:1.13"><img src="controller/i2c_svg.png"></a>
-  <br><small>Abbildung 1.13: Buchsen- und Kabelbelegung des I²C-Bus am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/i2c_svg.png">
+  <figcaption>Abbildung 1.13: Buchsen- und Kabelbelegung des I²C-Bus am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Die Signale auf dem I²C-Anschluss nutzen wie am TX-Controller einen
 5-Volt-Pegel. Zusätzlich werden aus der Spannungsversorgung des
@@ -497,11 +498,11 @@ bereitgestellt. Aus dem 5 Volt-Ausgang dürfen maximal 100mA entnommen
 werden, um die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-interne Spannungsversorgung nicht zu
 überlasten
 
-<p><center>
+<figure id="IMG:1.14">
   
-  <p><a name="IMG:1.14"><img src="controller/i2c-kappe.jpg"></a>
-  <br><small>Abbildung 1.14: Entfernen der Schutzkappe vom I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/i2c-kappe.jpg">
+  <figcaption>Abbildung 1.14: Entfernen der Schutzkappe vom I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p><font color="red">Achtung!</font> Der fischertechnik-TXT-Controller sowie für
 den Betrieb am TXT vorgesehene Komponenten sind aufgrund dessen 3,3
@@ -522,17 +523,17 @@ werden. Aus diesem Grund wird der <font color="red">f</font><font color="blue">t
 dem I²C-Anschluss vertrieben. Diese Kappe ist bei Bedarf vorsichtig
 mit einem flachen Schraubendreher zu entfernen.
 
-<p><h3><a name="1.2.7">1.2.7 Variante mit internem OLED-Display</a></h3> 
+<p><h3><a id="1.2.7">1.2.7 Variante mit internem OLED-Display</a></h3> 
 
 <p>Es gibt Varianten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>, die bereits über ein eingebautes
 OLED-Display verfügen. Das Display hat eine Auflösung von 128 * 32
 Pixel und ist intern am I²C-Bus angeschlossen.
 
-<p><center>
+<figure id="IMG:1.15">
   
-  <p><a name="IMG:1.15"><img src="controller/oled.jpg"></a>
-  <br><small>Abbildung 1.15: Raumschiffanimation auf dem intenen OLED des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="controller/oled.jpg">
+  <figcaption>Abbildung 1.15: Raumschiffanimation auf dem intenen OLED des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Der OLED-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verfügt über einen angepassten Bootloader, der
 direkt nach dem Einschalten das Display initialisiert und einen
@@ -545,11 +546,11 @@ selbst uneigeschränkt als Master arbeiten und z.B. einen weiteren
 Display-losen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am I²C ansprechen. Zusätzliche externe
 I²C-Geräte lassen sich wie gehabt anschließen.
 
-<p><center>
+<figure id="IMG:1.16">
   
-  <p><a name="IMG:1.16"><img src="controller/adafruit_gfx.png"></a>
-  <br><small>Abbildung 1.16: Die Adafruit-GPX-Bibliothek im Bibliotheksmanager der Arduino-IDE</small>
-</center>
+  <img src="controller/adafruit_gfx.png">
+  <figcaption>Abbildung 1.16: Die Adafruit-GPX-Bibliothek im Bibliotheksmanager der Arduino-IDE</figcaption>
+</figure>
 
 <p>Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation bringt unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/InternalOLED"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">InternalOLED</span></tt></a> mehrere Beispiele mit, die jeweils über
@@ -577,7 +578,7 @@ Ausgänge angeschlossen sind.
 und kann daher nicht ohne weiteres parallel mit anderen OLED-Displays
 unter dieser Adresse betrieben werden.
 
-<p><h3><a name="1.2.8">1.2.8 Hinweise für Arduino-erfahrene Nutzer</a></h3>
+<p><h3><a id="1.2.8">1.2.8 Hinweise für Arduino-erfahrene Nutzer</a></h3>
 
 <p>Es gibt ein paar fundamentale Unterschiede zwischen dem klassischen
 Arduino und dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. In erster Linie sind dies die Schutz- und
@@ -599,9 +600,9 @@ vor auch direkt mit der Hardware des <font color="red">f</font><font color="blue
 Schaltpläne im Anhang <a href="anhang.html#A">A</a> liefern alle dafür nötige
 Information.
 
-<p><h2><a name="1.3">1.3 Problemlösungen</a></h2> 
+<p><h2><a id="1.3">1.3 Problemlösungen</a></h2> 
 
-<p><h3><a name="1.3.1">1.3.1 Die grüne Leuchtdiode im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> leuchtet nicht</a></h3> 
+<p><h3><a id="1.3.1">1.3.1 Die grüne Leuchtdiode im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> leuchtet nicht</a></h3> 
 
 <p>Zunächst sollte der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> von allen Verbindungen getrennt und
 ausschließlich über den USB-Anschluss mit dem PC verbunden werden.
@@ -613,7 +614,7 @@ probiert werden.
 prüfen. Funktionieren andere Geräte an diesem Kabel? Gegebenenfalls
 muss das Kabel ausgetauscht werden.
 
-<p><h3><a name="1.3.2">1.3.2 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> taucht am PC nicht als <tt>COM:</tt>-Port auf</a></h3> 
+<p><h3><a id="1.3.2">1.3.2 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> taucht am PC nicht als <tt>COM:</tt>-Port auf</a></h3> 
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird nicht mehr vom PC erkannt und es wird kein
 <tt>COM:</tt>-Port angelegt.
@@ -647,7 +648,7 @@ danach in den normalen Sketch-Betrieb zurück. Zwischen dem Druck auf
 den Reset-Knopf und dem Start des Downloads aus der Arduino-IDE sollte
 daher möglichst wenig Zeit vergehen.
 
-<p><h3><a name="1.3.3">1.3.3 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> funktioniert, aber die Ausgänge nicht</a></h3>
+<p><h3><a id="1.3.3">1.3.3 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> funktioniert, aber die Ausgänge nicht</a></h3>
 
 <p>Um die Ausgänge zu benutzen muss der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer
 9-Volt-Spannungsquelle entweder über den Hohlstecker-Anschluss oder
@@ -665,7 +666,7 @@ dass Polarität und Spannung korrekt bzw. ausreichend
 sind. Gegebenenfalls muss die Batterie ausgetauscht oder der
 verwendete Akku geladen werden.
 
-<p><h3><a name="1.3.4">1.3.4 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich nicht flashen</a></h3> 
+<p><h3><a id="1.3.4">1.3.4 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lässt sich nicht flashen</a></h3> 
 
 <p>Es kommt vor, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zwar vom PC (zeitweise) erkannt
 wird, sich aber einfach nicht flashen lässt. Die Ursachen dafür können
@@ -690,21 +691,21 @@ auf den Reset-Taster vom PC erkannt.
 während des Flashens der USB-Stecker abgezogen wurde. Die Verwendung
 eines anderen USB-Kabels schafft dann in der Regel Abhilfe.
 
-<p><center>
+<figure id="IMG:1.17">
   
-  <p><a name="IMG:1.17"><img src="controller/fehler_beim_hochladen.png"></a>
-  <br><small>Abbildung 1.17: Fehler beim Hochladen</small> 
-</center>
+  <img src="controller/fehler_beim_hochladen.png">
+  <figcaption>Abbildung 1.17: Fehler beim Hochladen</figcaption> 
+</figure>
 
 <p>Liegt kein Wackelkontakt am USB-Port vor, dann geben die ``ausführlichen
 Ausgaben'' beim Upload ggf. zusätzliche Informationen. Diese Ausgaben
 werden in den Voreinstellungen aktiviert.
 
-<p><center>
+<figure id="IMG:1.18">
   
-  <p><a name="IMG:1.18"><img src="controller/ausfuehrliche_ausgabe.png"></a>
-  <br><small>Abbildung 1.18: Ausführliche Debug-Ausgaben während des Hochladens aktivieren</small> 
-</center>
+  <img src="controller/ausfuehrliche_ausgabe.png">
+  <figcaption>Abbildung 1.18: Ausführliche Debug-Ausgaben während des Hochladens aktivieren</figcaption> 
+</figure>
 
 <p>Eine mögliche Ausgabe sieht danach so aus:
 
@@ -754,33 +755,38 @@ z.B. auch den Arduino-Leonardo. Entsprechende Lösungen im Internet bei
 Leonardo-Problemen lassen sich daher oft auch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 übertragen.
 
-<p><h3><a name="1.3.5">1.3.5 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird als Leonardo erkannt</a></h3> 
+<p><h3><a id="1.3.5">1.3.5 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird als Leonardo erkannt</a></h3> 
 
 <p>Es ist möglich, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sich seiner Identität nicht so ganz
 sicher zu sein scheint und in der IDE statt als <tt>ftDuino</tt>
 als Leonardo angeszeigt wird wie in Abbildung <a href="controller.html#IMG:1.19">1.19</a> beispielhaft
 auf einem Linux-System zu sehen.
 
-<p><center>
+<figure id="IMG:1.19">
   
-  <p><a name="IMG:1.19"><img src="controller/ftduino_als_leonardo.png"></a>
-  <br><small>Abbildung 1.19: Die IDE erkennt den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als Leonardo</small> 
-</center>
+  <img src="controller/ftduino_als_leonardo.png">
+  <figcaption>Abbildung 1.19: Die IDE erkennt den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als Leonardo</figcaption> 
+</figure>
 
 <p>Das passiert, wenn man vor dem Upload eines Sketches in der IDE nicht den
 <tt>ftDuino</tt> als Board ausgewählt hatte sondern den Arduino Leonardo.
 
 <p>Dieser Zustand ist völlig unkritisch. Sobald man das Board wie unter
-anderem in Abschnitt <a href="installation.html#2.2.1">2.2.1</a> beschrieben auf
+anderem in Abschnitt <a href="installation.html#2.2.2">2.2.2</a> beschrieben auf
 <tt>ftDuino</tt> einstellt wird dieser nach dem nächsten erfolgreichen
 Sketch-Upload wieder als <tt>ftDuino</tt> erkannt.
 <hr><small>
-<a name="fn1">1) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505287">https://ft-datenbank.de/tickets?fulltext=505287</a><br>
-<a name="fn2">2) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505283">https://ft-datenbank.de/tickets?fulltext=505283</a><br>
-<a name="fn3">3) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=134863">https://ft-datenbank.de/tickets?fulltext=134863</a><br>
-<a name="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=34969">https://ft-datenbank.de/tickets?fulltext=34969</a><br>
-<a name="fn5">5) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505287">https://ft-datenbank.de/tickets?fulltext=505287</a><br>
-<a name="fn6">6) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=34969">https://ft-datenbank.de/tickets?fulltext=34969</a><br>
-<a name="fn7">7) </a>Reichelt MW 3R15GS <a href="https://www.reichelt.de/universal-schaltnetzteil-18-w-3-12-v-1500-ma-mw-3r15gs-p87340.html">https://www.reichelt.de/universal-schaltnetzteil-18-w-3-12-v-1500-ma-mw-3r15gs-p87340.html</a><br>
-<a name="fn8">8) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=133009">https://ft-datenbank.de/tickets?fulltext=133009</a><br>
-</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - controller</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
+<a id="fn1">1) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505287">https://ft-datenbank.de/tickets?fulltext=505287</a><br>
+<a id="fn2">2) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505283">https://ft-datenbank.de/tickets?fulltext=505283</a><br>
+<a id="fn3">3) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=134863">https://ft-datenbank.de/tickets?fulltext=134863</a><br>
+<a id="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=34969">https://ft-datenbank.de/tickets?fulltext=34969</a><br>
+<a id="fn5">5) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=505287">https://ft-datenbank.de/tickets?fulltext=505287</a><br>
+<a id="fn6">6) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=34969">https://ft-datenbank.de/tickets?fulltext=34969</a><br>
+<a id="fn7">7) </a>Reichelt MW 3R15GS <a href="https://www.reichelt.de/universal-schaltnetzteil-18-w-3-12-v-1500-ma-mw-3r15gs-p87340.html">https://www.reichelt.de/universal-schaltnetzteil-18-w-3-12-v-1500-ma-mw-3r15gs-p87340.html</a><br>
+<a id="fn8">8) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=133009">https://ft-datenbank.de/tickets?fulltext=133009</a><br>
+</small>
+<footer>
+<p><a href="">▲  nach oben</a><br><a href="http://ftduino.de/">ftDuino</a> manual - controller</p>
+<p class="copy">(c) 2017-2019 Till Harbaum</p>
+</footer>
+</body></html>

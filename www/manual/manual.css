@@ -2,9 +2,65 @@
 body, html {
     padding: 3px 3px 3px 3px;
     font-family: sans-serif;
-    font-size: 12pt;
+    font-size: 1em;
     color: black;
     background: white;
+	max-width: 60em;
+	margin: 1em auto;
+}
+
+figure {
+  text-align: center; 
+  border: 1px solid transparent;
+}
+
+@media (min-width: 30em) { /* Bilder nur nebeneinander, wenn es breit genug ist;  mindestens 30em */ 
+figure figure {
+  text-align: left;
+  width: 40%;
+  display: inline-block;
+}
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  border-top: 1px solid grey;
+  margin-top: 2em;
+}
+footer .copy {
+  text-align:right;
+}
+
+/*Box für Hinweis */ 
+.hinweis { 
+	border:1px solid black; 
+	padding: 1em;
+}
+.hinweis p:first-of-type {
+	color: red;
+	font-weight: bold;
+	text-align: center;
+}
+
+
+/* Verlinke nicht auf aktuelle Seite, kennzeichne diese aber! */
+[aria-current] {
+	font-weight:bold;
+	color:black;
+	text-decoration:none;
+}
+
+#backlink {
+  font-size: 2em;
+  font-weight: bold;
+  color: black;
+  text-decoration:none;
+}
+
+code, var {
+  font-family: monospace;
+  font-size: 1rem;
 }
 
 /* Tooltip container */
@@ -63,3 +119,41 @@ body { top: 0px !important; }
 .activity-root { display: hide !important;} 
 .status-message { display: hide !important;}
 .started-activity-container { display: hide !important;}
+
+table,
+th,
+td {
+	border: 1px solid #a0a0a0;
+}
+
+table {
+	border-collapse: collpase;
+	border-spacing: 0;
+	border-width: 1px 0 0 1px;
+	margin: 0 0 1.75em;
+	table-layout: fixed;
+	/* Prevents HTML tables from becoming too wide */
+	width: 100%;
+}
+
+caption,
+th,
+td {
+	font-weight: normal;
+	text-align: left;
+}
+
+th {
+    background-color: #f1f3f4;
+	font-weight: 700;
+}
+
+td {
+	border-width: 0 1px 1px 0;
+}
+
+th,
+td {
+	padding: 0.4375em;
+}
+

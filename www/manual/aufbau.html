@@ -1,18 +1,22 @@
 <!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>aufbau</title></head><body>
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
-<table><tr>
-<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
-<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
-<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
-<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
-<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
-<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
-<td><a href="modelle.html">7.&nbsp;Modelle</a></td><td>-</td>
-<td><a href="community.html">8.&nbsp;Community</a></td><td>-</td>
-<td><a href="bibliotheken.html">9.&nbsp;Bibliotheken</a></td><td>-</td>
-<td><a href="aufbau.html">10.&nbsp;Aufbau</a></td><td>-</td>
-<td><a href="anhang.html">Anhang</a></td>
-</tr></table><h1><a name="10">10 Selbstbau</a></h1>
+<header>
+	<p><a id="backlink" href="http://ftduino.de/"><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung</a> (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF-Version</a>)
+</header>
+
+<nav>
+<a href="controller.html">1.&nbsp;Controller</a> -
+<a href="installation.html">2.&nbsp;Installation</a> -
+<a href="ersteschritte.html">3.&nbsp;Erste Schritte</a> -
+<a href="programmierung.html">4.&nbsp;Programmierung</a> -
+<a href="schule.html">5.&nbsp;Schule</a> -
+<a href="experimente.html">6.&nbsp;Experimente</a> -
+<a href="modelle.html">7.&nbsp;Modelle</a> - 
+<a href="community.html">8.&nbsp;Community</a> -
+<a href="bibliotheken.html">9.&nbsp;Bibliotheken</a> -
+<a aria-current="page" href="aufbau.html">10.&nbsp;Aufbau</a>  -
+<a href="anhang.html">Anhang</a>
+</nav>
+<h1><a id="10">10 Selbstbau</a></h1>
 
 <p>Es ist möglich, einen <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> manuell zu bauen. Die ersten
 Prototypen sind so entstanden. Bei manuellem Aufbau bietet es sich an,
@@ -23,7 +27,7 @@ schrittweise sicher zu stellen.
 Anhängen <a href="anhang.html#B">B</a> und <a href="anhang.html#C">C</a> basierend auf dem
 Schaltplan entsprechend Anhang <a href="anhang.html#A">A</a>.
 
-<p><h2><a name="10.1">10.1 Erste Baustufe " Spannungsversorgung"</a></h2>
+<p><h2><a id="10.1">10.1 Erste Baustufe " Spannungsversorgung"</a></h2>
 
 <p>Im ersten Schritt wird die Spannungsversorgung aufgebaut. Sie besteht
 aus den Kondensatoren <tt>C6</tt> bis <tt>C11</tt> sowie <tt>C14</tt>,
@@ -34,17 +38,17 @@ Spannungsversorungs-Leuchtdiode (siehe Abschnitt <a href="controller.html#1.2.4"
 ebenfalls montiert. Die Spule <tt>L1</tt> sowie der Kondensator
 <tt>C1</tt> können auch bereits installiert werden.
 
-<p><center>
+<figure id="IMG:10.1">
   
-  <p><a name="IMG:10.1"><img src="aufbau/supply_svg.png"></a>
-  <br><small>Abbildung 10.1: Komponenten der Spannungsversorgung</small>
-</center>
+  <img src="aufbau/supply_svg.png">
+  <figcaption>Abbildung 10.1: Komponenten der Spannungsversorgung</figcaption>
+</figure>
 
 <p>Die 9V-Steckbuchse <tt>121</tt> sowie die beiden Bundhülsen
 <tt>9VIN+</tt> und <tt>9VIN-</tt> und die USB-Buchse <tt>J1</tt> werden
 ebenfalls jetzt schon bestückt.
 
-<p><h3><a name="10.1.1">10.1.1 Bauteile-Polarität</a></h3>
+<p><h3><a id="10.1.1">10.1.1 Bauteile-Polarität</a></h3>
 
 <p>Bei folgenden Bauteilen ist auf die Polarität zu achten: <tt>D1</tt>
 und <tt>D3</tt> bis <tt>D5</tt>, <tt>C6</tt> bis <tt>C8</tt> und
@@ -60,13 +64,13 @@ Symbole beim Bestückungsdruck. Aber auch hier ist sowohl auf der
 Diode selbst als auch auf dem Bestückungssymbol ein Balken auf der
 Seite der Kathode vorhanden.
 
-<p><center>
+<figure id="IMG:10.2">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:10.2"><img src="aufbau/tantal_svg.png"></a></td></tr><tr><td align="center"><small>(a) Tantal-Kondensator</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:10.2"><img src="aufbau/diode_svg.png"></a></td></tr><tr><td align="center"><small>(b) Diode</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:10.2"><img src="aufbau/led_svg.png"></a></td></tr><tr><td align="center"><small>(c) Leuchtdiode</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 10.2: Schaltplansymbol, Bauteilepolarität und Bestückungssymbol</small>
-</center>
+  <figure><img src="aufbau/tantal_svg.png"><figcaption>(a) Tantal-Kondensator</figcaption></figure> 
+  <figure><img src="aufbau/diode_svg.png"><figcaption>(b) Diode</figcaption></figure> 
+  <figure><img src="aufbau/led_svg.png"><figcaption>(c) Leuchtdiode</figcaption></figure>
+  <figcaption>Abbildung 10.2: Schaltplansymbol, Bauteilepolarität und Bestückungssymbol</figcaption>
+</figure>
 
 <p>Bei den Leuchtdioden (LEDs) ist es etwas schwieriger, die korrekte
 Polarität zu bestimmen. Auf der Unterseite der LED ist üblicherweise
@@ -87,7 +91,7 @@ Hilfe eines Multimeters leicht verfolgen, wo die Spannung noch
 vorhanden ist und wo nicht mehr. Wahrscheinlichste Fehler liegen in
 der Polarität der Dioden oder der LED.
 
-<p><h3><a name="10.1.2">10.1.2 Kontrollmessungen</a></h3>
+<p><h3><a id="10.1.2">10.1.2 Kontrollmessungen</a></h3>
 
 <p>Bei einer 9-Volt-Versorgung muss an den zwischen Pin 1 und 2 des
 I²C-Anschlusses am noch unbestückten Wannenstecker <tt>SV1</tt> eine
@@ -114,17 +118,17 @@ Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="
 was gegebenenfalls eine Überlastung des USB und/oder der Body-Diode zur Folge
 hätte.
 
-<p><h2><a name="10.2">10.2 Zweite Baustufe " Mikrocontroller"</a></h2>
+<p><h2><a id="10.2">10.2 Zweite Baustufe " Mikrocontroller"</a></h2>
 
 <p>Ist die Spannungsversorgung sichergestellt und vor allem liegen
 auch im 9-Volt-Betrieb am I²C-Anschluss stabile 5 Volt an, dann
 kann mit dem Mikrocontroller <tt>U1</tt> fortgefahren werden.
 
-<p><center>
+<figure id="IMG:10.3">
   
-  <p><a name="IMG:10.3"><img src="aufbau/mc_svg.png"></a>
-  <br><small>Abbildung 10.3: Komponenten des Mikrocontrollers</small>
-</center>
+  <img src="aufbau/mc_svg.png">
+  <figcaption>Abbildung 10.3: Komponenten des Mikrocontrollers</figcaption>
+</figure>
 
 <p>Auch der Mikrocontroller darf nicht verpolt werden, was in diesem Fall
 bedeutet, dass er korrekt orientiert aufgelötet werden muss. Sowohl auf
@@ -158,7 +162,7 @@ Druckvorlage<a href="#fn1"><sup>1</sup></a>  hat
 einen entsprechenden Ausschnitt und kann auch bei fest montiertem
 <tt>SV2</tt> genutzt werden.
 
-<p><h3><a name="10.2.1">10.2.1 Funktionstest des Mikrocontrollers</a></h3>
+<p><h3><a id="10.2.1">10.2.1 Funktionstest des Mikrocontrollers</a></h3>
 
 <p>Der Mikrocontroller wird von Atmel (bzw. Microchip) mit einem
 USB-Bootloader<a href="#fn2"><sup>2</sup></a>  ausgeliefert. Beim
@@ -172,11 +176,11 @@ Arduino-IDE bringt ihren eigenen Bootloader mit. Dieser wird einmalig
 mit einem Programmiergerät über den Steckverbinder <tt>SV2</tt>
 eingespielt (" gebrannt"). 
 
-<p><center>
+<figure id="IMG:10.4">
   
-  <p><a name="IMG:10.4"><img src="aufbau/arduino_bootloader.png"></a>
-  <br><small>Abbildung 10.4: Brennen des Bootloaders über die Arduino-IDE</small>
-</center>
+  <img src="aufbau/arduino_bootloader.png">
+  <figcaption>Abbildung 10.4: Brennen des Bootloaders über die Arduino-IDE</figcaption>
+</figure>
 
 <p>Zum Brennen des Arduino-Bootloaders unterstützt die Arduino-IDE eine
 ganze Reihe von Programmiergeräten. Es reicht eine einfache Variante,
@@ -195,17 +199,17 @@ bietet sich für einen ersten Test der Blink-Sketch unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Blink"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Blink</span></tt></a> an, da die dafür nötige <tt>LED1</tt>
 ebenfalls gerade montiert wurde.
 
-<p><h2><a name="10.3">10.3 Dritte Baustufe " Eingänge"</a></h2>
+<p><h2><a id="10.3">10.3 Dritte Baustufe " Eingänge"</a></h2>
 
 <p>Die dritte Baustufe ist sehr einfach zu löten und besteht
 primär aus Widerständen, die zum Schutz der Eingänge verwendet
 werden.
 
-<p><center>
+<figure id="IMG:10.5">
   
-  <p><a name="IMG:10.5"><img src="aufbau/inputs_svg.png"></a>
-  <br><small>Abbildung 10.5: Komponenten der Eingänge</small>
-</center>
+  <img src="aufbau/inputs_svg.png">
+  <figcaption>Abbildung 10.5: Komponenten der Eingänge</figcaption>
+</figure>
 
 <p>Die Komponenten der Analogeingänge <tt>I1</tt> bis <tt>I8</tt> sowie der
 Zählereingänge <tt>C1</tt> bis <tt>C4</tt> werden gleichzeitig montiert.
@@ -225,16 +229,16 @@ erkennen. Sollte ein Eingang nicht wie gewünscht funktionieren, so
 kommt als Fehlerquelle auch der Mikrocontroller aus Baustufe 2 in
 Betracht.
 
-<p><h2><a name="10.4">10.4 Vierte Baustufe " Ausgänge"</a></h2>
+<p><h2><a id="10.4">10.4 Vierte Baustufe " Ausgänge"</a></h2>
 
 <p>In der vierten und letzten Baustufe werden die Komponenten
 montiert, die zum Betrieb der Ausgänge benötigt werden.
 
-<p><center>
+<figure id="IMG:10.6">
   
-  <p><a name="IMG:10.6"><img src="aufbau/outputs_svg.png"></a>
-  <br><small>Abbildung 10.6: Komponenten der Ausgänge</small>
-</center>
+  <img src="aufbau/outputs_svg.png">
+  <figcaption>Abbildung 10.6: Komponenten der Ausgänge</figcaption>
+</figure>
 
 <p>Die Leistungstreiber <tt>U3</tt> und <tt>U4</tt> sollten zuerst bestückt
 werden, da sie nicht ganz einfach zu löten sind. Vor allem sollten die
@@ -242,17 +246,17 @@ Bundhülsen nicht bestückt sein, da sie den Zugang zu den Anschlusspads
 der Treiber sehr erschweren. Ergänzt werden die Treiber durch nur
 wenige Widerstände und Kondensatoren.
 
-<p><h3><a name="10.4.1">10.4.1 Ausgangstests mit 5 Volt</a></h3>
+<p><h3><a id="10.4.1">10.4.1 Ausgangstests mit 5 Volt</a></h3>
 
 <p>Da die Treiber an der 9-Volt-Versorgung angeschlossen sind sind
 Kurzschlüsse zwischen 9 Volt und 5 Volt führenden Signalen potenziell
 bei Lötfehlern möglich.
 
-<p><center>
+<figure id="IMG:10.7">
   
-  <p><a name="IMG:10.7"><img src="aufbau/9v5v_svg.png"></a>
-  <br><small>Abbildung 10.7: Testweise Brücke zwischen 5V und 9V</small>
-</center>
+  <img src="aufbau/9v5v_svg.png">
+  <figcaption>Abbildung 10.7: Testweise Brücke zwischen 5V und 9V</figcaption>
+</figure>
 
 <p>Neben der sorgfältigen Kontrolle der Lötstellen ist es daher sinnvoll,
 den 9-Volt-Zweig für erste Funktionstests aus dem 5-Volt-Zweig zu
@@ -276,7 +280,7 @@ nicht darauf ausgelegt ist, solche Lasten zu treiben.
 <p>Erst wenn alle Ausgänge bei 5 Volt korrekt funktionieren darf die
 Brücke entfernt und eine echte 9-Volt-Versorgung angeschlossen werden.
 
-<p><h3><a name="10.4.2">10.4.2 Platinenhistorie</a></h3>
+<p><h3><a id="10.4.2">10.4.2 Platinenhistorie</a></h3>
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird kontinuierlich weiterentwickelt. Daher ändert sich
 auch die Platine geringfügig. Bisher existieren folgenden Varianten:
@@ -304,10 +308,15 @@ auch die Platine geringfügig. Bisher existieren folgenden Varianten:
 <p>Alle Board-Versionen ab Version 1.0 sind logisch und elektrisch
 kompatibel und verhalten sich aus Anwendersicht identisch.
 <hr><small>
-<a name="fn1">1) </a>Gehäusedruckvorlage
+<a id="fn1">1) </a>Gehäusedruckvorlage
   <a href="https://github.com/harbaum/ftduino/tree/master/case">https://github.com/harbaum/ftduino/tree/master/case</a><br>
-<a name="fn2">2) </a>DFU-Bootloader,
+<a id="fn2">2) </a>DFU-Bootloader,
   <a href="http://www.atmel.com/Images/doc7618.pdf">http://www.atmel.com/Images/doc7618.pdf</a><br>
-<a name="fn3">3) </a>USBasp - USB programmer for Atmel AVR
+<a id="fn3">3) </a>USBasp - USB programmer for Atmel AVR
   controllers, <a href="http://www.fischl.de/usbasp/">http://www.fischl.de/usbasp/</a><br>
-</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - aufbau</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
+</small>
+<footer>
+<p><a href="">▲  nach oben</a><br><a href="http://ftduino.de/">ftDuino</a> manual - aufbau</p>
+<p class="copy">(c) 2017-2019 Till Harbaum</p>
+</footer>
+</body></html>

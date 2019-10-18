@@ -1,18 +1,22 @@
 <!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>bibliotheken</title></head><body>
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
-<table><tr>
-<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
-<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
-<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
-<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
-<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
-<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
-<td><a href="modelle.html">7.&nbsp;Modelle</a></td><td>-</td>
-<td><a href="community.html">8.&nbsp;Community</a></td><td>-</td>
-<td><a href="bibliotheken.html">9.&nbsp;Bibliotheken</a></td><td>-</td>
-<td><a href="aufbau.html">10.&nbsp;Aufbau</a></td><td>-</td>
-<td><a href="anhang.html">Anhang</a></td>
-</tr></table><h1><a name="9">9 Bibliotheken</a></h1> 
+<header>
+	<p><a id="backlink" href="http://ftduino.de/"><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung</a> (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF-Version</a>)
+</header>
+
+<nav>
+<a href="controller.html">1.&nbsp;Controller</a> -
+<a href="installation.html">2.&nbsp;Installation</a> -
+<a href="ersteschritte.html">3.&nbsp;Erste Schritte</a> -
+<a href="programmierung.html">4.&nbsp;Programmierung</a> -
+<a href="schule.html">5.&nbsp;Schule</a> -
+<a href="experimente.html">6.&nbsp;Experimente</a> -
+<a href="modelle.html">7.&nbsp;Modelle</a> - 
+<a href="community.html">8.&nbsp;Community</a> -
+<a aria-current="page" href="bibliotheken.html">9.&nbsp;Bibliotheken</a> -
+<a href="aufbau.html">10.&nbsp;Aufbau</a>  -
+<a href="anhang.html">Anhang</a>
+</nav>
+<h1><a id="9">9 Bibliotheken</a></h1> 
 
 <p>Mit dem Schaltplan aus Anhang <a href="anhang.html#A">A</a> und
 entsprechendem Know-How über den verbauten ATmega32U4-Controller
@@ -22,11 +26,11 @@ an Erfahrung und führt zu vergleichsweise komplexen Arduino-Sketches,
 da sämtlicher Code zur Ansteuerung der diversen Ein- und Ausgänge
 im Sketch selbst implementiert werden müsste.
 
-<p><center>
+<figure id="IMG:9.1">
   
-  <p><a name="IMG:9.1"><img src="bibliotheken/bibliotheken_in_ide.png"></a>
-  <br><small>Abbildung 9.1: Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken in der Arduino-IDE</small>
-</center>
+  <img src="bibliotheken/bibliotheken_in_ide.png">
+  <figcaption>Abbildung 9.1: Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken in der Arduino-IDE</figcaption>
+</figure>
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bringt daher sogenannte Bibliotheken mit. Das sind
 Code-Sammlungen, die bereits fertige Routinen zum Ansteuern der Ein-
@@ -53,7 +57,7 @@ ein ganz rudimentäres Funktions-Set bereit stellt und die
 <tt>Ftduino</tt>-Bibliothek, die deutlich komplexer ist und vielfältige
 Funktionen zur Signaleingabe und Signalausgabe bietet.
 
-<p><h3><a name="9.0.1">9.0.1 Port-Definitionen und Konstanten</a></h3>
+<p><h3><a id="9.0.1">9.0.1 Port-Definitionen und Konstanten</a></h3>
 
 <p>Für die unterschiedlichen Ports des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> werden in den beiden
 folgenden Bibliotheken die gleichen Konstanten verwendet. Die acht
@@ -82,7 +86,7 @@ Eine äquivalente Version ist:
        mache_etwas(Ftduino::I1+i);
      }
 </pre>
-<h2><a name="9.1">9.1 <tt>FtduinoSimple</tt></a></h2> 
+<h2><a id="9.1">9.1 <tt>FtduinoSimple</tt></a></h2> 
 
 <p>Die <tt>FtduinoSimple</tt>-Bibliothek ist eine sehr einfache
 Bibliothek. Sie erlaubt nur die Abfrage von einfachen
@@ -115,7 +119,7 @@ Sketches die entsprechende Include-Zeile eingefügt werden.
 <pre>
      #include &lt;FtduinoSimple.h&gt;
 </pre>
-<h3><a name="9.1.1">9.1.1 Verwendung im Sketch</a></h3> 
+<h3><a id="9.1.1">9.1.1 Verwendung im Sketch</a></h3> 
 
 <p>Die <tt>FtduinoSimple</tt>-Bibliothek verbirgt viele Details
 der Sensor- und Aktoransteuerung vor dem Nutzer und erlaubt es,
@@ -175,7 +179,7 @@ angeschlossenen Schalters ermittelt. Je nachdem ob er gedrückt
 (geschlossen) ist oder offen wird in den Zeilen 11 bzw. 14 der Ausgang
 <tt>O1</tt> ein- oder ausgeschaltet. 
 
-<p><h3><a name="9.1.2">9.1.2 <tt>bool input_get(uint8_t ch)</tt></a></h3>
+<p><h3><a id="9.1.2">9.1.2 <tt>bool input_get(uint8_t ch)</tt></a></h3>
 
 <p>Diese Funktion liest den Zustand des Eingangs <tt>ch</tt> ein.
 Erlaubte Werte für <tt>ch</tt> sind <tt>Ftduino::I1</tt> bis
@@ -199,7 +203,7 @@ durchgeführt werden muss.
      <font color="green"> 3</font>    /* ... tue etwas ... */
      <font color="green"> 4</font>  }
 </pre>
-<h3><a name="9.1.3">9.1.3 <tt>bool counter_get_state(uint8_t ch)</tt></a></h3>
+<h3><a id="9.1.3">9.1.3 <tt>bool counter_get_state(uint8_t ch)</tt></a></h3>
 
 <p>Diese Funktion entspricht von ihrer Wirkungsweise <tt>input_get()</tt>.
 Allerdings wird <tt>counter_get_state()</tt> auf die Zählereingänge
@@ -215,7 +219,7 @@ verbunden ist und <tt>false</tt>, wenn nicht.
      <font color="green"> 3</font>    /* ... tue etwas ... */
      <font color="green"> 4</font>  }
 </pre>
-<h3><a name="9.1.4">9.1.4 <tt>void output_set(uint8_t port, uint8_t mode)</tt></a></h3>
+<h3><a id="9.1.4">9.1.4 <tt>void output_set(uint8_t port, uint8_t mode)</tt></a></h3>
 
 <p>Mit der Funktion <tt>output_set()</tt> können die Ausgänge <tt>O1</tt>
 bis <tt>O8</tt> gesteuert werden. Der Wertebereich für <tt>port</tt> reicht
@@ -236,7 +240,7 @@ geschaltet werden soll.
   <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
   <a href="controller.html#1.2.5">1.2.5</a>).</em>
 
-<p><h3><a name="9.1.5">9.1.5 <tt>void motor_set(uint8_t port, uint8_t mode)</tt></a></h3>
+<p><h3><a id="9.1.5">9.1.5 <tt>void motor_set(uint8_t port, uint8_t mode)</tt></a></h3>
 
 <p>Die Funktion <tt>motor_set()</tt> bedient einen Motorausgang <tt>M1</tt>
 bis <tt>M4</tt>. Motorausgänge werden durch die Kombination von zwei
@@ -266,13 +270,13 @@ langsam ausläuft.
   <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
   <a href="controller.html#1.2.5">1.2.5</a>).</em>
 
-<p><h3><a name="9.1.6">9.1.6 Beispiel-Sketches</a></h3>
+<p><h3><a id="9.1.6">9.1.6 Beispiel-Sketches</a></h3>
 
 <p>Code-Beispiele zur Nutzung der <tt>FtduinoSimple</tt>-Bibliothek finden
 sich im Menü der Arduino-IDE unter
 <tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt>.
 
-<p><h2><a name="9.2">9.2 <tt>Ftduino</tt></a></h2>
+<p><h2><a id="9.2">9.2 <tt>Ftduino</tt></a></h2>
 
 <p>Die <tt>Ftduino</tt>-Bibliothek kapselt alle Funktionen der
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Hardware, sodass der Anwender bequemen Zugriff auf alle
@@ -303,7 +307,7 @@ Weise früh in der <tt>setup()</tt>-Funktion.
        ftduino.init();
      }
 </pre>
-<h3><a name="9.2.1">9.2.1 Die Eingänge <tt>I1</tt> bis <tt>I8</tt></a></h3>
+<h3><a id="9.2.1">9.2.1 Die Eingänge <tt>I1</tt> bis <tt>I8</tt></a></h3>
 
 <p>Die Eingänge <tt>I1</tt> bis <tt>I8</tt> sind mit Analogeingängen des
 ATmega32u4-Mikrocontrollers im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden. Diese
@@ -331,7 +335,7 @@ erfolgt automatisch vor der Messung. Sie ist auch der Grund, warum pro
 Kanal zwei Messungen erfolgen. Dies erlaubt den Signalen, sich nach
 dem Umschaltvorgang und vor der zweiten Messung zu stabilisieren.
 
-<p><h3><a name="9.2.2">9.2.2 <tt>void input_set_mode(uint8_t ch, uint8_t mode)</tt></a></h3>
+<p><h3><a id="9.2.2">9.2.2 <tt>void input_set_mode(uint8_t ch, uint8_t mode)</tt></a></h3>
 
 
 <p>Die Funktion <tt>input_set_mode()</tt> setzt den Messmodus des
@@ -344,7 +348,7 @@ Die Funktion <tt>input_get()</tt> liefert in der Folge Widerstandswerte
 in Ohm, Spannungswerte in Millivolt oder den Schaltzustand eines
 Schalters als Wahrheitswert.
 
-<p><h3><a name="9.2.3">9.2.3 <tt>uint16_t input_get(uint8_t ch)</tt></a></h3>
+<p><h3><a id="9.2.3">9.2.3 <tt>uint16_t input_get(uint8_t ch)</tt></a></h3>
 
 <p>Diese Funktion liest den aktuellen Messwert des Eingangs <tt>ch</tt> aus.
 Gültige Werte für <tt>ch</tt> reichen von <tt>Ftduino::I1</tt> bis
@@ -373,7 +377,7 @@ lange.
      <font color="green"> 2</font>  ftduino.input_set_mode(Ftduino::I1, Ftduino::RESISTANCE);
      <font color="green"> 3</font>  uint16_t widerstand = ftduino.input_get(Ftduino::I1);
 </pre>
-<h3><a name="9.2.4">9.2.4 Die Ausgänge <tt>O1</tt> bis <tt>O8</tt> und <tt>M1</tt> bis <tt>M4</tt></a></h3>
+<h3><a id="9.2.4">9.2.4 Die Ausgänge <tt>O1</tt> bis <tt>O8</tt> und <tt>M1</tt> bis <tt>M4</tt></a></h3>
 
 <p>Die Ausgänge <tt>O1</tt> bis <tt>O8</tt> sind acht unabhängige verstärkte
 Ausgänge zum direkten Anschluss üblicher 9-Volt-Aktoren von
@@ -415,7 +419,7 @@ Motortreiber aktualisiert.
 <p><em>Hinweis: Die Ausgänge lassen sich nur nutzen, wenn der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
   mit einer 9-Volt-Spannungsquelle verbunden ist.</em>
 
-<p><h3><a name="9.2.5">9.2.5 <tt>void output_set(uint8_t port, uint8_t mode, uint8_t pwm)</tt></a></h3>
+<p><h3><a id="9.2.5">9.2.5 <tt>void output_set(uint8_t port, uint8_t mode, uint8_t pwm)</tt></a></h3>
 
 <p>Diese Funktion schaltet einen Einzelausgang. Gültige Werte für
 <tt>port</tt> liegen im Bereich von <tt>Ftduino::O1</tt> bis
@@ -446,7 +450,7 @@ können. Zwischenwerte können dazu von den Konstanten abgeleitet werden
      <font color="green"> 1</font>  // Ausgang O2 auf 50% einschalten
      <font color="green"> 2</font>  ftduino.output_set(Ftduino::O2, Ftduino::HI, Ftduino::MAX/2);
 </pre>
-<h3><a name="9.2.6">9.2.6 <tt>void motor_set(uint8_t port, uint8_t mode, uint8_t pwm)</tt></a></h3>
+<h3><a id="9.2.6">9.2.6 <tt>void motor_set(uint8_t port, uint8_t mode, uint8_t pwm)</tt></a></h3>
 
 <p>Die Funktion <tt>motor_set()</tt> schaltet einen kombinierten
 Motorausgang. Gültige Werte für <tt>port</tt> liegen im Bereich von
@@ -482,7 +486,7 @@ Modus <tt>Ftduino::OFF</tt> hat der <tt>pwm</tt>-Wert keine Bedeutung.
      <font color="green"> 1</font>  // Motor an M3 mit 1/3 Geschwindigkeit links drehen
      <font color="green"> 2</font>  ftduino.motor_set(Ftduino::M3, Ftduino::LEFT, Ftduino::MAX/3);
 </pre>
-<h3><a name="9.2.7">9.2.7 <tt>void motor_counter(uint8_t port, uint8_t mode, uint8_t pwm, uint16_t counter)</tt></a></h3>
+<h3><a id="9.2.7">9.2.7 <tt>void motor_counter(uint8_t port, uint8_t mode, uint8_t pwm, uint16_t counter)</tt></a></h3>
 
 <p>Diese Funktion dient zur Ansteuerung von Encoder-Motoren und gleicht in
 ihren ersten drei Parametern der <tt>motor_set()</tt>-Funktion. Die
@@ -502,7 +506,7 @@ Motoren aus dem TXT Discovery Set liefern 63 <sup><small>1</small></sup>/<sub><s
 pro Drehung der Motorachse, die Motoren aus den ursprünglich für den
 TX-Controller verkauften Sets liefern 75 Impulse pro Umdrehung.
 
-<p><h3><a name="9.2.8">9.2.8 <tt>bool motor_counter_active(uint8_t port)</tt></a></h3>
+<p><h3><a id="9.2.8">9.2.8 <tt>bool motor_counter_active(uint8_t port)</tt></a></h3>
 
 <p>Die Funktion <tt>motor_counter_active()</tt> liefert zurück, ob die
 Impulszählung für den durch <tt>port</tt> spezifizierten Motorausgang
@@ -521,7 +525,7 @@ der Impulszählung und das Stoppen des Motors gewartet werden:
      <font color="green"> 4</font>  while(ftduino.motor_counter_active(Ftduino::M4));
      <font color="green"> 5</font>  // Motor hat gestoppt 
 </pre>
-<h3><a name="9.2.9">9.2.9 <tt>void motor_counter_set_brake(uint8_t port, bool on)</tt></a></h3>
+<h3><a id="9.2.9">9.2.9 <tt>void motor_counter_set_brake(uint8_t port, bool on)</tt></a></h3>
 
 
 <p>Diese Funktion bestimmt das Bremsverhalten des Motors an Ausgang
@@ -556,7 +560,7 @@ Nachlauf auch per Programm messbar:
      <font color="green"> 9</font>  // Zählerstand ausgeben
      <font color="green">10</font>  Serial.println(ftduino.counter_get(Ftduino::C4));
 </pre>
-<h3><a name="9.2.10">9.2.10 Die Zählereingänge <tt>C1</tt> bis <tt>C4</tt></a></h3>
+<h3><a id="9.2.10">9.2.10 Die Zählereingänge <tt>C1</tt> bis <tt>C4</tt></a></h3>
 
 <p>Die Zählereingänge arbeiten im Gegensatz zu den Analogeingängen rein
 digital. Sie unterscheiden nur, ob der jeweilige Eingang auf Masse
@@ -588,7 +592,7 @@ nicht.
 des fischertechnik ROBO TX Ultraschall-Distanzsensors 133009
 wie in Abschnitt <a href="controller.html#1.2.6">1.2.6</a> dargestellt.
 
-<p><h3><a name="9.2.11">9.2.11 <tt>void counter_set_mode(uint8_t ch, uint8_t mode)</tt></a></h3>
+<p><h3><a id="9.2.11">9.2.11 <tt>void counter_set_mode(uint8_t ch, uint8_t mode)</tt></a></h3>
 
 <p>Diese Funktion setzt den Betriebsmodus eines Zählereingangs. Gültige
 Werte für <tt>ch</tt> reichen von <tt>Ftduino::C1</tt> bis
@@ -614,7 +618,7 @@ gesetzt, so führen beide Signaländerungsrichtungen dazu, dass der
 Zähler erhöht wird. Sowohl das Drücken, als auch das Loslassen einen Testers
 wird dann z.B. gezählt.
 
-<p><h3><a name="9.2.12">9.2.12 <tt>uint16_t counter_get(uint8_t ch)</tt></a></h3>
+<p><h3><a id="9.2.12">9.2.12 <tt>uint16_t counter_get(uint8_t ch)</tt></a></h3>
 
 <p>Diese Funktion liefert den aktuellen Zählerstand zurück. Gültige Werte
 für <tt>ch</tt> liegen im Bereich von <tt>Ftduino::C1</tt> und
@@ -623,7 +627,7 @@ für <tt>ch</tt> liegen im Bereich von <tt>Ftduino::C1</tt> und
 <p>Der maximale Wert, der zurück geliefert wird ist 65535. Wird dieser Wert
 überschritten, dann springt der Zähler wieder auf 0 zurück.
 
-<p><h3><a name="9.2.13">9.2.13 <tt>void counter_clear(uint8_t ch)</tt></a></h3>
+<p><h3><a id="9.2.13">9.2.13 <tt>void counter_clear(uint8_t ch)</tt></a></h3>
 
 <p>Mit Hilfe der Funktion <tt>counter_clear()</tt> kann der Zählerstand
 auf Null gesetzt werden. Gültige Werte für <tt>ch</tt> liegen im
@@ -636,7 +640,7 @@ Bereich von <tt>Ftduino::C1</tt> und <tt>Ftduino::C4</tt>.
      <font color="green"> 4</font>  delay(1000);
      <font color="green"> 5</font>  uint16_t impulse = ftduino.counter_get(Ftduino::C1);
 </pre>
-<h3><a name="9.2.14">9.2.14 <tt>bool counter_get_state(uint8_t ch)</tt></a></h3>
+<h3><a id="9.2.14">9.2.14 <tt>bool counter_get_state(uint8_t ch)</tt></a></h3>
 
 <p>Der Zustand der Zählereingänge kann auch direkt mit der Funktion
 <tt>counter_get_state()</tt> abgefragt werden. Die Werte für
@@ -650,7 +654,7 @@ mit Masse verbunden ist und unwahr (<tt>false</tt>) wenn er offen ist.
 Tastenprellen nicht unterdrückt wird. Es können auf diese Weise
 digitale Signale mit einer sehr hohen Frequenz erfasst werden.
 
-<p><h3><a name="9.2.15">9.2.15 <tt>void ultrasonic_enable(bool ena)</tt></a></h3>
+<p><h3><a id="9.2.15">9.2.15 <tt>void ultrasonic_enable(bool ena)</tt></a></h3>
 
 <p>An Zählereingang <tt>C1</tt> kann alternativ der fischertechnik ROBO TX
 Ultraschall-Distanzsensors 133009 wie in Abschnitt <a href="controller.html#1.2.6">1.2.6</a>
@@ -666,7 +670,7 @@ Zählfunktion des Eingangs <tt>C1</tt> automatisch deaktiviert.
 circa zweimal je Sekunde im Hintergrund ausgewertet. Der jeweils
 aktuelle Messwert ist daher maximal 500 Millisekunden alt.
 
-<p><h3><a name="9.2.16">9.2.16 <tt>int16_t ultrasonic_get()</tt></a></h3>
+<p><h3><a id="9.2.16">9.2.16 <tt>int16_t ultrasonic_get()</tt></a></h3>
 
 <p>Die Funktion <tt>ultrasonic_get()</tt> liefert den Messwert eines an
 Zählereingang <tt>C1</tt> angeschlossenen Distanzsensors in Zentimetern
@@ -682,11 +686,11 @@ auch, wenn kein Sensor angeschlossen ist.
      <font color="green"> 3</font>  delay(1000);   // eine Sekunde Zeit für erste Messung geben
      <font color="green"> 4</font>  int16_t distanz = ftduino.ultrasonic_get();
 </pre>
-<h2><a name="9.3">9.3 Befehlsübersicht</a></h2>
+<h2><a id="9.3">9.3 Befehlsübersicht</a></h2>
 
 <p><h4>Befehlsübersicht <tt>FtduinoSimple</tt></h4>
 
-<p><center><table>
+<center><table>
   <tr><td>
 Befehl </td><td></td><td> Beschreibung </td></tr>
 <tr><td>
@@ -699,7 +703,7 @@ Befehl </td><td></td><td> Beschreibung </td></tr>
 
 <p><h4>Befehlsübersicht <tt>Ftduino</tt></h4>
 
-<p><center><table>
+<center><table>
   <tr><td>
 Befehl </td><td></td><td> Beschreibung </td></tr>
 <tr><td>
@@ -718,7 +722,12 @@ Befehl </td><td></td><td> Beschreibung </td></tr>
 <tr><td>
 </table></center>
 <hr><small>
-<a name="fn1">1) </a><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries">https://github.com/harbaum/ftduino/tree/master/ftduino/libraries</a><br>
-<a name="fn2">2) </a>Datenblatt unter
+<a id="fn1">1) </a><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries">https://github.com/harbaum/ftduino/tree/master/ftduino/libraries</a><br>
+<a id="fn2">2) </a>Datenblatt unter
   <a href="http://cache.freescale.com/files/analog/doc/data_sheet/MC33879.pdf">http://cache.freescale.com/files/analog/doc/data_sheet/MC33879.pdf</a>.<br>
-</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - bibliotheken</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
+</small>
+<footer>
+<p><a href="">▲  nach oben</a><br><a href="http://ftduino.de/">ftDuino</a> manual - bibliotheken</p>
+<p class="copy">(c) 2017-2019 Till Harbaum</p>
+</footer>
+</body></html>

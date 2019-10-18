@@ -1,18 +1,22 @@
 <!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>modelle</title></head><body>
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
-<table><tr>
-<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
-<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
-<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
-<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
-<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
-<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
-<td><a href="modelle.html">7.&nbsp;Modelle</a></td><td>-</td>
-<td><a href="community.html">8.&nbsp;Community</a></td><td>-</td>
-<td><a href="bibliotheken.html">9.&nbsp;Bibliotheken</a></td><td>-</td>
-<td><a href="aufbau.html">10.&nbsp;Aufbau</a></td><td>-</td>
-<td><a href="anhang.html">Anhang</a></td>
-</tr></table><h1><a name="7">7 Modelle</a></h1> 
+<header>
+	<p><a id="backlink" href="http://ftduino.de/"><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung</a> (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF-Version</a>)
+</header>
+
+<nav>
+<a href="controller.html">1.&nbsp;Controller</a> -
+<a href="installation.html">2.&nbsp;Installation</a> -
+<a href="ersteschritte.html">3.&nbsp;Erste Schritte</a> -
+<a href="programmierung.html">4.&nbsp;Programmierung</a> -
+<a href="schule.html">5.&nbsp;Schule</a> -
+<a href="experimente.html">6.&nbsp;Experimente</a> -
+<a aria-current="page" href="modelle.html">7.&nbsp;Modelle</a> - 
+<a href="community.html">8.&nbsp;Community</a> -
+<a href="bibliotheken.html">9.&nbsp;Bibliotheken</a> -
+<a href="aufbau.html">10.&nbsp;Aufbau</a>  -
+<a href="anhang.html">Anhang</a>
+</nav>
+<h1><a id="7">7 Modelle</a></h1> 
 
 <p>Während in den Experimenten aus Kapitel <a href="experimente.html#6">6</a> der
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Controller im Mittelpunkt stand und nur wenige externe
@@ -23,17 +27,17 @@ Modelle. Der <font color="red">f</font><font color="blue">t</font><font color="d
 deren Modelle angelehnt, so dass ein Nachbau mit dem entsprechenden
 Kasten möglich ist.
 
-<p><h2><a name="7.1">7.1 Automation Robots: Hochregallager</a></h2> 
+<p><h2><a id="7.1">7.1 Automation Robots: Hochregallager</a></h2> 
 
 <p>Das Modell Hochregallager stammt aus dem Baukasten ``Automation
 Robots''. In der Originalanleitung wird der Einsatz des TX-Controllers
 beschrieben. Ein Zusatzblatt beschreibt den TXT-Controller.
 
-<p><center>
+<figure id="IMG:7.1">
   
-  <p><a name="IMG:7.1"><img src="modelle/hochregal.jpg"></a>
-  <br><small>Abbildung 7.1: Hochregal mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="modelle/hochregal.jpg">
+  <figcaption>Abbildung 7.1: Hochregal mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Der Beispielsketch <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/HighLevelRack"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">HighLevelRack</span></tt></a> steuert das Modell
 ``Hochregallager'' aus dem Baukasten 511933 ``ROBO TX Automation
@@ -48,24 +52,24 @@ seriellen Monitor die Zeilenden auf <tt><span style="background-color:#f0f0f0;">
 <tt><span style="background-color:#f0f0f0;">Zeilenumbruch (CR)</span></tt> eingestellt worden sein, wie im
 Abschnitt <a href="ersteschritte.html#3.3.1">3.3.1</a> beschrieben.
 
-<p><center>
+<figure id="IMG:7.2">
   
-  <p><a name="IMG:7.2"><img src="modelle/hochregal_seriell.png"></a>
-  <br><small>Abbildung 7.2: Serielle Kommunikation mit dem Hochregal</small>
-</center>
+  <img src="modelle/hochregal_seriell.png">
+  <figcaption>Abbildung 7.2: Serielle Kommunikation mit dem Hochregal</figcaption>
+</figure>
 
-<p><h2><a name="7.2">7.2 ElectroPneumatic: Flipper</a></h2> 
+<p><h2><a id="7.2">7.2 ElectroPneumatic: Flipper</a></h2> 
 
 <p>Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind auch im Schalter-Modus mit den
 fischertechnik-Fototransistoren kompatibel. Ein beleuchteter
 Transistor liefert dann den Wahrheitswert ``wahr'', ein unbeleuchter
 den Wert ``unwahr''. 
 
-<p><center>
+<figure id="IMG:7.3">
   
-  <p><a name="IMG:7.3"><img src="modelle/flipper.jpg"></a>
-  <br><small>Abbildung 7.3: Flipper auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Basis</small>
-</center>
+  <img src="modelle/flipper.jpg">
+  <figcaption>Abbildung 7.3: Flipper auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Basis</figcaption>
+</figure>
 
 <p>Der Beispiel-Sketch des Flippers aus dem ElectroPneumatic-Set findet
 sich unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Pinball"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Pinball</span></tt></a>. Er nutzt die Fototransistoren
@@ -89,16 +93,16 @@ den Punktestand anzuzeigen<a href="#fn2"><sup>2</sup></a> . Da am
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> noch Ausgänge frei sind können stattdessen auch Lampen oder
 Leuchtdioden verwendet werden.
 
-<p><h2><a name="7.3">7.3 ROBOTICS TXT Explorer: Linienfolger</a></h2> 
+<p><h2><a id="7.3">7.3 ROBOTICS TXT Explorer: Linienfolger</a></h2> 
 
 <p>Der mobile Linienfolger ist an die Modelle des ``ROBOTICS TXT
 Explorer''-Sets angelehnt und nutzt den ``IR Spursensor'' dieses Sets.
 
-<p><center>
+<figure id="IMG:7.4">
   
-  <p><a name="IMG:7.4"><img src="modelle/linienfolger.jpg"></a>
-  <br><small>Abbildung 7.4: Ein Linienfolger auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Basis</small>
-</center>
+  <img src="modelle/linienfolger.jpg">
+  <figcaption>Abbildung 7.4: Ein Linienfolger auf <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Basis</figcaption>
+</figure>
 
 <p>Ein passender Beispiel Sketch ist unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/LineSensor"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">LineSensor</span></tt></a> zu
 finden. Dieser Sketch wertet kontinuierlich den Liniensensor aus, um
@@ -109,11 +113,11 @@ beliebige der Eingänge <tt>I1</tt> bis <tt>I8</tt> angeschlossen. Zusätzlich
 erfolgt über die roten und grünen Kabel die Spannungsversorgung
 durch den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
 
-<p><center>
+<figure id="IMG:7.5">
   
-  <p><a name="IMG:7.5"><img src="modelle/linienfolger_svg.png"></a>
-  <br><small>Abbildung 7.5: Verdrahtungsschema des Linienfolgers</small>
-</center>
+  <img src="modelle/linienfolger_svg.png">
+  <figcaption>Abbildung 7.5: Verdrahtungsschema des Linienfolgers</figcaption>
+</figure>
 
 <p>In diesem Fall ist der Spursensor an die Eingänge <tt>I1</tt> und
 <tt>I2</tt> angeschlossen. Der Sensor liefert nahezu maximale Spannung
@@ -135,18 +139,18 @@ Millivolt, wenn die schwarze Linie erkannt wurde.
          // ...
        }
 </pre>
-<h2><a name="7.4">7.4 Idas Ampel</a></h2> 
+<h2><a id="7.4">7.4 Idas Ampel</a></h2> 
 
 <p>Ein klassisches Modell ist die Ampel bzw. die Fußgängerampel. Das
 Modell bildet eine Bedarfsampel mit je drei Lampen für die Autos und
 zwei für Fußgänger ab.
 
-<p><center>
+<figure id="IMG:7.6">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:7.6"><img src="modelle/idas_ampel_svg.png"></a></td></tr><tr><td align="center"><small>(a) Verdrahtungsschema</small></td></tr></table></td>
-  <td><table><tr><td><a name="IMG:7.6"><img src="modelle/idas_ampel.jpg"></a></td></tr><tr><td align="center"><small>(b) Modell</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 7.6: Idas Ampel</small>
-</center>
+  <figure><img src="modelle/idas_ampel_svg.png"><figcaption>(a) Verdrahtungsschema</figcaption></figure>
+  <figure><img src="modelle/idas_ampel.jpg"><figcaption>(b) Modell</figcaption></figure>
+  <figcaption>Abbildung 7.6: Idas Ampel</figcaption>
+</figure>
 
 <p>Ein passender Beispiel-Sketch ist unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/PedestrianLight"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">PedestrianLight</span></tt></a> zu finden. Er implementiert
@@ -155,13 +159,13 @@ dabei dem üblichen Ablauf in acht Schritten von ``Autos haben grün,
 Fußgänger rot'' über die Grünphase für die Fußgänger bis schließlich
 die Autos wieder fahren dürfen.
 
-<p><center>
+<figure id="IMG:7.7">
   
-  <p><a name="IMG:7.7"><img src="modelle/ampelzustand_svg.png"></a>
-  <br><small>Abbildung 7.7: Die Zustände der Ampel</small>
-</center>
+  <img src="modelle/ampelzustand_svg.png">
+  <figcaption>Abbildung 7.7: Die Zustände der Ampel</figcaption>
+</figure>
 
-<p><h3><a name="7.4.1">7.4.1 Zustandsautomaten</a></h3>
+<p><h3><a id="7.4.1">7.4.1 Zustandsautomaten</a></h3>
 
 <p>Die einfache und naheliegenden Umsetzung der Ampelsteuerung in Software
 bestünde aus einem Programm, das dem Verlauf der Ampelzustände direkt folgt.
@@ -298,7 +302,7 @@ Bedarf an solch einfachen Systemen wie dem <font color="red">f</font><font color
 der Einsatz komplexer, betriebssystembasierter Lösungen mit sinkenden
 Hardware-Preisen auch in immer einfacheren Geräten möglich wird.
 
-<p><h2><a name="7.5">7.5 Klassischer 2D-Plotter</a></h2> 
+<p><h2><a id="7.5">7.5 Klassischer 2D-Plotter</a></h2> 
 
 <p>Der fischertechnik-Plotter 30571<a href="#fn4"><sup>4</sup></a>  von 1985 war eines der ersten
 Computing-Modelle von fischertechnik. Die Bewegung in X- und Y-Achse
@@ -308,11 +312,11 @@ die acht Ausgänge des damaligen Computing-Interface, wobei der Stift
 recht trickreich mit einem der Motoren kombiniert wurde, um mit den
 insgesamt 8 Ausgängen auszukommen.
 
-<p><center>
+<figure id="IMG:7.8">
   
-  <p><a name="IMG:7.8"><img src="modelle/plotter_detail.jpg"></a>
-  <br><small>Abbildung 7.8: Der Stift wird von einem fischertechnik-Servo gehoben</small>
-</center>
+  <img src="modelle/plotter_detail.jpg">
+  <figcaption>Abbildung 7.8: Der Stift wird von einem fischertechnik-Servo gehoben</figcaption>
+</figure>
 
 <p>Das hier vorgestellte Modell hat die gleichen Maße und verwendet eine
 sehr ähnliche Grundmechanik. Es werden ebenfalls zwei Schrittmotoren
@@ -321,11 +325,11 @@ Kraft für den Plotterbetrieb entwickeln. Die Schrittmotoren werden wir
 in Abschnitt <a href="experimente.html#6.4">6.4</a> beschrieben angesteuert und
 angeschlossen.
 
-<p><center>
+<figure id="IMG:7.9">
   
-  <p><a name="IMG:7.9"><img src="modelle/plotter_ganz.jpg"></a>
-  <br><small>Abbildung 7.9: Das Design orientiert sich stark am Plotter von 1985</small>
-</center>
+  <img src="modelle/plotter_ganz.jpg">
+  <figcaption>Abbildung 7.9: Das Design orientiert sich stark am Plotter von 1985</figcaption>
+</figure>
 
 <p>Der Stift wird in diesem Modell von einem fischertechnik-Servo gehoben
 und gesenkt. Dabei könnte der Ansatz aus Abschnitt <a href="experimente.html#6.5">6.5</a>
@@ -340,15 +344,20 @@ auf der USB-/COM-Schnittstelle plotterübliche
 HP-GL-Kommandos<a href="#fn6"><sup>6</sup></a> 
 und kann daher direkt aus vielen PC-Programmen angesprochen werden.
 <hr><small>
-<a name="fn1">1) </a>Hochregal-Video
+<a id="fn1">1) </a>Hochregal-Video
   <a href="https://www.youtube.com/watch?v=Sjgv9RnBAbg">https://www.youtube.com/watch?v=Sjgv9RnBAbg</a><br>
-<a name="fn2">2) </a>Flipper-Video
+<a id="fn2">2) </a>Flipper-Video
   <a href="https://www.youtube.com/watch?v=-zmuOhcHRbY">https://www.youtube.com/watch?v=-zmuOhcHRbY</a><br>
-<a name="fn3">3) </a>Linienfolger-Video
+<a id="fn3">3) </a>Linienfolger-Video
   <a href="https://www.youtube.com/watch?v=JQ8TLt5MC9k">https://www.youtube.com/watch?v=JQ8TLt5MC9k</a><br>
-<a name="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30571">https://ft-datenbank.de/tickets?fulltext=30571</a><br>
-<a name="fn5">5) </a>Servo-Shield auf Thingiverse:
+<a id="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30571">https://ft-datenbank.de/tickets?fulltext=30571</a><br>
+<a id="fn5">5) </a>Servo-Shield auf Thingiverse:
   <a href="https://www.thingiverse.com/thing:3316758">https://www.thingiverse.com/thing:3316758</a><br>
-<a name="fn6">6) </a>HP-GL auf Wikipedia:
+<a id="fn6">6) </a>HP-GL auf Wikipedia:
   <a href="https://de.wikipedia.org/wiki/Hewlett-Packard_Graphics_Language">https://de.wikipedia.org/wiki/Hewlett-Packard_Graphics_Language</a><br>
-</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - modelle</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
+</small>
+<footer>
+<p><a href="">▲  nach oben</a><br><a href="http://ftduino.de/">ftDuino</a> manual - modelle</p>
+<p class="copy">(c) 2017-2019 Till Harbaum</p>
+</footer>
+</body></html>

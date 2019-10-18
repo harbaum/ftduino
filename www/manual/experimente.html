@@ -1,18 +1,22 @@
 <!DOCTYPE html><html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="manual.css"><title>experimente</title></head><body>
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF</a>)<br>
-<table><tr>
-<td><a href="controller.html">1.&nbsp;Controller</a></td><td>-</td>
-<td><a href="installation.html">2.&nbsp;Installation</a></td><td>-</td>
-<td><a href="ersteschritte.html">3.&nbsp;Erste&nbsp;Schritte</a></td><td>-</td>
-<td><a href="programmierung.html">4.&nbsp;Programmierung</a></td><td>-</td>
-<td><a href="schule.html">5.&nbsp;Schule</a></td><td>-</td>
-<td><a href="experimente.html">6.&nbsp;Experimente</a></td><td>-</td>
-<td><a href="modelle.html">7.&nbsp;Modelle</a></td><td>-</td>
-<td><a href="community.html">8.&nbsp;Community</a></td><td>-</td>
-<td><a href="bibliotheken.html">9.&nbsp;Bibliotheken</a></td><td>-</td>
-<td><a href="aufbau.html">10.&nbsp;Aufbau</a></td><td>-</td>
-<td><a href="anhang.html">Anhang</a></td>
-</tr></table><h1><a name="6">6 Experimente</a></h1>  
+<header>
+	<p><a id="backlink" href="http://ftduino.de/"><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> Bedienungsanleitung</a> (<a href="https://harbaum.github.io/ftduino/manual.pdf">PDF-Version</a>)
+</header>
+
+<nav>
+<a href="controller.html">1.&nbsp;Controller</a> -
+<a href="installation.html">2.&nbsp;Installation</a> -
+<a href="ersteschritte.html">3.&nbsp;Erste Schritte</a> -
+<a href="programmierung.html">4.&nbsp;Programmierung</a> -
+<a href="schule.html">5.&nbsp;Schule</a> -
+<a aria-current="page" href="experimente.html">6.&nbsp;Experimente</a> -
+<a href="modelle.html">7.&nbsp;Modelle</a> - 
+<a href="community.html">8.&nbsp;Community</a> -
+<a href="bibliotheken.html">9.&nbsp;Bibliotheken</a> -
+<a href="aufbau.html">10.&nbsp;Aufbau</a>  -
+<a href="anhang.html">Anhang</a>
+</nav>
+<h1><a id="6">6 Experimente</a></h1>  
 
 <p>Die Experimente dieses Kapitels konzentrieren sich auf einzelne
 Aspekte des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Sie veranschaulichen einen Effekt oder ein
@@ -23,7 +27,7 @@ aber oft als Basis dafür dienen.
 <p>Beispiele für komplexe Modelle finden sich im Kapitel
 <a href="modelle.html#7">7</a>.
 
-<p><h2><a name="6.1">6.1 Lampen-Zeitschaltung</a></h2>
+<p><h2><a id="6.1">6.1 Lampen-Zeitschaltung</a></h2>
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
 
@@ -37,13 +41,13 @@ gedrückt, so verlängert sich die verbleibende Zeit wieder auf volle
 zehn Sekunden. Nach Ablauf der zehn Sekunden verlischt das Licht und
 das Spiel beginnt von vorn.
 
-<p><center>
+<figure id="IMG:6.1">
   
-  <p><a name="IMG:6.1"><img src="experimente/lamptimer_svg.png"></a>
-  <br><small>Abbildung 6.1: Lampen-Zeitschaltung</small>
-</center>
+  <img src="experimente/lamptimer_svg.png">
+  <figcaption>Abbildung 6.1: Lampen-Zeitschaltung</figcaption>
+</figure>
 
-<p><h3><a name="6.1.1">6.1.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/LampTimer">LampTimer</a></tt></a></h3>
+<p><h3><a id="6.1.1">6.1.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/LampTimer">LampTimer</a></tt></a></h3>
 
 <p>Der folgende Sketch findet sich bei installierter
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Unterstützung im Menü der Arduino-IDE unter
@@ -190,7 +194,7 @@ helfen.
 
 <p>Mehr dazu gibt es im Abschnitt <a href="experimente.html#6.8">6.8</a>.
 
-<p><h2><a name="6.2">6.2 Not-Aus</a></h2> 
+<p><h2><a id="6.2">6.2 Not-Aus</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
 
@@ -200,13 +204,13 @@ sich sofort ab. Im Modell stellt ein XS-Motor mit
 Ventilator an Ausgang <tt>M1</tt> die Maschine dar. Ein Taster
 an Eingang <tt>I1</tt> bildet den Not-Aus-Taster.
 
-<p><center>
+<figure id="IMG:6.2">
   
-  <p><a name="IMG:6.2"><img src="experimente/emergencystop_svg.png"></a>
-  <br><small>Abbildung 6.2: Not-Aus</small>
-</center>
+  <img src="experimente/emergencystop_svg.png">
+  <figcaption>Abbildung 6.2: Not-Aus</figcaption>
+</figure>
 
-<p><h3><a name="6.2.1">6.2.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/EmergencyStop">EmergencyStop</a></tt></a></h3>
+<p><h3><a id="6.2.1">6.2.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/EmergencyStop">EmergencyStop</a></tt></a></h3>
 
 <pre>     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    EmergencyStop - Not-Aus
@@ -285,11 +289,11 @@ fischertechnik-Taster aber auch als Öffner verwenden. Der Kontakt
 ist dann im Ruhezustand geschlossen und wird bei Druck auf den Taster
 geöffnet.
 
-<p><center>
+<figure id="IMG:6.3">
   
-  <p><a name="IMG:6.3"><img src="experimente/emergencystop_mod_svg.png"></a>
-  <br><small>Abbildung 6.3: Kabelbruch-sicherer Not-Aus-Öffner</small>
-</center>
+  <img src="experimente/emergencystop_mod_svg.png">
+  <figcaption>Abbildung 6.3: Kabelbruch-sicherer Not-Aus-Öffner</figcaption>
+</figure>
 
 <p>Mit dem aktuellen Sketch geht die Maschine bei einem Kabelbruch sofort
 in den Notzustand, da der Taster ja sofort als geschlossen erkannt
@@ -342,11 +346,11 @@ unterscheiden.
 kann man z.B. direkt am Taster einen 100&#8486;-Widerstand in die Leitung
 integrieren.
 
-<p><center>
+<figure id="IMG:6.4">
   
-  <p><a name="IMG:6.4"><img src="experimente/emergencystop_res_svg.png"></a>
-  <br><small>Abbildung 6.4: Gegen Kabelbruch und Kurzschluss sicherer Not-Aus</small>
-</center>
+  <img src="experimente/emergencystop_res_svg.png">
+  <figcaption>Abbildung 6.4: Gegen Kabelbruch und Kurzschluss sicherer Not-Aus</figcaption>
+</figure>
 
 <p>Im Normalfall ist der Taster geschlossen und der am Eingang <tt>I1</tt> zu
 messende Widerstand beträgt 100&#8486;. Ist die Leitung unterbrochen,
@@ -363,7 +367,7 @@ beeinflusst.
 passiert, wenn er nahe am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eingesetzt wird und dann ein
 Kurzschluss im Kabel zwischen Widerstand und Taster auftritt?
 
-<p><h2><a name="6.3">6.3 Pulsweitenmodulation</a></h2> 
+<p><h2><a id="6.3">6.3 Pulsweitenmodulation</a></h2> 
  
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
@@ -392,13 +396,13 @@ oder ob die Lampe einfach mit halber Helligkeit leuchtet und der Motor
 mit halber Drehzahl dreht ist von der Geschwindigkeit abhängig, mit
 der man die Spannung ein- und ausschaltet.
 
-<p><center>
+<figure id="IMG:6.5">
   
-  <p><a name="IMG:6.5"><img src="experimente/pwm_svg.png"></a>
-  <br><small>Abbildung 6.5: Pulsweitenmodulation</small>
-</center>
+  <img src="experimente/pwm_svg.png">
+  <figcaption>Abbildung 6.5: Pulsweitenmodulation</figcaption>
+</figure>
 
-<p><h3><a name="6.3.1">6.3.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Pwm">Pwm</a></tt></a></h3> 
+<p><h3><a id="6.3.1">6.3.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Pwm">Pwm</a></tt></a></h3> 
 
 <pre>     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    Pwm - Pulsweitenmodulation
@@ -548,11 +552,11 @@ bewegt sie dann in einer etwas abgedunkelten Umgebung schnell hin- und
 her, so wird der Eindruck einer Reihe von unterbrochenen
 Leuchtstreifen entstehen.
 
-<p><center>
+<figure id="IMG:6.6">
   
-  <p><a name="IMG:6.6"><img src="experimente/pwm_move_svg.png"></a>
-  <br><small>Abbildung 6.6: Muster bei schneller Bewegung der flackernden Leuchtdiode</small>
-</center>
+  <img src="experimente/pwm_move_svg.png">
+  <figcaption>Abbildung 6.6: Muster bei schneller Bewegung der flackernden Leuchtdiode</figcaption>
+</figure>
 
 <p>Je höher die PWM-Frequenz ist, desto kürzer sind die sichtbaren
 Leuchtstreifen.
@@ -627,11 +631,11 @@ man das Verhältnis der beiden Phasen, dann lässt sich die Helligkeit
 einer Lampe oder die Drehzahl eines Motors steuern. Die PWM-Frequenz
 kann dabei konstant bleiben. 
 
-<p><center>
+<figure id="IMG:6.7">
   
-  <p><a name="IMG:6.7"><img src="experimente/pwm_percent_svg.png"></a>
-  <br><small>Abbildung 6.7: Ausgewählte PWM-Verhältnisse von 0 bis 100%</small>
-</center>
+  <img src="experimente/pwm_percent_svg.png">
+  <figcaption>Abbildung 6.7: Ausgewählte PWM-Verhältnisse von 0 bis 100%</figcaption>
+</figure>
 
 <p>Je länger die eingeschaltete Phase gegenüber der ausgeschalteten,
 desto heller leuchtet die Lampe und desto schneller dreht der
@@ -644,11 +648,11 @@ Umdrehung der Achse. Man kann also durch Auswertung der Encodersignale
 an den Zählereingängen des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> die Drehzahl des Motors
 feststellen.
 
-<p><center>
+<figure id="IMG:6.8">
   
-  <p><a name="IMG:6.8"><img src="experimente/pwmspeed_svg.png"></a>
-  <br><small>Abbildung 6.8: Anschluss des TXT-Encoder-Motors zur PWM-abhängigen Drehzahlmessung</small>
-</center>
+  <img src="experimente/pwmspeed_svg.png">
+  <figcaption>Abbildung 6.8: Anschluss des TXT-Encoder-Motors zur PWM-abhängigen Drehzahlmessung</figcaption>
+</figure>
 
 <p>Das Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/PwmSpeed"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">PwmSpeed</span></tt></a>
 regelt das An-/Ausverhältnis der PWM langsam von 0 auf 100% hoch und
@@ -665,11 +669,11 @@ Plotter'', der sich im Menü der Arduino-IDE unter
 <tt><span style="background-color:#f0f0f0;">Werkzeuge</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Serieller Plotter</span></tt> befindet, so
 kann man die Messergebnisse anschaulich visualisieren.
  
-<p><center>
+<figure id="IMG:6.9">
   
-  <p><a name="IMG:6.9"><img src="experimente/pwmspeed.png"></a>
-  <br><small>Abbildung 6.9: Leerlaufdrehzahl des TXT-Encoder-Motors in Abhängigkeit des PWM-Verhältnisses</small>
-</center>
+  <img src="experimente/pwmspeed.png">
+  <figcaption>Abbildung 6.9: Leerlaufdrehzahl des TXT-Encoder-Motors in Abhängigkeit des PWM-Verhältnisses</figcaption>
+</figure>
 
 <p>Auf der horizontalen Achse ist das PWM-Verhältnis aufgetragen,
 beginnend mit ``dauerhaft aus'' ganz links bis ``dauerhaft an'' ganz
@@ -681,7 +685,7 @@ eingeschaltetem Signal wird 90% der maximalen Motordrehzahl erreicht.
 <p>Man kann z.B. indem man den Motor eine konstante Last anheben lässt
 nachprüfen, wie sich diese Kurve und Last verändert.
 
-<p><h2><a name="6.4">6.4 Schrittmotoransteuerung</a></h2> 
+<p><h2><a id="6.4">6.4 Schrittmotoransteuerung</a></h2> 
  
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;
@@ -708,11 +712,11 @@ Vorgehen sind Grenzen gesetzt, speziell bei den
 fischertechnik-Encoder-Motoren, die nicht in der Lage sind, die
 Drehrichtung zu erfassen.
 
-<p><center>
+<figure id="IMG:6.10">
   
-  <p><a name="IMG:6.10"><img src="experimente/schrittmotor.jpg"></a>
-  <br><small>Abbildung 6.10: 17HS13-Schrittmotor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/schrittmotor.jpg">
+  <figcaption>Abbildung 6.10: 17HS13-Schrittmotor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Für Aufgaben, bei denen es auf exaktes reproduzierbares Verhalten des
 Motors ankommt, gibt synchron arbeitende Motoren wie die sogenannten
@@ -723,11 +727,11 @@ Nutzung von Schrittmotoren auch am charakteristischen
 Betriebsgeräusch, das findige Tüftler sogar nutzen, um mit solchen
 Motoren Musik zu erzeugen<a href="#fn1"><sup>1</sup></a> .
 
-<p><center>
+<figure id="IMG:6.11">
   
-  <p><a name="IMG:6.11"><img src="experimente/schrittmotor_schema_svg.png"></a>
-  <br><small>Abbildung 6.11: Anschluss des Schrittmotors an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/schrittmotor_schema_svg.png">
+  <figcaption>Abbildung 6.11: Anschluss des Schrittmotors an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Gängige Schrittmotoren bestehen aus einem drehbar gelagerten Anker aus
 Permanentmagneten, der von Elektromagneten umgeben ist. Der
@@ -737,11 +741,11 @@ Motors vergleichsweise leicht drehen. Der dabei spürbare Widerstand
 resultiert daraus, dass der Permanentmagnet von den Eisenkernen der
 Elektromagnete auch im spannungslosen Zustand angezogen wird.
 
-<p><center>
+<figure id="IMG:6.12">
   
-  <p><a name="IMG:6.12"><img src="experimente/schrittmotor_svg.png"></a>
-  <br><small>Abbildung 6.12: Vereinfachtes Schema eines Schrittmotors</small>
-</center>
+  <img src="experimente/schrittmotor_svg.png">
+  <figcaption>Abbildung 6.12: Vereinfachtes Schema eines Schrittmotors</figcaption>
+</figure>
 
 <p>Der in der Abbildung dargestellte vereinfachte Schrittmotor verfügt
 über einen Permanentmagneten und zwei Elektromagnete. Reale
@@ -755,7 +759,7 @@ werden die Elektromagnete magnetisiert. In der Folge richtet sich der Anker
 entsprechend aus. Die Polarität der angelegten Spannung bestimmt die
 Richtung des Magnetfelds der Elektromagneten.
 
-<p><h3><a name="6.4.1">6.4.1 Vollschrittsteuerung</a></h3>
+<p><h3><a id="6.4.1">6.4.1 Vollschrittsteuerung</a></h3>
 
 <p>Sind immer beide Spulen unter Spannung, so gibt es vier verschiedene
 Ausrichtungen der beiden Elektromagnetfelder und der Anker nimmt
@@ -768,11 +772,11 @@ Weise exakt vorhersagbar. Sind immer alle Spulen unter Spannung und
 durchläuft der Zyklus daher genau vier Zustände, so spricht man von
 einer Vollschrittsteuerung.
 
-<p><center>
+<figure id="IMG:6.13">
   
-  <p><a name="IMG:6.13"><img src="experimente/schrittmotor_vollschritt_svg.png"></a>
-  <br><small>Abbildung 6.13: Vollschrittsteuerung eines Schrittmotors</small>
-</center>
+  <img src="experimente/schrittmotor_vollschritt_svg.png">
+  <figcaption>Abbildung 6.13: Vollschrittsteuerung eines Schrittmotors</figcaption>
+</figure>
 
 <p>Ein Sketch, der kontinuierlich das entsprechende Signalmuster erzeugt
 sieht folgendermaßen aus:
@@ -820,7 +824,7 @@ Magnetfeld beim Wechsel der Signale ändert. Die abgebildete Farbe
 entspricht jeweils der Polarität der dem Anker zugewandten Seite des
 Elektromagneten.
 
-<p><h3><a name="6.4.2">6.4.2 Halbschrittsteuerung</a></h3>
+<p><h3><a id="6.4.2">6.4.2 Halbschrittsteuerung</a></h3>
 
 <p>Eine höhere Winkel-Auflösung erreicht man, wenn man den Schrittmotor
 im sogenannten Halbschrittbetrieb ansteuert. Der Signalzyklus besteht
@@ -832,11 +836,11 @@ resultierenden Winkel genau zwischen den vier Zuständen der
 Vollschrittsteuerung angeordnet. Der Motor kann also die doppelt so
 viele Winkel ansteuern und entsprechend genauer positioniert werden.
 
-<p><center>
+<figure id="IMG:6.14">
   
-  <p><a name="IMG:6.14"><img src="experimente/schrittmotor_halbschritt_svg.png"></a>
-  <br><small>Abbildung 6.14: Halbschrittsteuerung eines Schrittmotors</small>
-</center>
+  <img src="experimente/schrittmotor_halbschritt_svg.png">
+  <figcaption>Abbildung 6.14: Halbschrittsteuerung eines Schrittmotors</figcaption>
+</figure>
 
 <p>In der Abbildung ist sichtbar, dass sich die beiden Signale zur
 Ansteuerung eines Elektromagneten nicht mehr gleichzeitig ändern,
@@ -955,7 +959,7 @@ steuern. Mit zwei Schrittmotoren ist so recht elegant z.B. ein
 sogenannter Plotter zu realisieren wie in Abschnitt <a href="modelle.html#7.5">7.5</a>
 gezeigt.
 
-<p><h2><a name="6.5">6.5 Servomotoransteuerung</a></h2> 
+<p><h2><a id="6.5">6.5 Servomotoransteuerung</a></h2> 
  
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
@@ -980,12 +984,12 @@ handelsübliche Servos verwenden, aber auch der fischertechnik-Servo
 fischertechnik RC-Servo 30275<a href="#fn6"><sup>6</sup></a>  von 1983 müsste auf diese Weise
 verwendbar sein. Das wurde jedoch bisher nicht überprüft.
 
-<p><center>
+<figure id="IMG:6.15">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.15"><img src="experimente/servo_svg.png"></a></td></tr><tr><td align="center"><small>(a) Versorgung durch den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.15"><img src="experimente/servo_7806_svg.png"></a></td></tr><tr><td align="center"><small>(b) Versorgung mit 7806-Regler</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.15: Anschluss des Servos an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/servo_svg.png"><figcaption>(a) Versorgung durch den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption></figure> 
+  <figure><img src="experimente/servo_7806_svg.png"><figcaption>(b) Versorgung mit 7806-Regler</figcaption></figure>
+  <figcaption>Abbildung 6.15: Anschluss des Servos an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Da Servos für eine Betriebsspannung von 6 Volt ausgelegt sind und oft
 auch bei 5 Volt noch funktionieren ist eine Versorgung aus den
@@ -997,7 +1001,7 @@ nicht zu überlasten. Die meisten Servos überschreiten diesen Wert
 deutlich und sollten daher nicht direkt aus dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> versorgt
 werden.
 
-<p><h3><a name="6.5.1">6.5.1 Externe 6-Volt-Versorgung</a></h3>
+<p><h3><a id="6.5.1">6.5.1 Externe 6-Volt-Versorgung</a></h3>
 
 <p>Wesentlich robuster und kaum aufwändiger ist die Versorgung über einen
 externen Spannungsregler z.B. vom Typ 7806, der unter dieser
@@ -1008,7 +1012,7 @@ reduzierte Spannung bereit.
 
 <p>Benötigte Teile:
 
-<p><center><table>
+<center><table>
   <tr><td>1x </td><td></td><td> Spannungsregler 7806 </td></tr>
   <tr><td>1x </td><td></td><td> Servo-Verlängerungskabel JR-Stecker </td></tr>
   <tr><td>2x </td><td></td><td> roter ft-Stecker </td></tr>
@@ -1031,12 +1035,12 @@ Abbildung <a href="experimente.html#IMG:6.16">6.16</a> dargestellt. Der aufgetre
 rote Anschluss wird dann mit dem fischertechnik-Stecker an den
 ebenfalls mit fischertechnik-Hülsen versehenen 7806 gesteckt.
 
-<p><center>
+<figure id="IMG:6.16">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.16"><img src="experimente/servo.jpg"></a></td></tr><tr><td align="center"><small>(a) Servo an Regler und Adapterkabel</small></td></tr></table></td>  
-  <td><table><tr><td><a name="IMG:6.16"><img src="experimente/servo_cable.jpg"></a></td></tr><tr><td align="center"><small>(b) Spannungsregler und Adapterkabel</small></td></tr></table></td> 
-  </tr></table><br><small>Abbildung 6.16: Servo-Motor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/servo.jpg"><figcaption>(a) Servo an Regler und Adapterkabel</figcaption></figure>  
+  <figure><img src="experimente/servo_cable.jpg"><figcaption>(b) Spannungsregler und Adapterkabel</figcaption></figure> 
+  <figcaption>Abbildung 6.16: Servo-Motor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Das Steuersignal eines Servos entspricht nicht dem
 I²C-Standard. Stattdessen verwenden Servos ein einfaches
@@ -1056,11 +1060,11 @@ Servo Schaden nehmen kann, wenn es Positionen außerhalb seines
 normalen Arbeitsbereichs anzufahren versucht. Es ist daher nicht
 ratsam, den Bereich von ein bis zwei Millisekunden zu verlassen.
 
-<p><center>
+<figure id="IMG:6.17">
   
-  <p><a name="IMG:6.17"><img src="experimente/servo_signal_svg.png"></a>
-  <br><small>Abbildung 6.17: Servo-Winkel in Abhängigkeit vom Stellsignal</small>
-</center>
+  <img src="experimente/servo_signal_svg.png">
+  <figcaption>Abbildung 6.17: Servo-Winkel in Abhängigkeit vom Stellsignal</figcaption>
+</figure>
 
 <p>Um das nötige Puls-Signal auf den eigentlich für I²C-Signale
 vorgesehenen Pins zu erzeugen muss auf Software zurückgegriffen
@@ -1136,7 +1140,7 @@ einrichtet. Der Winkel des Servos kann dann mit der
 Mittelposition wird z.B. durch <tt>servo.set(Servo::VALUE_MAX/2)</tt>
 angefahren.
 
-<p><h2><a name="6.6">6.6 Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
+<p><h2><a id="6.6">6.6 Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -1149,18 +1153,18 @@ Schutzschaltungen gegen Überspannung und Kurzschlüsse eingesetzt
 werden und die Signale Ausgänge verstärkt werden, um
 fischertechnik-Lampen und -Motoren betreiben zu können.
 
-<p><center>
+<figure id="IMG:6.18">
   
-  <p><a name="IMG:6.18"><img src="experimente/eingangsschaltung_pdf.png"></a>
-  <br><small>Abbildung 6.18: Interne Beschaltung der Eingänge <tt>I1</tt> bis <tt>I8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/eingangsschaltung_pdf.png">
+  <figcaption>Abbildung 6.18: Interne Beschaltung der Eingänge <tt>I1</tt> bis <tt>I8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Jeder der acht Eingänge <tt>I1</tt> bis <tt>I8</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> führt auf
 einen eigenen Analogeingang des ATmega32u4-Mikrocontrollers und kann
 von diesem unabhängig ausgewertet werden. Dazu kann der
 Mikrocontroller die Spannung des entsprechenden Eingangs messen.
 
-<p><h3><a name="6.6.1">6.6.1 Spannungsmessung</a></h3>
+<p><h3><a id="6.6.1">6.6.1 Spannungsmessung</a></h3>
 
 <p>Bevor das Eingangssignal den Mikrocontroller erreicht wird es über
 einen Spannungsteiler aus zwei 47-Kiloohm-Widerständen geführt. Diese
@@ -1177,7 +1181,7 @@ ihn verträglichen 0 bis 5 Volt-Spannungsbereichs liegen. Spannungen
 bis zu 47 Volt an einem Eingang beschädigen den Mikrocontroller daher
 nicht.
 
-<p><h3><a name="6.6.2">6.6.2 Widerstandsmessung</a></h3>
+<p><h3><a id="6.6.2">6.6.2 Widerstandsmessung</a></h3>
 
 <p>Die 1k&#8486;- und 2,2k&#8486;-Widerstände sowie der Schalter
 haben keine Bedeutung, solange der Schalter offen ist. Acht dieser
@@ -1202,7 +1206,7 @@ Programmierer muss sich also um keine Details kümmern und kann
 jederzeit Widerstandswerte mit Hilfe der Funktion
 <tt>ftduino.input_get()</tt> (siehe <a href="bibliotheken.html#9.2.2">9.2.2</a>) abfragen.
 
-<p><h3><a name="6.6.3">6.6.3 Ein Eingang als Ausgang</a></h3>
+<p><h3><a id="6.6.3">6.6.3 Ein Eingang als Ausgang</a></h3>
 
 <p>Die Tatsache, dass im Falle einer Widerstandsmessung ein Widerstand
 gegen 5 Volt geschaltet wird bedeutet, dass über den zu messenden
@@ -1212,11 +1216,11 @@ direkt mit Masse verbunden ist beträgt der Gesamtwiderstand
 3,2k&#8486; und es fließt ein Strom von
 I=5V/3,2k&#8486;=1,5625mA.
 
-<p><center>
+<figure id="IMG:6.19">
   
-  <p><a name="IMG:6.19"><img src="experimente/input_led_svg.png"></a>
-  <br><small>Abbildung 6.19: Anschluss einer LED an Eingang <tt>I1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/input_led_svg.png">
+  <figcaption>Abbildung 6.19: Anschluss einer LED an Eingang <tt>I1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Dieser Strom reicht zwar nicht, um eine Lampe oder gar einen Motor zu
 betreiben. Aber eine Leuchtdiode kann man damit schwach zum Leuchten
@@ -1253,7 +1257,7 @@ Sekundentakt blinken.
      <font color="green">10</font>    delay(1000);
      <font color="green">11</font>  }
 </pre>
-<h2><a name="6.7">6.7 Temperaturmessung</a></h2> 
+<h2><a id="6.7">6.7 Temperaturmessung</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
 
@@ -1274,13 +1278,13 @@ Temperatur von 25&nbsp;°C (298,15 K) angegeben. Der für den
 fischertechnik-Sensor angegebene Wert ist 1,5k&#8486;. Der ohmsche
 Widerstand beträgt bei 25&nbsp;°C also 1,5k&#8486;.
 
-<p><center>
+<figure id="IMG:6.20">
   
-  <p><a name="IMG:6.20"><img src="experimente/temperature_svg.png"></a>
-  <br><small>Abbildung 6.20: Anschluss des Temperatursensors an Eingang <tt>I1</tt></small>
-</center>
+  <img src="experimente/temperature_svg.png">
+  <figcaption>Abbildung 6.20: Anschluss des Temperatursensors an Eingang <tt>I1</tt></figcaption>
+</figure>
 
-<p><h3><a name="6.7.1">6.7.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Temperature">Temperature</a></tt></a></h3>
+<p><h3><a id="6.7.1">6.7.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Temperature">Temperature</a></tt></a></h3>
 
 <p>Der folgende Sketch findet sich bei installierter
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Unterstützung im Menü der Arduino-IDE unter
@@ -1395,7 +1399,7 @@ Temperaturmessung sollte der <font color="red">f</font><font color="blue">t</fon
 Spannung versorgt werden. Eine Versorgung nur über die
 USB-Schnittstelle ist nicht ausreichend.
 
-<p><h2><a name="6.8">6.8 Ausgänge an, aus oder nichts davon?</a></h2> 
+<p><h2><a id="6.8">6.8 Ausgänge an, aus oder nichts davon?</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -1403,11 +1407,11 @@ USB-Schnittstelle ist nicht ausreichend.
 Sichtweise. Dass es aber noch einen weiteren Zustand gibt ist auf
 den ersten Blick vielleicht nicht offensichtlich.
 
-<p><center>
+<figure id="IMG:6.21">
   
-  <p><a name="IMG:6.21"><img src="experimente/tristate_svg.png"></a>
-  <br><small>Abbildung 6.21: Zwei Lampen an Ausgang <tt>O1</tt></small>
-</center>
+  <img src="experimente/tristate_svg.png">
+  <figcaption>Abbildung 6.21: Zwei Lampen an Ausgang <tt>O1</tt></figcaption>
+</figure>
 
 <p>Die Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lassen sich in drei Zustände schalten:
 <tt>Ftduino::HI</tt>, <tt>Ftduino::LO</tt> und <tt>Ftduino::OFF</tt>.
@@ -1446,7 +1450,7 @@ Motoren oder Lampen an einem Ausgang unabhängig zu steuern, um
 Ausgänge zu sparen. Allerdings lassen sich bei dieser Verschaltung
 niemals beide Lampen gleichzeitig ausschalten
 
-<p><h3><a name="6.8.1">6.8.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/OnOffTristate">OnOffTristate</a></tt></a></h3>
+<p><h3><a id="6.8.1">6.8.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/OnOffTristate">OnOffTristate</a></tt></a></h3>
 
 <pre>     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    OnOffTristate - der dritte Zustand
@@ -1471,7 +1475,7 @@ niemals beide Lampen gleichzeitig ausschalten
      <font color="green">21</font>  
 </pre>
 
-<p><h3><a name="6.8.2">6.8.2 Leckströme</a></h3>
+<p><h3><a id="6.8.2">6.8.2 Leckströme</a></h3>
 
 <p>Ganz korrekt ist die Aussage, dass im hochohmigen
 bzw. Tristate-Zustand kein Strom fließt nicht. Über die
@@ -1489,7 +1493,7 @@ Ausgang hochohmig geschaltet ist. Nur wenn der Ausgang auf Masse
 geschaltet ist leuchtet die LED nicht. Man kann also direkt an der LED
 die drei Zustände unterscheiden.
 
-<p><h2><a name="6.9">6.9 Aktive Motorbremse</a></h2>  
+<p><h2><a id="6.9">6.9 Aktive Motorbremse</a></h2>  
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -1509,11 +1513,11 @@ vom Aufbau des Motors und der Qualität seiner Lager ab.
 fischertechnik einsetzt, als Generator. Werden sie gedreht, so wird in
 ihren internen Elektromagneten eine Spannung induziert. 
 
-<p><center>
+<figure id="IMG:6.22">
   
-  <p><a name="IMG:6.22"><img src="experimente/generator_svg.png"></a>
-  <br><small>Abbildung 6.22: Der TXT-Encoder-Motor als Generator</small>
-</center>
+  <img src="experimente/generator_svg.png">
+  <figcaption>Abbildung 6.22: Der TXT-Encoder-Motor als Generator</figcaption>
+</figure>
 
 <p>Dieser Effekt lässt sich mit einer Leuchtdiode leicht
 nachvollziehen. Schließt man die Leuchtdiode direkt an den Motor an
@@ -1536,11 +1540,11 @@ der Kurzschluss. Er hat einen minimalen elektrischen Widerstand und
 sorgt für maximalen Stromfluss und damit maximale elektrische Last am
 Generator. Auch die Bremswirkung ist dabei maximal.
 
-<p><center>
+<figure id="IMG:6.23">
   
-  <p><a name="IMG:6.23"><img src="experimente/motorbrake_svg.png"></a>
-  <br><small>Abbildung 6.23: Elektrisch gebremster und ungebremster Elektromotor</small>
-</center>
+  <img src="experimente/motorbrake_svg.png">
+  <figcaption>Abbildung 6.23: Elektrisch gebremster und ungebremster Elektromotor</figcaption>
+</figure>
 
 <p>Dieser Effekt lässt sich nutzen, um einen Elektromotor zu bremsen.
 Wende beide Anschlüsse eines Motors miteinander verbunden, so fließt
@@ -1556,11 +1560,11 @@ Drehzahlmessung wie schon im PWM-Experiment in Abschnitt <a href="experimente.ht
 genutzt. Das Bremsverhalten dieses Motors lässt sich daher
 experimentell gut verfolgen.
 
-<p><center>
+<figure id="IMG:6.24">
   
-  <p><a name="IMG:6.24"><img src="experimente/pwmspeed_svg.png"></a>
-  <br><small>Abbildung 6.24: Anschluss des TXT-Encoder-Motors an die Anschlüsse <tt>M1</tt> und <tt>C1</tt></small>
-</center>
+  <img src="experimente/pwmspeed_svg.png">
+  <figcaption>Abbildung 6.24: Anschluss des TXT-Encoder-Motors an die Anschlüsse <tt>M1</tt> und <tt>C1</tt></figcaption>
+</figure>
 
 <p>Das Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/MotorBrake"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MotorBrake</span></tt></a> lässt den Motor an Ausgang
 <tt>M1</tt> alle fünf Sekunden für drei Umdrehungen laufen und misst
@@ -1573,12 +1577,12 @@ hat und abgeschaltet wurde.
 aufgerufen, dass der Motor frei ausläuft bzw. dass er aktiv gebremst
 wird.
 
-<p><center>
+<figure id="IMG:6.25">
   
-  <p><a name="IMG:6.25"><img src="experimente/nachlauf.png"></a>
-  <br><small>Abbildung 6.25: Ausgabe bei Verwendung des TXT-Encoder-Motors</small>
+  <img src="experimente/nachlauf.png">
+  <figcaption>Abbildung 6.25: Ausgabe bei Verwendung des TXT-Encoder-Motors</figcaption>
   
-<p></center>
+<p></figure>
 
 <p>Wie in Abbildung <a href="experimente.html#IMG:6.25">6.25</a> zu sehen macht die aktive Bremse
 einen deutlichen Unterschied. Während der Encoder-Motor ungebremst
@@ -1587,7 +1591,7 @@ Umdrehungen, kommt er bei aktiver Bremse bereits nach fünf weiteren
 Impulse zum Stillstand. Das entspricht lediglich knapp
 <sup><small>1</small></sup>/<sub><small>13</small></sub> Umdrehung.
 
-<p><h2><a name="6.10">6.10 USB-Tastatur</a></h2> 
+<p><h2><a id="6.10">6.10 USB-Tastatur</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -1611,13 +1615,13 @@ ausgeben.
 werden reicht die Stromversorgung über USB und es ist keine weitere
 Versorgung über Batterie oder Netzteil nötig.
 
-<p><center>
+<figure id="IMG:6.26">
   
-  <p><a name="IMG:6.26"><img src="experimente/keyboardmessage_svg.png"></a>
-  <br><small>Abbildung 6.26: Tastatur-Nachricht</small>
-</center>
+  <img src="experimente/keyboardmessage_svg.png">
+  <figcaption>Abbildung 6.26: Tastatur-Nachricht</figcaption>
+</figure>
 
-<p><h3><a name="6.10.1">6.10.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/KeyboardMessage">USB/KeyboardMessage</a></tt></a></h3>
+<p><h3><a id="6.10.1">6.10.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/KeyboardMessage">USB/KeyboardMessage</a></tt></a></h3>
 
 <pre>     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    KeyboardMessage - USB-Tastatur
@@ -1710,7 +1714,7 @@ immer eine ordentliche Portion Vorsicht walten lassen, da der falsche
 Tastendruck zur falschen Zeit leicht einen Datenverlust zur Folge
 haben kann.
 
-<p><h2><a name="6.11">6.11 USB-GamePad</a></h2> 
+<p><h2><a id="6.11">6.11 USB-GamePad</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
 
@@ -1724,13 +1728,13 @@ Gamepads und Joysticks aber nicht. Um trotzdem ein USB-Gamepad zu
 implementieren ist daher im Sketch sehr viel mehr Aufwand zu
 treiben.
 
-<p><center>
+<figure id="IMG:6.27">
   
-  <p><a name="IMG:6.27"><img src="experimente/gamepad_svg.png"></a>
-  <br><small>Abbildung 6.27: GamePad mit vier Richtungstasten und zwei Feuerknöpfen</small>
-</center>
+  <img src="experimente/gamepad_svg.png">
+  <figcaption>Abbildung 6.27: GamePad mit vier Richtungstasten und zwei Feuerknöpfen</figcaption>
+</figure>
 
-<p><h3><a name="6.11.1">6.11.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/GamePad">USB/GamePad</a></tt></a></h3>
+<p><h3><a id="6.11.1">6.11.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/GamePad">USB/GamePad</a></tt></a></h3>
 
 <p>Das entsprechende Beispiel findet sich unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/GamePad"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">USB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">GamePad</span></tt></a>. Dieser Sketch besteht aus drei
@@ -1795,7 +1799,7 @@ mit den Ausgängen des <font color="red">f</font><font color="blue">t</font><fon
 Rückmeldungen über Lampen oder Motoren in Form von z.B.
 Force-Feedback möglich.
 
-<p><h2><a name="6.12">6.12 Entprellen</a></h2> 
+<p><h2><a id="6.12">6.12 Entprellen</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
 
@@ -1819,13 +1823,13 @@ ab und gibt auf dem <tt>COM:</tt>-Port eine Meldung aus, wenn sich
 der Zustand ändert. Zusätzlich zählt er mit, wie oft sich der Zustand
 insgesamt bereits geändert hat.
 
-<p><center>
+<figure id="IMG:6.28">
   
-    <p><a name="IMG:6.28"><img src="experimente/keyboardmessage_svg.png"></a>
-  <br><small>Abbildung 6.28: Entprellen</small>
-</center>
+    <img src="experimente/keyboardmessage_svg.png">
+  <figcaption>Abbildung 6.28: Entprellen</figcaption>
+</figure>
 
-<p><h3><a name="6.12.1">6.12.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Debounce">Debounce</a></tt></a></h3>
+<p><h3><a id="6.12.1">6.12.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Debounce">Debounce</a></tt></a></h3>
 
 <pre>     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    Debounce
@@ -1993,11 +1997,11 @@ aufgezeichneten 480 Werte, so dass insgesamt 500 Werte ausgegeben
 werden. Die ersten 20 Werte repräsentieren den Zustand vor der
 Aufzeichnung, als der Taster noch nicht gedrückt wurde.
 
-<p><center>
+<figure id="IMG:6.29">
   
-  <p><a name="IMG:6.29"><img src="experimente/serieller_plotter.png"></a>
-  <br><small>Abbildung 6.29: Verlauf des Prellens im seriellen Plotter</small>
-</center>
+  <img src="experimente/serieller_plotter.png">
+  <figcaption>Abbildung 6.29: Verlauf des Prellens im seriellen Plotter</figcaption>
+</figure>
 
 <p>Die insgesamt 500 Werte stellt der serielle Plotter als Kurve dar.
 Der Wert ist null, wenn der Kontakt als offen erkannt wird und eins,
@@ -2018,7 +2022,7 @@ dauert. Tatsächlich dauert auch das Auslesen des Eingangs <tt>I1</tt>
 etwas Zeit und das Zeitverhalten unser Messung ist nicht sehr genau.
 Es genügt aber, um die prinzipiellen Abläufe darzustellen.
 
-<p><h2><a name="6.13">6.13 Nutzung des I²C-Bus</a></h2> 
+<p><h2><a id="6.13">6.13 Nutzung des I²C-Bus</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
 
@@ -2038,12 +2042,12 @@ Online-Handel günstig erhältlichen MPU6050-Sensor-Platine
 dargestellt. Der Sensor ist damit direkt an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 anschließbar. 
 
-<p><center>
+<figure id="IMG:6.30">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.30"><img src="experimente/schema_mpu6050_svg.png"></a></td></tr><tr><td align="center"><small>(a) Verdrahtungsschema</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.30"><img src="experimente/foto_mpu6050.jpg"></a></td></tr><tr><td align="center"><small>(b) fertiger Sensor</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.30: MPU6050-Sensor mit Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
-</center>
+  <figure><img src="experimente/schema_mpu6050_svg.png"><figcaption>(a) Verdrahtungsschema</figcaption></figure> 
+  <figure><img src="experimente/foto_mpu6050.jpg"><figcaption>(b) fertiger Sensor</figcaption></figure>
+  <figcaption>Abbildung 6.30: MPU6050-Sensor mit Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption> 
+</figure>
 
 <p>Um den jeweiligen Sensor in eigenen Projekten zu verwenden sind in der
 Regel zusätzliche Code-Routinen oder Bibliotheken nötig. Die große
@@ -2052,13 +2056,13 @@ jedem gängigen Sensor mit wenig Suche passende Beispiele und
 Code-Bibliotheken
 findet<a href="#fn12"><sup>12</sup></a> .
 
-<p><center>
+<figure id="IMG:6.31">
   
-  <p><a name="IMG:6.31"><img src="experimente/i2c_sensoren.jpg"></a>
-  <br><small>Abbildung 6.31: Diverse I²C-Sensoren mit passendem Anschlusskabel an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/i2c_sensoren.jpg">
+  <figcaption>Abbildung 6.31: Diverse I²C-Sensoren mit passendem Anschlusskabel an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
-<p><h3><a name="6.13.1">6.13.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner">I2C/I2cScanner</a></tt></a></h3>
+<p><h3><a id="6.13.1">6.13.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner">I2C/I2cScanner</a></tt></a></h3>
 
 <p>Für einen schnellen Test, ob die elektrische Verbindung zum Sensor
 korrekt ist reicht aber in der Regel ein einfacher Test der
@@ -2070,26 +2074,26 @@ Adresse eines Sensors wird in der Regel vom Sensorhersteller fest
 vergeben. Im Falle des MPU-6050 ist dies die Adresse <tt>0x68</tt>.
 Diese Adresse wird bei korrektem Anschluss des Sensors angezeigt.
 
-<p><center>
+<figure id="IMG:6.32">
   
-  <p><a name="IMG:6.32"><img src="experimente/i2cscanner_mpu6050.png"></a>
-  <br><small>Abbildung 6.32: Ausgabe von <tt>I2cScanner</tt> bei angeschlossenem MPU-6050</small>
-</center>
+  <img src="experimente/i2cscanner_mpu6050.png">
+  <figcaption>Abbildung 6.32: Ausgabe von <tt>I2cScanner</tt> bei angeschlossenem MPU-6050</figcaption>
+</figure>
 
-<p><h3><a name="6.13.2">6.13.2 MPU-6050-Sensor</a></h3>
+<p><h3><a id="6.13.2">6.13.2 MPU-6050-Sensor</a></h3>
 
 <p>Für den MPU6050 liefert die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Umgebung ein eigenes Beispiel
 mit. Der Beispiel-Sketch unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/MPU6050Test"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MPU6050Test</span></tt></a> liest
 die Beschelunigungswerte aus dem MPU-6050 aus und gibt sie
 auf dem seriellen Monitor aus.
 
-<p><center>
+<figure id="IMG:6.33">
   
-  <p><a name="IMG:6.33"><img src="experimente/mpu6050_serieller_monitor.png"></a>
-  <br><small>Abbildung 6.33: Ausgabe von <tt>MPU6050Test</tt></small>
-</center>
+  <img src="experimente/mpu6050_serieller_monitor.png">
+  <figcaption>Abbildung 6.33: Ausgabe von <tt>MPU6050Test</tt></figcaption>
+</figure>
 
-<p><h3><a name="6.13.3">6.13.3 OLED-Display</a></h3> 
+<p><h3><a id="6.13.3">6.13.3 OLED-Display</a></h3> 
 
 <p>Eine weitere naheliegenden Anwendung des I²C-Anschlusses ist der
 Anschluss eines kleinen Displays, mit dem z.B. direkt am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
@@ -2101,13 +2105,13 @@ Displays auch sehr gut für den Einbau in ein entsprechendes
 fischertechnik-kompatibles Gehäuse
 <a href="#fn13"><sup>13</sup></a> .
 
-<p><center>
+<figure id="IMG:6.34">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.34"><img src="experimente/oled_schema_front_svg.png"></a><a name="IMG:6.34"><img src="experimente/oled_front.jpg"></a></td></tr><tr><td align="center"><small>(a) Vorderseite</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.34"><img src="experimente/oled_schema_rear_svg.png"></a><a name="IMG:6.34"><img src="experimente/oled_rear.jpg"></a></td></tr><tr><td align="center"><small>(b) Rückseite</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.34"><img src="experimente/oled_case.jpg"></a></td></tr><tr><td align="center"><small>(c) im Gehäuse</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.34: OLED-Display mit Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
-</center>
+  <figure><img src="experimente/oled_schema_front_svg.png"><img src="experimente/oled_front.jpg"><figcaption>(a) Vorderseite</figcaption></figure> 
+  <figure><img src="experimente/oled_schema_rear_svg.png"><img src="experimente/oled_rear.jpg"><figcaption>(b) Rückseite</figcaption></figure> 
+  <figure><img src="experimente/oled_case.jpg"><figcaption>(c) im Gehäuse</figcaption></figure>
+  <figcaption>Abbildung 6.34: OLED-Display mit Anschlusskabel für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption> 
+</figure>
 
 <p>Beim Anlöten des Kabels muss man sich unbedingt am Aufdruck auf der
 Display-Platine und nicht an den Skizzen hier orientieren, da es in
@@ -2151,7 +2155,7 @@ das dieses Display verwendet. Das Shootduino-Spiel findet sich unter
 den Eingängen <tt>I1</tt>, <tt>I2</tt> und <tt>I3</tt> zur Steuerung des
 Raumschiffs und gegebenenfalls eine Lampe an <tt>O1</tt>.
 
-<p><h3><a name="6.13.4">6.13.4 VL53L0X LIDAR-Distanzsensor</a></h3>
+<p><h3><a id="6.13.4">6.13.4 VL53L0X LIDAR-Distanzsensor</a></h3>
 
 <p>Fischertechnik liefert einen Ultraschallsensor zur Distanzmessung, der
 wie in Abschnitt <a href="controller.html#1.2.6">1.2.6</a> gezeigt auch am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
@@ -2167,25 +2171,25 @@ dem des Ultraschallsensors, allerdings kommt kein Schall, sondern
 Laserlicht zu Einsatz. Der VL53L0X lässt sich recht leicht über
 I²C mit dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbinden.
 
-<p><center>
+<figure id="IMG:6.35">
   
-  <p><a name="IMG:6.35"><img src="experimente/vl53l0x_schema_svg.png"></a>
-  <br><small>Abbildung 6.35: Anschlussschema des VL53L0X an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/vl53l0x_schema_svg.png">
+  <figcaption>Abbildung 6.35: Anschlussschema des VL53L0X an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Ein passendes Gehäuse zum selbst-drucken findet sich im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Repository<a href="#fn17"><sup>17</sup></a> . 
 
-<p><center>
+<figure id="IMG:6.36">
   
-  <p><a name="IMG:6.36"><img src="experimente/vl53l0x_cased.jpg"></a>
-  <br><small>Abbildung 6.36: VL53L0X in 3D-gedrucktem Gehäuse</small>
-</center>
+  <img src="experimente/vl53l0x_cased.jpg">
+  <figcaption>Abbildung 6.36: VL53L0X in 3D-gedrucktem Gehäuse</figcaption>
+</figure>
 
 <p>Wie für fast alle üblichen I²C-Sensoren findet man auch beim
 VL53L0X bereits fertige Arduino-Bibliotheken und -Sketches im
 Internet<a href="#fn18"><sup>18</sup></a> .
 
-<p><h3><a name="6.13.5">6.13.5 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Client und Kopplung zweier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s</a></h3> 
+<p><h3><a id="6.13.5">6.13.5 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Client und Kopplung zweier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s</a></h3> 
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann nicht nur andere Geräte über den I²C-Bus
 ansprechen, er kann sich selbst auch als passives Gerät am Bus
@@ -2194,11 +2198,11 @@ ausgeben, um von einem anderen Gerät angesprochen zu werden.
 <p>Am einfachsten lässt sich diese Möglichkeit nutzen, wenn zwei <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s
 direkt über I²C gekoppelt werden.
 
-<p><center>
+<figure id="IMG:6.37">
   
-  <p><a name="IMG:6.37"><img src="experimente/i2c_master_client_svg.png"></a>
-  <br><small>Abbildung 6.37: Kopplung zweier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C</small>
-</center>
+  <img src="experimente/i2c_master_client_svg.png">
+  <figcaption>Abbildung 6.37: Kopplung zweier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C</figcaption>
+</figure>
 
 <p>Es wird dazu eine 1:1-Verbindung zwischen den beiden I²C-Anschlüssen
 der beteiligten Controller hergestellt. Ein Controller muss in diesem
@@ -2232,11 +2236,11 @@ verfügbar macht.
 Modelle. Das hier abgebildete Beispiel verwendet drei <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s zur
 Erweiterung des Master-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> um weitere 24 Aus- und 36 Eingänge.
 
-<p><center>
+<figure id="IMG:6.38">
   
-  <p><a name="IMG:6.38"><img src="experimente/i2c_x4_svg.png"></a>
-  <br><small>Abbildung 6.38: Kopplung von vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C</small>
-</center>
+  <img src="experimente/i2c_x4_svg.png">
+  <figcaption>Abbildung 6.38: Kopplung von vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C</figcaption>
+</figure>
 
 <p>Der erste <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> im Bild ganz links bildet den Master, gefolgt von
 den drei Slaves. Auf dem ersten Slave läuft das unveränderte Beispiel
@@ -2278,11 +2282,11 @@ fischertechnik-Netzteil erfolgen, das an den Master angeschlossen
 wird. Die Slaves werden dann vom 9-Volt-Ausgang des Masters über
 zweipolige fischertechnik-Kabel versorgt.
 
-<p><center>
+<figure id="IMG:6.39">
   
-  <p><a name="IMG:6.39"><img src="experimente/i2c_x4.jpg"></a>
-  <br><small>Abbildung 6.39: Vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C gekoppelt</small>
-</center>
+  <img src="experimente/i2c_x4.jpg">
+  <figcaption>Abbildung 6.39: Vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s über I²C gekoppelt</figcaption>
+</figure>
 
 <p>Das Beispiel <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/I2C/I2cMaster"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cMaster</span></tt></a> eignet sich als Vorlage
 für komplexe Modelle. Je nach Modell kann es aber praktischer sein,
@@ -2299,7 +2303,7 @@ mit vorangestelltem 0x sind in Hexadezimalschreibweise dargestellt.
 
 <p><h4>Registerbelegungen für Ausgänge O1 bis O8 bzw. M1 bis M4</h4>
 
-<p><center><table>
+<center><table>
   <tr><td>
 0x00 </td><td></td><td> Ausgangs-Modus O1/M1 </td></tr>
 <tr><td>
@@ -2360,7 +2364,7 @@ mit vorangestelltem 0x sind in Hexadezimalschreibweise dargestellt.
 Es können maximal die beiden Bytes eines Eingangs in einem gemeinsamen
 I2C-Transfer gelesen werden. Jeder Eingang muss einzeln gelesen werden.
 
-<p><center><table>
+<center><table>
   <tr><td>
   0x10 </td><td></td><td> schreiben: Eingangs-Modus I1 </td></tr>
          <tr><td></td><td></td><td>  0x00 - Spannung </td></tr>
@@ -2402,7 +2406,7 @@ I2C-Transfer gelesen werden. Jeder Eingang muss einzeln gelesen werden.
 
 <p><h4>Registerbelegungen für Zählereingänge C1 bis C4</h4>
 
-<p><center><table>
+<center><table>
   <tr><td>
 0x20 </td><td></td><td> schreiben: Zähler-Modus C1 </td></tr>
       <tr><td></td><td></td><td> 0x00 - aus </td></tr>
@@ -2458,12 +2462,12 @@ I²C-Schnittstelle auch mit Hilfe eines einfachen Adapters
 über USB nachrüsten. Ein solcher Adapter ist der
 <tt>i2c_tiny_usb</tt><a href="#fn19"><sup>19</sup></a> .
 
-<p><center>
+<figure id="IMG:6.40">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.40"><img src="experimente/i2c_digispark_svg.png"></a></td></tr><tr><td align="center"><small>(a) Verdrahtungsschema</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.40"><img src="experimente/i2c_digispark.jpg"></a></td></tr><tr><td align="center"><small>(b) fertiger Adapter</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.40: Digispark/<tt>i2c_tiny_usb</tt> zum Anschluss an den I²C des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/i2c_digispark_svg.png"><figcaption>(a) Verdrahtungsschema</figcaption></figure> 
+  <figure><img src="experimente/i2c_digispark.jpg"><figcaption>(b) fertiger Adapter</figcaption></figure>
+  <figcaption>Abbildung 6.40: Digispark/<tt>i2c_tiny_usb</tt> zum Anschluss an den I²C des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Auf einem Linux PC<a href="#fn20"><sup>20</sup></a>  kann das Programm
 <tt>i2c_detect</tt> verwendet werden. Mit dem Parameter <tt>-l</tt>
@@ -2524,26 +2528,26 @@ Elektronik die Spannungsversorgung der 3,3-Volt-Seite selbst aus der
 Versorgung der 5-Volt-Seite erzeugt, da der TXT selbst keine 3,3 Volt
 zur Verfügung stellt.
 
-<p><center>
+<figure id="IMG:6.41">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.41"><img src="experimente/i2c_level_shifter_svg.png"></a></td></tr><tr><td align="center"><small>(a) Kabelschema</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.41"><img src="experimente/ftduino_txt_i2c.jpg"></a></td></tr><tr><td align="center"><small>(b) Anschluss an den TXT</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.41: Levelshifter zur Verbindung von TXT und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/i2c_level_shifter_svg.png"><figcaption>(a) Kabelschema</figcaption></figure> 
+  <figure><img src="experimente/ftduino_txt_i2c.jpg"><figcaption>(b) Anschluss an den TXT</figcaption></figure>
+  <figcaption>Abbildung 6.41: Levelshifter zur Verbindung von TXT und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
-<p><h3><a name="6.13.6">6.13.6 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Expander</a></h3> 
+<p><h3><a id="6.13.6">6.13.6 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Expander</a></h3> 
 
 <p>Die Funktion eines Levelshifters erfüllt auch der sogenannte
 I²C-Expander<a href="#fn23"><sup>23</sup></a> .
 Dieses Gerät wurde zum Einsatz am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> entworfen, kann aber
 auch am TXT oder TX betrieben werden.
 
-<p><center>
+<figure id="IMG:6.42">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.42"><img src="experimente/i2cexpander.jpg"></a></td></tr><tr><td align="center"><small>(a) fertiges Gerät</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.42"><img src="experimente/i2cexpander_parts.jpg"></a></td></tr><tr><td align="center"><small>(b) Einzelteile</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.42: I²C-Expander für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/i2cexpander.jpg"><figcaption>(a) fertiges Gerät</figcaption></figure> 
+  <figure><img src="experimente/i2cexpander_parts.jpg"><figcaption>(b) Einzelteile</figcaption></figure>
+  <figcaption>Abbildung 6.42: I²C-Expander für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Der I²C-Expander stellt einen TXT-kompatiblen 10-poligen
 I²C-Anschluss bereit und vier 6-polige TX-
@@ -2562,18 +2566,18 @@ cfw-apps-Repository<a href="#fn24"><sup>24</sup></a> .
 angesteuert werden können lässt sich der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auf diese Weise
 auch unter RoboPro als Erweiterung des TXT nutzen.
 
-<p><h3><a name="6.13.7">6.13.7 fischertechnik-Orientierungssensor</a></h3>
+<p><h3><a id="6.13.7">6.13.7 fischertechnik-Orientierungssensor</a></h3>
 
 <p>Das Kabel zum Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an den TXT und der
 I²C-Expander sind nicht auf eines feste Richtung festgelegt. Sie
 können daher auch dazu verwendet werden, für den TXT entworfene
 Sensoren an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> anzuschließen.
 
-<p><center>
+<figure id="IMG:6.43">
   
-  <p><a name="IMG:6.43"><img src="experimente/i2c_ext_sens_svg.png"></a>
-  <br><small>Abbildung 6.43: Anschluss eines fischertechnik-Sensors via I²C-Expander</small>
-</center>
+  <img src="experimente/i2c_ext_sens_svg.png">
+  <figcaption>Abbildung 6.43: Anschluss eines fischertechnik-Sensors via I²C-Expander</figcaption>
+</figure>
 
 <p>Getestet wurde dies z.B. mit dem ``Kombisensor 158402<a href="#fn25"><sup>25</sup></a>  3-in-1
 Orientierungssensor''<a href="#fn26"><sup>26</sup></a> 
@@ -2583,14 +2587,14 @@ gibt<a href="#fn27"><sup>27</sup></a> .
 Der Anschluss der 9-Volt-Versorgungsspannung erfolgt dabei exakt wie
 beim TXT an einem der 9-Volt-Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
 
-<p><center>
+<figure id="IMG:6.44">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.44"><img src="experimente/orientierungssensor.jpg"></a></td></tr><tr><td align="center"><small>(a) am Levelshifter</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.44"><img src="experimente/orientierungssensor_i2cexp.jpg"></a></td></tr><tr><td align="center"><small>(b) am I²C-Expander</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.44: Orientierungssensor von fischertechnik am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/orientierungssensor.jpg"><figcaption>(a) am Levelshifter</figcaption></figure> 
+  <figure><img src="experimente/orientierungssensor_i2cexp.jpg"><figcaption>(b) am I²C-Expander</figcaption></figure>
+  <figcaption>Abbildung 6.44: Orientierungssensor von fischertechnik am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
-<p><h3><a name="6.13.8">6.13.8 fischertechnik-Umweltsensor</a></h3>
+<p><h3><a id="6.13.8">6.13.8 fischertechnik-Umweltsensor</a></h3>
 
 <p>Der Umweltsensor aus dem ``ROBOTICS TXT Smart Home''-Baukasten
 544624<a href="#fn28"><sup>28</sup></a>  basiert auf dem BME680<a href="#fn29"><sup>29</sup></a> 
@@ -2602,11 +2606,11 @@ Luftfeuchtigkeit und Luftqualität.
 in Abbildung <a href="experimente.html#IMG:6.45">6.45</a> zu sehen. Für erste Experimente empfielt sich
 die Bibliothek von Adafruit.
 
-<p><center>
+<figure id="IMG:6.45">
   
-  <p><a name="IMG:6.45"><img src="experimente/bme680_libs.png"></a>
-  <br><small>Abbildung 6.45: Arduino-Bibliotheken für den BME680</small> 
-</center>
+  <img src="experimente/bme680_libs.png">
+  <figcaption>Abbildung 6.45: Arduino-Bibliotheken für den BME680</figcaption> 
+</figure>
 
 <p>Die I²C-Adresse des BME680 ist durch entsprechende Verdrahtung
 verstellbar.  Fischertechnik stellt die Adresse auf <tt>0x76</tt> ein
@@ -2626,12 +2630,12 @@ folgt zu ändern:
 Der Sensor lässt sich mit dem Levelshifter als auch mit dem I²C-Expander
 betreiben sowie mit dem ft-Extender (siehe Abschnitt <a href="community.html#8.5">8.5</a>).
 
-<p><center>
+<figure id="IMG:6.46">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.46"><img src="experimente/bme680_foto.jpg"></a></td></tr><tr><td align="center"><small>(a) Anschluss per Levelshifter</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.46"><img src="experimente/bme680_serial.png"></a></td></tr><tr><td align="center"><small>(b) Ausgabe von <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit BME680 Library/examples/bme680test"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit BME680 Library</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">bme680test</span></tt></a></small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.46: fischertechnik-Umweltsensor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <figure><img src="experimente/bme680_foto.jpg"><figcaption>(a) Anschluss per Levelshifter</figcaption></figure> 
+  <figure><img src="experimente/bme680_serial.png"><figcaption>(b) Ausgabe von <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Adafruit BME680 Library/examples/bme680test"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Adafruit BME680 Library</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">bme680test</span></tt></a></figcaption></figure>
+  <figcaption>Abbildung 6.46: fischertechnik-Umweltsensor am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Die Luftqualität wertet der BME680 durch Erhitzen und
 Widerstandsmessung aus. Die Adafruit-Bibliothek liefert hier lediglich
@@ -2657,17 +2661,17 @@ Bibliothek zu groß für den Flash-Speicher des <font color="red">f</font><font 
 </pre>
 
 
-<p><h3><a name="6.13.9">6.13.9 Mini-I²C-Servo-Adapter</a></h3> 
+<p><h3><a id="6.13.9">6.13.9 Mini-I²C-Servo-Adapter</a></h3> 
 
 <p>Speziell für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wurde der Mini-I²C-Servo-Adapter
 entworfen. Er vereint trotz seiner geringen Größe eine
 Spannungsversorgung und eine Servosteuerung in einem Gehäuse.
 
-<p><center>
+<figure id="IMG:6.47">
   
-  <p><a name="IMG:6.47"><img src="experimente/mini_i2c_adapter.jpg"></a>
-  <br><small>Abbildung 6.47: Der Mini-I²C-Adapter am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/mini_i2c_adapter.jpg">
+  <figcaption>Abbildung 6.47: Der Mini-I²C-Adapter am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p><h4>Anschluss und Inbetriebnahme</h4>
 
@@ -2702,12 +2706,12 @@ angeschlossen werden wie in Abbildung <a href="experimente.html#IMG:6.48">6.48</
 sehen. Auch hier sollte der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> während der Umverkabelung von
 der Strom- und USB-Versorgung getrennt werden.
 
-<p><center>
+<figure id="IMG:6.48">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.48"><img src="experimente/mini_servo_adapter_svg.png"></a></td></tr><tr><td align="center"><small>(a) Einzelner I²C-Anschluss</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.48"><img src="experimente/mini_servo_adapter_45_svg.png"></a></td></tr><tr><td align="center"><small>(b) Doppelter I²C-Anschluss</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.48: Anschluss des Mini-I²C-Adapters an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small> 
-</center>
+  <figure><img src="experimente/mini_servo_adapter_svg.png"><figcaption>(a) Einzelner I²C-Anschluss</figcaption></figure> 
+  <figure><img src="experimente/mini_servo_adapter_45_svg.png"><figcaption>(b) Doppelter I²C-Anschluss</figcaption></figure>
+  <figcaption>Abbildung 6.48: Anschluss des Mini-I²C-Adapters an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption> 
+</figure>
 
 <p>Der Mini-I²C-Servo-Adapter wird zwischen den I²C-Ausgang des
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und den Anschluss des Servos gesteckt. Zusätzlich wird eine
@@ -2745,7 +2749,7 @@ bzw. dezimal 17. Diese Adresse kann permanent geändert werden
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/I2cScanner"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2cScanner</span></tt></a>-Sketch, die Adresse des
 Adapters zu bestimmen.
 
-<p><center><table>
+<center><table>
 <tr><td>Register </td><td></td><td> Beschreibung </td></tr>
 <tr><td>
 0x00/0x01 </td><td></td><td> Setzen der Pulsweite der Servoausgänge 1 oder 2 in Schritten von 16µs. In der Standardeinstellung werden nur Werte im für Servos geeigneten Bereich von 63 (1ms) bis 125 (2ms) akzeptiert. Werte außerhalb dieses Bereiches werden gekappt. Die Grenzen können verändert werden (s.u.).</td></tr>
@@ -2769,13 +2773,13 @@ betrieben werden soll, dann ist es nötig, jedem Adapter eine individuelle Adres
 wird der zu verstellende Adapter zunächst alleine an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> angeschlossen und die Adresse
 wie in Abbildung <a href="experimente.html#IMG:6.49">6.49</a> zu sehen verändert.
 
-<p><center>
+<figure id="IMG:6.49">
   
-  <p><a name="IMG:6.49"><img src="experimente/mini_servo_address.png"></a>
-  <br><small>Abbildung 6.49: Änderung der I²C-Adresse des Mini-I²C-Adapter</small> 
-</center>
+  <img src="experimente/mini_servo_address.png">
+  <figcaption>Abbildung 6.49: Änderung der I²C-Adresse des Mini-I²C-Adapter</figcaption> 
+</figure>
 
-<p><h2><a name="6.14">6.14 WS2812B-Vollfarb-Leuchtdioden</a></h2> 
+<p><h2><a id="6.14">6.14 WS2812B-Vollfarb-Leuchtdioden</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
 
@@ -2798,11 +2802,11 @@ I²C-Anschlusses des <font color="red">f</font><font color="blue">t</font><font 
 Leuchtdioden verwendet werden, so ist eine separate externe
 5-Volt-Versorgung vorzusehen.
 
-<p><center>
+<figure id="IMG:6.50">
   
-  <p><a name="IMG:6.50"><img src="experimente/ws2812b_svg.png"></a>
-  <br><small>Abbildung 6.50: Anschluss von zwei WS2812B-Vollfarb-Leuchtdioden</small>
-</center>
+  <img src="experimente/ws2812b_svg.png">
+  <figcaption>Abbildung 6.50: Anschluss von zwei WS2812B-Vollfarb-Leuchtdioden</figcaption>
+</figure>
 
 <p>Jeder WS2812B-Leuchtdiodenstreifen verfügt über drei Eingangssignale:
 <tt>Masse</tt>, <tt>+5V</tt> und <tt>DI</tt>. Versorgungssignale
@@ -2821,7 +2825,7 @@ eingetragen werden.
 werden. Kurzschlüsse oder falsche Verbindungen können die Leuchtdioden
 und den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> beschädigen.
 
-<p><h3><a name="6.14.1">6.14.1 Sketch <tt>WS2812FX</tt></a></h3>
+<p><h3><a id="6.14.1">6.14.1 Sketch <tt>WS2812FX</tt></a></h3>
 
 <p>Das Beispiel zu Ansteuern der WS2812B-Leuchtdioden sowie die nötige
 Code-Bibliothek können beispielsweise der
@@ -2847,7 +2851,7 @@ anzupassen.
      <font color="green"> 5</font>  
      <font color="green"> 6</font>  #define TIMER_MS 5000
 </pre>
-<h2><a name="6.15">6.15 Musik aus dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
+<h2><a id="6.15">6.15 Musik aus dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -2857,11 +2861,11 @@ einen Lautsprecher an einen der Ausgänge des <font color="red">f</font><font co
 anzuschließen. Dazu eignet sich natürlich besonders gut die
 fischertechnik Lautsprecherkassette 36936.
 
-<p><center>
+<figure id="IMG:6.51">
   
-  <p><a name="IMG:6.51"><img src="experimente/music_svg.png"></a>
-  <br><small>Abbildung 6.51: Anschluss der Lautsprecherkassette an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
-</center>
+  <img src="experimente/music_svg.png">
+  <figcaption>Abbildung 6.51: Anschluss der Lautsprecherkassette an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
+</figure>
 
 <p>Wichtig ist, dass ein Vorwiderstand von mindestens 100&#8486; zwischen
 den Lautsprecher und den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geschaltet wird.  Werden die 9
@@ -2922,7 +2926,7 @@ Um den Effekt am Ausgang zu sehen muss die
 die nach wie vor nötige Initialisierung der Ausgangstreiber durch die
 Bibliothek erfolgt.
 
-<p><h3><a name="6.15.1">6.15.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Music">Music</a></tt></a></h3>
+<p><h3><a id="6.15.1">6.15.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Music">Music</a></tt></a></h3>
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
 
@@ -2934,7 +2938,7 @@ Ton-Erzeugung angewendet werden. Der Beispielsketch unter
      // Kammerton A für eine Sekunde spielen
      tone(11, 440, 1000);
 </pre>
-<h3><a name="6.15.2">6.15.2 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MusicPwm">MusicPwm</a></tt></a></h3>
+<h3><a id="6.15.2">6.15.2 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MusicPwm">MusicPwm</a></tt></a></h3>
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
 
@@ -2964,7 +2968,7 @@ Ausgangs in der gewünschten Ton-Frequenz wird automatisch erledigt und
 benötigt daher auch bei hohen Frequenzen keinerlei Rechenzeit des
 Mikrocontrollers.
 
-<p><h2><a name="6.16">6.16 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als MIDI-Instrument</a></h2> 
+<p><h2><a id="6.16">6.16 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als MIDI-Instrument</a></h2> 
 
 <p>Einen Lautsprecher anzuschließen ist nur eine Art, Töne zu
 erzeugen. Baukastensysteme wie fischertechnik laden natürlich ein, auf
@@ -2980,13 +2984,13 @@ es eine Variante von MIDI über USB. Die Arduino-Umgebung bietet dafür
 die <tt>MIDIUSB</tt>-Bibliothek an, die über die Bibliotheksverwaltung
 der IDE direkt installiert werden kann.
 
-<p><center>
+<figure id="IMG:6.52">
   
-  <p><a name="IMG:6.52"><img src="experimente/installieren_midiusb.png"></a>
-  <br><small>Abbildung 6.52: Installation der MIDIUSB-Bibliothek in der Arduino-IDE</small>
-</center>
+  <img src="experimente/installieren_midiusb.png">
+  <figcaption>Abbildung 6.52: Installation der MIDIUSB-Bibliothek in der Arduino-IDE</figcaption>
+</figure>
 
-<p><h3><a name="6.16.1">6.16.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MidiInstrument">MidiInstrument</a></tt></a></h3>
+<p><h3><a id="6.16.1">6.16.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MidiInstrument">MidiInstrument</a></tt></a></h3>
 
 <p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Beispielsketch unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MidiInstrument"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MidiInstrument</span></tt></a>
 nutzt diese Bibliothek, um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als MIDI-Gerät für den PC
@@ -3030,7 +3034,7 @@ Tonerzeugung.
 <p>Eine monophone Beispieldatei <tt>song.mid</tt> findet sich im
 Verzeichnis des Sketches.
 
-<p><h2><a name="6.17">6.17 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Android-Smartphone</a></h2> 
+<p><h2><a id="6.17">6.17 Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Android-Smartphone</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -3041,12 +3045,12 @@ ein sogenanntes USB-On-the-Go(USB-OTG)-Kabel notwendig. Für den
 über die passenden Stecker und ist mit 50cm kurz genug, um in einem
 Modell untergebracht zu werden.
 
-<p><center>
+<figure id="IMG:6.53">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.53"><img src="experimente/android-screenshot.png"></a></td></tr><tr><td align="center"><small>(a) Screenshot</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.53"><img src="experimente/android.jpg"></a></td></tr><tr><td align="center"><small>(b) Smartphone am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.53: Android-Demo zur Nutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Smartphone</small>
-</center>
+  <figure><img src="experimente/android-screenshot.png"><figcaption>(a) Screenshot</figcaption></figure> 
+  <figure><img src="experimente/android.jpg"><figcaption>(b) Smartphone am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption></figure>
+  <figcaption>Abbildung 6.53: Android-Demo zur Nutzung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> am Smartphone</figcaption>
+</figure>
 
 <p>Mit USB-OTG übernimmt das Smartphone die Rolle des PCs. Es beim
 Anschluss eines entsprechenden Kabels eine Spannung am USB-Anschluss
@@ -3093,7 +3097,7 @@ Bluetooth- oder WLAN-Verbindungen, da sie keine weitere Konfiguration
 erfordert. Sobald Smartphone und <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden werden startet
 die entsprechende App und die Verbindung ist vollständig.
 
-<p><h2><a name="6.18">6.18 WebUSB: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> via Webbrowser steuern</a></h2> 
+<p><h2><a id="6.18">6.18 WebUSB: <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> via Webbrowser steuern</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
 
@@ -3115,7 +3119,7 @@ eines bisher unbekannten WebUSB-Gerätes öffnet der Browser direkt die
 passende Webseite und das Gerät kann sofort ohne Treiber- oder
 Softwareinstallation verwendet werden.
 
-<p><h3><a name="6.18.1">6.18.1 Chrome-Browser</a></h3> 
+<p><h3><a id="6.18.1">6.18.1 Chrome-Browser</a></h3> 
 
 <p>WebUSB ist kein offizieller Web-Standard und wird daher lediglich von
 Googles Chromebrowser<a href="#fn36"><sup>36</sup></a> 
@@ -3133,11 +3137,11 @@ für WebUSB-Experimente. Zum Anschluss des <font color="red">f</font><font color
 wird ein USB-Host-Kabel (z.B. Lindy 31717, siehe Abschnitt
 <a href="experimente.html#6.17">6.17</a>) benötigt.
 
-<p><center>
+<figure id="IMG:6.54">
   
-  <p><a name="IMG:6.54"><img src="experimente/webusb_chrome_icon.png"></a>
-  <br><small>Abbildung 6.54: Der Chrome-Browser ist auf den meisten Android-Geräten vorinstalliert</small>
-</center>
+  <img src="experimente/webusb_chrome_icon.png">
+  <figcaption>Abbildung 6.54: Der Chrome-Browser ist auf den meisten Android-Geräten vorinstalliert</figcaption>
+</figure>
 
 <p>Auf Linux-PCs erfüllt den gleichen Zweck der Chromium-Browser. Er
 lässt sich normalerweise über den Paketmanager nachinstallieren. Im
@@ -3145,18 +3149,18 @@ Gegensatz zur Windows-Version funktioniert hier auch das automatische
 Weiterleiten an die vom USB-Gerät bereitgestellte URL wie in Abbildung
 <a href="experimente.html#IMG:6.55">6.55</a> zu sehen.
 
-<p><center>
+<figure id="IMG:6.55">
   
-  <p><a name="IMG:6.55"><img src="experimente/webusb_hinweis.png"></a>
-  <br><small>Abbildung 6.55: Meldung beim Eistecken des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei laufendem Chromium-Browser</small> 
-</center>
+  <img src="experimente/webusb_hinweis.png">
+  <figcaption>Abbildung 6.55: Meldung beim Eistecken des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bei laufendem Chromium-Browser</figcaption> 
+</figure>
 
 <p>Auf Linux-PCs hat der Webbrowser normalerweise keine ausreichenden
 Rechte, um USB-Geräte direkt ansprechen zu dürfen. Die Installation der
 <tt>udev</tt>-Regeln wie in Abschnitt <a href="installation.html#2.1.4">2.1.4</a> beschrieben
 ermöglicht den Zugriff.
 
-<p><h3><a name="6.18.2">6.18.2 WebUSB-Sketches</a></h3>
+<p><h3><a id="6.18.2">6.18.2 WebUSB-Sketches</a></h3>
 
 <p>Einige WebUSB-Beispiel-Sketches werden als Beispiel in der
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation der Arduino-IDE unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt></a>
@@ -3177,13 +3181,13 @@ nur für WebUSB verwendet werden, da die Anpassungen nur in
 Zusammenhang mit der WebUSB-Bibliothek vollständig sind und Windows
 das Gerät andernfalls nicht erkennt.
 
-<p><center>
+<figure id="IMG:6.56">
   
-  <p><a name="IMG:6.56"><img src="experimente/webusb_board.png"></a>
-  <br><small>Abbildung 6.56: Auswahl der WebUSB-Konfiguration</small> 
-</center>
+  <img src="experimente/webusb_board.png">
+  <figcaption>Abbildung 6.56: Auswahl der WebUSB-Konfiguration</figcaption> 
+</figure>
 
-<p><h3><a name="6.18.3">6.18.3 Console</a></h3>
+<p><h3><a id="6.18.3">6.18.3 Console</a></h3>
 
 <p>Der <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/WebUSB/examples/ Console"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">WebUSB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;"> Console</span></tt></a>-Sketch bietet eine einfache
 Kommandoschnittstelle über USB, mit der die eingebaute Leuchtdiode
@@ -3196,15 +3200,15 @@ dem Browser herzustellen. Die Leuchtdiode kann dann über direkt in der
 Console eigegebene Befehle gesteuert oder durch Klick auf die Buttons
 geschaltet werden.
 
-<p><center>
+<figure id="IMG:6.57">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.57"><img src="experimente/webusb_console.png"></a></td></tr><tr><td align="center"><small>(a) Chromium-Browser unter Linux</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.57"><img src="experimente/webusb_android.png"></a></td></tr><tr><td align="center"><small>(b) Chrome-Browser unter Android</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.57: WebUSB-Console des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  <figure><img src="experimente/webusb_console.png"><figcaption>(a) Chromium-Browser unter Linux</figcaption></figure> 
+  <figure><img src="experimente/webusb_android.png"><figcaption>(b) Chrome-Browser unter Android</figcaption></figure>
+  <figcaption>Abbildung 6.57: WebUSB-Console des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
   
-<p></center>
+<p></figure>
 
-<p><h3><a name="6.18.4">6.18.4 Brickly-lite</a></h3> 
+<p><h3><a id="6.18.4">6.18.4 Brickly-lite</a></h3> 
 
 <p>Das in Abschnitt <a href="community.html#8.3">8.3</a> beschriebene
 Brickly-Projekt<a href="#fn38"><sup>38</sup></a> 
@@ -3214,13 +3218,13 @@ Programmierumgebung zur Nutzung per Webbrowser. Im Falle des TXTs
 können so per Smartphone, PC oder Tablett mit Hilfe des Webbrowsers
 Programmer erstellt und auf dem TXT laufen gelassen werden.
 
-<p><center>
+<figure id="IMG:6.58">
   
-  <p><table><tr><td><table><tr><td><a name="IMG:6.58"><img src="experimente/brickly_chromium.png"></a></td></tr><tr><td align="center"><small>(a) im Chrome-Browser am PC</small></td></tr></table></td> 
-  <td><table><tr><td><a name="IMG:6.58"><img src="experimente/brickly_lite_tablet.jpg"></a></td></tr><tr><td align="center"><small>(b) am Android-Tablett mit Lindy-31717-Kabel</small></td></tr></table></td>
-  </tr></table><br><small>Abbildung 6.58: Brickly-lite für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></small>
+  <figure><img src="experimente/brickly_chromium.png"><figcaption>(a) im Chrome-Browser am PC</figcaption></figure> 
+  <figure><img src="experimente/brickly_lite_tablet.jpg"><figcaption>(b) am Android-Tablett mit Lindy-31717-Kabel</figcaption></figure>
+  <figcaption>Abbildung 6.58: Brickly-lite für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></figcaption>
   
-<p></center>
+<p></figure>
 
 <p>Brickly-lite wurde für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> völlig neu konzipiert. Auf die
 Ausführung von Blockly-generiertem Code auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wurde dabei
@@ -3255,17 +3259,17 @@ Browser-bedienbare einfache Modelle dienen.
 Arduino'' und ``Scatch 3.0''. Mehr Informationen finden sich in
 Abschnitt <a href="community.html#8.6">8.6</a> und <a href="experimente.html#6.18.5">6.18.5</a>.
 
-<p><h3><a name="6.18.5">6.18.5 Scratch 3.0</a></h3> 
+<p><h3><a id="6.18.5">6.18.5 Scratch 3.0</a></h3> 
 
 <p>Scratch 3.0 basiert wie Brickly auf dem Blockly-Projekt von Google.
 Dementsprechend nutzen beide eine sehr ähnliche Art, wer WebUSB
 aus dem Browser auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zuzugreifen.
 
-<p><center>
+<figure id="IMG:6.59">
   
-  <p><a name="IMG:6.59"><img src="experimente/scratch3.png"></a>
-  <br><small>Abbildung 6.59: Scratch 3.0 im Chrome-Browser mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Extension</small> 
-</center>
+  <img src="experimente/scratch3.png">
+  <figcaption>Abbildung 6.59: Scratch 3.0 im Chrome-Browser mit <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Extension</figcaption> 
+</figure>
 
 <p>Während Brickly eine komplette <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifische Entwicklung ist
 ist Scratch 3.0 ein eigenständiges Projekt. Die unter
@@ -3283,64 +3287,69 @@ Smartphones und Android-Tabletts.
 <p>Mehr Informationen zu Scratch 3.0 und dem Einsatz des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 finden sich in Abschnitt <a href="schule.html#5.1.4">5.1.4</a>.
 <hr><small>
-<a name="fn1">1) </a>Im Internet leicht zu finden
+<a id="fn1">1) </a>Im Internet leicht zu finden
 unter dem Stichwort ``Floppymusik''<br>
-<a name="fn2">2) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30571">https://ft-datenbank.de/tickets?fulltext=30571</a><br>
-<a name="fn3">3) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=132292">https://ft-datenbank.de/tickets?fulltext=132292</a><br>
-<a name="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=132292">https://ft-datenbank.de/tickets?fulltext=132292</a><br>
-<a name="fn5">5) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=540585">https://ft-datenbank.de/tickets?fulltext=540585</a><br>
-<a name="fn6">6) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30275">https://ft-datenbank.de/tickets?fulltext=30275</a><br>
-<a name="fn7">7) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=36437">https://ft-datenbank.de/tickets?fulltext=36437</a><br>
-<a name="fn8">8) </a><a href="https://de.wikipedia.org/wiki/Hei%C3%9Fleiter">https://de.wikipedia.org/wiki/Hei%C3%9Fleiter</a><br>
-<a name="fn9">9) </a>Weitere Informationen und tiefergehenden Erklärungen
+<a id="fn2">2) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30571">https://ft-datenbank.de/tickets?fulltext=30571</a><br>
+<a id="fn3">3) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=132292">https://ft-datenbank.de/tickets?fulltext=132292</a><br>
+<a id="fn4">4) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=132292">https://ft-datenbank.de/tickets?fulltext=132292</a><br>
+<a id="fn5">5) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=540585">https://ft-datenbank.de/tickets?fulltext=540585</a><br>
+<a id="fn6">6) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=30275">https://ft-datenbank.de/tickets?fulltext=30275</a><br>
+<a id="fn7">7) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=36437">https://ft-datenbank.de/tickets?fulltext=36437</a><br>
+<a id="fn8">8) </a><a href="https://de.wikipedia.org/wiki/Hei%C3%9Fleiter">https://de.wikipedia.org/wiki/Hei%C3%9Fleiter</a><br>
+<a id="fn9">9) </a>Weitere Informationen und tiefergehenden Erklärungen
   zu den Arduino-Bibliotheken zur Maus- und Tastaturnachbildung finden
   sich unter
   <a href="https://www.arduino.cc/en/Reference/MouseKeyboard">https://www.arduino.cc/en/Reference/MouseKeyboard</a><br>
-<a name="fn10">10) </a>Mehr Info unter <a href="http://www.usb.org/developers/hidpage/">http://www.usb.org/developers/hidpage/</a><br>
-<a name="fn11">11) </a><a href="http://www.usb.org/developers/hidpage/Hut1_12v2.pdf">http://www.usb.org/developers/hidpage/Hut1_12v2.pdf</a><br>
-<a name="fn12">12) </a>Eine große Sammlung von Sensorbibliotheken
+<a id="fn10">10) </a>Mehr Info unter <a href="http://www.usb.org/developers/hidpage/">http://www.usb.org/developers/hidpage/</a><br>
+<a id="fn11">11) </a><a href="http://www.usb.org/developers/hidpage/Hut1_12v2.pdf">http://www.usb.org/developers/hidpage/Hut1_12v2.pdf</a><br>
+<a id="fn12">12) </a>Eine große Sammlung von Sensorbibliotheken
 findet sich unter <a href="https://github.com/ControlEverythingCommunity">https://github.com/ControlEverythingCommunity</a>.<br>
-<a name="fn13">13) </a><a href="https://www.thingiverse.com/thing:2542260">https://www.thingiverse.com/thing:2542260</a><br>
-<a name="fn14">14) </a>Datenblatt des SSD1306: <a href="https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf">https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf</a><br>
-<a name="fn15">15) </a>Adafruit-SSD1306-Bibliothek: <a href="https://github.com/adafruit/Adafruit_SSD1306">https://github.com/adafruit/Adafruit_SSD1306</a><br>
-<a name="fn16">16) </a>Adafruit-GFX-Bibliothek: <a href="https://github.com/adafruit/Adafruit-GFX-Library">https://github.com/adafruit/Adafruit-GFX-Library</a><br>
-<a name="fn17">17) </a>VL53L0X-Gehäuse: <a href="https://github.com/harbaum/ftduino/tree/master/addons/vl53l0x">https://github.com/harbaum/ftduino/tree/master/addons/vl53l0x</a><br>
-<a name="fn18">18) </a>Adafruit-Bibliothek für den VL53L0X: <a href="https://github.com/adafruit/Adafruit_VL53L0X">https://github.com/adafruit/Adafruit_VL53L0X</a><br>
-<a name="fn19">19) </a>Weitere Infos zum
+<a id="fn13">13) </a><a href="https://www.thingiverse.com/thing:2542260">https://www.thingiverse.com/thing:2542260</a><br>
+<a id="fn14">14) </a>Datenblatt des SSD1306: <a href="https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf">https://cdn-shop.adafruit.com/datasheets/SSD1306.pdf</a><br>
+<a id="fn15">15) </a>Adafruit-SSD1306-Bibliothek: <a href="https://github.com/adafruit/Adafruit_SSD1306">https://github.com/adafruit/Adafruit_SSD1306</a><br>
+<a id="fn16">16) </a>Adafruit-GFX-Bibliothek: <a href="https://github.com/adafruit/Adafruit-GFX-Library">https://github.com/adafruit/Adafruit-GFX-Library</a><br>
+<a id="fn17">17) </a>VL53L0X-Gehäuse: <a href="https://github.com/harbaum/ftduino/tree/master/addons/vl53l0x">https://github.com/harbaum/ftduino/tree/master/addons/vl53l0x</a><br>
+<a id="fn18">18) </a>Adafruit-Bibliothek für den VL53L0X: <a href="https://github.com/adafruit/Adafruit_VL53L0X">https://github.com/adafruit/Adafruit_VL53L0X</a><br>
+<a id="fn19">19) </a>Weitere Infos zum
 <tt>i2c_tiny_usb</tt> finden sich unter <a href="https://github.com/harbaum/I2C-Tiny-USB">https://github.com/harbaum/I2C-Tiny-USB</a><br>
-<a name="fn20">20) </a>Auch der Raspberry-Pi oder der
+<a id="fn20">20) </a>Auch der Raspberry-Pi oder der
   fischertechnik TXT sind Linux-PCs<br>
-<a name="fn21">21) </a>
+<a id="fn21">21) </a>
   <a href="https://harbaum.github.io/ftduino/ftduino/libraries/FtduinoSimple/examples/I2C/I2cSlave/master.py">https://harbaum.github.io/ftduino/ftduino/libraries/FtduinoSimple/examples/I2C/I2cSlave/master.py</a><br>
-<a name="fn22">22) </a>
+<a id="fn22">22) </a>
   <a href="https://harbaum.github.io/ftduino/ftduino/libraries/Ftduino/examples/I2C/I2cSlave/master.py">https://harbaum.github.io/ftduino/ftduino/libraries/Ftduino/examples/I2C/I2cSlave/master.py</a><br>
-<a name="fn23">23) </a>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Expander:
+<a id="fn23">23) </a>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Expander:
   <a href="https://github.com/harbaum/ftduino/tree/master/addons/i2c-expander">https://github.com/harbaum/ftduino/tree/master/addons/i2c-expander</a><br>
-<a name="fn24">24) </a>
+<a id="fn24">24) </a>
   <a href="https://github.com/harbaum/cfw-apps/tree/master/packages/ftDuinoI2C">https://github.com/harbaum/cfw-apps/tree/master/packages/ftDuinoI2C</a><br>
-<a name="fn25">25) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=158402">https://ft-datenbank.de/tickets?fulltext=158402</a><br>
-<a name="fn26">26) </a><a href="https://content.ugfischer.com/cbfiles/fischer/Zulassungen/ft/158402-Kombisensor-Kurzanleitung-BMX055-2017-06-09.pdf">https://content.ugfischer.com/cbfiles/fischer/Zulassungen/ft/158402-Kombisensor-Kurzanleitung-BMX055-2017-06-09.pdf</a><br>
-<a name="fn27">27) </a><a href="https://github.com/ControlEverythingCommunity/BMX055">https://github.com/ControlEverythingCommunity/BMX055</a><br>
-<a name="fn28">28) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=544624">https://ft-datenbank.de/tickets?fulltext=544624</a><br>
-<a name="fn29">29) </a>Bosch BME680:
+<a id="fn25">25) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=158402">https://ft-datenbank.de/tickets?fulltext=158402</a><br>
+<a id="fn26">26) </a><a href="https://content.ugfischer.com/cbfiles/fischer/Zulassungen/ft/158402-Kombisensor-Kurzanleitung-BMX055-2017-06-09.pdf">https://content.ugfischer.com/cbfiles/fischer/Zulassungen/ft/158402-Kombisensor-Kurzanleitung-BMX055-2017-06-09.pdf</a><br>
+<a id="fn27">27) </a><a href="https://github.com/ControlEverythingCommunity/BMX055">https://github.com/ControlEverythingCommunity/BMX055</a><br>
+<a id="fn28">28) </a>fischertechnik-Datenbank: <a href="https://ft-datenbank.de/tickets?fulltext=544624">https://ft-datenbank.de/tickets?fulltext=544624</a><br>
+<a id="fn29">29) </a>Bosch BME680:
   <a href="https://www.bosch-sensortec.com/bst/products/all_products/bme680">https://www.bosch-sensortec.com/bst/products/all_products/bme680</a><br>
-<a name="fn30">30) </a><a href="https://github.com/kitesurfer1404/WS2812FX">https://github.com/kitesurfer1404/WS2812FX</a><br>
-<a name="fn31">31) </a><tt>EN5</tt> und <tt>EN6</tt>, siehe
+<a id="fn30">30) </a><a href="https://github.com/kitesurfer1404/WS2812FX">https://github.com/kitesurfer1404/WS2812FX</a><br>
+<a id="fn31">31) </a><tt>EN5</tt> und <tt>EN6</tt>, siehe
   <a href="http://cache.freescale.com/files/analog/doc/data_sheet/MC33879.pdf">http://cache.freescale.com/files/analog/doc/data_sheet/MC33879.pdf</a><br>
-<a name="fn32">32) </a>MIDI, Musical Instrument Digital
+<a id="fn32">32) </a>MIDI, Musical Instrument Digital
   Interface, <a href="https://en.wikipedia.org/wiki/MIDI">https://en.wikipedia.org/wiki/MIDI</a><br>
-<a name="fn33">33) </a><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Android-App: <a href="https://github.com/harbaum/ftduino/tree/master/android">https://github.com/harbaum/ftduino/tree/master/android</a><br>
-<a name="fn34">34) </a>UsbSerial für Android:  <a href="https://github.com/felHR85/UsbSerial">https://github.com/felHR85/UsbSerial</a><br>
-<a name="fn35">35) </a>WebUSB:
+<a id="fn33">33) </a><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Android-App: <a href="https://github.com/harbaum/ftduino/tree/master/android">https://github.com/harbaum/ftduino/tree/master/android</a><br>
+<a id="fn34">34) </a>UsbSerial für Android:  <a href="https://github.com/felHR85/UsbSerial">https://github.com/felHR85/UsbSerial</a><br>
+<a id="fn35">35) </a>WebUSB:
   <a href="https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web">https://developers.google.com/web/updates/2016/03/access-usb-devices-on-the-web</a><br>
-<a name="fn36">36) </a>Google-Chrome-Browser:
+<a id="fn36">36) </a>Google-Chrome-Browser:
   <a href="https://www.google.com/intl/de_ALL/chrome/">https://www.google.com/intl/de_ALL/chrome/</a><br>
-<a name="fn37">37) </a>Chrome-Portable:
+<a id="fn37">37) </a>Chrome-Portable:
   <a href="https://portableapps.com/apps/internet/google_chrome_portable">https://portableapps.com/apps/internet/google_chrome_portable</a><br>
-<a name="fn38">38) </a>Brickly für den TXT:
+<a id="fn38">38) </a>Brickly für den TXT:
   <a href="https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/">https://cfw.ftcommunity.de/ftcommunity-TXT/de/programming/brickly/</a><br>
-<a name="fn39">39) </a>Blockly:
+<a id="fn39">39) </a>Blockly:
   <a href="https://developers.google.com/blockly/">https://developers.google.com/blockly/</a><br>
-<a name="fn40">40) </a>Adafruit GFX
+<a id="fn40">40) </a>Adafruit GFX
   Library: <a href="https://github.com/adafruit/Adafruit-GFX-Library">https://github.com/adafruit/Adafruit-GFX-Library</a><br>
-</small><hr><table width="100%"><tr><td><a href="http://ftduino.de">ftDuino</a> manual - experimente</td><td align="right">(c) 2017-2019 Till Harbaum</td></tr></table></body></html>
+</small>
+<footer>
+<p><a href="">▲  nach oben</a><br><a href="http://ftduino.de/">ftDuino</a> manual - experimente</p>
+<p class="copy">(c) 2017-2019 Till Harbaum</p>
+</footer>
+</body></html>
