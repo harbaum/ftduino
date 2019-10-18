@@ -152,6 +152,24 @@
                             "name": "ftDuino fischertechnik compatible controller"
                         }
                     ]
+                },
+                {
+                    "name": "ftDuino",
+                    "architecture": "avr",
+                    "version": "0.0.15",
+                    "category": "ftDuino",
+                    "url": "https://github.com/harbaum/ftduino/releases/download/0.0.15/ftduino-0.0.15.zip",
+                    "archiveFileName": "ftduino-0.0.15.zip",
+                    "checksum": "SHA-256:80d64b2472abfe0e5b9225d20f6b3f0961c4328f9f643f4ae77661f305314e71",
+                    "size": "211766",
+                    "help": {
+                        "online": "http://ftduino.de/issues"
+                    },
+                    "boards": [
+                        {
+                            "name": "ftDuino fischertechnik compatible controller"
+                        }
+                    ]
                 }
             ],
             "tools": []
