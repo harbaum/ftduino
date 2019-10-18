@@ -53,7 +53,7 @@ das Spiel beginnt von vorn.
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Unterstützung im Menü der Arduino-IDE unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/LampTimer"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">LampTimer</span></tt></a>.
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    LampTimer - Lampen-Zeitschaltuhr
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    (c) 2017 by Till Harbaum &lt;till@harbaum.org&gt;
@@ -92,7 +92,7 @@ das Spiel beginnt von vorn.
      <font color="green">37</font>    }
      <font color="green">38</font>  }
      <font color="green">39</font>  
-</pre>
+</code></pre>
 
 <p><h4>Sketchbeschreibung</h4>
 
@@ -132,10 +132,10 @@ an bleibt.
 damit die Lampe 20000 Millisekunden, also 20 Sekunden eingeschaltet
 bleibt.
 
-<pre>
+<pre><code class="language-c">
      <font color="green">31</font>    if((startzeit != 0) &&
      <font color="green">32</font>       (millis() &gt; startzeit + 20000)) {
-</pre>
+</code></pre>
 <h4>Aufgabe 2: Keine Verlängerung</h4>
 
 <p>Sorge dafür, dass ein weiterer Druck auf den Taster, während die Lampe
@@ -148,10 +148,10 @@ verlängert.
 werden, die nur dann einen neue Wert setzt, wenn bisher keiner gesetzt
 war. Beide Zeilen zusammen sehen dann so aus:
 
-<pre>
+<pre><code class="language-c">
      <font color="green">23</font>    if(startzeit == 0)
      <font color="green">24</font>      startzeit = millis();
-</pre>
+</code></pre>
 <h4>Expertenaufgabe:</h4> 
 
 <p>Schließt Du statt der Lampe eine Leuchtdiode an (der rote Anschluss
@@ -184,9 +184,9 @@ durch <tt>LO</tt> ersetzt werden. <tt>LO</tt> steht für low, englisch
 niedrig und meint in diesem Fall 0 Volt. Die Leuchtdiode erlischt nun
 komplett nach Ablauf der Zeit.
 
-<pre>
+<pre><code class="language-c">
      <font color="green">36</font>      ftduino.output_set(Ftduino::O1, Ftduino::LO);
-</pre>
+</code></pre>
 Direkt nach dem Einschalten des ftDuino leuchtet die Leuchtdiode aber
 nach wie vor. Vielleicht findest Du selbst heraus, wie sich das ändern
 lässt. Tipp: Die bisher unbenutzte <tt>setup()</tt>-Funktion könnte
@@ -212,7 +212,7 @@ an Eingang <tt>I1</tt> bildet den Not-Aus-Taster.
 
 <p><h3><a id="6.2.1">6.2.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/EmergencyStop">EmergencyStop</a></tt></a></h3>
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    EmergencyStop - Not-Aus
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    (c) 2017 by Till Harbaum &lt;till@harbaum.org&gt;
@@ -245,7 +245,7 @@ an Eingang <tt>I1</tt> bildet den Not-Aus-Taster.
      <font color="green">31</font>    }
      <font color="green">32</font>  }
      <font color="green">33</font>  
-</pre>
+</code></pre>
 
 <p><h4>Sketchbeschreibung</h4>
 
@@ -300,9 +300,9 @@ in den Notzustand, da der Taster ja sofort als geschlossen erkannt
 wird. Also muss auch im Sketch die Logik herum gedreht werden. Das
 passiert durch folgende Änderung in Zeile 26:
 
-<pre>
+<pre><code class="language-c">
      <font color="green">26</font>    if(!ftduino.input_get(Ftduino::I1)) {
-</pre>
+</code></pre>
 Man muss genau hinschauen, um den Unterschied zu sehen. Hinter der
 öffnenden Klammer steht nun aus Ausrufezeichen, das in der
 Programmiersprache C für die logische Negation eines Ausdrucks
@@ -404,7 +404,7 @@ der man die Spannung ein- und ausschaltet.
 
 <p><h3><a id="6.3.1">6.3.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Pwm">Pwm</a></tt></a></h3> 
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    Pwm - Pulsweitenmodulation
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    (c) 2017 by Till Harbaum &lt;till@harbaum.org&gt;
@@ -478,7 +478,7 @@ der man die Spannung ein- und ausschaltet.
      <font color="green">72</font>  }
      <font color="green">73</font>  
      <font color="green">74</font>  
-</pre>
+</code></pre>
 
 <p><h4>Sketchbeschreibung</h4>
 
@@ -781,7 +781,7 @@ einer Vollschrittsteuerung.
 <p>Ein Sketch, der kontinuierlich das entsprechende Signalmuster erzeugt
 sieht folgendermaßen aus:
 
-<pre>
+<pre><code class="language-c">
      while(1) {
        ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
        delay(5);
@@ -792,7 +792,7 @@ sieht folgendermaßen aus:
        ftduino.motor_set(Ftduino::M2, Ftduino::RIGHT); 
        delay(5);
      }
-</pre>
+</code></pre>
 Ein vollständiges Beispiel findet sich in der Arduino-IDE unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/StepperMotor"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">StepperMotor</span></tt></a>.
 
@@ -906,7 +906,7 @@ Millisekunden ausgeführt wird. Der Motor ließe sich so durch passenden
 Programmcode innerhalb dieser Routine völlig unabhängig vom
 Hauptprogramm des Sketches betreiben.
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  // die sogenannte Interrupt-Service-Routine (ISR) wird
@@ -949,7 +949,7 @@ Hauptprogramm des Sketches betreiben.
      <font color="green">40</font>    // der Timer 1-Interrupt wird unabhängig regelmäßig
      <font color="green">41</font>    // ausgeführt
      <font color="green">42</font>  }
-</pre>
+</code></pre>
 Das vollständige Beispiel findet sich unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/StepperMotorSrv"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">StepperMotorSrv</span></tt></a>. Es entspricht weitgehend der
 vorgeschlagenen Nutzung von Timer 1. Ein zweiter Motor ließe sich
@@ -1071,7 +1071,7 @@ vorgesehenen Pins zu erzeugen muss auf Software zurückgegriffen
 werden. Ein Programmfragment, das den Servo in die Mittelposition
 bewegt könnte z.B. folgendermaßen aussehen:
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  void setup() {
      <font color="green"> 2</font>    // Port D.1 (SDA-Anschluss) auf Ausgang schalten    
      <font color="green"> 3</font>    bitSet(DDRD, 1);
@@ -1090,7 +1090,7 @@ bewegt könnte z.B. folgendermaßen aussehen:
      <font color="green">16</font>    // 18500us (18.5ms) warten
      <font color="green">17</font>    _delay_us(20000-1500);
      <font color="green">18</font>  }
-</pre>
+</code></pre>
 Hier wird der SDA-Anschluss am I²C zunächst in der
 <tt>setup()</tt>-Funktion zu einem unabhängig verwendbaren Ausgang
 konfiguriert. In der Folge kann in der <tt>loop()</tt>-Funktion der
@@ -1111,7 +1111,7 @@ Hintergrund durch einen Hardwaretimer zu veranlassen. Das Beispiel
 Servoansteuerung mit. Das eigentliche Hauptprogramm sieht dann
 folgendermaßen aus:
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  //
      <font color="green"> 2</font>  // Servo.ino
      <font color="green"> 3</font>  //
@@ -1131,7 +1131,7 @@ folgendermaßen aus:
      <font color="green">17</font>  
      <font color="green">18</font>    delay(10);   
      <font color="green">19</font>  }
-</pre>
+</code></pre>
 Die Ansteuerung des Servos beschränkt sich auf den Aufruf der
 <tt>servo.begin()</tt>-Funktion, die die nötigen Timer im Hintergrund
 einrichtet. Der Winkel des Servos kann dann mit der
@@ -1244,7 +1244,7 @@ ist dann dauerhaft aktiviert, bis ein anderer Eingang angefragt wird.
 Das folgenden Code-Fragment lässt eine LED an Eingang <tt>I1</tt> im
 Sekundentakt blinken.
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  void loop() {
@@ -1256,7 +1256,7 @@ Sekundentakt blinken.
      <font color="green"> 9</font>    ftduino.input_get(Ftduino::I2);
      <font color="green">10</font>    delay(1000);
      <font color="green">11</font>  }
-</pre>
+</code></pre>
 <h2><a id="6.7">6.7 Temperaturmessung</a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;&#9734;
@@ -1290,7 +1290,7 @@ Widerstand beträgt bei 25&nbsp;°C also 1,5k&#8486;.
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Unterstützung im Menü der Arduino-IDE unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Temperature"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Temperature</span></tt></a>.
 
-<pre>     <font color="green"> 1</font>  //
+<pre><code class="language-c">     <font color="green"> 1</font>  //
      <font color="green"> 2</font>  // Temperaure.ino
      <font color="green"> 3</font>  //
      <font color="green"> 4</font>  // Abfrage eines fischertechnik Temperatur-Widerstands an Eingang I1
@@ -1342,7 +1342,7 @@ Widerstand beträgt bei 25&nbsp;°C also 1,5k&#8486;.
      <font color="green">50</font>  
      <font color="green">51</font>    delay(1000);
      <font color="green">52</font>  }
-</pre>
+</code></pre>
 
 <p><h4>Sketchbeschreibung</h4>
 
@@ -1452,7 +1452,7 @@ niemals beide Lampen gleichzeitig ausschalten
 
 <p><h3><a id="6.8.1">6.8.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/OnOffTristate">OnOffTristate</a></tt></a></h3>
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    OnOffTristate - der dritte Zustand
      <font color="green"> 3</font>  */
      <font color="green"> 4</font>  
@@ -1473,7 +1473,7 @@ niemals beide Lampen gleichzeitig ausschalten
      <font color="green">19</font>    delay(1000);
      <font color="green">20</font>  }
      <font color="green">21</font>  
-</pre>
+</code></pre>
 
 <p><h3><a id="6.8.2">6.8.2 Leckströme</a></h3>
 
@@ -1623,7 +1623,7 @@ Versorgung über Batterie oder Netzteil nötig.
 
 <p><h3><a id="6.10.1">6.10.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/KeyboardMessage">USB/KeyboardMessage</a></tt></a></h3>
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    KeyboardMessage - USB-Tastatur
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    Der ftDuino gibt sich als USB-Tastatur aus und "tippt" eine Nachricht, sobald
@@ -1673,7 +1673,7 @@ Versorgung über Batterie oder Netzteil nötig.
      <font color="green">48</font>    }
      <font color="green">49</font>  }
      <font color="green">50</font>  
-</pre>
+</code></pre>
 
 <p><h4>Sketchbeschreibung</h4>
 
@@ -1745,7 +1745,7 @@ bietet. Interessant ist vor allem die
 <tt>_hidReportDescriptor</tt>-Struktur in der Datei
 <tt>HidGamePad.cpp</tt>.
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 9</font>  static const uint8_t _hidReportDescriptor[] PROGMEM = {
      <font color="green">10</font>    0x05, 0x01,                // USAGE_PAGE (Generic Desktop)
      <font color="green">11</font>    0x09, 0x05,                // USAGE (Gamepad)
@@ -1775,7 +1775,7 @@ bietet. Interessant ist vor allem die
      <font color="green">35</font>    0x81, 0x03,                //   INPUT (Const,Var,Abs)
      <font color="green">36</font>    0xc0                       // END_COLLECTION
      <font color="green">37</font>  };
-</pre>
+</code></pre>
 Diese vergleichsweise kryptische Struktur beschreibt die Fähigkeiten
 eines USB-HID-Geräts<a href="#fn10"><sup>10</sup></a> .
 Sie beschreibt, um welche Art Gerät es sich handelt und im Falle
@@ -1831,7 +1831,7 @@ insgesamt bereits geändert hat.
 
 <p><h3><a id="6.12.1">6.12.1 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Debounce">Debounce</a></tt></a></h3>
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    Debounce
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    Demonstriert Tastenprellen
@@ -1865,7 +1865,7 @@ insgesamt bereits geändert hat.
      <font color="green">32</font>    }
      <font color="green">33</font>  }
      <font color="green">34</font>  
-</pre>
+</code></pre>
 
 <p><h4>Sketchbeschreibung</h4>
 
@@ -1900,11 +1900,11 @@ Das erreicht man zum Beispiel, indem man nach Zeile 31 zusätzlich
 etwas wartet, wie es auch im <tt>Pwm</tt>-Sketch aus Abschnitt
 <a href="experimente.html#6.3.1">6.3.1</a> getan wurde.
 
-<pre>
+<pre><code class="language-c">
      <font color="green">31</font>      letzter_zustand = zustand;             // neuen Zustand als letzten merken
      <font color="green">32</font>      delay(10);                             // warte zehn Millisekunden
      <font color="green">33</font>    }
-</pre>
+</code></pre>
 Nach dieser Änderung zählt der Sketch tatsächlich nur noch einzelne
 Tastendrücke. Diese einfache Lösung hat aber einen Nachteil: Die
 Ausführung des gesamten Sketches wird bei jeden Tastendruck für zehn
@@ -1942,7 +1942,7 @@ die grafisch in einer Kurve dargestellt (geplottet) werden.
 <p>Das folgende Beispiel ist unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/BounceVisu"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">BounceVisu</span></tt></a> zu finden.
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    BounceVisu
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    visualisiert Tastenprellen
@@ -1984,7 +1984,7 @@ die grafisch in einer Kurve dargestellt (geplottet) werden.
      <font color="green">40</font>    }
      <font color="green">41</font>  }
      <font color="green">42</font>  
-</pre>
+</code></pre>
 
 <p>Der Sketch wartet in Zeile 22 darauf, dass die Taste an Eingang
 <tt>I1</tt> gedrückt wird. Daraufhin zeichnet er für eine kurze Weile den
@@ -2144,11 +2144,11 @@ Beispiele wurden ebenfalls entsprechend angepasst.
 
 <p>Dabei muss im Sketch selbst die I²C-Adresse von <tt>0x3D</tt> nach
 <tt>0x3C</tt> angepasst werden:
-<pre>
+<pre><code class="language-c">
      <font color="green">60</font>    // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
      <font color="green">61</font>    display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
      <font color="green">62</font>    // init done
-</pre>
+</code></pre>
 Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation selbst bringt ebenfalls ein Beispiel mit,
 das dieses Display verwendet. Das Shootduino-Spiel findet sich unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Shootduino"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Shootduino</span></tt></a>. Das Spiel erwartet drei Taster an
@@ -2249,7 +2249,7 @@ I²C-Adresse im Sketch jeweils angepasst werden. Das geschieht,
 indem in Zeile 16 im <tt>I2cSlave</tt>-Sketch die Adresse 43 ersetzt
 wird durch 44 bzw 45 für die beiden weiteren Slaves.
 
-<pre>
+<pre><code class="language-c">
      <font color="green">13</font>  void setup() {
      <font color="green">14</font>    pinMode(LED_BUILTIN, OUTPUT); // LED initialisieren
      <font color="green">15</font>  
@@ -2262,7 +2262,7 @@ wird durch 44 bzw 45 für die beiden weiteren Slaves.
      <font color="green">22</font>    // alle Ausgänge sind hochohmig
      <font color="green">23</font>    memset(output_mode, 0, sizeof(output_mode));
      <font color="green">24</font>  }
-</pre>
+</code></pre>
 Der Master enthält in diesem Fall die gesamte eigentliche
 Programmlogik und die Slaves nehmen fundamentale Steuerbefehle über
 I²C entgegen. Der Master-Sketch findet sich unter
@@ -2271,12 +2271,12 @@ I²C entgegen. Der Master-Sketch findet sich unter
 weniger Slaves verwendet werden, so ist die Zeile 12 entsprechend
 anzupassen.
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 9</font>  // Liste der anzusteuernden I2c-Clients, beginnend mit 0 (der Master selbst)
      <font color="green">10</font>  // und -1 als Endemarkierung. In diesem Fall sind drei Clients unter den Adressen
      <font color="green">11</font>  // 43, 44 und 45 angeschlossen
      <font color="green">12</font>  static const int8_t clients[] = { 0, 43, 44, 45, -1 };
-</pre>
+</code></pre>
 Die Stromversorgung aller vier <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s kann aus einem
 fischertechnik-Netzteil erfolgen, das an den Master angeschlossen
 wird. Die Slaves werden dann vom 9-Volt-Ausgang des Masters über
@@ -2621,12 +2621,12 @@ fischertechnik verwendete Adresse explizit angegeben werden. Der
 Aufruf der Funktion <tt>bme.begin()</tt> ist in den Beispielen wie
 folgt zu ändern:
 
-<pre>
+<pre><code class="language-c">
      if (!bme.begin(0x76)) {
        Serial.println("Could not find a valid BME680 sensor, check wiring!");
        while (1);
      }
-</pre>
+</code></pre>
 Der Sensor lässt sich mit dem Levelshifter als auch mit dem I²C-Expander
 betreiben sowie mit dem ft-Extender (siehe Abschnitt <a href="community.html#8.5">8.5</a>).
 
@@ -2648,7 +2648,7 @@ Bibliothek zu groß für den Flash-Speicher des <font color="red">f</font><font 
 <p>Eine alternative Berechnung eines abstrakten ``Air-Quality''-Wertes
 <tt>airq</tt> sieht wie folgt aus.
 
-<pre>
+<pre><code class="language-c">
      gas_baseline   = 200000.0;
      hum_baseline   = 40.0;
      hum_weighting  = 0.25;
@@ -2658,7 +2658,7 @@ Bibliothek zu groß für den Flash-Speicher des <font color="red">f</font><font 
                       (100 - hum_baseline) * (hum_weighting * 100);
      gas_score      = (gas_resistance / gas_baseline) * (100 - (hum_weighting * 100));
      airq           = hum_score + gas_score;
-</pre>
+</code></pre>
 
 
 <p><h3><a id="6.13.9">6.13.9 Mini-I²C-Servo-Adapter</a></h3> 
@@ -2735,12 +2735,12 @@ ein simples Beispiel findet sich unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/I2C/MiniServoAdapter"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">MiniServoAdapter</span></tt></a>. Das Setzen eines Ausgangs
 auf einen Wert benötigt lefiglich folgenden Code:
 
-<pre>
+<pre><code class="language-c">
        Wire.beginTransmission(ADDRESS);
        Wire.write(0x00);                 // 0 = servo 1, 1 = servo 2
        Wire.write(94);                   // Mitte, 63 (ganz links) bis 125 (ganz rechts)
        Wire.endTransmission();
-</pre>
+</code></pre>
 <h4>Registerbelegung</h4>
 
 <p>Die Standard-Adresse des Mini-I²C-Servo-Adapters ist hex 0x11
@@ -2843,14 +2843,14 @@ Leuchtdioden zu überprüfen.
 vorzunehmen, um die Zahl und den verwendeten Anschluss der Leuchtdioden
 anzupassen.
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;WS2812FX.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  #define LED_COUNT 2
      <font color="green"> 4</font>  #define LED_PIN SCL
      <font color="green"> 5</font>  
      <font color="green"> 6</font>  #define TIMER_MS 5000
-</pre>
+</code></pre>
 <h2><a id="6.15">6.15 Musik aus dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h2> 
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;&#9734;
@@ -2877,9 +2877,9 @@ schützt Lautsprecher und Gehör.
 <p>Schaltet man nun den Ausgang O2 mit 50% PWM-Verhältnis ein, so
 kann man das PWM-Signal direkt hören.
 
-<pre>
+<pre><code class="language-c">
      ftduino.output_set(Ftduino::O2, Ftduino::HI, Ftduino::MAX/2);
-</pre>
+</code></pre>
 Durch das 50% PWM-Signal wird der Ausgang permanent zwischen
 <tt>HI</tt> und <tt>OFF</tt> umgeschaltet (siehe auch Abschnitt
 <a href="experimente.html#6.3">6.3</a>). Nur wenn der Ausgang <tt>HI</tt> ist fließt ein Strom
@@ -2914,13 +2914,13 @@ der Ausgangstransistoren des Ausgangstreibers über diesen Pin am
 ATmega32u4 direkt schalten. In der Arduino-Welt hat dieser Pin die
 Nummer 11 und lässt sich mit den üblichen Arduino-Funktionen schalten.
 
-<pre>
+<pre><code class="language-c">
      // Highside-Treiber von Ausgang O2 für eine Sekunde aktivieren
      pinMode(11, OUTPUT);
      digitalWrite(11, HIGH);
      delay(1000);
      digitalWrite(11, LOW);
-</pre>
+</code></pre>
 Um den Effekt am Ausgang zu sehen muss die
 <tt>FtduinoSimple</tt>-Bibliothek in den Sketch eingebunden sein, da
 die nach wie vor nötige Initialisierung der Ausgangstreiber durch die
@@ -2934,10 +2934,10 @@ Bibliothek erfolgt.
 Ton-Erzeugung angewendet werden. Der Beispielsketch unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/Music"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Music</span></tt></a> nutzt dies.
 
-<pre>
+<pre><code class="language-c">
      // Kammerton A für eine Sekunde spielen
      tone(11, 440, 1000);
-</pre>
+</code></pre>
 <h3><a id="6.15.2">6.15.2 Sketch <tt><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/MusicPwm">MusicPwm</a></tt></a></h3>
 
 <p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>
@@ -3068,7 +3068,7 @@ Funktion ausgeführt werden soll während mit angeschlossenem Smartphone eine
 manuelle Bedienung erwünscht ist. Das ist im Sketch über die Abfrage der
 USB-Stromversorgung möglich.
 
-<pre>
+<pre><code class="language-c">
      // Abfrage der USB-Stromversorgung vorbereiten (z.B. in der setup()-Funktion)
      USBCON |= (1&lt;&lt;OTGPADE);
      
@@ -3080,7 +3080,7 @@ USB-Stromversorgung möglich.
        // USB ist nicht verbunden
        // ...
      }
-</pre>
+</code></pre>
 Ein kompletter einfacher Demo-Sketch findet sich unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/USB/AndroidDemo"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">USB</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">AndroidDemo</span></tt></a>. Er sendet über USB einmal pro
 Sekunde eine Nachricht (``COUNTER: XX'') und erwartet die Nachricht
@@ -3169,9 +3169,9 @@ mitgeliefert.
 <p>Die URL eines WebUSB-Projektes wird im Sketch direkt angegeben und
 kann in eigenen Sketches entsprechend angepasst werden.
 
-<pre>
+<pre><code class="language-c">
      WebUSB WebUSBSerial(1 /* https:// */, "harbaum.github.io/ftduino/webusb/console");
-</pre>
+</code></pre>
 Neben dem passenden Sketch verlangt die WebUSB-Spezifikation weitere
 Anpassungen an der USB-Konfiguration des Geräts. Die nötigen
 Änderungen nimmt die Arduino-IDE vor, wenn man in der Board-Auswahl

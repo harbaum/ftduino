@@ -48,7 +48,7 @@ werden, denn es findet sich als fertig mitgeliefertes Beispiel im
 <p>Alle vorinstallierten Beispiele können mit einem Klick geladen werden
 und es öffnet sich ein neues Fenster mit dem ausgewählten Beispiel.
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>    Blink
      <font color="green"> 3</font>  
      <font color="green"> 4</font>    Schaltet die interne rote LED des ftDuino für eine Sekunde ein
@@ -72,7 +72,7 @@ und es öffnet sich ein neues Fenster mit dem ausgewählten Beispiel.
      <font color="green">22</font>    			    	     // niedrigen Pegel (LOW) geschaltet wird
      <font color="green">23</font>    delay(1000);                       // warte eine Sekunde
      <font color="green">24</font>  }
-</pre> 
+</code></pre> 
 
 <p><h3><a id="3.1.1">3.1.1 Download des Blink-Sketches auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
 
@@ -198,7 +198,7 @@ später jederzeit wieder geladen werden.
 <p>Im Sketch kann man nun beispielsweise aus den 1000 Millisekunden in
 den Zeilen 20 und 23 jeweils 500 Millisekunden machen.
 
-<pre>
+<pre><code class="language-c">
      <font color="green">18</font>  void loop() {
      <font color="green">19</font>    digitalWrite(LED_BUILTIN, HIGH);   // schalte die LED ein (HIGH ist der hohe Spannungspegel)
      <font color="green">20</font>    delay(500);                        // warte 500 Millisekunden (eine halbe Sekunde)
@@ -206,7 +206,7 @@ den Zeilen 20 und 23 jeweils 500 Millisekunden machen.
      <font color="green">22</font>                                       // niedrigen Pegel (LOW) geschaltet wird
      <font color="green">23</font>    delay(500);                        // warte eine halbe Sekunde
      <font color="green">24</font>  }
-</pre>
+</code></pre>
 Nach erfolgreichem Download wird die Leuchtdiode dann jeweils für 0,5
 Sekunden ein- und ausgeschaltet und die Blinkfrequenz verdoppelt sich
 auf ein Hertz.
@@ -248,7 +248,7 @@ anrichten.
 <tt><span style="background-color:#f0f0f0;">Datei</span></tt>-Menü der Arduino-IDE unter
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/FtduinoSimple/examples/BlinkO1"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">FtduinoSimple</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">BlinkO1</span></tt></a>.
 
-<pre>     <font color="green"> 1</font>  // BlinkO1.ino
+<pre><code class="language-c">     <font color="green"> 1</font>  // BlinkO1.ino
      <font color="green"> 2</font>  //
      <font color="green"> 3</font>  // Blinken einer Lamoe an Ausgang O1
      <font color="green"> 4</font>  //
@@ -274,7 +274,7 @@ anrichten.
      <font color="green">24</font>    
      <font color="green">25</font>    delay(1000);                       // warte eine Sekunde
      <font color="green">26</font>  }
-</pre> 
+</code></pre> 
 
 <p>Der Sketch unterscheidet sich nur in wenigen Details vom
 ursprünglichen Blink-Sketch. Neu hinzugekommen sind die Zeilen 7, 17
@@ -310,7 +310,7 @@ in Abschnitt <a href="bibliotheken.html#9">9</a> dargestellt. Über die
 <tt>FtduinoSimple</tt>-Bibliothek kann der Schaltzustand eines Tasters
 abgefragt werden:
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  void setup() {
@@ -323,13 +323,13 @@ abgefragt werden:
      <font color="green">10</font>      /* ... tue etwas ... */
      <font color="green">11</font>    }
      <font color="green">12</font>  }
-</pre>
+</code></pre>
 Um Analogwerte wie Spannungen und Widerstände einzulesen ist der
 erweiterte Funktionsumfang der <tt>Ftduino</tt>-Bibliothek nötig.
 Bei ihrer Verwendung muss zunächst der Messmodus des Eingangs
 eingestellt werden, bevor Widerstands-Werte gelesen werden können:
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;Ftduino.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  void setup() {
@@ -345,7 +345,7 @@ eingestellt werden, bevor Widerstands-Werte gelesen werden können:
      <font color="green">13</font>    uint16_t widerstand = ftduino.input_get(Ftduino::I1);
      <font color="green">14</font>    /* ... tue etwas ... */
      <font color="green">15</font>  }
-</pre>
+</code></pre>
 In den Experimenten in Kapitel <a href="experimente.html#6">6</a> finden sich
 diverse Beispiel, in denen die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ausgewertet
 werden inklusive spezieller Sensoren wie dem Temperatursensor in
@@ -373,7 +373,7 @@ Arduino-IDE unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduin
 <tt>ComPort</tt>-Sketch verwendet keinen der Ausgänge und benötigt
 daher neben der USB-Verbindung keinerlei weitere Spannungsversorgung.
 
-<pre>     <font color="green"> 1</font>  /*
+<pre><code class="language-c">     <font color="green"> 1</font>  /*
      <font color="green"> 2</font>     ComPort - Kommunikation mit dem PC über den COM:-Port
      <font color="green"> 3</font>  
      <font color="green"> 4</font>   */
@@ -396,7 +396,7 @@ daher neben der USB-Verbindung keinerlei weitere Spannungsversorgung.
      <font color="green">21</font>  
      <font color="green">22</font>    delay(1000);                    // warte 1 Sekunde (1000 Millisekunden)
      <font color="green">23</font>  }
-</pre> 
+</code></pre> 
 
 <p><h3><a id="3.3.1">3.3.1 Der serielle Monitor</a></h3> 
 
@@ -505,7 +505,7 @@ erfolgen.
 (Programmcode, der per <tt>//</tt> in einen Kommentar verwandelt wurde,
 wird nicht ausgeführt).
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 8</font>  void setup() {
      <font color="green"> 9</font>    // Port initialisieren und auf USB-Verbindung warten
      <font color="green">10</font>    Serial.begin(9600);
@@ -513,7 +513,7 @@ wird nicht ausgeführt).
      <font color="green">12</font>  
      <font color="green">13</font>    Serial.println("ftDuino COM:-Port test");
      <font color="green">14</font>  }
-</pre>
+</code></pre>
 Lädt man diesen Sketch nun auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>, so beginnt die
 Textausgabe im seriellen Monitor erst ab der Zeile
 <tt>Zähler:&nbsp;2</tt>. Die beiden vorhergehenden Zeilen werden vom

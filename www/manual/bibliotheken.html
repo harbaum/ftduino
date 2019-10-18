@@ -72,20 +72,20 @@ werden entsprechende Sketche weiterhin funktionieren.
 Konstanten immer direkt aufeinander folgend auftsteigend sind.
 Man kann also z.B. über alle Ports abzählen:
 
-<pre>
+<pre><code class="language-c">
      // Schleife über alle Eingänge des ftDuino
      for(uint8_t port=Ftduino::I1; port &lt;= Ftduino::I8; port++) {
        /* port verweist nacheinandern auf alle Ports I1 bis I8 */
        mache_etwas(port);
      }
-</pre>
+</code></pre>
 Eine äquivalente Version ist:
 
-<pre>
+<pre><code class="language-c">
      for(uint8_t i=0; i &lt; 8; i++) {
        mache_etwas(Ftduino::I1+i);
      }
-</pre>
+</code></pre>
 <h2><a id="9.1">9.1 <tt>FtduinoSimple</tt></a></h2> 
 
 <p>Die <tt>FtduinoSimple</tt>-Bibliothek ist eine sehr einfache
@@ -116,9 +116,9 @@ Werten zu schalten.
 <p>Um die <tt>FtduinoSimple</tt>-Bibliothek zu nutzen muss zu Beginn eines
 Sketches die entsprechende Include-Zeile eingefügt werden.
 
-<pre>
+<pre><code class="language-c">
      #include &lt;FtduinoSimple.h&gt;
-</pre>
+</code></pre>
 <h3><a id="9.1.1">9.1.1 Verwendung im Sketch</a></h3> 
 
 <p>Die <tt>FtduinoSimple</tt>-Bibliothek verbirgt viele Details
@@ -129,7 +129,7 @@ einem Sketch zu verwendet.
 <p>Folgendes Beispiel zeigt das periodische Schalten eines Ausganges mit
 Hilfe der <tt>FtduinoSimple</tt>-Bibliothek:
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  void setup() {
@@ -144,7 +144,7 @@ Hilfe der <tt>FtduinoSimple</tt>-Bibliothek:
      <font color="green">12</font>    ftduino.output_set(Ftduino::O1, Ftduino::LO);
      <font color="green">13</font>    delay(1000);
      <font color="green">14</font>  }
-</pre>
+</code></pre>
 In den Zeilen 9 und 12 wird der Ausgang <tt>O1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ein-
 bzw. ausgeschaltet. Der erste Parameter der
 <tt>output_set()</tt>-Funktion gibt dabei den zu schaltenden Ausgang an,
@@ -156,7 +156,7 @@ natürlich mit 9 Volt versorgt werden.
 <p>Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lassen sich ebenfalls sehr einfach
 mit Hilfe der <tt>FtduinoSimple</tt>-Bibliothek abfragen:
 
-<pre>
+<pre><code class="language-c">
      <font color="green"> 1</font>  #include &lt;FtduinoSimple.h&gt;
      <font color="green"> 2</font>  
      <font color="green"> 3</font>  void setup() {
@@ -173,7 +173,7 @@ mit Hilfe der <tt>FtduinoSimple</tt>-Bibliothek abfragen:
      <font color="green">14</font>      ftduino.output_set(Ftduino::O1, Ftduino::LO);
      <font color="green">15</font>    }
      <font color="green">16</font>  }
-</pre>
+</code></pre>
 In Zeile 9 wird der Zustand eines an den Eingang <tt>I1</tt>
 angeschlossenen Schalters ermittelt. Je nachdem ob er gedrückt
 (geschlossen) ist oder offen wird in den Zeilen 11 bzw. 14 der Ausgang
@@ -197,12 +197,12 @@ dadurch zu einer Verzögerung von einigen Mikrosekunden, da
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-intern eine Umschaltung auf den geänderten Eingang
 durchgeführt werden muss.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // lies den Zustand einer Taste an Eingang I1
      <font color="green"> 2</font>  if(ftduino.input_get(Ftduino::I1)) {
      <font color="green"> 3</font>    /* ... tue etwas ... */
      <font color="green"> 4</font>  }
-</pre>
+</code></pre>
 <h3><a id="9.1.3">9.1.3 <tt>bool counter_get_state(uint8_t ch)</tt></a></h3>
 
 <p>Diese Funktion entspricht von ihrer Wirkungsweise <tt>input_get()</tt>.
@@ -213,12 +213,12 @@ angewandt. Der Wertebereich für <tt>ch</tt> reicht demnach von
 <p>Der Rückgabewerte ist <tt>true</tt>, wenn der Eingang mit Masse
 verbunden ist und <tt>false</tt>, wenn nicht.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // lies den Zustand einer Taste an Zaehler-Eingang C1
      <font color="green"> 2</font>  if(ftduino.counter_get_state(Ftduino::C1)) {
      <font color="green"> 3</font>    /* ... tue etwas ... */
      <font color="green"> 4</font>  }
-</pre>
+</code></pre>
 <h3><a id="9.1.4">9.1.4 <tt>void output_set(uint8_t port, uint8_t mode)</tt></a></h3>
 
 <p>Mit der Funktion <tt>output_set()</tt> können die Ausgänge <tt>O1</tt>
@@ -232,10 +232,10 @@ soll, <tt>Ftduino::LO</tt>, wenn der Ausgang gegen Masse geschaltet
 werden soll und <tt>Ftduino::HI</tt>, wenn der Ausgang auf 9 Volt
 geschaltet werden soll.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Lampe zwischen Ausgang O1 und Masse leuchten lassen
      <font color="green"> 2</font>  ftduino.output_set(Ftduino::O1, Ftduino::HI);
-</pre>
+</code></pre>
 <em>Hinweis: Ausgänge können nur verwendet werden, wenn der
   <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
   <a href="controller.html#1.2.5">1.2.5</a>).</em>
@@ -262,10 +262,10 @@ Anschlüsse aktiv gebremst wird während der Motor bei
 <tt>Ftduino::OFF</tt> lediglich spannungslos geschaltet wird und
 langsam ausläuft.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Motor an Ausgang M1 links herum laufen lassen
      <font color="green"> 2</font>  ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
-</pre>
+</code></pre>
 <em>Hinweis: Ausgänge können nur verwendet werden, wenn der
   <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
   <a href="controller.html#1.2.5">1.2.5</a>).</em>
@@ -293,20 +293,20 @@ Funktionsbeschreibungen erwähnt.
 <p>Um die <tt>Ftduino</tt>-Bibliothek zu nutzen muss zu Beginn eines
 Sketches die entsprechende Include-Zeile eingefügt werden.
 
-<pre>
+<pre><code class="language-c">
      #include &lt;Ftduino.h&gt;
-</pre>
+</code></pre>
 Zusätzlich muss vor Verwendung aller anderen Funktionen die
 <tt>init()</tt>-Funktion aufgerufen werden. Dies geschieht sinnvoller
 Weise früh in der <tt>setup()</tt>-Funktion.
 
-<pre>
+<pre><code class="language-c">
      // die setup-Funktion wird einmal beim Start aufgerufen
      void setup() {
        // Benutzung der Ftduino-Bibliothek vorbereiten
        ftduino.init();
      }
-</pre>
+</code></pre>
 <h3><a id="9.2.1">9.2.1 Die Eingänge <tt>I1</tt> bis <tt>I8</tt></a></h3>
 
 <p>Die Eingänge <tt>I1</tt> bis <tt>I8</tt> sind mit Analogeingängen des
@@ -372,11 +372,11 @@ Millisekunden dauern, bis die Funktion einen gültigen Messwert zurück
 liefert. Die Funktion blockiert in dem Fall die Programmausführung so
 lange.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Widerstand an I1 auswerten
      <font color="green"> 2</font>  ftduino.input_set_mode(Ftduino::I1, Ftduino::RESISTANCE);
      <font color="green"> 3</font>  uint16_t widerstand = ftduino.input_get(Ftduino::I1);
-</pre>
+</code></pre>
 <h3><a id="9.2.4">9.2.4 Die Ausgänge <tt>O1</tt> bis <tt>O8</tt> und <tt>M1</tt> bis <tt>M4</tt></a></h3>
 
 <p>Die Ausgänge <tt>O1</tt> bis <tt>O8</tt> sind acht unabhängige verstärkte
@@ -446,10 +446,10 @@ PWM-Wertebereichs z.B. in späteren Versionen der
 können. Zwischenwerte können dazu von den Konstanten abgeleitet werden
 (z.B. <tt>Ftduino::MAX</tt>/2).
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Ausgang O2 auf 50% einschalten
      <font color="green"> 2</font>  ftduino.output_set(Ftduino::O2, Ftduino::HI, Ftduino::MAX/2);
-</pre>
+</code></pre>
 <h3><a id="9.2.6">9.2.6 <tt>void motor_set(uint8_t port, uint8_t mode, uint8_t pwm)</tt></a></h3>
 
 <p>Die Funktion <tt>motor_set()</tt> schaltet einen kombinierten
@@ -482,10 +482,10 @@ können. Zwischenwerte können dazu von den Konstanten abgeleitet werden
 bestimmt der <tt>pwm</tt>-Wert, wie stark der Motor gebremst wird. Im
 Modus <tt>Ftduino::OFF</tt> hat der <tt>pwm</tt>-Wert keine Bedeutung.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Motor an M3 mit 1/3 Geschwindigkeit links drehen
      <font color="green"> 2</font>  ftduino.motor_set(Ftduino::M3, Ftduino::LEFT, Ftduino::MAX/3);
-</pre>
+</code></pre>
 <h3><a id="9.2.7">9.2.7 <tt>void motor_counter(uint8_t port, uint8_t mode, uint8_t pwm, uint16_t counter)</tt></a></h3>
 
 <p>Diese Funktion dient zur Ansteuerung von Encoder-Motoren und gleicht in
@@ -518,13 +518,13 @@ aktiv ist. Gültige Werte von <tt>port</tt> liegen im Bereich von
 nicht abgelaufen ist. Mit dieser Funktion kann u.a. auf das Ablaufen
 der Impulszählung und das Stoppen des Motors gewartet werden:
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // TXT-Encodermotor an M4 für drei volle Umdrehungen starten
      <font color="green"> 2</font>  ftduino.motor_counter(Ftduino::M4, Ftduino::LEFT, Ftduino::MAX, 190);
      <font color="green"> 3</font>  // warten bis der Motor stoppt
      <font color="green"> 4</font>  while(ftduino.motor_counter_active(Ftduino::M4));
      <font color="green"> 5</font>  // Motor hat gestoppt 
-</pre>
+</code></pre>
 <h3><a id="9.2.9">9.2.9 <tt>void motor_counter_set_brake(uint8_t port, bool on)</tt></a></h3>
 
 
@@ -548,7 +548,7 @@ Umdrehungen) nach.
 <p>Da die Zähler nach dem Stoppen des Encoders weiterlaufen ist der
 Nachlauf auch per Programm messbar:
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Bremse für Ausgang M4 abschalten
      <font color="green"> 2</font>  ftduino.motor_counter_set_brake(Ftduino::M4, false);
      <font color="green"> 3</font>  // TXT-Encodermotor an M4 für drei volle Umdrehungen starten
@@ -559,7 +559,7 @@ Nachlauf auch per Programm messbar:
      <font color="green"> 8</font>  delay(500);
      <font color="green"> 9</font>  // Zählerstand ausgeben
      <font color="green">10</font>  Serial.println(ftduino.counter_get(Ftduino::C4));
-</pre>
+</code></pre>
 <h3><a id="9.2.10">9.2.10 Die Zählereingänge <tt>C1</tt> bis <tt>C4</tt></a></h3>
 
 <p>Die Zählereingänge arbeiten im Gegensatz zu den Analogeingängen rein
@@ -633,13 +633,13 @@ für <tt>ch</tt> liegen im Bereich von <tt>Ftduino::C1</tt> und
 auf Null gesetzt werden. Gültige Werte für <tt>ch</tt> liegen im
 Bereich von <tt>Ftduino::C1</tt> und <tt>Ftduino::C4</tt>.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Eine Sekunde lang steigende (low-nach-high) Impulse an Eingang C1 zählen
      <font color="green"> 2</font>  ftduino.counter_set_mode(Ftduino::C1, Ftduino::C_EDGE_RISING);
      <font color="green"> 3</font>  ftduino.counter_clear(Ftduino::C1);
      <font color="green"> 4</font>  delay(1000);
      <font color="green"> 5</font>  uint16_t impulse = ftduino.counter_get(Ftduino::C1);
-</pre>
+</code></pre>
 <h3><a id="9.2.14">9.2.14 <tt>bool counter_get_state(uint8_t ch)</tt></a></h3>
 
 <p>Der Zustand der Zählereingänge kann auch direkt mit der Funktion
@@ -680,12 +680,12 @@ auch, wenn kein Sensor angeschlossen ist.
 
 <p>Der Sensor selbst arbeitet im Bereich von 0 bis 1023 Zentimeter.
 
-<p><b>Beispiel:</b><br><pre>
+<p><b>Beispiel:</b><br><pre><code class="language-c">
      <font color="green"> 1</font>  // Distanzsensor an Eingang C1 abfragen
      <font color="green"> 2</font>  ftduino.ultrasonic_enable(true);
      <font color="green"> 3</font>  delay(1000);   // eine Sekunde Zeit für erste Messung geben
      <font color="green"> 4</font>  int16_t distanz = ftduino.ultrasonic_get();
-</pre>
+</code></pre>
 <h2><a id="9.3">9.3 Befehlsübersicht</a></h2>
 
 <p><h4>Befehlsübersicht <tt>FtduinoSimple</tt></h4>

@@ -76,14 +76,14 @@ sich unter <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libra
 als Schaltereingänge für die Lichtschranken. Eine durch eine Kugel
 unterbrochene Lichtschranke liefert dann den Wert ``unwahr'':
 
-<pre>
+<pre><code class="language-c">
      if(!ftduino.input_get(Ftduino::I4)) {
        if(millis() - loose_timer &gt; 1000) {
          // ...
        }
        loose_timer = millis();
      }
-</pre>
+</code></pre>
 Dabei wird ein Timer mitgeführt, der z.B. in diesem Fall dafür sorgt,
 dass frühestens eine Sekunde (1000 Millisekunden) nach einem Ereignis
 ein weiteres Ereignis erkannt wird.
@@ -124,7 +124,7 @@ durch den <font color="red">f</font><font color="blue">t</font><font color="dark
 (circa 9 Volt) wenn eine weiße Fläche erkannt wird und nur wenig
 Millivolt, wenn die schwarze Linie erkannt wurde.
 
-<pre>
+<pre><code class="language-c">
        // beiden Eingänge auf Spannungsmessung einstellen
        ftduino.input_set_mode(Ftduino::I1, Ftduino::VOLTAGE); 
        ftduino.input_set_mode(Ftduino::I2, Ftduino::VOLTAGE); 
@@ -138,7 +138,7 @@ Millivolt, wenn die schwarze Linie erkannt wurde.
          // beide Sensoren haben die Linie erkannt
          // ...
        }
-</pre>
+</code></pre>
 <h2><a id="7.4">7.4 Idas Ampel</a></h2> 
 
 <p>Ein klassisches Modell ist die Ampel bzw. die Fußgängerampel. Das
@@ -174,7 +174,7 @@ einer Zeit gewartet wird und setzt fort, wenn das entsprechende Ereignis
 eingetreten ist. Im Folgenden ist dies exemplarisch für die ersten zwei Zustände
 der Ampel dargestellt.
 
-<pre>
+<pre><code class="language-c">
      void loop() {
        // warte auf Tastendruck
        while(!ftduino.input_get(BUTTON)) {
@@ -191,7 +191,7 @@ der Ampel dargestellt.
      
        // ...
      }
-</pre>
+</code></pre>
 Dieses Programm ist kurz und leicht zu verstehen. Das ist eigentlich gut, hat
 aber einen entscheidenden Nachteil: Während auf ein Ereignis gewartet wird stoppt
 der gesamte Programmablauf und es ist nicht möglich, weitere Dinge parallel
@@ -204,7 +204,7 @@ befindet.
 
 <p>Die Lösung ist ein Zustandsautomat.
 
-<pre>
+<pre><code class="language-c">
      // die loop-Funktion wird immer wieder aufgerufen
      void loop() {
        // Zeitpunkt des nächsten Lichtwechsel-Ereignisses
@@ -263,7 +263,7 @@ befindet.
          }
        } 
      }
-</pre>
+</code></pre>
 Dieses Listing ist deutlich komplizierter. Aber es hat den großen
 Vorteil, dass an keiner Stelle aktiv gewartet wird. Stattdessen wird
 die Programmausführung ständig fortgesetzt.  Um trotzdem die einzelnen
