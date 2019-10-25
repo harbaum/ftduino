@@ -2304,10 +2304,11 @@ mit vorangestelltem 0x sind in Hexadezimalschreibweise dargestellt.
 <p><h4>Registerbelegungen für Ausgänge O1 bis O8 bzw. M1 bis M4</h4>
 
 <center><figure><table>
-  <tr><td>
- 0x00 </td><td> Ausgangs-Modus O1/M1 </td></tr>
  <tr><td>
-     </td><td>  0x0x - Betrieb als Einzelausgang </td></tr>
+ Register </td><td> Beschreibung </td></tr>
+<tr><td colspan='2'><hr></td></tr><tr><td>
+ 0x00 </td><td> Ausgangs-Modus O1/M1 </td></tr>
+     <tr><td></td><td>  0x0x - Betrieb als Einzelausgang </td></tr>
      <tr><td></td><td>  0x00 - Einzelausgang offen/hochohmig (tristate) </td></tr>
      <tr><td></td><td>  0x01 - Einzelausgang gegen +9V geschaltet (High) </td></tr>
      <tr><td></td><td>  0x02 - Einzelausgang gegen Masse geschaltet (Low) </td></tr>
@@ -2316,49 +2317,49 @@ mit vorangestelltem 0x sind in Hexadezimalschreibweise dargestellt.
      <tr><td></td><td>  0x11 - Motorausgang gebremst aus (brake) </td></tr>
      <tr><td></td><td>  0x12 - Motorausgang links drehend an </td></tr>
      <tr><td></td><td>  0x13 - Motorausgang rechts drehend an </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x01 </td><td> Ausgangswert (PWM) O1/M1 von 0 (aus) bis 255 (100% an) </td></tr>
      <tr><td></td><td> Der Zustand des Hardwareausgangs wird beim Schreiben </td></tr>
      <tr><td></td><td> dieses Registers aktualisiert </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x02 </td><td> Ausgangs-Modus O2 </td></tr>
      <tr><td></td><td> Der Inhalt dieses Registers wird ignoriert, wenn Ausgangs-Modus O1/M1 </td></tr>
      <tr><td></td><td> (Register 0x00) den Wert 0x1x enthält </td></tr>
      <tr><td></td><td> 0x00 - Einzelausgang offen/hochohmig (tristate) </td></tr>
      <tr><td></td><td> 0x01 - Einzelausgang gegen +9V geschaltet (High) </td></tr>
      <tr><td></td><td> 0x02 - Einzelausgang gegen Masse geschaltet (Low) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x03 </td><td> Ausgangswert (PWM) O2 von 0 (aus) bis 255 (100% an) </td></tr>
      <tr><td></td><td> Der Inhalt dieses Registers wird ignoriert, wenn Ausgangs-Modus O1/M1 </td></tr>
      <tr><td></td><td> (Register 0x00) den Wert 0x1x enthält </td></tr>
      <tr><td></td><td> Der Zustand des Hardwareausgangs wird beim Schreiben </td></tr>
      <tr><td></td><td> dieses Registers aktualisiert </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x04 </td><td> Ausgangs-Modus O3/M2, siehe Ausgang-Modus O1 (Register 0x00) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x05 </td><td> Ausgangswert O3/M2, siehe Ausgangswert O1 (Register 0x01) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x06 </td><td> Ausgangs-Modus O4, siehe Ausgang-Modus O2 (Register 0x02) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x07 </td><td> Ausgangswert O4, siehe Ausgangswert O2 (Register 0x03) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x08 </td><td> Ausgangs-Modus O5/M3, siehe Ausgang-Modus O1 (Register 0x00) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x09 </td><td> Ausgangswert O5/M3, siehe Ausgangswert O1 (Register 0x01) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x0a </td><td> Ausgangs-Modus O6, siehe Ausgang-Modus O2 (Register 0x02) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x0b </td><td> Ausgangswert O6, siehe Ausgangswert O2 (Register 0x03) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x0c </td><td> Ausgangs-Modus O7/M4, siehe Ausgang-Modus O1 (Register 0x00) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x0d </td><td> Ausgangswert O7/M4, siehe Ausgangswert O1 (Register 0x01) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x0e </td><td> Ausgangs-Modus O8, siehe Ausgang-Modus O2 (Register 0x02) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x0f </td><td> Ausgangswert O8, siehe Ausgangswert O2 (Register 0x03) </td></tr>
-
-<p></table></figure></center>
+<tr><td colspan='2'><hr></td></tr><tr><td>
+</table></figure></center>
 
 <p><h4>Registerbelegungen für Eingänge I1 bis I8</h4>
 Es können maximal die beiden Bytes eines Eingangs in einem gemeinsamen
@@ -2366,48 +2367,52 @@ I2C-Transfer gelesen werden. Jeder Eingang muss einzeln gelesen werden.
 
 <center><figure><table>
   <tr><td>
+ Register </td><td> Beschreibung </td></tr>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x10 </td><td> schreiben: Eingangs-Modus I1 </td></tr>
          <tr><td></td><td>  0x00 - Spannung </td></tr>
          <tr><td></td><td>  0x01 - Widerstand </td></tr>
          <tr><td></td><td>  0x02 - Schalter </td></tr>
          <tr><td></td><td>  lesen: Eingangswert I1, Low-Byte (LSB) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x11 </td><td> lesen: Eingangswert I1, High-Byte (MSB) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x12 </td><td> Eingangs-Modus/Eingangswert I2, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x13 </td><td> Eingangswert I2, siehe Eingangswert I1 (Register 0x11) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x14 </td><td> Eingangs-Modus/Eingangswert I3, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x15 </td><td> Eingangswert I3, siehe Eingangswert I1 (Register 0x11) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x16 </td><td> Eingangs-Modus/Eingangswert I4, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x17 </td><td> Eingangswert I4, siehe Eingangswert I1 (Register 0x11) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x18 </td><td> Eingangs-Modus/Eingangswert I5, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x19 </td><td> Eingangswert I5, siehe Eingangswert I1 (Register 0x11) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x1a </td><td> Eingangs-Modus/Eingangswert I6, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x1b </td><td> Eingangswert I6, siehe Eingangswert I1 (Register 0x11) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x1c </td><td> Eingangs-Modus/Eingangswert I7, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x1d </td><td> Eingangswert I7, siehe Eingangswert I1 (Register 0x11) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x1e </td><td> Eingangs-Modus/Eingangswert I8, siehe Eingangs-Modus I1 (Register 0x10) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
   0x1f </td><td> Eingangswert I8, siehe Eingangswert I1 (Register 0x11) </td></tr>
-
-<p></table></figure></center>
+<tr><td colspan='2'><hr></td></tr><tr><td>
+</table></figure></center>
 
 <p><h4>Registerbelegungen für Zählereingänge C1 bis C4</h4>
 
 <center><figure><table>
   <tr><td>
+ Register </td><td> Beschreibung </td></tr>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x20 </td><td> schreiben: Zähler-Modus C1 </td></tr>
       <tr><td></td><td> 0x00 - aus </td></tr>
       <tr><td></td><td> 0x01 - steigende Flanke </td></tr>
@@ -2415,41 +2420,41 @@ I2C-Transfer gelesen werden. Jeder Eingang muss einzeln gelesen werden.
       <tr><td></td><td> 0x03 - beide Flanken </td></tr>
       <tr><td></td><td> 0x04 - Ultraschallsensor aktivieren </td></tr>
       <tr><td></td><td> lesen: Eingangszustand C1 </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x21 </td><td> schreiben: Zähler C1  </td></tr>
       <tr><td></td><td> 0x00  - Zähler unverändert lassen </td></tr>
       <tr><td></td><td> sonst - Zähler löschen </td></tr>
       <tr><td></td><td> lesen: Zählerstand C1/Ultraschall-Distanz, Low-Byte (LSB) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x22 </td><td> Zählerstand C1/Ultraschall-Distanz, High-Byte (MSB) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x24 </td><td> schreiben: Zähler-Modus C2 </td></tr>
       <tr><td></td><td> 0x00 - aus </td></tr>
       <tr><td></td><td> 0x01 - steigende Flanke </td></tr>
       <tr><td></td><td> 0x02 - fallende Flanke </td></tr>
       <tr><td></td><td> 0x03 - beide Flanken </td></tr>
       <tr><td></td><td> lesen: Eingangszustand C2 </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x25 </td><td> schreiben: Zähler C2  </td></tr>
       <tr><td></td><td> 0x00  - Zähler unverändert lassen </td></tr>
       <tr><td></td><td> sonst - Zähler löschen </td></tr>
       <tr><td></td><td> lesen: Zählerstand C2, Low-Byte (LSB) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x26 </td><td> Zählerstand C2, High-Byte (MSB) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x28 </td><td> Zähler-Modus C3, siehe Zähler-Modus C2 (Register 0x24) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x29 </td><td> Zählerstand C3, Low-Byte (LSB), siehe Zählerstand C2 (Register 0x25) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x2a </td><td> Zählerstand C3, High-Byte (MSB), siehe Zählerstand C2 (Register 0x26) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x2c </td><td> Zähler-Modus C4, siehe Zähler-Modus C2 (Register 0x24) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x2d </td><td> Zählerstand C4, Low-Byte (LSB), siehe Zählerstand C2 (Register 0x25) </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x2e </td><td> Zählerstand C4, High-Byte (MSB), siehe Zählerstand C2 (Register 0x26) </td></tr>
-
-<p></table></figure></center>
+<tr><td colspan='2'><hr></td></tr><tr><td>
+</table></figure></center>
 
 
 <p><h4><font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als I²C-Slave am PC</h4>
@@ -2751,7 +2756,7 @@ Adapters zu bestimmen.
 
 <center><figure><table>
  <tr><td>Register </td><td> Beschreibung </td></tr>
- <tr><td>
+<tr><td colspan='2'><hr></td></tr><tr><td>
  0x00/0x01 </td><td> Setzen der Pulsweite der Servoausgänge 1 oder 2 in Schritten von 16µs. In der Standardeinstellung werden nur Werte im für Servos geeigneten Bereich von 63 (1ms) bis 125 (2ms) akzeptiert. Werte außerhalb dieses Bereiches werden gekappt. Die Grenzen können verändert werden (s.u.).</td></tr>
  <tr><td>0x02/0x03 </td><td> Setzen der unteren Grenze der Pulsweise von Servo 1 bzw. Servo 2 in 16µs-Schritten. Standardwert ist 63. Werte größer als diese Grenze, die in die Register 0x00 und 0x01 geschrieben werden werden auf diese untere Grenze beschränkt.</td></tr>
  <tr><td>0x04/0x05 </td><td> Setzen der oberen Grenze der Pulsweise von Servo 1 bzw. Servo 2 in 16µs-Schritten. Standardwert ist 125. Werte kleiner als diese Grenze, die in die Register 0x00 und 0x01 geschrieben werden werden auf diese obere Grenze beschränkt.</td></tr>

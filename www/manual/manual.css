@@ -123,13 +123,14 @@ body { top: 0px !important; }
 table,
 th,
 td {
-	border: 1px solid #a0a0a0;
+    border: none;
 }
 
 table {
-	border-collapse: collpase;
+    border-collapse: collpase;
+    background-color: #f0f0f0;
 	border-spacing: 0;
-	border-width: 1px 0 0 1px;
+	border-width: none;
 	margin: 0 0 1.75em;
 	table-layout: fixed;
 	/* Prevents HTML tables from becoming too wide */
