@@ -1,10 +1,10 @@
 ##############################################################
 
 ftduino.name=ftDuino
+ftduino.vid.0=0x1c40
+ftduino.pid.0=0x0537
 ftduino.vid.1=0x1c40
-ftduino.pid.1=0x0537
-ftduino.vid.2=0x1c40
-ftduino.pid.2=0x0538
+ftduino.pid.1=0x0538
 
 ftduino.upload.tool=avrdude
 ftduino.upload.protocol=avr109
@@ -35,8 +35,8 @@ ftduino.build.variant=ftduino
 ftduino.build.extra_flags={build.usb_flags}
 
 ftduinowebusb.name=ftDuino (WebUSB)
-ftduinowebusb.vid.1=0x1c40
-ftduinowebusb.pid.1=0x0538
+ftduinowebusb.vid.0=0x1c40
+ftduinowebusb.pid.0=0x0538
 
 ftduinowebusb.upload.tool=avrdude
 ftduinowebusb.upload.protocol=avr109
