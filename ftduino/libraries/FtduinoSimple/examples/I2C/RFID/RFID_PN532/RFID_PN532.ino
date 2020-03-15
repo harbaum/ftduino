@@ -14,7 +14,12 @@ Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
 
 void setup(void) {
   Serial.begin(115200);
-  while (!Serial) delay(10); // for Leonardo/Micro/Zero
+
+  // wait up to 3000ms for usb
+  // for Leonardo/Micro/Zero
+  uint32_t to = millis();
+  while((!Serial) && ((millis()-to) < 3000))
+    delay(10);
 
   nfc.begin();
 
