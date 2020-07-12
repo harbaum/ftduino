@@ -14,12 +14,16 @@ figure {
   border: 1px solid transparent;
 }
 
-@media (min-width: 30em) { /* Bilder nur nebeneinander, wenn es breit genug ist;  mindestens 30em */ 
-figure figure {
-  text-align: left;
-  width: 40%;
-  display: inline-block;
+figure img {
+    max-width: 100%;
 }
+
+@media (min-width: 30em) { /* Bilder nur nebeneinander, wenn es breit genug ist;  mindestens 30em */ 
+    figure figure {
+	text-align: center;
+	width: 40%;
+	display: inline-block;
+    }
 }
 
 footer {
