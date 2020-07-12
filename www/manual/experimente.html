@@ -3279,7 +3279,7 @@ aus dem Browser auf dem <font color="red">f</font><font color="blue">t</font><fo
 <p>Während Brickly eine komplette <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifische Entwicklung ist
 ist Scratch 3.0 ein eigenständiges Projekt. Die unter
 <a href="https://harbaum.github.io/ftduino/webusb/scratch3/">https://harbaum.github.io/ftduino/webusb/scratch3/</a> befindliche
-Variante von Scratch 3.0 beinhaltet zusätzlich eine segenannte
+Variante von Scratch 3.0 beinhaltet zusätzlich eine sogenannte
 Extension zur Ansteuerung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
 
 <p>Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Extension greift direkt auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu und
@@ -3291,6 +3291,446 @@ Smartphones und Android-Tabletts.
 
 <p>Mehr Informationen zu Scratch 3.0 und dem Einsatz des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
 finden sich in Abschnitt <a href="schule.html#5.1.4">5.1.4</a>.
+
+<p><h2><a id="6.19">6.19 Bluetooth</a></h2> 
+
+<p>Schwierigkeitsgrad: <font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font><font color="darkorange">&#9733;</font>&#9734;&#9734;
+
+<p>Bluetooth ist eine drahtlose Übertragungstechnik für Kurzstrecken.
+Die meisten PCs, Tabletts und Smartphones beherrschen Bluetooth und
+können sich so drahtlos mit Endgeräten verbinden. Viele Spielzeuge
+unterstützen Bluetooth ebenfalls und auch die meisten Controller
+von Lego oder fischertechnik beherrschen diese Technologie.
+
+<figure id="IMG:6.60">
+  
+  <img src="experimente/bt_module.jpg">
+  <figcaption>Abbildung 6.60: Bluetooth-Module HC-05, HC-06 und HM-10 für den Arduino</figcaption> 
+</figure>
+
+<p><h3><a id="6.19.1">6.19.1 Bluetooth-Varianten</a></h3>
+
+<p>Bluetooth existiert in vielen Varianten mit unterschiedlichen
+Datenraten, Reichweiten, Energiebedarf usw. Die meisten Unterschiede
+sind für die Anwendung am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> irrelevant. Es gibt allerdings
+eine fundamentale Unterscheidung zwischen dem sogenannten klassischen
+Bluetooth und Bluetooth-Low-Energy, die für die Nutzung am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+bedeutsam ist.
+
+<p><h4>Klassisches Bluetooth</h4>
+
+<p>Als klassisches Bluetooth wird üblicherweise die ursprünglich Variante
+bezeichnet. Sie wurde vor allem zum spontanen Datenaustausch zwischen
+PC und mobilen Endgeräten entworfen und findet immer dann Verwendung,
+wenn über Bluetooth Dateien, Bilder, Kontakte oder ähnlich
+ausgetauscht werden. Auch Bluetooth-Tastaturen und -Mäuse sowie
+Bluetooth-Kopfhörer und -Lautsprecher verwenden klassisches Bluetooth.
+Das klassische Bluetooth implementiert dafür sogenannte Profile. Eines
+dieser Profile ist das Object-Exchange-Profil (OBEX), wie es eben für
+den Austausch besagter Dateien verwendet wird.
+
+<p>Ein weiteres Profil des klassischen Bluetooth ist das sogenannte
+Serial-Port-Profil (SPP). Dieses Profil stellt eine relativ langsame
+einfache Punkt-zu-Punkt Datenverbindung her. SPP sollte vor allem
+Kabelgebundene serielle RS232-Verbindungen ersetzen und kam in erster
+Linie zur Verbindung mit seperaten GPS-Empfängern und ähnlich zum
+Einsatz. Heutzutage spielt das SPP eine geringe Rolle, wird aber von
+den meisten Systemen, die klassisches Bluetooth einsetzen unterstützt.
+Dazu zählen die aktuelle PC-Betriebssysteme wie Windows, MacOS und
+Linux ebenso wie die Mobilbetriebssysteme Android und IOS.
+
+<p>Da die PC-Betriebssysteme schon immer mit seriellen RS232-Verbindungen
+umgehen konnten gibt es entsprechend viel Software, die diese
+Verbindungen beherrscht. Diese Unterstützung überträgt sich auch auf
+SPP, USB und andere moderne Technologien. Für den Benutzer sieht daher
+eine SPP-Bluetooth-Verbindung aus wie jede andere serielle Verdbindung
+und wird z.B. unter Windows durch einen sogenannten COM-Port
+dargestellt. Jede Windows-Software, die einen COM-Port nutzen kann
+kann auch eine SPP-Bluetooth-Verbindung nutzen. Dazu zählt u.a. die
+Arduino-IDE selbst, die einen COM-Port zur Verbindung mit dem Arduino
+oder <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nutzt und auch eine SPP-Bluetooth-Verbindung nutzen
+kann.
+
+<p>Bei den Mobilbetriebssystemen ist die Nutzung von seriellen
+Verbindungen weniger verbreitet und damit ist auch die Verwendung des
+SPP unter Android weniger üblich und unter IOS inzwischen gar nicht
+mehr möglich.
+
+<p>Auch Geräte wie der TXT-Controller oder der Raspberry-Pi
+unterstützen klassisches Bluetooth.
+
+<p><h4>Bluetooth-Low-Energy (BLE)</h4>
+
+<p>Im Gegensatz zum klassischen Bluetooth ist Bluetooth-Low-Energy (BLE)
+eine recht junge Technologie. Sie wurde erst sehr spät zur
+Bluetooth-Familie hinzugefügt und basiert auf gänzlich neuen
+Übertragungsverfahren und Protokollen. Die Kommunikation mit
+BLE-Geräten erfordert relativ moderne Hardware und gänzlich andere
+Software. BLE vor allem auf geringen Energieverbrauch ausgerichtet.
+Dies wird durch geringen Datenraten und geringe zu übertragene
+Datenmengen erreicht. Um das zu erreichen verzichtet BLE auf die
+komplexen und langwierigen Verbindungsauf- und abbauten. Stattdessen
+werden bei BLE vergeleichsweise spontan kleine Datenpakete versendet.
+
+<p>Im PC-Bereich wird BLE eher selten verwendet und die Unterstützung
+auch in den neuesten Windows-Betriebsystemversionen ist häufig
+problematisch. Aber vor allem bei der Verbindung von mobilen
+Endgeräten mit Geräten wie Smart-Watches, Pulssensoren und ähnlich hat
+sich BLE etabliert. Die Unterstützung von BLE in den
+Mobilbetriebssystemen Android und IOS ist ausgereift und zuverlässig.
+
+<p>Geräte wie der TXT-Controller oder der Raspberry-Pi unterstützen
+naben klassischem Bluetooth auch BLE.
+
+<p><h4>Klassisches Bluetooth oder BLE?</h4>
+
+<p>Die vorherigen Beschreibungen lassen es schon erahnen: Während klassisches
+Bluetooth vor allem bei klassischen PCs eingesetzt wird ist BLE eher
+im Mobilumfeld die Technologie der Wahl.
+
+<p>Das bedeutet nicht, dass es umgekehrt generell gar nicht funktioniert.
+Eine Nutzung von BLE ist unter Windows unter bestimmten Bedingungen
+möglich und Android bietet weitgehende SPP-Unterstützung für
+klassisches Bluetooth. Im Zweifelsfall stellt aber klassisches
+Bluetooth im PC-Umfeld die einfachere Lösung dar und BLE bietet sich
+in Zusammenhang mit Mobilgeräten an.
+
+<p><h4>Arduino-Bluetooth-Module HC-05, HC-06 und HM-10</h4>
+
+<p>Einfache Arduinos verfügen ab Werk genauso wenig über
+Bluetooth-Unterstützung wie der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Für die Bluetooth-Nutzung
+ist daher Zusatzhardware nötig. Sehr preisgünstig und verbreitet sind
+kleine Module der Serien HC-05, HC-06 und HM-10. Wie in Abbildung
+<a href="experimente.html#IMG:6.60">6.60</a> dargestellt.
+
+<p>Während die Module HC-05 und HC-06 klassisches Bluetooth und SPP
+unterstützen nutzt das HM-10-Modul Bluetooth-Low-Energy. Die
+Unterschiede zwischen HC-05 und HC-06 sind kleiner. Während das HC-05
+etwas leistungsfähiger ist und z.B. selbst Verbindungen zu anderen
+Geräten aufbauen kann (u.a. seinesgleichen!) ist das HC-06 darauf
+beschränkt, von anderen Geräten angesprochen zu werden. Für die
+allermeisten Einsatzzwecke ist das aber unergeblich. In der Regel wird
+man von einem PC oder Mobilgerät die Verbindung zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+herstellen wollen. HC-05 und HC-06 eigenen sich daher vor allem zur
+Verbindung mit Windows-PCs. Das HM-10-Modul auf der anderen Seite kann
+als einziges der drei Module mit IOS-basierten Mobilgeräten eingesetzt
+werden. 
+
+<p><h3><a id="6.19.2">6.19.2 Anbindung an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font></a></h3>
+
+<p>Elektrisch und mechanisch unterscheiden sich die drei Module nur
+wenig, so dass die Anbindung an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> gleichermaßen für
+alle drei abläuft und das Modul jederzeit austauschbar ist.
+
+<p>Die Verbindung zum Arduino/<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erfolgt bei allen drei
+Modulen über vier Signale:
+
+<figure id="IMG:6.61">
+  
+  <img src="experimente/hc06_unterseite.jpg">
+  <figcaption>Abbildung 6.61: Anschlüsse des HC-06</figcaption> 
+</figure>
+
+<center><figure><table>
+  <tr><td>VCC </td><td> Versorgungsspannung von 5 Volt </td></tr>
+  <tr><td>GND </td><td> Masse </td></tr>
+  <tr><td>TXD </td><td> serieller UART-Datenausgang des Moduls </td></tr>
+  <tr><td>RXD </td><td> serieller UART-Dateneingang zum Modul </td></tr>
+</table></figure></center>
+
+<p>Über eine passende UART-Schnittstelle verfügen zwar die
+Mikrocontroller eines Arduino wie auch des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Während diese
+Schnittstelle z.B.  beim klassischen Arduino-UNO bereits für die
+USB-Kommunikation zum PC genutzt wird ist werdem diese Signale im
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> für andere Zwecke ebenfalls belegt.
+
+<p>Zusätzlich ist zu beachten, dass die Module zwar mit 5 Volt versorgt
+werden, aber die UART-Signale nur 3,3 Volt nutzen. Das macht für die
+TXD-Verbindung vom Modul zum Arduino/<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> keinen Unterschied, da
+diese mit den niedrigeren Spannungspegeln des Moduls umgehen können.
+Die Verbindung vom Arduino/<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum RXD-Eingang des Moduls
+sollte aber so gestaltet werden, dass nicht die vollen 5 Volt des
+Arduino/<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auf das Modul treffen. Diverse Anleitungen im
+Internet ignorieren diese Regel, was darauf hindeutet, dass die Module
+in dieser Beziehung robuster sind als der Aufdruck auf ihrer
+Unterseite vermuten lässt. Dennoch schadet es sicher nicht, innerhalb
+der 3,3-Volt-Grenzen zu bleiben.
+
+<p><h4>SoftwareSerial</h4>
+
+<p>In der Arduino-Welt behilft man sich in der Regel mit der Nutzung der
+SoftwareSerial-Bibliothek<a href="#fn41"><sup>41</sup></a> , mit
+deren Hilfe auch andere Pins des Mikrocontrollers in begrenztem Maße
+diese Aufgabe übernehmen können. Am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind lediglich zwei
+Anschlüsse des Mikrocontrollers direkt von außen zugänglich. Dies sind
+die SCL- und SDA-Signale am I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Diese
+beiden Signale sind leider nicht per SoftwareSerial nutzbar. Damit
+kann SoftwareSerial am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> nicht wie bei Arduinos üblich zur
+Kommunikation mit den Bluetooth-Modulen genutzt werden.
+
+<p><h4>I²C-UART SC16IS750</h4>
+
+<p>Eine elegante Möglichkeit ist der Einsatz eines Bausteins, der
+zwischen dem I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und dem UART-Protokoll,
+wie es für die Bluetooth-Module benötigt wird, übersetzen kann.
+
+<p>Ein solcher Baustein ist der SC16IS750<a href="#fn42"><sup>42</sup></a> 
+von NXP. Er ist u.a. unter der Bezeichnung CJMCU 750 auf einfachen
+Adapterplatinen im Online-Handel erhältlich und lässt sich sowohl
+direkt mit dem I²C-Anschluss als auch mit den UART-Signalen
+verbinden. Ein weiterer Vorteil dieses Chips ist, dass er mit
+3,3-Volt-Signalen arbeitet und so keine Gefahr für das Bluetooth-Modul
+darstellt. Auf der anderen Seite ist er selbst aber tolerant gegen 5
+Volt auf der I²C-Seite zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>.
+
+<figure id="IMG:6.62">
+  
+  <figure><b>MISSING: raisebox</b><figcaption>(a) Verbindungsschema</figcaption></figure> 
+  <figure><img src="experimente/i2c_uart_hm10.jpg"><figcaption>(b) Die Umsetzung erfordert
+    Lötarbeiten</figcaption></figure> 
+  <figcaption>Abbildung 6.62: Bluetooth über CJMCU 750-I²C-UART-Adapter</figcaption>
+</figure>
+
+<p>Abbildung <a href="experimente.html#IMG:6.62">6.62</a> stellt die nötigen Verbindungen dar, die
+zwischen I²C-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und I²C-Anschluss des CJMCU
+750 sowie UART-Anschluss des CJMCU 750 und dem Bluetooth-Modul
+hergestellt werden müssen.
+
+<p>Die Anschlüsse <tt>A0-CS</tt> und <tt>A1-SI</tt> des CJMCU 750 werden in
+diesem Beispiel auf Masse gelegt. Der SC16IS750 reagiert daher auf
+Adresse <tt>0x4e</tt> am I²C-Bus. Dies wird in den folgenen
+Beispielsketches berücksichtig. Sollen mehrere SC16IS750 am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+angeschlossen werden, so kann durch entsprechende Beschaltung von
+<tt>A0-CS</tt> und <tt>A1-SI</tt> eine andere Adresse vergeben werden.
+
+<p>Ein einfacher Beispielsketch findet sich unter
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/I2C_Uart/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C_Uart</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a>. Er überbrückt in beiden
+Richtungen zwischem dem USB-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum PC und dem
+UART-Anschluss des SC16IS750 zum Bluetooth-Modul. Jedes Zeichen, das
+vom PC (z.B. mit Hilfe des seriellen Monitors, siehe Abschnitt
+<a href="ersteschritte.html#3.3.1">3.3.1</a>) gesendet wird, wird vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> an das
+Bluetooth-Modul weitergeleitet und umgekehrt. Man kann so direkt mit
+dem Bluetooth-Modul kommunizieren und Daten aus dem seriellen Monitor
+über Bluetooth senden. Per Bluetooth empfangene Daten werden wiederum
+direkt im seriellen Monitor angezeigt.
+
+<p><h4>Einfacher Anschluss an C1</h4>
+
+<p>Wie bereits erwähnt wird der UART des Mikrocontrollers des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+intern verwendet. Da auch der fischertechnik-Ultraschallsensor (siehe
+Abschnitt <a href="controller.html#1.2.6">1.2.6</a>) einen UART verwendet wurde das
+UART-Empfangssignal des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> auf dem Zählereingang C1 zugänglich
+gemacht. Die Schutzschaltungen im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> haben einen geringen
+Einfluss auf die eingehenden Signale, so dass sich der TXD-Anchluss
+eines Bluetooth-Moduls direkt mit dem Zählereingang C1 des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+verbinden lässt.
+
+<figure id="IMG:6.63">
+  
+  <figure><b>MISSING: raisebox</b><figcaption>(a) Schema</figcaption></figure> 
+  <figure><img src="experimente/ftduino_hm10_c1.jpg"><figcaption>(b) Einfachste Umsetzung</figcaption></figure>
+  <figcaption>Abbildung 6.63: Nur für den Empfang: Bluetooth an C1</figcaption> 
+</figure>
+
+<p>Die für das Modul nötige 5-Volt-Versorgungsspannung kann wie in
+Abbildung <a href="experimente.html#IMG:6.63">6.63</a> zu sehen nach wie vor direkt vom
+I²C-Anschluss abgegriffen werden. Dazu finden am einfachsten
+sogenannte Buchse-auf-Buchse-Jumperwire Verwendung wie in der
+Abbildung zu sehen. Diese Kabel lassen sich sowohl direkt auf die Pins
+des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-I²C-Anschlusses stecken aus auch auf die Pins am
+Bluetooth-Modul.
+
+<p>Ein auf diese einfache Art angeschlossenes Bluetooth-Modul kann keine
+Daten vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> empfangen, sondern nur an ihn senden.  Für die
+Bluetooth-Verbindung z.B. zu einem PC bedeutet das, dass Daten zwar
+vom PC an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geschickt werden können, aber nicht vom
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum PC. Für viele einfache Fernsteueranwendungen ist das
+aber ausreichend und zum Beispiel ArduinoBlue (siehe Abschnitt
+ ist vollständig nutzbar.
+
+<p>Der Datenempfang von einem PC kann z.B. mit dem Sketch
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a> im seriellen Monitor
+beobachtet werden.
+
+<p>Die Nutzung des UARTs in dieser Form gerät in Konflikt mit der
+<tt>Ftduino</tt>-Bibliothek, da dort wie gesagt der UART ebenfalls
+Verwendung für den Ultraschallsensor findet. Der Beispielsketch
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/ArduinoBlue"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ArduinoBlue</span></tt></a> beinhaltet daher
+eine modifizierte Version der <tt>Ftduino</tt>-Bibliothek, die keine
+Unterstützung für den Ultraschallsensor enthält. Diese Version kann
+daher ohne Konflikt mit dieser Art des Bluetooth-Anschlusses genutzt
+werden.
+
+<p><h4>Bidirektionaler Anschluss an C1 & C2</h4>
+
+<p>Die UART-Sendeleitung des Mikrocontrollers, die zum Senden von Daten
+vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum Bluetooth-Modul nötig ist wird intern für den
+Zähleranschluss C2 verwendet. Dieser Anschluss ist in der
+normalen Konfiguration des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ein Eingang und mit entsprechenden
+Schutzschaltungen versehen.
+
+<p>Nutzt man diesen Anschluss als Ausgang, so sorgen diese
+Schutzschaltungen dafür, dass ein ausgehendes Digitalsignal eine
+Spannung von 2,5 Volt als Low-Pegel (0) und eine Spannung von 5 Volt
+als High-Pegel (1) aufweist.  Der RXD-Eingang am Bluetooth-Modul
+erwartet allerdings eine Spannung kleiner 0,8 Volt für ein Low-Signal
+und eine Spannung zwischen 2 und 3,3 Volt für ein High-Signal.
+
+<p>Eine der einfachten Möglichkeiten, die Spannung entsprechend
+abzusenken bietet eine einfach Siliziumleuchtdiode. Wie in Abbildung
+ dargestellt kann ihr Spannungsabfall genutzt
+werden, um den Signalpegel um ca. zwei Volt zu senken. Die
+resultierenden 0,5 Volt und 3 Volt werden von Bluetooth-Modul sicher
+erkannt und liegen innerhalb des für das Bluetooth-Modul verträglichen
+Bereiches unter 3,3 Volt. Beim Anschluss der Leuchtdiode ist die
+Polarität zu beachten. Das längerer Bein der Leuchtdiode gehört an den
+C2-Anschluss des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Sind Leuchtdiode und Widerstand korrekt
+angeschlossen, dann sollte die Leuchtdiode ganz schwach leuchten.
+
+<p>Der zusätzliche 100k-Widerstand stellt sicher, dass die Spannung beim
+Wechsel von 3 auf 0,5 Volt schnell genug sinkt. 
+
+<figure id="IMG:6.64">
+  
+  <figure><b>MISSING: raisebox</b><figcaption>(a) Schema</figcaption></figure> 
+  <figure><img src="experimente/ftduino_hm10_c1_c2.jpg"><figcaption>(b) Einfache
+    Umsetzung</figcaption></figure>
+  <figcaption>Abbildung 6.64: Senden und empfangen: Bluetooth an C1 & C2</figcaption> 
+</figure>
+
+<p>Mit dieser Schaltung ist bei bidirektionaler Betrieb möglich und die
+Kommunikation ist sowohl vom <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum PC als auch in
+Gegenrichtung vom PC zum <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> möglich.
+
+<figure id="IMG:6.65">
+  
+  <img src="experimente/hm10_atcmd.png">
+  <figcaption>Abbildung 6.65: AT-Kommandos mit dem HM-10</figcaption> 
+</figure>
+
+<p>Der Sketch <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a> erlaubt so
+u.a. die Konfiguration des Bluetooth-Moduls per sogenannter
+AT-Kommandos.  Abbildung zeigt bei Nutzung des Bridge-Sketches die
+Reaktion des HM-10 auf die Kommandos <tt>AT+NAME</tt>,
+<tt>AT+VERSION</tt> und <tt>AT+HELP</tt>. Das HC-05 und HC-06 reagieren
+ggf. etwas anders auf Kommandos bzw. müssen erst per Tastendruck in
+den Kommandomodus gebracht werden. Diese Kommandos sind für den
+einfachen Betrieb zunächst bedeutungslos. Sie beweisen hier nur
+beispielhaft die Kommunikation in beide Richtungen.
+
+<p><h4>Bidirektionaler Anschluss an C1, C2 und Spannungsregler</h4>
+
+<p>Das verbleibende Manko ist die Nutzung des I²C-Anschlusses zur
+Stromversorgung des Bluetooth-Moduls. Zum einen wird dadurch der
+Anchluss mechanisch blockiert und kann nicht mehr zum Anschluss
+von I²C-Sensoren genutzt werden. Zum anderen wird die interne
+Spannungsversorung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> unnötig belastet.
+
+<figure id="IMG:6.66">
+  
+  <figure><img src="experimente/hm10_serial1_bidir_7805_svg.png"><figcaption>(a) Schema</figcaption></figure> 
+  <figure><b>MISSING: raisebox</b><figcaption>(b) Einfache Umsetzung</figcaption></figure>
+  <figcaption>Abbildung 6.66: Freier I²C-Anschluss: Bluetooth an 9V, C1 & C2</figcaption> 
+</figure>
+
+<p>Abbildung <a href="experimente.html#IMG:6.66">6.66</a> zeigt daher, wie ein einfacher
+7805-Spannungsregler eine Versorung aus den 9 Volt des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+ermöglicht. Einziger Nachteil dieser Lösung ist, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+nun tatsächlich mit 9 Volt versorgt werden muss. Für die Nutzung des
+I²C-Anschlusses war eine Versorgung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über USB
+ausreichend.
+
+<figure id="IMG:6.67">
+  
+  <figure><b>MISSING: raisebox</b><figcaption>(a) Benötigte Teile</figcaption></figure> 
+  <figure><img src="experimente/hm10_bidir_7805_2.jpg"><figcaption>(b) Zusammenbau</figcaption></figure>
+  <figcaption>Abbildung 6.67: 9V-Versorgung und Datenberbindung</figcaption> 
+</figure>
+
+<p>Abbildung <a href="experimente.html#IMG:6.67">6.67</a> zeigt im Detail, welche
+Einzelteile nötig sind und wie sie am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu verbinden
+sind. Die nötigen Einzelteile sind zum Beispiel bei
+Reichelt<a href="#fn43"><sup>43</sup></a>  erhältlich.  Diese
+Liste enthält auch das HC-05-Bluetooth-Modul, das bei Bedarf durch ein
+HM-10 (leider nicht bei Reichelt erhältlich) ersetzt werden sollte.
+
+<p><h3><a id="6.19.3">6.19.3 Nutzung am PC oder Smartphone</a></h3>
+
+<p>Bluetooth am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> erfordert die Benutzung einer passenden
+Gegenstelle in Form passender Software am PC oder Smartphone.
+
+<p><h4>HC-05 unter Windows</h4>
+
+<p>Für die Nutzung an einem Windows-PC eignet sich wie beschrieben
+das HC-05 am besten. Sobald es mit Spannung versorgt ist und seine
+rote Leuchtdiode hektisch (ca. 5 mal je Sekunde) blinkt ist es
+bereit, eine Verbindung vom PC anzunehmen.
+
+<p>Am PC nutzt man das Bluetooth-Icon unten rechts und bindet das HC-05
+als neues Gerät ein. Dabei wird während der Kopplung eine
+Sicherheits-Pin abgefragt.  Diese lautet für alle hier vorgestellten
+Module <tt>1234</tt>.
+
+<p>Nach erfolfreicher Kopplung erscheint das HC-05 in Windows unter
+``Geräte und Drucker'' wie in Abbildung  dargestellt.
+Die eigentlich Kommunikation erfolgt nun über einen COM-Port, den
+man wie dargestellt in Erfahrung bringen kann. In diesem Fall ist das
+HC-05-Modul als <tt>COM6</tt> eingebunden und kann z.B. aus der Arduino-IDE
+mit Hilfe des seriellen Monitors angesprochen werden.
+
+<p>Hinweis: Der Bluetooth-COM-Port dient ausschließlich dem Datenaustausch
+über Bluetooth. Es ist z.B. nicht möglich, einen neuen Sketch auf
+den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über Bluetooth aufzuspielen.
+
+<figure id="IMG:6.68">
+  
+  <figure><img src="experimente/screenshot_win_bluetooth_1.png"><figcaption>(a) HC-05 in Geräte und Drucker</figcaption></figure> 
+  <figure><img src="experimente/screenshot_win_bluetooth_2.png"><figcaption>(b) Eigenschaften von HC-05</figcaption></figure> 
+  <figure><img src="experimente/screenshot_win_bluetooth_3.png"><figcaption>(c) Eigenschaften des COM-Ports</figcaption></figure> 
+  <figcaption>Abbildung 6.68: Bestimmung des Bluetooth-COM-Ports unter Windows</figcaption> 
+</figure>
+
+<p>Neben der Arduino-IDE eigenen sich andere sogenannte Terminalprogramme
+wie z.B. Tera-Term<a href="#fn44"><sup>44</sup></a> 
+zur Kommunikation über den COM-Port. Da die Arduino-IDE nur ein
+serielles Monitorfenster zur Zeit öffnen kann ist die Benutzung eines
+zweiten Terminalprograms ggf. nötig, wenn man Testdaten zwischen
+<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-USB-COM-Port und Bluetooth-COM-Port austauschen will.
+
+<p>Beispiel-Sketches zur Nutzung unter Windows sind
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a> und
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/I2C_Uart/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C_Uart</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a>.
+
+<p><h4>HM-10 auf dem Smartphone</h4>
+
+<p>Die App-Stores der großen Mobilbetriebssysteme bieten eine
+Vielzahl von Apps zum Zugriff auf das HM-10-Modul und
+im Falle von Android auch zum Zugriff auf das HC-05 oder
+HC-06.
+
+<p>Für das HM-10 sticht die kostenlose und werbefreie App
+ArduinoBlue<a href="#fn45"><sup>45</sup></a>  aus der
+Masse.
+
+<p>Wie in Abbildung  dargestellt ist die Oberfläche
+von ArduinoBlue übersichtlich gehalten und erlaubt sowohl eine
+Joystick-Steuerung des Modells, als auch eine Steuerung durch
+einstellbare Schaltflächen und Slider.
+
+<figure id="IMG:6.69">
+  
+  <figure><img src="experimente/screenshot_arduinoblue_1.png"><figcaption>(a) Einstellungen</figcaption></figure> 
+  <figure><img src="experimente/screenshot_arduinoblue_2.png"><figcaption>(b) Kommandos</figcaption></figure> 
+  <figure><img src="experimente/screenshot_arduinoblue_3.png"><figcaption>(c) Joystick</figcaption></figure>
+  <figcaption>Abbildung 6.69: ArduinoBlue unter Android</figcaption> 
+</figure>
+
+<p>ArduinoBlue ist für Android und IOS verfügbar.
+
+<p>Beispiel-Sketches zur Nutzung mit ArduinoBlue sind
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/ArduinoBlue"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ArduinoBlue</span></tt></a> und
+<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/I2C_Uart/ArduinoBlue"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C_Uart</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">ArduinoBlue</span></tt></a>.
+
 <hr><small>
 <a id="fn1">1) </a>Im Internet leicht zu finden
 unter dem Stichwort ``Floppymusik''<br>
@@ -3352,6 +3792,15 @@ findet sich unter <a href="https://github.com/ControlEverythingCommunity">https:
   <a href="https://developers.google.com/blockly/">https://developers.google.com/blockly/</a><br>
 <a id="fn40">40) </a>Adafruit GFX
   Library: <a href="https://github.com/adafruit/Adafruit-GFX-Library">https://github.com/adafruit/Adafruit-GFX-Library</a><br>
+<a id="fn41">41) </a>SoftwareSerial-Bibliothek:
+  <a href="https://www.arduino.cc/en/Reference/SoftwareSerial">https://www.arduino.cc/en/Reference/SoftwareSerial</a><br>
+<a id="fn42">42) </a>SC16IS750-Datenblatt:
+  <a href="https://www.nxp.com/docs/en/data-sheet/SC16IS740_750_760.pdf">https://www.nxp.com/docs/en/data-sheet/SC16IS740_750_760.pdf</a><br>
+<a id="fn43">43) </a>Reichelt Bauteileliste ``ftDuino Bluetooth
+  HC05'':<a href="https://www.reichelt.de/my/1733294">https://www.reichelt.de/my/1733294</a><br>
+<a id="fn44">44) </a>Tera-Term: <a href="http://ttssh2.osdn.jp">http://ttssh2.osdn.jp</a><br>
+<a id="fn45">45) </a>ArduinoBlue:
+  <a href="https://sites.google.com/stonybrook.edu/arduinoble/">https://sites.google.com/stonybrook.edu/arduinoble/</a><br>
 </small>
 <footer>
 <p><a href="">▲  nach oben</a><br><a href="http://ftduino.de/">ftDuino</a> manual - experimente</p>
