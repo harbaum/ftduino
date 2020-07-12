@@ -3485,7 +3485,7 @@ Volt auf der I²C-Seite zum <font color="red">f</font><font color="blue">t</font
 
 <figure id="IMG:6.62">
   
-  <figure><b>MISSING: raisebox</b><figcaption>(a) Verbindungsschema</figcaption></figure> 
+  <figure><img src="experimente/i2c_uart_svg.png"><figcaption>(a) Verbindungsschema</figcaption></figure> 
   <figure><img src="experimente/i2c_uart_hm10.jpg"><figcaption>(b) Die Umsetzung erfordert
     Lötarbeiten</figcaption></figure> 
   <figcaption>Abbildung 6.62: Bluetooth über CJMCU 750-I²C-UART-Adapter</figcaption>
@@ -3527,7 +3527,7 @@ verbinden lässt.
 
 <figure id="IMG:6.63">
   
-  <figure><b>MISSING: raisebox</b><figcaption>(a) Schema</figcaption></figure> 
+  <figure><img src="experimente/hm10_serial1_svg.png"><figcaption>(a) Schema</figcaption></figure> 
   <figure><img src="experimente/ftduino_hm10_c1.jpg"><figcaption>(b) Einfachste Umsetzung</figcaption></figure>
   <figcaption>Abbildung 6.63: Nur für den Empfang: Bluetooth an C1</figcaption> 
 </figure>
@@ -3546,7 +3546,7 @@ Bluetooth-Verbindung z.B. zu einem PC bedeutet das, dass Daten zwar
 vom PC an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geschickt werden können, aber nicht vom
 <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zum PC. Für viele einfache Fernsteueranwendungen ist das
 aber ausreichend und zum Beispiel ArduinoBlue (siehe Abschnitt
- ist vollständig nutzbar.
+<a href="experimente.html#6.19.3">6.19.3</a> ist vollständig nutzbar.
 
 <p>Der Datenempfang von einem PC kann z.B. mit dem Sketch
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a> im seriellen Monitor
@@ -3578,7 +3578,7 @@ und eine Spannung zwischen 2 und 3,3 Volt für ein High-Signal.
 
 <p>Eine der einfachten Möglichkeiten, die Spannung entsprechend
 abzusenken bietet eine einfach Siliziumleuchtdiode. Wie in Abbildung
- dargestellt kann ihr Spannungsabfall genutzt
+<a href="experimente.html#IMG:6.64">6.64</a> dargestellt kann ihr Spannungsabfall genutzt
 werden, um den Signalpegel um ca. zwei Volt zu senken. Die
 resultierenden 0,5 Volt und 3 Volt werden von Bluetooth-Modul sicher
 erkannt und liegen innerhalb des für das Bluetooth-Modul verträglichen
@@ -3592,7 +3592,7 @@ Wechsel von 3 auf 0,5 Volt schnell genug sinkt.
 
 <figure id="IMG:6.64">
   
-  <figure><b>MISSING: raisebox</b><figcaption>(a) Schema</figcaption></figure> 
+  <figure><img src="experimente/hm10_serial1_bidir_svg.png"><figcaption>(a) Schema</figcaption></figure> 
   <figure><img src="experimente/ftduino_hm10_c1_c2.jpg"><figcaption>(b) Einfache
     Umsetzung</figcaption></figure>
   <figcaption>Abbildung 6.64: Senden und empfangen: Bluetooth an C1 & C2</figcaption> 
@@ -3629,7 +3629,7 @@ Spannungsversorung des <font color="red">f</font><font color="blue">t</font><fon
 <figure id="IMG:6.66">
   
   <figure><img src="experimente/hm10_serial1_bidir_7805_svg.png"><figcaption>(a) Schema</figcaption></figure> 
-  <figure><b>MISSING: raisebox</b><figcaption>(b) Einfache Umsetzung</figcaption></figure>
+  <figure><img src="experimente/hm10_bidir_7805.jpg"><figcaption>(b) Einfache Umsetzung</figcaption></figure>
   <figcaption>Abbildung 6.66: Freier I²C-Anschluss: Bluetooth an 9V, C1 & C2</figcaption> 
 </figure>
 
@@ -3642,7 +3642,7 @@ ausreichend.
 
 <figure id="IMG:6.67">
   
-  <figure><b>MISSING: raisebox</b><figcaption>(a) Benötigte Teile</figcaption></figure> 
+  <figure><img src="experimente/hm10_kabel.jpg"><figcaption>(a) Benötigte Teile</figcaption></figure> 
   <figure><img src="experimente/hm10_bidir_7805_2.jpg"><figcaption>(b) Zusammenbau</figcaption></figure>
   <figcaption>Abbildung 6.67: 9V-Versorgung und Datenberbindung</figcaption> 
 </figure>
@@ -3672,7 +3672,7 @@ Sicherheits-Pin abgefragt.  Diese lautet für alle hier vorgestellten
 Module <tt>1234</tt>.
 
 <p>Nach erfolfreicher Kopplung erscheint das HC-05 in Windows unter
-``Geräte und Drucker'' wie in Abbildung  dargestellt.
+``Geräte und Drucker'' wie in Abbildung <a href="experimente.html#IMG:6.68">6.68</a> dargestellt.
 Die eigentlich Kommunikation erfolgt nun über einen COM-Port, den
 man wie dargestellt in Erfahrung bringen kann. In diesem Fall ist das
 HC-05-Modul als <tt>COM6</tt> eingebunden und kann z.B. aus der Arduino-IDE
@@ -3701,7 +3701,7 @@ zweiten Terminalprograms ggf. nötig, wenn man Testdaten zwischen
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/CounterPort/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">CounterPort</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a> und
 <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/I2C_Uart/Bridge"><tt><span style="background-color:#f0f0f0;">Datei</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Beispiele</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Ftduino</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bluetooth</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">I2C_Uart</span></tt> &#9658; <tt><span style="background-color:#f0f0f0;">Bridge</span></tt></a>.
 
-<p><h4>HM-10 auf dem Smartphone</h4>
+<p><h4>HM-10 auf dem Smartphone</h4>  
 
 <p>Die App-Stores der großen Mobilbetriebssysteme bieten eine
 Vielzahl von Apps zum Zugriff auf das HM-10-Modul und
@@ -3712,7 +3712,7 @@ HC-06.
 ArduinoBlue<a href="#fn45"><sup>45</sup></a>  aus der
 Masse.
 
-<p>Wie in Abbildung  dargestellt ist die Oberfläche
+<p>Wie in Abbildung <a href="experimente.html#IMG:6.69">6.69</a> dargestellt ist die Oberfläche
 von ArduinoBlue übersichtlich gehalten und erlaubt sowohl eine
 Joystick-Steuerung des Modells, als auch eine Steuerung durch
 einstellbare Schaltflächen und Slider.
