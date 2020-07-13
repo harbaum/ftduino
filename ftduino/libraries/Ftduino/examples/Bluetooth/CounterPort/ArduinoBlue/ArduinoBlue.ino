@@ -1,7 +1,14 @@
 // CounterPorts/ArduinoBlue
 // ftDuino example for ArduinoBlue https://sites.google.com/stonybrook.edu/arduinoble
 // The HM10 TXD needs to be connected to C1 of the ftDuino. RXD may be unconnected.
+// This demo controls a motor on M1 using the ArduinoBlue joystick throttle (y axis)
 
+// Blueooth using Serial1 re-uses the UART which is normally needed for
+// ultrasonic. Thus a local library version without ultrasonic is being used
+
+// This demo needs the ArduinoBlue library. Please install it using the library manager.
+
+#include "Ftduino.h"
 #include <ArduinoBlue.h>
 
 ArduinoBlue phone(Serial1);
@@ -12,9 +19,8 @@ int throttle, steering, sliderVal, button, sliderId;
 
 void setup() 
 {
+    ftduino.init();  
     Serial.begin(9600);
-    while(!Serial);
-       
     Serial1.begin(9600); 
 };
 
@@ -58,6 +64,14 @@ void loop()
         Serial.print("Throttle: "); Serial.print(throttle); Serial.print("\tSteering: "); Serial.println(steering);
         prevThrottle = throttle;
         prevSteering = steering;
+
+        // use throttle to control M1
+        if(throttle >= 50)  // 50 ... 99
+          ftduino.motor_set(Ftduino::O1, Ftduino::LEFT, Ftduino::MAX * (throttle-50) / 49);
+        else if(throttle <= 48) // 0 ... 48
+          ftduino.motor_set(Ftduino::O1, Ftduino::RIGHT, Ftduino::MAX * (48-throttle) / 48);
+        else // 49
+          ftduino.motor_set(Ftduino::O1, Ftduino::OFF, Ftduino::MAX);
     }
 
     // If a text from the phone was sent print it to the serial monitor
