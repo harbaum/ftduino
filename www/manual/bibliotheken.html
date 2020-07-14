@@ -20,7 +20,7 @@
 
 <p>Mit dem Schaltplan aus Anhang <a href="anhang.html#A">A</a> und
 entsprechendem Know-How über den verbauten ATmega32U4-Controller
-lassen sich sämtliche Anschlüsse des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aus einem
+lassen sich sämtliche Anschlüsse des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> aus einem
 Arduino-Sketch ansteuern. Allerdings erfordert dieses Vorgehen einiges
 an Erfahrung und führt zu vergleichsweise komplexen Arduino-Sketches,
 da sämtlicher Code zur Ansteuerung der diversen Ein- und Ausgänge
@@ -29,17 +29,17 @@ im Sketch selbst implementiert werden müsste.
 <figure id="IMG:9.1">
   
   <img src="bibliotheken/bibliotheken_in_ide.png">
-  <figcaption>Abbildung 9.1: Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken in der Arduino-IDE</figcaption>
+  <figcaption>Abbildung 9.1: Die <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliotheken in der Arduino-IDE</figcaption>
 </figure>
 
-<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> bringt daher sogenannte Bibliotheken mit. Das sind
+<p>Der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> bringt daher sogenannte Bibliotheken mit. Das sind
 Code-Sammlungen, die bereits fertige Routinen zum Ansteuern der Ein-
-und Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>s enthalten. Der eigentliche Arduino-Sketch
+und Ausgänge des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>s enthalten. Der eigentliche Arduino-Sketch
 wird dadurch sehr viel einfacher und kürzer und vor allem muss der
 Programmierer die Aspekte der Hardware selbst gar nicht komplett
 verstanden haben, da er lediglich einige einfach zu benutzende
-Routinen zum Zugriff auf die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Hardware nutzt. Die
-Bibliotheken werden als Teil der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Installation in der
+Routinen zum Zugriff auf die <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Hardware nutzt. Die
+Bibliotheken werden als Teil der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Installation in der
 Arduino-IDE automatisch mit installiert. Aktualisierungen dieser
 Bibliotheken werden von der Arduino-IDE automatisch festgestellt und
 zum Update angeboten.
@@ -51,7 +51,7 @@ Bibliotheken ist ebenfalls frei
 verfügbar<a href="#fn1"><sup>1</sup></a> , sodass der Anwender
 selbst gegebenenfalls Erweiterungen und Verbesserungen vornehmen kann.
 
-<p>Es gibt zwei Bibliotheken, um den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> anzusteuern. Die
+<p>Es gibt zwei Bibliotheken, um den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> anzusteuern. Die
 <tt>FtduinoSimple</tt>-Bibliothek, die sehr einfach gehalten ist und nur
 ein ganz rudimentäres Funktions-Set bereit stellt und die
 <tt>Ftduino</tt>-Bibliothek, die deutlich komplexer ist und vielfältige
@@ -59,7 +59,7 @@ Funktionen zur Signaleingabe und Signalausgabe bietet.
 
 <p><h3><a id="9.0.1">9.0.1 Port-Definitionen und Konstanten</a></h3>
 
-<p>Für die unterschiedlichen Ports des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> werden in den beiden
+<p>Für die unterschiedlichen Ports des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> werden in den beiden
 folgenden Bibliotheken die gleichen Konstanten verwendet. Die acht
 Eingänge werden beispielsweise durch die Konstanten
 <tt>Ftduino::I1</tt> bis <tt>Ftduino::I8</tt> beschrieben. Auch wenn
@@ -102,7 +102,7 @@ Werten zu schalten.
   einfach zu nutzende Funktionen. Man kann kaum etwas
   falsch machen.
 </dd><dt><b>Geringer Speicherbedarf</b></dt><dd> Die Bibliothek belegt
-  kaum Flash- oder RAM-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Fast
+  kaum Flash- oder RAM-Speicher des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>. Fast
   der gesamte Speicher steht dem eigentlichen Sketch
   zur Verfügung.
 </dd><dt><b>Keine Seiteneffekte</b></dt><dd> Die Bibliothek verwendet keine weitere
@@ -145,15 +145,15 @@ Hilfe der <tt>FtduinoSimple</tt>-Bibliothek:
      <font color="green">13</font>    delay(1000);
      <font color="green">14</font>  }
 </code></pre>
-In den Zeilen 9 und 12 wird der Ausgang <tt>O1</tt> des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> ein-
+In den Zeilen 9 und 12 wird der Ausgang <tt>O1</tt> des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> ein-
 bzw. ausgeschaltet. Der erste Parameter der
 <tt>output_set()</tt>-Funktion gibt dabei den zu schaltenden Ausgang an,
 der zwei bestimmt, ob der Ausgang ein- oder ausgeschaltet werden soll.
 
-<p><b>Achtung</b>: Um die Ausgänge benutzen zu können muss der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+<p><b>Achtung</b>: Um die Ausgänge benutzen zu können muss der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
 natürlich mit 9 Volt versorgt werden.
 
-<p>Die Eingänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lassen sich ebenfalls sehr einfach
+<p>Die Eingänge des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> lassen sich ebenfalls sehr einfach
 mit Hilfe der <tt>FtduinoSimple</tt>-Bibliothek abfragen:
 
 <pre><code class="language-c">
@@ -194,7 +194,7 @@ erfolgt genau in dem Moment, in dem die <tt>input_get()</tt>-Funktion
 aufgerufen wird. Vor allem, wenn dabei ein anderer Port abgefragt wird
 als im direkt vorhergehenden Aufruf von <tt>input_get()</tt> kommt es
 dadurch zu einer Verzögerung von einigen Mikrosekunden, da
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-intern eine Umschaltung auf den geänderten Eingang
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-intern eine Umschaltung auf den geänderten Eingang
 durchgeführt werden muss.
 
 <p><b>Beispiel:</b><br><pre><code class="language-c">
@@ -237,7 +237,7 @@ geschaltet werden soll.
      <font color="green"> 2</font>  ftduino.output_set(Ftduino::O1, Ftduino::HI);
 </code></pre>
 <em>Hinweis: Ausgänge können nur verwendet werden, wenn der
-  <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
+  <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
   <a href="controller.html#1.2.5">1.2.5</a>).</em>
 
 <p><h3><a id="9.1.5">9.1.5 <tt>void motor_set(uint8_t port, uint8_t mode)</tt></a></h3>
@@ -267,7 +267,7 @@ langsam ausläuft.
      <font color="green"> 2</font>  ftduino.motor_set(Ftduino::M1, Ftduino::LEFT);
 </code></pre>
 <em>Hinweis: Ausgänge können nur verwendet werden, wenn der
-  <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
+  <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> mit einer 9-Volt-Versorgung verbunden ist (siehe Abschnitt
   <a href="controller.html#1.2.5">1.2.5</a>).</em>
 
 <p><h3><a id="9.1.6">9.1.6 Beispiel-Sketches</a></h3>
@@ -279,7 +279,7 @@ sich im Menü der Arduino-IDE unter
 <p><h2><a id="9.2">9.2 <tt>Ftduino</tt></a></h2>
 
 <p>Die <tt>Ftduino</tt>-Bibliothek kapselt alle Funktionen der
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Hardware, sodass der Anwender bequemen Zugriff auf alle
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Hardware, sodass der Anwender bequemen Zugriff auf alle
 Ein- und Ausgänge hat, ohne sich über die konkrete technische
 Umsetzung Gedanken machen zu müssen.
 
@@ -310,13 +310,13 @@ Weise früh in der <tt>setup()</tt>-Funktion.
 <h3><a id="9.2.1">9.2.1 Die Eingänge <tt>I1</tt> bis <tt>I8</tt></a></h3>
 
 <p>Die Eingänge <tt>I1</tt> bis <tt>I8</tt> sind mit Analogeingängen des
-ATmega32u4-Mikrocontrollers im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verbunden. Diese
-Analogeingänge werden von der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliothek permanent
+ATmega32u4-Mikrocontrollers im <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> verbunden. Diese
+Analogeingänge werden von der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliothek permanent
 im Hintergrund ausgewertet, da die Analog-Wandlung eine gewisse
 Zeit in Anspruch nimmt und auf diese Weise eine unerwünschte
 Verzögerung bei der Abfrage von Eingängen vermieden werden kann.
 
-<p>Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliothek nutzt dazu den sogenannten
+<p>Die <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliothek nutzt dazu den sogenannten
 <tt>ADC_vect</tt>-Interrupt. Die Analog-Digital-Wandler (ADCs) werden
 auf eine Messrate von ungefähr 8900 Messungen pro Sekunde
 eingestellt. Jeder Eingang wird zweimal abgefragt, um eine stabile
@@ -327,10 +327,10 @@ Hintergrund erfolgen.  Beim Auslesen ist der Messwert demnach maximal
 circa 2 Millisekunden alt und der Wert wird ungefähr alle 2
 Millisekunden aktualisiert.
 
-<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> kann einen sogenannte Pull-Up-Widerstand an jedem der
+<p>Der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> kann einen sogenannte Pull-Up-Widerstand an jedem der
 Eingänge aktivieren, so dass einer Spannungsmessung eine
 Widerstandsmessung erfolgen kann. Auch das wird von der
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliothek im Hintergrund verwaltet und die Umschaltung
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliothek im Hintergrund verwaltet und die Umschaltung
 erfolgt automatisch vor der Messung. Sie ist auch der Grund, warum pro
 Kanal zwei Messungen erfolgen. Dies erlaubt den Signalen, sich nach
 dem Umschaltvorgang und vor der zweiten Messung zu stabilisieren.
@@ -416,7 +416,7 @@ SPI-Bus im Hintergrund. Dazu implementiert die
 permanent im Hintergrund läuft und permanent den Status der
 Motortreiber aktualisiert.
 
-<p><em>Hinweis: Die Ausgänge lassen sich nur nutzen, wenn der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+<p><em>Hinweis: Die Ausgänge lassen sich nur nutzen, wenn der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
   mit einer 9-Volt-Spannungsquelle verbunden ist.</em>
 
 <p><h3><a id="9.2.5">9.2.5 <tt>void output_set(uint8_t port, uint8_t mode, uint8_t pwm)</tt></a></h3>
@@ -569,10 +569,10 @@ Tester, der zwischen dem Zählereingang und seinem korrespondierenden
 Masseanschluss angeschlossen ist oder einem Encodermotor, dessen
 Encoderausgang mit dem Zählereingang verbunden ist. Die Zählereingänge
 haben interne Pull-Up-Widerstände. Das bedeutet, dass sie vom
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als ``high'' bzw mit hohem Signalpegel erkannt werden, wenn
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> als ``high'' bzw mit hohem Signalpegel erkannt werden, wenn
 kein Signal anliegt weil z.B. ein angeschlossener Taster nicht
 gedrückt ist. Ist der Taster geschlossen, dann schaltet er den Eingang
-auf Masse, was von <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> als ``low'' erkannt wird.
+auf Masse, was von <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> als ``low'' erkannt wird.
 
 <p>Die vier Zählereingänge sind direkt mit einem Interrupt-fähigen
 Eingang am ATmega32u4 verbunden. Technisch ist damit eine Reaktion im

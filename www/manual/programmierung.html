@@ -19,18 +19,18 @@
 <h1><a id="4">4 Programmierung</a></h1> 
 
 <p>Dieses Kapitel erklärt die Programmierung eigener Programme bzw.
-Sketches für den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Wer zunächst keine eigenen Programme
+Sketches für den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>. Wer zunächst keine eigenen Programme
 schreiben möchte und erst einmal die vorgefertigten Beispiele und
 Experimente ausführen möchte ohne deren Programmcode zu verstehen kann
 direkt mit Kapitel <a href="experimente.html#6">6</a> weitermachen.
 
-<p>Der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird mit einer ständig wachsenden Anzahl vorgefertigter
+<p>Der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> wird mit einer ständig wachsenden Anzahl vorgefertigter
 Beispiel-Sketches ausgeliefert. Für viele Modelle und Versuche reicht
 es daher, wie in den vorhergehenden Kapiteln beschrieben diese
-Beispiele auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden. Aber wie der Spaß beim Bauen
+Beispiele auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> zu laden. Aber wie der Spaß beim Bauen
 mit fischertechnik gerade dort beginnt, wo man die vorgegebenen
 Pfade der Bauanleitungen hinter sich lässt, so besteht auch beim
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> der eigentliche Nutzen darin, dass man ihn mit eigenen
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> der eigentliche Nutzen darin, dass man ihn mit eigenen
 Sketches programmieren kann. Zusammen mit einem selbst entworfenen
 Modell ergeben sich so beeindruckende Möglichkeiten. Und ganz nebenbei
 lernt man nicht nur die mechanische Grundlagen kennen, sondern erhält
@@ -38,8 +38,8 @@ zusätzlich einen realistischen Einblick in die Welt der
 Mikrocontroller-Programmierung.
 
 <p>Dieses Kapitel soll einen ersten Einblick in die Programmierung des
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geben. Es werden die wesentlichen Sprachkonstrukte der auf
-dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verwendeten Programmiersprache soweit erklärt, wie sie
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> geben. Es werden die wesentlichen Sprachkonstrukte der auf
+dem <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> verwendeten Programmiersprache soweit erklärt, wie sie
 zum Verständnis der Programme der nachfolgenden Kapitel benötigt
 werden. Die Beschreibung beschränkt sich bewusst auf das
 allernötigste. Trotzdem sind Ende dieses recht kurzen Kapitels alle
@@ -138,7 +138,7 @@ kann sie in den Voreinstellungen der Arduino-IDE wie in Abbildung
 
 <p><h2><a id="4.2">4.2 Die Programmiersprache C<sup>++</sup></a></h2>
 
-<p>Arduinos und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> werden in der Programmiersprache C<sup>++</sup>,
+<p>Arduinos und der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> werden in der Programmiersprache C<sup>++</sup>,
 genauer dem Standard C<sup>++</sup>11 programmiert. Ein Arduino-Sketch
 unterscheidet sich in einigen wenigen fundamentalen Dingen von
 klassischen C<sup>++</sup>-Programmen, davon abgesehen entspricht die
@@ -151,8 +151,8 @@ den professionellen Bereich.
 
 <p>Die Sketches genannten C<sup>++</sup>-Programme der Arduino-Welt werden durch ein
 Compiler genanntes Programm in sogenannten Maschinen- oder Binärcode
-übersetzt, der vom Mikrocontroller des Arduino bzw. <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
-verstanden wird. Dieser Binärcode kann dann auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> per
+übersetzt, der vom Mikrocontroller des Arduino bzw. <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
+verstanden wird. Dieser Binärcode kann dann auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> per
 Download übertragen werden.
 
 <p>Der Compiler, der von der Arduino-IDE verwendet wird ist der
@@ -191,14 +191,14 @@ dem obigen Beispiel entspricht.
 </figure>
 
 <p>Dieser minimale Sketch lässt sich in der Arduino-IDE erfolgreich
-übersetzen und auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> laden. Dazu gibt es in der
+übersetzen und auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> laden. Dazu gibt es in der
 Arduino-IDE die beiden in Abbildung <a href="programmierung.html#IMG:4.4">4.4</a> dargestellten
 Schaltflächen. Eine Fläche startet die Übersetzung in
 Maschinencode. Diese Funktion benötigt keinen angeschlossenen
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> und mit ihr lässt sich schnell feststellen, ob ein Sketch
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> und mit ihr lässt sich schnell feststellen, ob ein Sketch
 keine fundamentalen Fehler enthält, die bereits die Übersetzung
 verhindern. Die zweite Schaltfläche startet den Download auf den
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>. Sollte der Sketch noch nicht übersetzt sein, so wird bei
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>. Sollte der Sketch noch nicht übersetzt sein, so wird bei
 Klick auf die Download-Schaltfläche vorher noch automatisch die
 Übersetzung gestartet. Nur wenn diese Übersetzung erfolgreich ist wird
 der Download begonnen.
@@ -208,7 +208,7 @@ angelegt, so wird einen die Arduino-IDE nun ggf. fragen, ob man den
 Sketch speichern möchte. Wenn man dem Speichern zustimmt kann man an
 dem Sketch später jederzeit weiter arbeiten.
 
-<p>Nach dem erfolgreichen Download wird der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> keine sichtbare
+<p>Nach dem erfolgreichen Download wird der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> keine sichtbare
 Reaktion zeigen. Der Sketch besteht aus zwei sogenannten Funktionen,
 eine mit dem Namen <tt>setup()</tt> und eine mit dem Namen
 <tt>loop()</tt>. Diese Funktionen bilden das Skelett eines jeden
@@ -220,7 +220,7 @@ Semikolon (;) getrennt.
 
 <p>Befinden sich aber wie in diesem einfachen Beispiel überhaupt keine
 Anweisungen zwischen den Klammern, so löst der Sketch folgerichtig
-auch keine erkennbare Reaktion auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aus.
+auch keine erkennbare Reaktion auf dem <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> aus.
 
 <p><h3><a id="4.3.1">4.3.1 Kommentare</a></h3>
 
@@ -241,7 +241,7 @@ den Sketch diesmal unverändert lassen:
      }
 </code></pre>
 Ein erneuter Klick auf den Download-Button wird auch diesen Sketch
-übersetzen und auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> laden. Wieder erfolgt am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+übersetzen und auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> laden. Wieder erfolgt am <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
 keine erkennbare Funktion. Das liegt daran, dass die beiden
 zusätzlichen Zeilen reine Kommentarzeilen sind. Sie sind dazu gedacht,
 einem menschlichen Leser zusätzliche Erklärungen zu geben. Für die
@@ -281,8 +281,8 @@ Klammern der <tt>setup()</tt>-Funktion eingefügt werden:
 </code></pre>
 Was diese beiden kryptischen Zeilen genau bedeuten wird später erklärt
 werden. Zunächst soll der Sketch lediglich wieder übersetzt und auf
-den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> geladen werden. Ist das Programm fehlerfrei
-übersetzbar, so wird es erneut auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> übertragen.
+den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> geladen werden. Ist das Programm fehlerfrei
+übersetzbar, so wird es erneut auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> übertragen.
 
 <p>Leider ist es in diesem Fall aber nicht fehlerfrei. Wurde das Programm
 exakt wie abgebildet eingegeben, so sollte die Übersetzung des
@@ -324,7 +324,7 @@ Sketch sollte nun wie folgt aussehen.
      <font color="green"> 6</font>  void loop() {
      <font color="green"> 7</font>  }
 </code></pre>
-Nach dem Download wird die rote Leuchtdiode im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> leuchten,
+Nach dem Download wird die rote Leuchtdiode im <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> leuchten,
 denn genau das bewirken die zwei kryptischen Zeilen, die im folgenden
 Abschnitt genauer erklärt werden.
 
@@ -363,7 +363,7 @@ dass der Anwender nicht erkennen kann, dass z.B. eine Leuchtdiode für
 wenige Mikrosekunden eingeschaltet war. 
 
 <p>Die Ausführung der Anweisungen kann direkt etwas bewirken und
-z.B. eine Leuchtdiode am <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aufleuchten lassen. Eine
+z.B. eine Leuchtdiode am <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> aufleuchten lassen. Eine
 Funktion, die alle Anweisungen zum Einschalten der Leuchtdiode
 zusammenfasst könnte z.B. wie folgt aussehen.
 
@@ -438,15 +438,15 @@ Funktion <tt>setup()</tt> wird dabei einmal bei Sketch-Start aufgerufen
 und die Funktion <tt>loop()</tt> wird in Folge immer wieder aufgerufen
 wie in Abbildung <a href="programmierung.html#IMG:4.7">4.7</a> dargestellt.
 
-<p>Mit Sketch-Start ist im Falle des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> eine von drei Situationen
+<p>Mit Sketch-Start ist im Falle des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> eine von drei Situationen
 gemeint:
 
 <p><ol>
 <li> Direkt nach dem Download eines übersetzten Sketches wird dessen
   Code gestartet.
-</li><li> Nach dem Anlegen der Stromversorgung an den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> wird ein
+</li><li> Nach dem Anlegen der Stromversorgung an den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> wird ein
   vorher per Download installierter Sketch-Code gestartet.
-</li><li> Wurde der Bootloader des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> durch Druck auf den
+</li><li> Wurde der Bootloader des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> durch Druck auf den
   Reset-Taster gestartet, so bleibt dieser für acht Sekunden
   aktiviert.  Wird der Bootloader in dieser Zeit nicht vom PC aus
   angesprochen, so beendet sich der Bootloader und der zuletzt
@@ -533,7 +533,7 @@ Die Funktion <tt>setup()</tt> enthält eine einzelne Anweisung in Form
 eines Aufrufs der Funktion <tt>SchalteLedEin</tt>. Diese Funktion ist
 wiederum in den Zeilen 2 bis 5 des Sketches definiert und besteht
 ihrerseits aus dem Aufruf zweier Bibliotheksfunktionen, die die
-eingebaute Leuchtdiode des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> aufleuchten lassen.
+eingebaute Leuchtdiode des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> aufleuchten lassen.
 
 <p>Die <tt>loop()</tt>-Funktion wird nach Systemstart permanent immer
 wieder aufgerufen. Sie ist aber leer, über das Einschalten der
@@ -547,9 +547,9 @@ keinen Einfluss auf die Übersetzung des Sketches oder seine Funktion.
 
 <p>Wie in den vorigen Abschnitten angedeutet bringt die Arduino-IDE
 einige Bibliotheken mit, die Funktionen zur Verwendung spezieller
-Eigenschaften des Arduino bieten. Zusätzlich bringt die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+Eigenschaften des Arduino bieten. Zusätzlich bringt die <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
 Installation eigene Bibliotheken mit, um auf die fischertechnik-Ein-
-und -Ausgänge des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zuzugreifen.
+und -Ausgänge des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> zuzugreifen.
 
 <p>Im folgenden werden sieben der am häufigsten benötigten Funktionen
 beschrieben. Mit ihnen lassen sich bereits vielfältige Sketches
@@ -558,7 +558,7 @@ schreiben.
 <p>Eine Beschreibung weiterer Funktionen der Arduino-IDE findet man
 online in der Arduino-Language-Reference unter
 <a href="https://www.arduino.cc/reference/en/#functions">https://www.arduino.cc/reference/en/#functions</a> während weitere
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-spezifische Funktionen im Kapitel <a href="bibliotheken.html#9">9</a>
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-spezifische Funktionen im Kapitel <a href="bibliotheken.html#9">9</a>
 beschrieben sind.
 
 <p><h3><a id="4.4.1">4.4.1 <tt>pinMode(pin, mode)</tt></a></h3>
@@ -568,11 +568,11 @@ beschrieben sind.
 als Ein- (<tt>mode</tt> = <tt>INPUT</tt>) oder Ausgang (<tt>mode</tt> =
 <tt>OUTPUT</tt>). Diese Funktion wird auf Arduinos sehr häufig
 verwendet, da dort direkt mit den Anschlüssen des Mikrocontrollers
-gearbeitet wird. Auf dem <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> befinden sich an den meisten
+gearbeitet wird. Auf dem <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> befinden sich an den meisten
 Anschlüssen Zusatzschaltungen zur Verbindung mit
 fischertechnik-Komponenten, die die direkte Verwendung der
 <tt>pinMode()</tt>-Funktion unnötig machen. Stattdessen bringen die
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken alle Funktionen mit, um die Ein- und Ausgänge
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliotheken alle Funktionen mit, um die Ein- und Ausgänge
 fischertechnik-konform zu bedienen.
 
 <p>Die wesentliche Ausnahme bildet der Anschluss der internen roten Leuchtdiode.
@@ -587,7 +587,7 @@ Für <tt>pin</tt> muss in dem Fall <tt>LED_BUILTIN</tt> verwendet werden.
 
 <p>Die Funktion <tt>digitalWrite()</tt> steuert einen durch die Funktion
 <tt>pinMode()</tt> zum Ausgang erklärten Pin. Sie wird daher im
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> in der Regel für die Leuchtdiode verwendet und in seltenen
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> in der Regel für die Leuchtdiode verwendet und in seltenen
 Fällen zur Steuerung der beiden am I²C-Anschluss verfügbaren
 Signale.
 
@@ -635,10 +635,10 @@ daher kontinuierlich blinken.
 <h3><a id="4.4.4">4.4.4 <tt>Serial.begin(speed)</tt></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/">https://www.arduino.cc/reference/en/language/functions/communication/serial/begin/</a>
 
-<p>Die Kommunikationsmöglichkeiten des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> beschränken sich direkt
+<p>Die Kommunikationsmöglichkeiten des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> beschränken sich direkt
 am Gerät im Wesentlichen auf die fischertechnik Ein- und Ausgänge. Bei
 komplexeren Projekten wird es schwierig, nur am Verhalten des
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> den Programmfluss zu verfolgen. Ein einfacher Weg, aus dem
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> den Programmfluss zu verfolgen. Ein einfacher Weg, aus dem
 Sketch heraus Informationen an den Benutzer auszugeben ist die
 Verwendung der <code>Serial</code>-Bibliothek.
 
@@ -650,7 +650,7 @@ seriellen Monitors vor. Sie sollte daher am Beginn des Sketches
 bzw. in der <tt>setup()</tt>-Funktion aufgerufen werden.
 
 <p>Die Funktion <tt>Serial.begin()</tt> erwartet einen Parameter namens
-<tt>speed</tt>. Dieser Wert ist für die USB-Verbindung des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+<tt>speed</tt>. Dieser Wert ist für die USB-Verbindung des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
 belanglos und sollte z.B. auf einen Wert von 115200 gesetzt werden.
 
 <pre><code class="language-c">
@@ -701,7 +701,7 @@ eingeschlossen werden.
 
 <p>Ein Controller für ein fischertechnik-Modell muss natürlich Eingaben
 aus dem Modell empfangen und Reaktionen im Modell auslösen können. Die
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken sind in allem Detailgrad in Kapitel
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliotheken sind in allem Detailgrad in Kapitel
 <a href="bibliotheken.html#9">9</a> beschrieben. In diesem Absatz wird daher nur das
 absolute Minimum beschrieben.
 
@@ -709,7 +709,7 @@ absolute Minimum beschrieben.
 Besonderheit ist, dass Bibliotheksfunktionen ohne weitere Vorbedingungen
 zur Verfügung stehen und im Sketch verwendet werden können. Dies trifft
 aber nur auf die Arduino-eigenen Bibliotheken zu wie sie in den bisherigen
-Beispielen verwendet wurden. Die <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken stehen nicht
+Beispielen verwendet wurden. Die <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliotheken stehen nicht
 automatisch zur Verfügung sondern müssen am Anfang des Sketches
 mit einer <code>#include</code>-Anweisung bekannt gemacht werden.
 
@@ -756,7 +756,7 @@ um den Ausgang auszuschalten.
 </code></pre>
 Dieser Sketch würde eine wie in Abbildung <a href="programmierung.html#IMG:4.8">4.8</a>
 angeschlossene Lampe zum Leuchten bringen. Achtung: Dazu muss der
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> mit 9 Volt versorgt sein.
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> mit 9 Volt versorgt sein.
 
 <p>Die Funktion <tt>ftduino.motor_set(port, mode)</tt> ist
 <tt>ftduino.output_set(port, mode)</tt> sehr ähnlich, nur dass hier ein
@@ -792,13 +792,13 @@ werden. Dazu muss irgendwo vermerkt werden, dass der Taster vor kurzem
 noch gedrückt war.
 
 <p>Für diesen Zweck gibt es sogenannte Variablen. Mit ihnen weist man den
-Compiler an, Platz im Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> für etwas ``gemerktes''
+Compiler an, Platz im Speicher des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> für etwas ``gemerktes''
 zu reservieren. Während der Sketch im sogenannten Flash-Speicher des
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> abgelegt wird und daher auch über das Ausschalten des
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> hinaus erhalten bleibt. Wird der Speicherplatz für
-Variablen im flüchtigen RAM-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> abgelegt. Der
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> abgelegt wird und daher auch über das Ausschalten des
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> hinaus erhalten bleibt. Wird der Speicherplatz für
+Variablen im flüchtigen RAM-Speicher des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> abgelegt. Der
 gespeicherte Wert einer Variablen geht also beim Ausschalten des
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> verloren.
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> verloren.
 
 <p>Eine Variable wird wie eine Funktion im Sketch definiert. Dazu erhält
 sie wie eine Funktion einen Namen. Außerdem muss angeben werden,
@@ -818,7 +818,7 @@ vom Typ <tt>int</tt> angelegt.
 <h3><a id="4.5.1">4.5.1 Datentyp <code>int</code></a></h3>
 <a href="https://www.arduino.cc/reference/en/language/variables/data-types/int/">https://www.arduino.cc/reference/en/language/variables/data-types/int/</a>
 
-<p>Der Datentyp <code>int</code> ist der Standard-Datentyp. Beim <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+<p>Der Datentyp <code>int</code> ist der Standard-Datentyp. Beim <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
 erlaubt dieser Datentyp das Ablegen ganzzahliger Werte im Bereich von
 -32768 bis +32767. Für die meisten Verwendungen ist das ausreichend.
 
@@ -827,7 +827,7 @@ wieder abzurufen. Das Ablegen von Werte geschieht, indem der Variablen
 ein Wert mit dem Gleichheitszeichen (=) zugewiesen wird. Die Ausdrücke
 auf der rechten Seite der Zuweisung können komplexe mathematische
 Funktionen beinhalten und sogar Funktionsaufrufe, um beispielsweise
-den Zustand eines Eingangs des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu speichern.
+den Zustand eines Eingangs des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> zu speichern.
 
 <pre><code class="language-c">
      // eine einfache Zuweisung
@@ -1094,7 +1094,7 @@ Beispiel passiert also:
 <p><h2><a id="4.8">4.8 Beispiele</a></h2>
 
 <p>Die in diesem Kapitel vorgestellten C<sup>++</sup>-Sprachkonstrukte sowie die ausgewählten
-Funktionen der Arduino- und der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>-Bibliotheken bilden zwar nur einen geringen
+Funktionen der Arduino- und der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>-Bibliotheken bilden zwar nur einen geringen
 Teil ab. Aber schon diese wenigen Informationen reichen, um einige interessante
 Sketches selbst zu schreiben.
 
@@ -1250,7 +1250,7 @@ Abbildung <a href="programmierung.html#IMG:4.15">4.15</a> dargestellten Warnmeld
   <figcaption>Abbildung 4.15: Warnung der Arduino-IDE über geringen Arbeitsspeicher</figcaption> 
 </figure>
 
-<p>Da der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> lediglich über 2560 Bytes dynamischen Speicher
+<p>Da der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> lediglich über 2560 Bytes dynamischen Speicher
 (RAM-Speicher) verfügt ist der Umgang mit dieser knappen Resource oft
 nicht einfach.
 
@@ -1262,7 +1262,7 @@ Flash-Speicher bezeichnet). Der Programmspeicher kann bedenkenlos zu
 
 <p><h3><a id="4.9.1">4.9.1 Auswirkungen</a></h3>
 
-<p>Im Flash-Speicher des <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind zu jeder Zeit zwei Programme
+<p>Im Flash-Speicher des <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> sind zu jeder Zeit zwei Programme
 gespeichert:
 
 <p><dl>
@@ -1272,7 +1272,7 @@ gespeichert:
   Flash-Speicher zu laden.
 </dd><dt><b>Sketch</b></dt><dd>Der Sketch wird vom Anwender mit Hilfe der Arduino-IDE
   und des Bootloaders installiert und kann sämtlichen Flash-Speicher
-  nutzen, der nicht durch den Bootloader belegt wird. Im <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+  nutzen, der nicht durch den Bootloader belegt wird. Im <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
   stehen neben dem vom Bootloader belegten Bereich noch 28672 Bytes
   des Flash-Speichers für eigene Sketche zur Verfügung.
 </dd></dl>
@@ -1321,23 +1321,23 @@ verborgene Teil des Sketches nicht korrekt funktioniert. Die
 Arduino-IDE kann dadurch selbst nicht mehr den Start des Bootloaders
 veranlassen und Upload-Versuche durch die Arduino-IDE scheitern.
 Unter Umständen ist die USB-Kommunikation zum PC so sehr
-beeinträchtigt, dass der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> während der Sketch-Ausführung vom
+beeinträchtigt, dass der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> während der Sketch-Ausführung vom
 PC nicht korrekt oder ggf. sogar überhaupt nicht erkannt wird.
 
-<p>Für diesen Fall verfügt der <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über einen Reset-Taster (siehe
+<p>Für diesen Fall verfügt der <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> über einen Reset-Taster (siehe
 Abschnitt <a href="controller.html#1.2.3">1.2.3</a>). Ist die Arduino-IDE durch Speichermangel
-im Sketch nicht mehr in der Lage, den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> über USB anzusprechen
+im Sketch nicht mehr in der Lage, den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> über USB anzusprechen
 und zur Aktivierung des Bootloaders zu veranlassen, so ist es mit dem
 Reset-Taster manuell immer noch möglich, den Bootloader im passenden
 manuell zu aktivieren wie in Abschnitt <a href="controller.html#1.3.2">1.3.2</a> beschrieben.
 Die Funktion des Reset-Tasters ist immer vorhanden und sie kann nicht
 durch einen fehlerhaften Sketch beeinflusst werden. Mit seiner Hilfe
-ist es immer möglich, einen neuen Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden.
+ist es immer möglich, einen neuen Sketch auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> zu laden.
 
 <p><h3><a id="4.9.2">4.9.2 Vorbeugende Maßnahmen</a></h3>
 
 <p>Taucht die o.g. Warnung auf, so sollte man im Zweifelsfall davon
-Abstand nehmen, den Sketch auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zu laden. Auch wenn es
+Abstand nehmen, den Sketch auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> zu laden. Auch wenn es
 mit Hilfe des Reset-Tasters immer möglich ist, den fehlerhaften Sketch
 zu ersetzen, so erfordert dieses Vorgehen ein gutes Timing und es kann
 einige Versuche erfordern, bis der störrische Sketch erfolgreich
@@ -1436,7 +1436,7 @@ dass man alles findet, das man für sein konkretes Problem benötigt.
 <p>Oft sind es aber gerade die besonders umfangreichen Bibliotheken, die
 besonders ressourcenhungrig sind und eine große Menge Speicher belegen.
 Bei Verwendung des OLED-Displays aus Abschnitt <a href="experimente.html#6.13.3">6.13.3</a> am
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> sind es zum Beispiel die Grafikbibliotheken von Adafruit,
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> sind es zum Beispiel die Grafikbibliotheken von Adafruit,
 die alle Funktionen für aufwändige Grafiken mitbringen, aber
 gleichzeitig einen hohen Speicherverbrauch haben.
 
@@ -1505,10 +1505,10 @@ als auch zur Arduino-Programmierung<a href="#fn3"><sup>3</sup></a> .
 
 <p>Diese und ähnliche Tutorials erklären viele weitere Sprachkonstrukte
 und Bibliotheksfunktionen. Solche Tutorials sind nicht auf den
-<font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font> zugeschnitten. Aber dieses Kapitel hat die nötigen
+<span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span> zugeschnitten. Aber dieses Kapitel hat die nötigen
 Grundlagen geliefert, um auch mit anderen Tutorials weiterarbeiten zu
 können. Nicht alles aus der Welt der PC-Programmierung oder der
-Arduino-Programmierung lässt sich auf den <font color="red">f</font><font color="blue">t</font><font color="darkcyan">Duino</font>
+Arduino-Programmierung lässt sich auf den <span style="color: red">f</span><span style="color: blue">t</span><span style="color: darkcyan">Duino</span>
 übertragen. Zusammen mit den Experimenten und Modellen der folgenden
 Kapitel sowie den fertig mitgelieferten Beispielprogrammen ist der
 tiefere Einstieg in die professionelle C<sup>++</sup>-Programmierung aber
