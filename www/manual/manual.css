@@ -123,6 +123,9 @@ body { top: 0px !important; }
 .activity-root { display: hide !important;} 
 .status-message { display: hide !important;}
 .started-activity-container { display: hide !important;}
+.goog-logo-link { display:none !important; }
+.goog-te-gadget { color: transparent !important; }
+.goog-te-gadget .goog-te-combo { color: blue !important; }
 
 table,
 th,
