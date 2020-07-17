@@ -7,15 +7,14 @@ SC16IS750 i2cuart = SC16IS750(SC16IS750_PROTOCOL_I2C,SC16IS750_ADDRESS_BB);
 void setup() 
 {
     Serial.begin(9600);
-    while(!Serial);
-    i2cuart.begin(9600);               //baudrate setting
+    i2cuart.begin(9600);
 };
 
 void loop() 
 {
-    while(i2cuart.available())
+    while(i2cuart.available() && Serial.availableForWrite())
       Serial.write(i2cuart.read());
       
-    if(Serial.available())
+    if(Serial.available() && i2cuart.availableForWrite())
       i2cuart.write(Serial.read());
 };
