@@ -1,0 +1,12 @@
+/* Style the tab */
+body, html {
+    padding: 3px 3px 3px 3px;
+    font-family: sans-serif;
+    font-size: 12pt;
+    color: black;
+    background: white;
+}
+
+h3 {
+    text-align: center;
+}
