@@ -1,0 +1,10 @@
+Part name                Description            Digikey No
+------------------------------------------------------------------
+IC1                      TS2940CP50             TS2940CP50ROG-ND      
+IC2                      Attiny25 SOIC8         ATTINY25-20SSU-ND 
+R1                       220 0805               CR0805-JW-221ELFTR-ND, any < 5% 0805 220R resistor
+R2,R3                    10k 0805               311-10KARTR-ND, any < 5% 0805 10k resistor
+C1,C2                    100nF 0805             399-7367-2-ND, any ceramic 100nF >=10V 0805 will do
+LED                      green 0805             475-1410-2-ND, any cheap 0805 led will do
+I²C1, I²C2, SERVO        6 pin 2.54mm SMD pin   54202-S0803LF-ND or similar regular 2.54mm 6 pin smd 
+I1                       metal sleeve           fischertechnik sleeve as on ftDuino itself
