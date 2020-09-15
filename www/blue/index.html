@@ -11,26 +11,25 @@
     to your ftDuino or Arduino project. This interface can be accessed
     using the free ftDuinoBlue Android app.</p>
 
-    <p>Just add the follwing XML to your sketch:
-      
-      <center>     
-	<pre>
-	  <layout orientation='portrait' name='ftDuinoBlue Led Demo'>
-	    <switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>
-	    <label id='2' size='20' place='left;below:1'>LED brightness</label>
-	    <slider id='3' width='parent' max='255' place='hcenter;below:2'/>
-	    <label id='4' size='20' place='left;below:3'>Blink speed</label>
-	    <slider id='5' width='parent' place='hcenter;below:4'/>
-	  </layout>
-	</pre>
-      </center>
-      
-      To create this user interface in the adroid app:
-      
-      <center>     
-	<img width="256" src="images/screenshot_demo.png" />
-      </center>
-    </p>
+    <p>Just add the follwing XML to your sketch:</p>
+    
+    <center>     
+      <textarea>
+	<layout orientation='portrait' name='ftDuinoBlue Led Demo'>
+	  <switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>
+	  <label id='2' size='20' place='left;below:1'>LED brightness</label>
+	  <slider id='3' width='parent' max='255' place='hcenter;below:2' />
+	  <label id='4' size='20' place='left;below:3'>Blink speed</label>
+	  <slider id='5' width='parent' place='hcenter;below:4' />
+	</layout>
+      </textarea>
+    </center>
+    
+    <p>To create this user interface in the adroid app:</p>
+    
+    <center>     
+      <img width="256" src="images/screenshot_demo.png" />
+    </center>
     
     <p>The full demo sketch can be found in the <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftduinoblue_demo">ftDuino repository</a>.</p>
     
@@ -39,32 +38,29 @@
     to the android store.</p>
     
     <h2>How it works</h2>
-    <p>
-      <ul>
-	<li>You simply design a custom interface exactly matching your needs.</li>
-	<li>All setup takes place in the ftDuino/Arduino sketch.</li>
-	<li>On connection the Android app automatically creates the user interface as requested by the ftDuino/Arduino.</li>
-	<li>Various user interface elements available:
-	  <ul>
-	    <li>Push buttons</li>
-	    <li>Switches</li>
-	    <li>Joysticks</li>
-	    <li>Sliders</li>
-	    <li>Texts and Labels</li>
-	  </ul>
-	<li>You use the controls to command your ftDuino/Arduino.</li>
-	<li>Your ftDuino/Arduino gives you visual feedback.</li>
-      </ul>
-    </p>
+    <ul>
+      <li>You simply design a custom interface exactly matching your needs.</li>
+      <li>All setup takes place in the ftDuino/Arduino sketch.</li>
+      <li>On connection the Android app automatically creates the user interface as requested by the ftDuino/Arduino.</li>
+      <li>Various user interface elements available:
+	<ul>
+	  <li>Push buttons</li>
+	  <li>Switches</li>
+	  <li>Joysticks</li>
+	  <li>Sliders</li>
+	  <li>Texts and Labels</li>
+	</ul>
+      <li>You use the controls to command your ftDuino/Arduino.</li>
+      <li>Your ftDuino/Arduino gives you visual feedback.</li>
+    </ul>
     
     <h2>What you need</h2>
-    <p>Only very few and cheap parts are needed:
-      <ul>
-	<li>The ftDuinoBlue app for android</li>
-	<li>An ftDuino or arduino</li>
-	<li>A HM-10 bluetooth module for your ftDuino or Arduino</li>
-      </ul>
-    </p>
+    <p>Only very few and cheap parts are needed:</p>
+    <ul>
+      <li>The ftDuinoBlue app for android</li>
+      <li>An ftDuino or arduino</li>
+      <li>A HM-10 bluetooth module for your ftDuino or Arduino</li>
+    </ul>
     
   </body>
 </html>
