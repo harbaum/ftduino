@@ -6,15 +6,40 @@
   </head>
   <body>
     <h1>ftDuinoBlue</h1>
+    
     <p>ftDuinoBlue allows you to add a custom bluetooth user interface
     to your ftDuino or Arduino project. This interface can be accessed
     using the free ftDuinoBlue Android app.</p>
 
-    <center>
-      <img width="256" src="images/screenshot_demo.png" />
-    </center>
+    <p>Just add the follwing XML to your sketch:
+      
+      <center>     
+	<pre>
+	  <layout orientation='portrait' name='ftDuinoBlue Led Demo'>
+	    <switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>
+	    <label id='2' size='20' place='left;below:1'>LED brightness</label>
+	    <slider id='3' width='parent' max='255' place='hcenter;below:2'/>
+	    <label id='4' size='20' place='left;below:3'>Blink speed</label>
+	    <slider id='5' width='parent' place='hcenter;below:4'/>
+	  </layout>
+	</pre>
+      </center>
+      
+      To create this user interface in the adroid app:
+      
+      <center>     
+	<img width="256" src="images/screenshot_demo.png" />
+      </center>
+    </p>
+    
+    <p>The full demo sketch can be found in the <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftduinoblue_demo">ftDuino repository</a>.</p>
+    
+    <p>Currently the app can be
+    found <a href="./arduinoblue.apk">here</a>. It will later be moved
+    to the android store.</p>
     
     <h2>How it works</h2>
+    <p>
       <ul>
 	<li>You simply design a custom interface exactly matching your needs.</li>
 	<li>All setup takes place in the ftDuino/Arduino sketch.</li>
@@ -31,7 +56,7 @@
 	<li>Your ftDuino/Arduino gives you visual feedback.</li>
       </ul>
     </p>
-
+    
     <h2>What you need</h2>
     <p>Only very few and cheap parts are needed:
       <ul>
