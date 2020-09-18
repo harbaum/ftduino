@@ -2,6 +2,7 @@
 <html lang="en-US">
   <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <title>ftDuinoBlue - control your ftDuino or Arduino via bluetooth</title>
   </head>
   <body>
@@ -12,16 +13,16 @@
     using the free ftDuinoBlue Android app.</p>
 
     <p>Just add the follwing XML to your sketch:</p>
-    
-    <center>     
-      <textarea rows="7"><layout orientation='portrait' name='ftDuinoBlue Led Demo'>
-	  <switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>
-	  <label id='2' size='20' place='left;below:1'>LED brightness</label>
-	  <slider id='3' width='parent' max='255' place='hcenter;below:2' />
-	  <label id='4' size='20' place='left;below:3'>Blink speed</label>
-	  <slider id='5' width='parent' place='hcenter;below:4' />
-<layout></textarea>
-    </center>
+
+    <xmp class="prettyprint">
+      <layout orientation='portrait' name='ftDuinoBlue Led Demo'>
+	<switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>
+	<label id='2' size='20' place='left;below:1'>LED brightness</label>
+	<slider id='3' width='parent' max='255' place='hcenter;below:2' />
+	<label id='4' size='20' place='left;below:3'>Blink speed</label>
+	<slider id='5' width='parent' place='hcenter;below:4' />
+      </layout>
+    </xmp>
     
     <p>To create this user interface in the adroid app:</p>
     

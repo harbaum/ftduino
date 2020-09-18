@@ -2,6 +2,7 @@
 <html lang="en-US">
   <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
     <title>ftDuinoBlue - examples</title>
   </head>
   <body>
@@ -16,15 +17,15 @@
 
     <h1>Demo #1: About ftDuinoBlue</h1>
 
-    <center>     
-      <textarea style="white-space: pre; overflow: auto;" rows="7"><layout orientation="portrait" name="Demo #1: About ftDuinoBlue">
-      <label id="1" size="20" place="left;top">ftDuinoBlue allows you to add a custom remote user interface to any Arduino and ftDuino project. All you need is a HM-10 bluetooth module connected to your Arduino, a few lines of extra code in your sketch, and this app.</label>
-      <label id="2" size="20" place="left;below:1">The entire user interface is stored as an XML description inside your Arduino sketch. There is no need to configure anything in this app.</label>
-      <label id="3" size="20" place="left;below:2">ftDuinoBlue supports various interface elements like e.g. buttons:</label>
-      <button id="4" size="30" color="white" bgcolor="#673AB7" place="hcenter;below:3">Button</button>
-      <label id="5" size="20" place="left;below:4">Use the controls in the demo to see what messages would be sent to the Arduino. Hit the button above for a test. Hit the info button in the menu to see the XML code.</label>
-</layout></textarea>
-    </center>
+    <xmp class="prettyprint">
+      <layout orientation='portrait' name='Demo #1: About ftDuinoBlue'>
+	<label id='1' size='20' place='left;top'>ftDuinoBlue allows you to add a custom remote user interface to any Arduino and ftDuino project. All you need is a HM-10 bluetooth module connected to your Arduino, a few lines of extra code in your sketch, and this app.</label>
+	<label id='2' size='20' place='left;below:1'>The entire user interface is stored as an XML description inside your Arduino sketch. There is no need to configure anything in this app.</label>
+	<label id='3' size='20' place='left;below:2'>ftDuinoBlue supports various interface elements like e.g. buttons:</label>
+	<button id='4' size='30' color='white' bgcolor='#673AB7' place='hcenter;below:3'>Button</button>
+	<label id='5' size='20' place='left;below:4'>Use the controls in the demo to see what messages would be sent to the Arduino. Hit the button above for a test. Hit the info button in the menu to see the XML code.</label>
+      </layout>
+    </xmp>
 
     <center>     
       <img width="256" src="images/ftduinoblue_introduction.png" />
@@ -32,19 +33,19 @@
 
     <h1>Demo #2: Buttons</h1>
     
-    <center>     
-      <textarea style="white-space: pre; overflow: auto;" rows="11"><layout orientation="portrait" name="Demo #2: Buttons" bgcolor="#B7F5FF">
-    <!-- up arrow button in center, ... -->
-    <button id="1" size="45" color="white" bgcolor="#009688" place="center">▲</button>
-    <button id="2" size="45" color="white" bgcolor="#00BCD4" place="below:1;left_of:1">◀</button>
-    <button id="3" size="45" color="white" bgcolor="#00BCD4" place="below:1;right_of:1">▶</button>
-    <button id="4" size="45" color="white" bgcolor="#FF5722" place="hcenter;below:3">▼</button>
-
-    <space id="5" height="50" place="hcenter;above:1"/>
-    <button id="6" size="45" color="#ffffff" bgcolor="#FF5722" place="above:5;left_of:1">A</button>
-    <button id="7" size="45" color="white" bgcolor="#673AB7" place="above:5;right_of:1">B</button>
-</layout></textarea>
-    </center>
+    <xmp class="prettyprint">
+      <layout orientation='portrait' name='Demo #2: Buttons' bgcolor='#B7F5FF'>
+	<!-- up arrow button in center, ... -->
+	<button id='1' size='45' color='white' bgcolor='#009688' place='center'>▲</button>
+	<button id='2' size='45' color='white' bgcolor='#00BCD4' place='below:1;left_of:1'>◀</button>
+	<button id='3' size='45' color='white' bgcolor='#00BCD4' place='below:1;right_of:1'>▶</button>
+	<button id='4' size='45' color='white' bgcolor='#FF5722' place='hcenter;below:3'>▼</button>
+	
+	<space id='5' height='50' place='hcenter;above:1'/>
+	<button id='6' size='45' color='#ffffff' bgcolor='#FF5722' place='above:5;left_of:1'>A</button>
+	<button id='7' size='45' color='white' bgcolor='#673AB7' place='above:5;right_of:1'>B</button>
+      </layout>
+    </xmp>
 
     <center>     
       <img width="256" src="images/ftduinoblue_buttons.png" />
@@ -52,16 +53,16 @@
 
     <h1>Demo #3: Joysticks</h1>
     
-    <center>     
-      <textarea rows="8"><layout orientation="portrait" name="Demo #3: Joysticks">
-    <joystick id="1" color="#FF9800" bgcolor="#03A9F4" place="hcenter;bottom"/>
-
-    <space id="2" width="100" place="hcenter;above:1"/>
-
-    <button id="3" size="60" color="#ffffff" bgcolor="#009688" place="above:1;left_of:2">A</button>
-    <button id="4" size="60" color="#ffffff" bgcolor="#F44336" place="above:1;right_of:2">B</button>
-</layout></textarea>
-    </center>
+    <xmp class="prettyprint">
+      <layout orientation='portrait' name='Demo #3: Joysticks'>
+	<joystick id='1' color='#FF9800' bgcolor='#03A9F4' place='hcenter;bottom'/>
+	
+	<space id='2' width='100' place='hcenter;above:1'/>
+	
+	<button id='3' size='60' color='#ffffff' bgcolor='#009688' place='above:1;left_of:2'>A</button>
+	<button id='4' size='60' color='#ffffff' bgcolor='#F44336' place='above:1;right_of:2'>B</button>
+      </layout>
+    </xmp>
 
     <center>     
       <img width="256" src="images/ftduinoblue_joystick.png" />
@@ -69,17 +70,17 @@
 
     <h1>Demo #4: Switches</h1>
     
-    <center>     
-      <textarea style="white-space: pre; overflow: auto;" rows="9"><layout orientation="portrait" name="Demo #4: Switches">
-    <label id="1" size="30" color="#E91E63" place="hcenter;top">Some Switches</label>
-    <switch id="2" size="20" width="parent" place="hcenter;below:1">First switch</switch>
-    <switch id="3" size="20" color="red" width="parent" place="hcenter;below:2">Second switch</switch>
-    <label id="4" size="30" color="#673AB7" place="hcenter;below:3">More Switches</label>
-    <switch id="5" size="20" width="parent" place="hcenter;below:4">Third switch</switch>
-    <switch id="6" size="20" width="parent" place="hcenter;below:5">Fourth switch</switch>
-    <switch id="7" size="20" bgcolor="#B7F7FF" width="parent" place="hcenter;below:6">Fifth switch</switch>
-</layout></textarea>
-    </center>
+    <xmp class="prettyprint">
+      <layout orientation='portrait' name='Demo #4: Switches'>
+	<label id='1' size='30' color='#E91E63' place='hcenter;top'>Some Switches</label>
+	<switch id='2' size='20' width='parent' place='hcenter;below:1'>First switch</switch>
+	<switch id='3' size='20' color='red' width='parent' place='hcenter;below:2'>Second switch</switch>
+	<label id='4' size='30' color='#673AB7' place='hcenter;below:3'>More Switches</label>
+	<switch id='5' size='20' width='parent' place='hcenter;below:4'>Third switch</switch>
+	<switch id='6' size='20' width='parent' place='hcenter;below:5'>Fourth switch</switch>
+	<switch id='7' size='20' bgcolor='#B7F7FF' width='parent' place='hcenter;below:6'>Fifth switch</switch>
+      </layout>
+    </xmp>
 
     <center>     
       <img width="256" src="images/ftduinoblue_switches.png" />
@@ -88,28 +89,28 @@
   
     <h1>Demo #5: Landscape</h1>
     
-    <center>     
-      <textarea style="white-space: pre; overflow: auto;" rows="4"><layout orientation="landscape" name="Demo #5: Landscape">
-    <joystick id="2" color="#FF9800" bgcolor="#2196F3" place="left;bottom"/>
-    <joystick id="3" color="#FFEB3B" bgcolor="#009688" place="right;bottom"/>
-</layout></textarea>
-    </center>
-
+    <xmp class="prettyprint">
+      <layout orientation='landscape' name='Demo #5: Landscape'>
+	<joystick id='2' color='#FF9800' bgcolor='#2196F3' place='left;bottom'/>
+	<joystick id='3' color='#FFEB3B' bgcolor='#009688' place='right;bottom'/>
+      </layout>
+    </xmp>
+    
     <center>     
       <img height="256" src="images/ftduinoblue_landscape.png" />
     </center>
 
     <h1>Demo #6: Slider</h1>
     
-    <center>     
-      <textarea style="white-space: pre; overflow: auto;" rows="6"><layout orientation="portrait" name="Demo #6: Slider">
-    <label id="1" size="20" place="top;hcenter">Some sliders</label>
-    <slider id="2" height="30" width="parent" color="#E91E63" place="left;below:1"/>
-    <slider id="3" height="30" width="parent" color="#03A9F4" enabled="false" place="left;below:2"/>
-    <slider id="4" height="30" width="parent" color="#4CAF50" place="left;below:3" max="10"/>
-</layout></textarea>
-    </center>
-
+    <xmp class="prettyprint">
+      <layout orientation='portrait' name='Demo #6: Slider'>
+	<label id='1' size='20' place='top;hcenter'>Some sliders</label>
+	<slider id='2' height='30' width='parent' color='#E91E63' place='left;below:1'/>
+	<slider id='3' height='30' width='parent' color='#03A9F4' enabled='false' place='left;below:2'/>
+	<slider id='4' height='30' width='parent' color='#4CAF50' place='left;below:3' max='10'/>
+      </layout>
+    </xmp>
+    
     <center>     
       <img width="256" src="images/ftduinoblue_sliders.png" />
     </center>
