@@ -6,17 +6,23 @@
 
 #include <avr/pgmspace.h>
 
-#define USE_I2C_BT   // use i2c bluetooth adapter, otherwise serial1 
+// This sketch supports different hardware setups. Choose you one below:
+#define USE_I2C_BT   // ftDuino with ftduino i2c bluetooth adapter 
+// #define USE_UNO_SU   // soft uart on arduino uno (HM10 on: RX D10, TX D09, GND D11, VCC D12)
+
 
 #ifdef USE_I2C_BT
 // use i2c bluetooth adapter
 #include "I2cSerialBt.h"
 I2cSerialBt btSerial;
+#else 
+#ifdef USE_UNO_SU
+#include <SoftwareSerial.h>
+SoftwareSerial btSerial(10, 9);
 #else
-#define btSerial Serial1
+#define btSerial Serial1   // default = Serial1 of e.g. Leonardo or Pro Micro
 #endif
-
-#define LED LED_BUILTIN
+#endif
 
 // A very simple wrapper class that appends a checksum to
 // every message sent.
@@ -57,16 +63,23 @@ ftDuinoBlueSerial ftdbSerial(btSerial);
 
 void setup() {
   Serial.begin(9600);     // some debug output is done on Serial (USB)
-  btSerial.begin(9600);
 
+#ifdef USE_UNO_SU
+  // power up bt module on uno
+  pinMode(11, OUTPUT);  digitalWrite(11, LOW);
+  pinMode(12, OUTPUT);  digitalWrite(12, HIGH);
+#endif
+
+  btSerial.begin(9600);
+  
 // optionally set the bluetooth name.
 //    delay(10);
 //    btSerial.println("AT+NAMEftDuinoBlue");
 //    delay(10);
 
   // prepare led
-  pinMode(LED, OUTPUT);
-  digitalWrite(LED, LOW);   
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, LOW);   
 };
 
 char parseHexDigit(char a) {
@@ -198,8 +211,8 @@ void loop() {
     // update state of physical led. Set analog brightness if
     // a) led is enabled by user and b) led is actually in the on state
     // of the blinking. Switch it off otherwise
-    if(led_state && ledState) analogWrite(LED, ledBrightness);
-    else                      digitalWrite(LED, LOW);      
+    if(led_state && ledState) analogWrite(LED_BUILTIN, ledBrightness);
+    else                      digitalWrite(LED_BUILTIN, LOW);      
   }
 
   // parse everything coming from Serial1 (bluetooth side)
