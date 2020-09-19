@@ -1,15 +1,19 @@
 /*
  *  ftduinoblue_demo.ino
  *  
- *  This is a demo sketch for ftDuinoBlue. It make  
+ *  This is a demo sketch for ftDuinoBlue. It allows you to create a custom
+ *  remote android user interface for your project right inside you arduino
+ *  sketch. No android programming required.
+ *  
+ *  For more info see http://ftduino.de/blue  
  */
 
 #include <avr/pgmspace.h>
 
 // This sketch supports different hardware setups. Choose you one below:
 #define USE_I2C_BT   // ftDuino with ftduino i2c bluetooth adapter 
+// #define USE_SERIAL1  // ftDuino as explained at https://harbaum.github.io/ftduino/www/manual/experimente.html#6.19.2
 // #define USE_UNO_SU   // soft uart on arduino uno (HM10 on: RX D10, TX D09, GND D11, VCC D12)
-
 
 #ifdef USE_I2C_BT
 // use i2c bluetooth adapter
@@ -20,7 +24,11 @@ I2cSerialBt btSerial;
 #include <SoftwareSerial.h>
 SoftwareSerial btSerial(10, 9);
 #else
+#ifdef USE_SERIAL1
 #define btSerial Serial1   // default = Serial1 of e.g. Leonardo or Pro Micro
+#else
+#error "Please specify your setup!"
+#endif
 #endif
 #endif
 
@@ -118,12 +126,17 @@ void parseCommand(char *buffer) {
   } else if(strcmp(buffer, "STATE") == 0) {
     // app requests state. Send state of the LED switch
     Serial.println("state cmd");
+
+    // received the STATE command from the android app. Reply
+    // with the current value for sliders and switches
+    
     ftdbSerial.print("SWITCH 1 ");
     ftdbSerial.println(ledState?"ON":"OFF");
     ftdbSerial.print("SLIDER 3 ");
     ftdbSerial.println(ledBrightness);
     ftdbSerial.print("SLIDER 5 ");
     ftdbSerial.println(ledBlinkSpeed);
+    
   } else if(strncmp(buffer, "BUTTON ", 7) == 0) {
     char *idx = buffer;
     char id = parseParameter(&idx);
