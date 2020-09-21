@@ -9,6 +9,7 @@
  */
 
 #include <avr/pgmspace.h>
+#include "ftduinoblue.h"
 
 // This sketch supports different hardware setups. Choose you one below:
 #define USE_I2C_BT   // ftDuino with ftduino i2c bluetooth adapter 
@@ -32,42 +33,19 @@ SoftwareSerial btSerial(10, 9);
 #endif
 #endif
 
-// A very simple wrapper class that appends a checksum to
-// every message sent.
-class ftDuinoBlueSerial: public Stream {
-public:
-  ftDuinoBlueSerial(Stream &s) { this->mStream = &s; }
-  int available() { return this->mStream->available(); }
-  int read() { return this->mStream->read(); }
-  size_t write(uint8_t b) { 
-    if(b>=32) mOutSum += b;  // ignore all control characters (especially the \r and \n at the end of the line)
-    // according to
-    // https://www.arduino.cc/reference/en/language/functions/communication/serial/println/
-    // println always sends \r\n. So we insert the checksum before the \r
-    if(b == '\r') {
-      this->mStream->write(':');
-      this->mStream->print(mOutSum, HEX);
-      mOutSum = 0;
-    }
-    return this->mStream->write(b);
-  } 
-  int peek() { return this->mStream->peek(); }
-private:
-  Stream *mStream;
-  uint8_t mOutSum = 0;
-};
-
-ftDuinoBlueSerial ftdbSerial(btSerial);
-
 // the layout to be sent to the ftDuinoBlue app
-#define LAYOUT \
-    "<layout orientation='portrait' name='ftDuinoBlue Led Demo'>" \
-    "<switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>" \
-    "<label id='2' size='20' place='left;below:1'>LED brightness</label>" \
-    "<slider id='3' width='parent' max='255' place='hcenter;below:2'/>" \
-    "<label id='4' size='20' place='left;below:3'>Blink speed</label>" \
-    "<slider id='5' width='parent' place='hcenter;below:4'/>" \
-    "</layout>"
+const char layout[] PROGMEM = 
+    "<layout orientation='portrait' name='ftDuinoBlue Led Demo'>"
+    "<switch id='1' size='20' width='parent' place='hcenter;top'>LED on/off</switch>"
+    "<label id='2' size='20' place='left;below:1'>LED brightness</label>"
+    "<slider id='3' width='parent' max='255' place='hcenter;below:2'/>"
+    "<label id='4' size='20' place='left;below:3'>Blink speed</label>"
+    "<slider id='5' width='parent' place='hcenter;below:4'/>"
+//    "<button id='6' width='parent' place='hcenter;below:5'>BUTTON</button>"
+//    "<joystick id='7' width='parent' place='hcenter;below:6' />"
+    "</layout>";
+
+FtduinoBlue ftdblue(btSerial, layout);
 
 void setup() {
   Serial.begin(9600);     // some debug output is done on Serial (USB)
@@ -77,6 +55,13 @@ void setup() {
   pinMode(11, OUTPUT);  digitalWrite(11, LOW);
   pinMode(12, OUTPUT);  digitalWrite(12, HIGH);
 #endif
+
+  // register callbacks for ftduinoblue
+  ftdblue.setStateCb(ftduinoblue_state_callback);
+  ftdblue.setButtonCb(ftduinoblue_button_callback);
+  ftdblue.setSwitchCb(ftduinoblue_switch_callback);
+  ftdblue.setSliderCb(ftduinoblue_slider_callback);
+  ftdblue.setJoystickCb(ftduinoblue_joystick_callback);
 
   btSerial.begin(9600);
   
@@ -90,21 +75,6 @@ void setup() {
   digitalWrite(LED_BUILTIN, LOW);   
 };
 
-char parseHexDigit(char a) {
-  if(a >= '0' && a <= '9') return a-'0';  
-  if(a >= 'a' && a <= 'f') return 10+a-'a';  
-  if(a >= 'A' && a <= 'F') return 10+a-'A';  
-  return 0;
-}
-
-// skip current part (word) in string and any whitespace behind
-// and return the position in front of the next part
-int parseParameter(char **idx) {
-  while(**idx && **idx != ' ') (*idx)++;  // skip non-whites
-  while(**idx == ' ')          (*idx)++;  // skip whites
-  return atoi(*idx);                      // parse number
-}
-
 // led config. This has a startup default and can be changed
 // by the user via bluetooth. This is also reported back to
 // the user app to provide the correct initial values should
@@ -114,75 +84,6 @@ static char ledState = true;         // LED is on
 static uint8_t ledBlinkSpeed = 50;   // ~ 2 Hz
 static uint8_t ledBrightness = 128;  // 50% brightness
 
-
-void parseCommand(char *buffer) {       
-  if(strcmp(buffer, "VERSION") == 0) {
-    Serial.println("version cmd");
-    ftdbSerial.println("VERSION 1.0.0");
-  } else if(strcmp(buffer, "LAYOUT") == 0) {
-    Serial.println("layout cmd");
-    ftdbSerial.print("LAYOUT ");
-    ftdbSerial.println(F(LAYOUT));
-  } else if(strcmp(buffer, "STATE") == 0) {
-    // app requests state. Send state of the LED switch
-    Serial.println("state cmd");
-
-    // received the STATE command from the android app. Reply
-    // with the current value for sliders and switches
-    
-    ftdbSerial.print("SWITCH 1 ");
-    ftdbSerial.println(ledState?"ON":"OFF");
-    ftdbSerial.print("SLIDER 3 ");
-    ftdbSerial.println(ledBrightness);
-    ftdbSerial.print("SLIDER 5 ");
-    ftdbSerial.println(ledBlinkSpeed);
-    
-  } else if(strncmp(buffer, "BUTTON ", 7) == 0) {
-    char *idx = buffer;
-    char id = parseParameter(&idx);
-    parseParameter(&idx);
-    char down = (strncmp(idx, "DOWN", 4) == 0);
-
-    Serial.print("BUTTON ");
-    Serial.print(id, DEC);
-    Serial.print(" ");
-    Serial.println(down?"DOWN":"UP");
-    
-  } else if(strncmp(buffer, "SLIDER ", 7) == 0) {
-    char *idx = buffer;
-    char id = parseParameter(&idx);
-    int value = parseParameter(&idx);
-    
-    Serial.print("SLIDER ");
-    Serial.print(id, DEC);
-    Serial.print(" ");
-    Serial.println(value, DEC);
-
-    if(id == 3) ledBrightness = value;
-    if(id == 5) ledBlinkSpeed = value;
-    ledChanged = true;   // user has changed something -> led needs to be updated
-
-  } else if(strncmp(buffer, "SWITCH ", 7) == 0) {
-    char *idx = buffer;
-    char id = parseParameter(&idx);
-    parseParameter(&idx);   // return value is ignored as we parse the string outselves
-    char on = (strncmp(idx, "ON", 2) == 0);
-
-    Serial.print("SWITCH ");
-    Serial.print(id, DEC);
-    Serial.print(" ");
-    Serial.println(on?"ON":"OFF");
-          
-    if(id == 1) ledState = on;
-    ledChanged = true;   // user has changed something -> led needs to be updated
-
-  } else {
-    Serial.print("unknown cmd ");
-    Serial.println(buffer);
-    ftdbSerial.print("ERROR:unknown command ");
-    ftdbSerial.println(buffer);
-  }
-}
 
 // the i2c_bluetooth adapter has a on-board led which can
 // be used to show that the communication is fine.
@@ -200,11 +101,57 @@ void adapter_led() {
 #endif
 }
 
-void loop() {
-  static char buffer[32];
-  static uint8_t buffer_fill = 0;
+// callback invoked by ftduinoblue whenever the app requests the current state
+void ftduinoblue_state_callback() {    
+  ftdblue.print("SWITCH 1 ");
+  ftdblue.println(ledState?"ON":"OFF");
+  ftdblue.print("SLIDER 3 ");
+  ftdblue.println(ledBrightness);
+  ftdblue.print("SLIDER 5 ");
+  ftdblue.println(ledBlinkSpeed);
+}
 
-  
+void ftduinoblue_button_callback(char id, bool state) {
+  Serial.print("BUTTON ");
+  Serial.print(id, DEC);
+  Serial.print(" ");
+  Serial.println(state?"DOWN":"UP");
+}
+
+void ftduinoblue_switch_callback(char id, bool state) {
+  Serial.print("SWITCH ");
+  Serial.print(id, DEC);
+  Serial.print(" ");
+  Serial.println(state?"ON":"OFF");
+
+  // make sure the led reacts on switch 1
+  if(id == 1) {
+    ledChanged = true;
+    ledState = state;       
+  }
+}
+
+void ftduinoblue_slider_callback(char id, int value) {
+  Serial.print("SLIDER ");
+  Serial.print(id, DEC);
+  Serial.print(" ");
+  Serial.println(value, DEC);
+
+  if(id == 3) ledBrightness = value;
+  if(id == 5) ledBlinkSpeed = value;
+  ledChanged = true;   // user has changed something -> led needs to be updated
+}
+
+void ftduinoblue_joystick_callback(char id, char value_x, char value_y) {
+  Serial.print("JOYSTICK ");
+  Serial.print(id, DEC);
+  Serial.print(" ");
+  Serial.print(value_x, DEC);
+  Serial.print(" ");
+  Serial.println(value_y, DEC);
+}
+
+void loop() {
   adapter_led();
 
   // led blink timer
@@ -228,35 +175,5 @@ void loop() {
     else                      digitalWrite(LED_BUILTIN, LOW);      
   }
 
-  // parse everything coming from Serial1 (bluetooth side)
-  while(ftdbSerial.available()) {
-    uint8_t c = ftdbSerial.read();
-
-    // buffer all characters but the control characters 
-    if(c >= 32) {
-      if(buffer_fill < sizeof(buffer))
-        buffer[buffer_fill++] = c;
-    } else if((c == '\n' || c == '\r')) {
-      // verify checksum if present
-      if(buffer_fill > 3 && buffer[buffer_fill-3] == ':') {
-         // extract checksum
-         uint8_t csum_in = 
-            16 * parseHexDigit(buffer[buffer_fill-2]) +
-                 parseHexDigit(buffer[buffer_fill-1]);
-
-         // calculate checksum
-         uint8_t csum_calc = 0;
-         for(char i=0;i<buffer_fill-3;i++)
-           csum_calc += buffer[i];
-
-         if(csum_calc == csum_in) {
-           // cut off checksum for further processing
-           buffer[buffer_fill-3] = 0;
-           parseCommand(buffer);
-         }
-       }
-       // whatever happened, the buffer contents have been consumed now
-       buffer_fill = 0;
-    }
-  }
+  ftdblue.handle();
 };
