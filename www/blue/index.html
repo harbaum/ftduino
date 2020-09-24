@@ -18,6 +18,7 @@
       <label for="bmenub" class="burger pseudo button">menu</label>
       
       <div class="menu">
+	<a href="#gs" class="pseudo button">Getting started</a>
 	<a href="examples.html" class="pseudo button">Demos</a>
 	<a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftduinoblue_demo" class="pseudo button">Example Sketch</a>
 	<a href="./ftduinoblue.apk" class="pseudo button">Android App</a>
@@ -54,9 +55,8 @@
       <img style="border: 5px solid #888;" width="360" src="images/screenshot_demo.png" />
     </center>
 
-    <p>
-    More examples can be found on the <a href="examples.html">examples
-    page</a>.</p>
+    <p>More examples can be found on
+    the <a href="examples.html">examples page</a>.</p>
     
     <p>The full demo sketch can be found in the <a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftduinoblue_demo">ftDuino repository</a>.</p>
     
@@ -108,7 +108,31 @@
 	</article>
       </div>
     </div>
+
+
+    <h2><a id="gs">Getting started with an Arduino Uno</a></h2>
+
+    <p>Th most simple setup to give ftDuinoBlue a test on real hardware is based
+      on the Arduino Uno and a HM-10 bluetooth module.</p>
     
-    
+    <p>Plug the HM-10 straight into digital pins 8 to 13 of the Uno starting with
+      the HM-10's STATE pin in the Unos pin 8. This requires some addtional
+      software configutaion to provide e.g. power via pin 12 of the Uno to the
+      HM-10. The <a href="https://github.com/harbaum/ftduino/blob/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftduinoblue_demo/ftduinoblue_demo.ino">demo sketch</a> takes care of that
+      if you enable the setup for the Uno by uncommenting the appropriate line:</p>
+
+    <pre style="overflow-x:scroll;" class="prettyprint">
+      // #define USE_I2C_BT   // ftDuino with ftduino i2c bluetooth adapter 
+      // #define USE_SERIAL1  // ftDuino as explained at https://harbaum.github.io/ftduino/www/manual/experimente.html#6.19.2
+      #define USE_UNO_SU      // Arduino Uno with HM-10
+    </pre>
+
+    <p>Then simply load the demo sketch onto the Uno. The LED on the HM-10 should
+      start flashing as well as the on-board user LED of the Uno. You can now
+      connect to the Uno using the ftDuinoBlue app and control the Unos on-board
+      LED. Adjusting the brightness does not work work on the Uno since the LED
+      is not connected to a PWM capable pin. But you can still use the user
+      interface to start and stop the LED blinking and to adjust the blink
+      frequency.</p>    
   </body>
 </html>

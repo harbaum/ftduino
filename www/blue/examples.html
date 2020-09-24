@@ -38,6 +38,31 @@
 
     <h1>Demo #1: About ftDuinoBlue</h1>
 
+    <p>This demo is supposed to explain the basic concepts by itself. but it equally well uses the
+      basic mechanisms itself.</p>
+
+    <p>The whole XML description of the user interface consists of the one big <code>layout</code>
+      element. This includes the different user interface elements. In this case these are mainly
+      text elements (labels) representing the explanations given to the user. But it also includes
+      a button as an interactive element.</p>
+
+    <p>All elements have to be given an id. The id can be freely choosen. E.g. the button in this
+      example uses id 4. This id serves two main purposes:</p>
+
+    <ul>
+      <li>The id is used to reference it in the layout to place other
+	elements above, below, left of this element. E.g. the label
+	with id 5 is placed below the button with the id 4 as its
+	placement includes <code>place='below:4'</code>.</li>
+      <li>The id is used when notfying the arduino of user interaction. E.g.
+	if the user pressed the button with the id 4 down the app will send
+	<code>BUTTON 4 DOWN</code> to the arduino to tell it that the
+	button with the id 4 has been pressed down by the user.</li>
+    </ul>
+
+    <p>Various other attributes allow to style the elements by
+    e.g. changing their size oder color.</p>
+    
     <div>
       <article class="card">
     <xmp style="overflow-x:scroll;" class="prettyprint">
