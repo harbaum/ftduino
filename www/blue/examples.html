@@ -23,20 +23,18 @@
       </div>
     </nav>
     
-   
     <h1>ftDuinoBlue - Examples and Demos</h1>
     
     <p>All examples shown on this page are integrated as built-in
       demos into the android app. They can be launched without using a
-      real arduino unless a real ftDuinoBlue device is within
-      range.</p>
+      real arduino or ftDuino.</p>
 
     <center>     
       <img style="border: 5px solid #888;" width="360" src="images/ftduinoblue_init.png" />
       <img style="border: 5px solid #888;" width="360" src="images/ftduinoblue_demos.png" />
     </center>
 
-    <h1>Demo #1: About ftDuinoBlue</h1>
+    <h2 id="demo1">Demo #1: About ftDuinoBlue</h2>
 
     <p>This demo is supposed to explain the basic concepts by itself. but it equally well uses the
       basic mechanisms itself.</p>
@@ -53,13 +51,47 @@
       <li>The id is used to reference it in the layout to place other
 	elements above, below, left of this element. E.g. the label
 	with id 5 is placed below the button with the id 4 as its
-	placement includes <code>place='below:4'</code>.</li>
+	placement includes <code>place='hcenter;below:4'</code>.</li>
       <li>The id is used when notfying the arduino of user interaction. E.g.
 	if the user pressed the button with the id 4 down the app will send
 	<code>BUTTON 4 DOWN</code> to the arduino to tell it that the
 	button with the id 4 has been pressed down by the user.</li>
     </ul>
 
+    <p>The possible values to be used inside a place attribute are
+      listed below. Most values only affect the horizontal or the
+      vertical placement. Two values can therefore be combined in a
+      place attribute using a semicolor like
+      e.g. <tt>place='top;hcenter'.</p>
+    <dl>
+      <dt><tt><b>center</b></tt></dt><dd>Center the element vertically and horizontally on the screen</dd>
+      <dt><tt><b>hcenter</b></tt></dt><dd>Center the element horizontally on the screen</dd>
+      <dt><tt><b>vcenter</b></tt></dt><dd>Center the element vertically on the screen</dd>
+
+      <dt><tt><b>top</b></tt></dt><dd>Place at the top of the screen</dd>
+      <dt><tt><b>bottom</b></tt></dt><dd>Place at the bottom of the screen</dd>
+      <dt><tt><b>start</b></tt></dt><dd>Place at the start of the screen</dd>
+      <dt><tt><b>end</b></tt></dt><dd>Place at the end of the screen</dd>
+      <dt><tt><b>left</b></tt></dt><dd>Place at the left screen border</dd>
+      <dt><tt><b>right</b></tt></dt><dd>place at the right screen border</dd>
+      
+      <dt><tt><b>above:X</b></tt></dt><dd>Place above the element with id X</dd>
+      <dt><tt><b>below:X</b></tt></dt><dd>Place below the element with id X</dd>
+      <dt><tt><b>left_of:X</b></tt></dt><dd>Place left of the element with id X</dd>
+      <dt><tt><b>right_of:X</b></tt></dt><dd>Place right of the element with id X</dd>
+      <dt><tt><b>start_of:X</b></tt></dt><dd>Place at start of the element with id X</dd>
+      <dt><tt><b>end_of:X</b></tt></dt><dd>Place at end of the element with id X</dd>
+
+      <dt><tt><b>align_top:X</b></tt></dt><dd>Align this elements top with the top of the element with id X</dd>
+      <dt><tt><b>align_bottom:X</b></tt></dt><dd>Align this elements bottom with the bottom of the element with id X</dd>
+      <dt><tt><b>align_start:X</b></tt></dt><dd>Align this elements start with the start of the element with id X</dd>
+      <dt><tt><b>align_end:X</b></tt></dt><dd>Align this elements end with the end of the element with id X</dd>
+      <dt><tt><b>align_left:X</b></tt></dt><dd>Align this elements left side with the left side of the element with id X</dd>
+      <dt><tt><b>align_right:X</b></tt></dt><dd>Align this elements right side with the right side of the element with id X</dd>
+
+      <dt><tt><b>align_baseline:X</b></tt></dt><dd>Align this elements text baseline with the text baseline of the element with id X. This makes both texts appear as sitting on the same line.</dd>
+    </dl>
+    
     <p>Various other attributes allow to style the elements by
     e.g. changing their size oder color.</p>
     
@@ -81,7 +113,7 @@
       <img style="border: 5px solid #888;" width="360" src="images/ftduinoblue_introduction.png" />
     </center>
 
-    <h1>Demo #2: Buttons</h1>
+    <h2 id="demo2">Demo #2: Buttons</h2>
     
     <div>
       <article class="card">
@@ -105,7 +137,7 @@
       <img style="border: 5px solid #888;" width="360" src="images/ftduinoblue_buttons.png" />
     </center>
 
-    <h1>Demo #3: Joysticks</h1>
+    <h2 id="demo3">Demo #3: Joysticks</h2>
     
     <div>
       <article class="card">
@@ -126,7 +158,7 @@
       <img style="border: 5px solid #888;" width="360" src="images/ftduinoblue_joystick.png" />
     </center>
 
-    <h1>Demo #4: Switches</h1>
+    <h2 id="demo4">Demo #4: Switches</h2>
     
     <div>
       <article class="card">
@@ -149,7 +181,7 @@
     </center>
 
   
-    <h1>Demo #5: Landscape</h1>
+    <h2 id="demo5">Demo #5: Landscape</h2>
     
     <div>
       <article class="card">
@@ -166,7 +198,7 @@
       <img style="border: 5px solid #888;" height="360" src="images/ftduinoblue_landscape.png" />
     </center>
 
-    <h1>Demo #6: Slider</h1>
+    <h2 id="demo6">Demo #6: Slider</h2>
     
     <div>
       <article class="card">
