@@ -62,7 +62,7 @@
       layouts as also shown in the other demos.</p>
     
     <details>
-      <summary style="outline: 0" ><a class="button">Show/hide all placement values</a></summary>
+      <summary style="outline: 0" ><div class="button">List of all placement values</div></summary>
       <article class="card">
 	<header><h3>Values for the <tt>place</tt> attribute</h3></header>
 
@@ -125,7 +125,36 @@
     </center>
 
     <h2 id="demo2">Demo #2: Buttons</h2>
-    
+
+    <p>The second demo is a "real life" example. It creates a gamepad like user interface
+      consisting if six buttons. The buttons are arranged relative to each other using the
+      <tt>place</tt> attribute as explained in demo #1. Placement
+      starts with the ▲ button which is places in the very center of
+      the screen. Left and right below this are the ◀ and ▶ buttons
+      and the ▼ is placed below these and horizontally centered.</p>
+
+    <p>We want the A and B buttons to be slighly above the ▲
+      button. This is accomplished using a <tt>space</tt>
+      element. This element is invisible and serves no other purpose
+      than to take up some screen space. In this example a 50 pixels
+      high space is placed above the ▲ button. The A and B buttons are
+      then placed above this space but left and right of the first ▲
+      button just like the ◀ and ▶ buttons previously.</p>
+
+    <p>This demo also shows that you can use the full UTF-8 character
+      set incl.  those neat triangles. Further examples of UTF-8
+      characters can be found at places
+      like <a href="https://www.w3schools.com/charsets/ref_utf_basic_latin.asp">w3schools.com</a>.
+      Keep in mind that not all of these may be supported by all smart
+      devices.</p>
+
+    <p>Finally this demo shows how to use colors and how to set the
+      background color of the entire layout. Colors may be specified
+      by their names (e.g. 'white') but also by their color
+      code. Places like
+      <a href="https://www.w3schools.com/colors/colors_picker.asp">w3schools.com</a>
+      provide tools to help finding the required color codes.</p>
+      
     <div>
       <article class="card">
     <xmp style="overflow-x:scroll;" class="prettyprint">
