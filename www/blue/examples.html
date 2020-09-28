@@ -39,13 +39,16 @@
     <p>This demo is supposed to explain the basic concepts by itself. but it equally well uses the
       basic mechanisms itself.</p>
 
-    <p>The whole XML description of the user interface consists of the one big <code>layout</code>
-      element. This includes the different user interface elements. In this case these are mainly
-      text elements (labels) representing the explanations given to the user. But it also includes
-      a button as an interactive element.</p>
+    <p>The whole XML description of the user interface consists of the
+      one big <code>layout</code> element. This includes the different
+      user interface elements. In this case these are mainly text
+      elements (labels) representing the explanations given to the
+      user. But it also includes a button as an interactive
+      element.</p>
 
-    <p>All elements have to be given an id. The id can be freely choosen. E.g. the button in this
-      example uses id 4. This id serves two main purposes:</p>
+    <p>All elements have to be given an id. The id can be freely
+      choosen. E.g. the button in this example uses id 4. This id
+      serves two main purposes:</p>
 
     <ul>
       <li>The id is used to reference it in the layout to place other
@@ -73,32 +76,58 @@
 	  e.g. <tt>place='top;hcenter'</tt>.</p>
 	
 	<dl>
-	  <dt><tt><b>center</b></tt></dt><dd>Center the element vertically and horizontally on the screen</dd>
-	  <dt><tt><b>hcenter</b></tt></dt><dd>Center the element horizontally on the screen</dd>
-	  <dt><tt><b>vcenter</b></tt></dt><dd>Center the element vertically on the screen</dd>
+	  <dt><tt><b>center</b></tt></dt><dd>Center the element
+	  vertically and horizontally on the screen</dd>
+	  <dt><tt><b>hcenter</b></tt></dt><dd>Center the element
+	  horizontally on the screen</dd>
+	  <dt><tt><b>vcenter</b></tt></dt><dd>Center the element
+	  vertically on the screen</dd>
 	  
-	  <dt><tt><b>top</b></tt></dt><dd>Place at the top of the screen</dd>
-	  <dt><tt><b>bottom</b></tt></dt><dd>Place at the bottom of the screen</dd>
-	  <dt><tt><b>start</b></tt></dt><dd>Place at the start of the screen</dd>
-	  <dt><tt><b>end</b></tt></dt><dd>Place at the end of the screen</dd>
-	  <dt><tt><b>left</b></tt></dt><dd>Place at the left screen border</dd>
-	  <dt><tt><b>right</b></tt></dt><dd>place at the right screen border</dd>
+	  <dt><tt><b>top</b></tt></dt><dd>Place at the top of the
+	  screen</dd>
+	  <dt><tt><b>bottom</b></tt></dt><dd>Place at the bottom of
+	  the screen</dd>
+	  <dt><tt><b>start</b></tt></dt><dd>Place at the start of the
+	  screen</dd>
+	  <dt><tt><b>end</b></tt></dt><dd>Place at the end of the
+	  screen</dd>
+	  <dt><tt><b>left</b></tt></dt><dd>Place at the left screen
+	  border</dd>
+	  <dt><tt><b>right</b></tt></dt><dd>place at the right screen
+	  border</dd>
 	  
-	  <dt><tt><b>above:X</b></tt></dt><dd>Place above the element with id X</dd>
-	  <dt><tt><b>below:X</b></tt></dt><dd>Place below the element with id X</dd>
-	  <dt><tt><b>left_of:X</b></tt></dt><dd>Place left of the element with id X</dd>
-	  <dt><tt><b>right_of:X</b></tt></dt><dd>Place right of the element with id X</dd>
-	  <dt><tt><b>start_of:X</b></tt></dt><dd>Place at start of the element with id X</dd>
-	  <dt><tt><b>end_of:X</b></tt></dt><dd>Place at end of the element with id X</dd>
+	  <dt><tt><b>above:X</b></tt></dt><dd>Place above the element
+	  with id X</dd>
+	  <dt><tt><b>below:X</b></tt></dt><dd>Place below the element
+	  with id X</dd>
+	  <dt><tt><b>left_of:X</b></tt></dt><dd>Place left of the
+	  element with id X</dd>
+	  <dt><tt><b>right_of:X</b></tt></dt><dd>Place right of the
+	  element with id X</dd>
+	  <dt><tt><b>start_of:X</b></tt></dt><dd>Place at start of the
+	  element with id X</dd>
+	  <dt><tt><b>end_of:X</b></tt></dt><dd>Place at end of the
+	  element with id X</dd>
 	  
-	  <dt><tt><b>align_top:X</b></tt></dt><dd>Align this elements top with the top of the element with id X</dd>
-	  <dt><tt><b>align_bottom:X</b></tt></dt><dd>Align this elements bottom with the bottom of the element with id X</dd>
-	  <dt><tt><b>align_start:X</b></tt></dt><dd>Align this elements start with the start of the element with id X</dd>
-	  <dt><tt><b>align_end:X</b></tt></dt><dd>Align this elements end with the end of the element with id X</dd>
-	  <dt><tt><b>align_left:X</b></tt></dt><dd>Align this elements left side with the left side of the element with id X</dd>
-	  <dt><tt><b>align_right:X</b></tt></dt><dd>Align this elements right side with the right side of the element with id X</dd>
+	  <dt><tt><b>align_top:X</b></tt></dt><dd>Align this elements
+	  top with the top of the element with id X</dd>
+	  <dt><tt><b>align_bottom:X</b></tt></dt><dd>Align this
+	  elements bottom with the bottom of the element with id
+	  X</dd>
+	  <dt><tt><b>align_start:X</b></tt></dt><dd>Align this
+	  elements start with the start of the element with id X</dd>
+	  <dt><tt><b>align_end:X</b></tt></dt><dd>Align this elements
+	  end with the end of the element with id X</dd>
+	  <dt><tt><b>align_left:X</b></tt></dt><dd>Align this elements
+	  left side with the left side of the element with id X</dd>
+	  <dt><tt><b>align_right:X</b></tt></dt><dd>Align this
+	  elements right side with the right side of the element with
+	  id X</dd>
 	  
-	  <dt><tt><b>align_baseline:X</b></tt></dt><dd>Align this elements text baseline with the text baseline of the element with id X. This makes both texts appear as sitting on the same line.</dd>
+	  <dt><tt><b>align_baseline:X</b></tt></dt><dd>Align this
+	  elements text baseline with the text baseline of the element
+	  with id X. This makes both texts appear as sitting on the
+	  same line.</dd>
 	</dl>
       </article>
     </details>
@@ -126,10 +155,11 @@
 
     <h2 id="demo2">Demo #2: Buttons</h2>
 
-    <p>The second demo is a "real life" example. It creates a gamepad like user interface
-      consisting if six buttons. The buttons are arranged relative to each other using the
+    <p>The second demo is a "real life" example. It creates a gamepad
+      like user interface consisting of six buttons. The buttons are
+      arranged relative to each other using the
       <tt>place</tt> attribute as explained in demo #1. Placement
-      starts with the ▲ button which is places in the very center of
+      starts with the ▲ button which places it in the very center of
       the screen. Left and right below this are the ◀ and ▶ buttons
       and the ▼ is placed below these and horizontally centered.</p>
 
@@ -142,18 +172,18 @@
       button just like the ◀ and ▶ buttons previously.</p>
 
     <p>This demo also shows that you can use the full UTF-8 character
-      set incl.  those neat triangles. Further examples of UTF-8
+      set including those neat triangles. Further examples of UTF-8
       characters can be found at places
-      like <a href="https://www.w3schools.com/charsets/ref_utf_basic_latin.asp">w3schools.com</a>.
+      like <a href="https://www.w3schools.com/charsets/ref_utf_geometric.asp">w3schools.com</a>.
       Keep in mind that not all of these may be supported by all smart
       devices.</p>
 
     <p>Finally this demo shows how to use colors and how to set the
       background color of the entire layout. Colors may be specified
-      by their names (e.g. 'white') but also by their color
+      by their names (e.g. 'white') but also by their RGB color
       code. Places like
       <a href="https://www.w3schools.com/colors/colors_picker.asp">w3schools.com</a>
-      provide tools to help finding the required color codes.</p>
+      provide tools to help finding the required RGB color codes.</p>
       
     <div>
       <article class="card">
