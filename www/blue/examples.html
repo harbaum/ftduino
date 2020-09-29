@@ -72,10 +72,10 @@
 	<header><h3>Values for the <tt>place</tt> attribute</h3></header>
 
 	<p>The possible values to be used inside a place attribute are
-	  listed below. Most values only affect the horizontal or the
-	  vertical placement. Two values can therefore be combined in a
-	  place attribute using a semicolor like
-	  e.g. <tt>place='top;hcenter'</tt>.</p>
+	  listed below. Most values only affect only the horizontal or
+	  only the vertical placement. Two values can therefore be
+	  combined in a <tt>place</tt> attribute using a semicolon
+	  like e.g. <tt>place='top;hcenter'</tt>.</p>
 	
 	<dl>
 	  <dt><tt><b>center</b></tt></dt><dd>Center the element
@@ -161,15 +161,15 @@
       like user interface consisting of six buttons. The buttons are
       arranged relative to each other using the
       <tt>place</tt> attribute as explained in demo #1. Placement
-      starts with the ▲ button which places it in the very center of
+      starts with the ▲ button which is placed in the very center of
       the screen. Left and right below this are the ◀ and ▶ buttons
       and the ▼ is placed below these and horizontally centered.</p>
 
     <p>We want the A and B buttons to be slighly above the ▲
       button. This is accomplished using a <tt>space</tt>
       element. This element is invisible and serves no other purpose
-      than to take up some screen space. In this example a 50 pixels
-      high space is placed above the ▲ button. The A and B buttons are
+      than to take up some screen space. In this example a 50 pixel
+      tall space is placed above the ▲ button. The A and B buttons are
       then placed above this space but left and right of the first ▲
       button just like the ◀ and ▶ buttons previously.</p>
 
@@ -196,7 +196,6 @@
 	<button id='2' size='45' color='white' bgcolor='#00BCD4' place='below:1;left_of:1'>◀</button>
 	<button id='3' size='45' color='white' bgcolor='#00BCD4' place='below:1;right_of:1'>▶</button>
 	<button id='4' size='45' color='white' bgcolor='#FF5722' place='hcenter;below:3'>▼</button>
-	
 	<space id='5' height='50' place='hcenter;above:1'/>
 	<button id='6' size='45' color='#ffffff' bgcolor='#FF5722' place='above:5;left_of:1'>A</button>
 	<button id='7' size='45' color='white' bgcolor='#673AB7' place='above:5;right_of:1'>B</button>
@@ -225,9 +224,7 @@
     <xmp style="overflow-x:scroll;" class="prettyprint">
       <layout orientation='portrait' name='Demo #3: Joysticks'>
 	<joystick id='1' color='#FF9800' bgcolor='#03A9F4' place='hcenter;bottom'/>
-	
 	<space id='2' width='100' place='hcenter;above:1'/>
-	
 	<button id='3' size='60' color='#ffffff' bgcolor='#009688' place='above:1;left_of:2'>A</button>
 	<button id='4' size='60' color='#ffffff' bgcolor='#F44336' place='above:1;right_of:2'>B</button>
       </layout>
@@ -244,16 +241,16 @@
     <p>Another common element for user interfaces is the
       switch. Switches share the basic functions with buttons and can
       also be used to turn things on or off. But unlike buttons they
-      keep their state. Once switched on they stay "on" until they are
+      keep their state. Once switched on they stay on until they are
       explicitely switched off again.</p>
 
     <p>The fact that a switch can permanently change its state makes
       it desireable to set the correct switch state whenever the app
-      connects to the Arduino. The app therefore request the
+      reconnects to the Arduino. The app therefore requests the
       current <tt>STATE</tt> from the arduino before it paints the
       user interface. Upon receiving the <tt>STATE</tt> request the
-      Arduino can send the state of the switched to the app to
-      initialize them
+      Arduino can send the state of the switches to the app in order
+      to initialize them
       properly. The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example
       sketch</a> does this in
       the <tt>ftduinoblue_state_callback()</tt> function.</p>
@@ -281,7 +278,7 @@
     <h2 id="demo5">Demo #5: Landscape</h2>
 
     <p>All demos so far were expecting to use the smart device in vertical portrait orientation.
-      To e.g. place to joysticks side by side a horizontal landscape layout would be more
+      To e.g. place two joysticks side by side a horizontal landscape layout would be more
       appropriate. This demo achieves exactly that.</p>
     
     <div>
@@ -301,7 +298,7 @@
 
     <h2 id="demo6">Demo #6: Slider</h2>
 
-    <p>Sliders are another common user interface element. They can use used to set a value within
+    <p>Sliders are another common user interface element. They can be used to set a value within
       a given range. The range always starts with 0. The maximum value can explicitely be specifed
       using the <tt>max</tt> attribute. By default the sliders range from 0 to 100.</p>
 
@@ -310,6 +307,14 @@
       startup. The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example
       sketch</a> also does this in
       the <tt>ftduinoblue_state_callback()</tt> function.</p>
+    
+    <p>Furthermore this demo shows how to disable an element by
+      setting its <tt>enabled</tt> attribute to <tt>false</tt> making
+      the element unresponsive to user input. This may either be used
+      to indicate that manual interaction is not possible at this
+      moment. But this may also be used to create a display-only
+      element as the Arduino can still change the value and alter the
+      visual appearence of a disabled element.</p>
     
     <div>
       <article class="card">
