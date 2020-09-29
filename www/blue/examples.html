@@ -210,6 +210,15 @@
     </center>
 
     <h2 id="demo3">Demo #3: Joysticks</h2>
+
+    <p>The third demo highlights the <tt>joystick</tt> element. This joystick works like
+      a typical analog direction pad and delivers two values to the Arduino, one for the
+      x axis of the joystick and one for the y axis. The joystick can e.g. be used to drive
+      a mobile robot. The values for both axes range from -100 to 100.</p>
+
+    <p>Two additional buttons are placed above the joystick. This time a <tt>space</tt>
+      element with a horizontal width is used to place both buttons 100 pixels apart from
+      each other.</p>
     
     <div>
       <article class="card">
@@ -231,6 +240,23 @@
     </center>
 
     <h2 id="demo4">Demo #4: Switches</h2>
+
+    <p>Another common element for user interfaces is the
+      switch. Switches share the basic functions with buttons and can
+      also be used to turn things on or off. But unlike buttons they
+      keep their state. Once switched on they stay "on" until they are
+      explicitely switched off again.</p>
+
+    <p>The fact that a switch can permanently change its state makes
+      it desireable to set the correct switch state whenever the app
+      connects to the Arduino. The app therefore request the
+      current <tt>STATE</tt> from the arduino before it paints the
+      user interface. Upon receiving the <tt>STATE</tt> request the
+      Arduino can send the state of the switched to the app to
+      initialize them
+      properly. The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example
+      sketch</a> does this in
+      the <tt>ftduinoblue_state_callback()</tt> function.</p>
     
     <div>
       <article class="card">
@@ -251,9 +277,12 @@
     <center>     
       <img style="border: 5px solid #888;" width="360" src="images/ftduinoblue_switches.png" />
     </center>
-
-  
+ 
     <h2 id="demo5">Demo #5: Landscape</h2>
+
+    <p>All demos so far were expecting to use the smart device in vertical portrait orientation.
+      To e.g. place to joysticks side by side a horizontal landscape layout would be more
+      appropriate. This demo achieves exactly that.</p>
     
     <div>
       <article class="card">
@@ -271,6 +300,16 @@
     </center>
 
     <h2 id="demo6">Demo #6: Slider</h2>
+
+    <p>Sliders are another common user interface element. They can use used to set a value within
+      a given range. The range always starts with 0. The maximum value can explicitely be specifed
+      using the <tt>max</tt> attribute. By default the sliders range from 0 to 100.</p>
+
+    <p>Like switches the sliders keep their state and the user may
+      expect the sliders to be set to the current value at
+      startup. The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example
+      sketch</a> also does this in
+      the <tt>ftduinoblue_state_callback()</tt> function.</p>
     
     <div>
       <article class="card">
