@@ -77,34 +77,55 @@
     <ul>
       <li>The <a href="https://play.google.com/store/apps/details?id=org.harbaum.ftduinoblue">ftDuinoBlue app</a> for android</li>
       <li>A <a href="http://ftduino.de">ftDuino</a> or Arduino (see pictures below)</li>
-      <li>A HM-10 bluetooth module for your ftDuino or Arduino</li>
+      <li>A HM-10 bluetooth module for your Arduino or a matching Bluetooth module for your ftDuino</li>
       <li>The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example sketch</a></li>
     </ul>
 
-    <div class="flex two">
+    <h2 id="gs">Getting started</h2>
+
+    <p>Although ftDuinoBlue was designed for and with the
+      <a href="http://ftduino.de">ftDuino</a> it can equally well be
+      used with the Arduino Uno or most other Arduinos. This section
+      describes a most simple Arduino Uno based setup as well as the
+      ftDuino setup ftDuinoBlue was designed for.</p>
+    
+    <h3>Getting started with an Arduino Uno</h3>
+
+    <p>The most simple setup to give ftDuinoBlue a test on real hardware is based
+      on the Arduino Uno and a HM-10 bluetooth module.</p>
+
+    <div class="flex two-800 three-1200 center">
       <div>
 	<article class="card">
-	  <img src="images/ftduinoblue_uno.jpg">
-	  <footer>
-            <h3>Arduino Uno with HM-10</h3>
-	  </footer>
+	  <center>
+	    <img style="max-height: 400px;" src="images/ftduinoblue_uno.jpg">
+	  </center>
 	</article>
       </div>
+	
       <div>
 	<article class="card">
-	  <img src="images/ftduinoblue_ftduino.jpg">
-	  <footer>
-            <h3>ftDuino with bluetooth adapter prototype</h3>
-	  </footer>
+	  <center>
+	    <img style="max-height: 400px; max-width: 360px" src="images/ftduinoblue_uno.png" />
+	  </center>
+	</article>
+      </div>
+      
+      <div>
+	<article class="card">
+	    <div>
+	      Parts needed:
+
+	      <ul>
+		<li>Arduino Uno</li>
+		<li>HM-10 bluetooth LE module</li>
+		<li>LED</li>
+		<li>1 kOhm resistor</li>
+	      </ul>
+	    </div>
 	</article>
       </div>
     </div>
-
-
-    <h2 id="gs">Getting started with an Arduino Uno</h2>
-
-    <p>Th most simple setup to give ftDuinoBlue a test on real hardware is based
-      on the Arduino Uno and a HM-10 bluetooth module.</p>
     
     <p>Plug the HM-10 straight into digital pins 8 to 13 of the Uno starting with
       the HM-10's STATE pin in the Unos pin 8. This requires some addtional
@@ -125,5 +146,13 @@
       is not connected to a PWM capable pin. But you can still use the user
       interface to start and stop the LED blinking and to adjust the blink
       frequency.</p>    
+
+    <h3>Getting started with an ftDuino</h3>
+    
+    <center>
+      <img style="max-height: 400px;" src="images/ftduinoblue_ftduino.jpg">
+      <h4>ftDuino with bluetooth adapter prototype</h4>
+    </center>
+    
   </body>
 </html>
