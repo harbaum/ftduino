@@ -12,9 +12,9 @@ void setup()
 
 void loop() 
 {
-    while(i2cuart.available() && Serial.availableForWrite())
+   while(i2cuart.available() && Serial.availableForWrite())
       Serial.write(i2cuart.read());
-      
-    if(Serial.available() && i2cuart.availableForWrite())
+    
+   while(Serial.available())
       i2cuart.write(Serial.read());
 };

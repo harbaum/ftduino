@@ -88,6 +88,7 @@ int SC16IS750::read(void)
 size_t SC16IS750::write(uint8_t val)
 {
     WriteByte(val);
+    return 1;
 }
 
 void SC16IS750::pinMode(uint8_t pin, uint8_t i_o)
@@ -477,14 +478,12 @@ void SC16IS750::WriteByte(uint8_t val)
 #endif
     WriteRegister(SC16IS750_REG_THR,val);
 */
+  
 	do {
 		tmp_lsr = ReadRegister(SC16IS750_REG_LSR);
 	} while ((tmp_lsr&0x20) ==0);
 
 	WriteRegister(SC16IS750_REG_THR,val);
-
-
-
 }
 
 int SC16IS750::ReadByte(void)
