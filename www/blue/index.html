@@ -83,17 +83,19 @@
     <ul>
       <li>The <a href="https://play.google.com/store/apps/details?id=org.harbaum.ftduinoblue">ftDuinoBlue app</a> for android</li>
       <li>A <a href="http://ftduino.de">ftDuino</a> or Arduino (see pictures below)</li>
-      <li>A HM-10 bluetooth module for your Arduino or a matching Bluetooth module for your ftDuino</li>
+      <li>A HM-10 bluetooth module for your Arduino or a <a href="https://www.mintronics.de/btadapter">matching Bluetooth module</a> for your ftDuino</li>
       <li>The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example sketch</a></li>
     </ul>
 
     <h2 id="gs">Getting started</h2>
 
     <p>Although ftDuinoBlue was designed for and with the
-      <a href="http://ftduino.de">ftDuino</a> it can equally well be
-      used with the Arduino Uno or most other Arduinos. This section
-      describes a most simple Arduino Uno based setup as well as the
-      ftDuino setup ftDuinoBlue was designed for.</p>
+      <a href="http://ftduino.de">ftDuino</a> and
+      its <a href="https://www.mintronics.de/btadapter">Bluetooth
+      adapter</a>it can equally well be used with the Arduino Uno or
+      most other Arduinos. This section describes a most simple
+      Arduino Uno based setup as well as the ftDuino setup ftDuinoBlue
+      was designed for.</p>
     
     <h3>Getting started with an Arduino Uno</h3>
 
@@ -156,8 +158,25 @@
     <h3>Getting started with an ftDuino</h3>
     
     <center>
-      <img style="max-height: 400px;" src="images/ftduinoblue_ftduino.jpg">
-      <h4>ftDuino with bluetooth adapter prototype</h4>
+      <img style="max-height: 400px;" src="images/ftduino_modul.jpg">
+      <h4><a href="http://ftduino.de">ftDuino</a> with <a href="https://www.mintronics.de/btadapter">bluetooth adapter</a></h4>
+    </center>
+    <p>ftDuinoBlue was designed to be used with the <a href="htp://ftduino.de">ftDuino</a>
+      and its <a href="https://www.mintronics.de/btadapter">bluetooth adapter</a>. The entire setup is
+      plug'n play and doesn't require any soldering. The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">demo sketch</a> works with this setup out of the box
+      and controls the intenal LED as well as a lamp connected to ftDuino output O1.</p>
+
+    <p>The ftDuino integration for the Arduino-IDE also includes ftDuinoBlue examples including:</p>
+
+    <ul>
+      <li><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftDuino-Bluetooth/ftduinoblue_demo">A simple LED blink demo</a></li>
+
+      <li><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftDuino-Bluetooth/txt_automation_3axis">A full control setup for the fischertechnik 3axis robot</a></li>
+    </ul>      
+    
+    <center>
+      <img style="max-height: 400px;" src="images/ftduinoblue_robot.jpg">
+      <h4><a href="http://ftduino.de">ftDuino</a> controlling the fischertechnik 3axis robot</a></h4>
     </center>
     
   </body>
