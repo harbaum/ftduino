@@ -59,10 +59,10 @@ class Ftduino {
     void motor_counter(uint8_t port, uint8_t mode, uint8_t pwm, uint16_t counter);
     bool motor_counter_active(uint8_t port);
     void motor_counter_set_brake(uint8_t port, bool on);
-
+#if ULTRASONIC_ENABLE
     void ultrasonic_enable(bool ena);
     int16_t ultrasonic_get();
-
+#endif 
     void counter_set_mode(uint8_t ch, uint8_t mode);
     uint16_t counter_get(uint8_t ch);
     void counter_clear(uint8_t ch);
@@ -112,6 +112,7 @@ class Ftduino {
 
     // -------- ultrasonic ---------------
     void pulldown_c1_init();
+#if ULTRASONIC_ENABLE
     void pulldown_c1_enable(bool on);
 
     void timer3_compa_interrupt_exec();
@@ -125,7 +126,8 @@ class Ftduino {
     uint8_t ultrasonic_timeout;
     uint8_t ultrasonic_state;
     uint8_t ultrasonic_rx_data[2] = { 0xff, 0xff};
-
+#endif
+  
     // ------- counter inputs ------------
     void counter_init(void);
     void counter_timer_exceeded(uint8_t c);

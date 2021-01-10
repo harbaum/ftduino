@@ -32,28 +32,26 @@ ftduino.build.usb_product="ftDuino"
 ftduino.build.core=arduino:arduino
 ftduino.build.board=AVR_FTDUINO
 ftduino.build.variant=ftduino
-ftduino.build.extra_flags={build.usb_flags}
+ftduino.build.extra_flags={build.usb_flags} {build.usb} {build.odrv} {build.usonic}
 
-ftduinowebusb.name=ftDuino (WebUSB)
-ftduinowebusb.vid.1=0x1c40
-ftduinowebusb.pid.1=0x0538
+##############################################################
+# Sub menu
+##############################################################
 
-ftduinowebusb.upload.tool=avrdude
-ftduinowebusb.upload.protocol=avr109
-ftduinowebusb.upload.maximum_size=28672
-ftduinowebusb.upload.maximum_data_size=2560
-ftduinowebusb.upload.speed=57600
-ftduinowebusb.upload.disable_flushing=true
-ftduinowebusb.upload.use_1200bps_touch=true
-ftduinowebusb.upload.wait_for_upload_port=true
+menu.usb=USB Version
+ftduino.menu.usb.normal=Standard (use for most sketches)
+ftduino.menu.usb.webusb=WebUSB (use for WebUSB sketches only)
+ftduino.menu.usb.normal.build.usb=
+ftduino.menu.usb.webusb.build.usb=-DUSB_VERSION=0x210
 
-ftduinowebusb.build.mcu=atmega32u4
-ftduinowebusb.build.f_cpu=16000000L
-ftduinowebusb.build.vid=0x1c40
-ftduinowebusb.build.pid=0x0538
-ftduinowebusb.build.usb_manufacturer="Till Harbaum"
-ftduinowebusb.build.usb_product="ftDuino"
-ftduinowebusb.build.core=arduino:arduino
-ftduinowebusb.build.board=AVR_FTDUINO
-ftduinowebusb.build.variant=ftduino
-ftduinowebusb.build.extra_flags={build.usb_flags} "-DUSB_VERSION=0x210"
+menu.odrv=Output Driver
+ftduino.menu.odrv.mc33879a=MC33879A (Board Rev. 1.3 and older)
+ftduino.menu.odrv.tle94108el=TLE94108EL (Board Rev. 1.4 and newer)
+ftduino.menu.odrv.mc33879a.build.odrv=-DOUTPUT_DRIVER=MC33879A
+ftduino.menu.odrv.tle94108el.build.odrv=-DOUTPUT_DRIVER=TLE94108EL
+
+menu.usonic=Ultrasonic on C1
+ftduino.menu.usonic.enabled=Enabled (occupies timer3 and USART)
+ftduino.menu.usonic.disabled=Disabled (frees timer3 and USART)
+ftduino.menu.usonic.enabled.build.usonic=-DULTRASONIC_ENABLE=1
+ftduino.menu.usonic.disabled.build.usonic=-DULTRASONIC_ENABLE=0

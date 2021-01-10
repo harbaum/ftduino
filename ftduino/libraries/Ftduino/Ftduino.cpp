@@ -400,6 +400,7 @@ void Ftduino::pulldown_c1_init() {
   PORTE &= ~(1<<2);    // de-activate by default
 }
 
+#if ULTRASONIC_ENABLE
 void Ftduino::pulldown_c1_enable(bool on) {
   if(on) PORTE |=  (1<<2);
   else   PORTE &= ~(1<<2);
@@ -503,6 +504,7 @@ int16_t Ftduino::ultrasonic_get() {
   
   return ultrasonic_rx_data[0]*128 + ultrasonic_rx_data[1];
 }
+#endif
 
 bool Ftduino::counter_get_pin_state(uint8_t c) {
   uint8_t state = 1;
@@ -700,7 +702,9 @@ void Ftduino::init() {
 
   // prepare for ultrasonic distance sensor on C1
   pulldown_c1_init();
+#if ULTRASONIC_ENABLE
   usart_init();
+#endif
 
   // prepare spi service for M1..M4/O1..O8
   output_init();
