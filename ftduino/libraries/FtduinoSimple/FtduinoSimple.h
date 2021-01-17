@@ -9,6 +9,24 @@
 
 #include "Arduino.h"
 
+#ifndef IN_FTDUINO_SIMPLE_LIB
+#if defined(OUTPUT_DRIVER_MC33879A)
+#warning "Building for MC33879A boards only"
+#ifndef MC33879A_ONLY  // user has to define this
+#error "Please select 'Automatic' output driver or define MC33879A_ONLY when using MC33879A output driver."
+#endif
+#elif defined(OUTPUT_DRIVER_TLE94108EL)
+#warning "Building for TLE94108EL boards only"
+#ifndef TLE94108EL_ONLY  // user has to define this
+#error "Please select 'Automatic' output driver or define TLE94108EL_ONLY when using TLE94108EL output driver."
+#endif
+#elif defined(OUTPUT_DRIVER_AUTO)
+// #warning "Building for output auto detection"
+#else
+#warning "Error, no output driver configured"
+#endif
+#endif
+
 class Ftduino {
   public:
     Ftduino();
@@ -47,12 +65,18 @@ class Ftduino {
 
     void cd4051_set(char mode);
     void pulldown_c1_enable(char on);
-#if defined(OUTPUT_DRIVER_MC33879A)
+#if defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_AUTO)
     void output_spi_tx(void);
     uint32_t spi_tx;
-#elif defined(OUTPUT_DRIVER_TLE94108EL)
+#endif
+#if defined(OUTPUT_DRIVER_TLE94108EL) || defined(OUTPUT_DRIVER_AUTO)
     void write_spi_reg(uint8_t reg, uint8_t data);
     uint16_t state;
+#endif
+#if defined(OUTPUT_DRIVER_AUTO)
+    void output_set_mc33879a(uint8_t port, uint8_t mode);
+    void output_set_tle94108el(uint8_t port, uint8_t mode);
+    bool odrv_mc33879a;
 #endif
 };
 

@@ -16,6 +16,7 @@
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 
+#define IN_FTDUINO_SIMPLE_LIB
 #include "FtduinoSimple.h"
 
 Ftduino ftduino;
@@ -111,7 +112,7 @@ bool Ftduino::input_get(uint8_t ch) {
   return !rval;
 }
 
-#if defined(OUTPUT_DRIVER_TLE94108EL)
+#if defined(OUTPUT_DRIVER_TLE94108EL) || defined(OUTPUT_DRIVER_AUTO)
 #define HB_ACT_1_CTRL  0b10000011
 #define HB_ACT_2_CTRL  0b11000011
 #endif
@@ -124,22 +125,18 @@ void Ftduino::output_init() {
   DDRB |= (1<<0) | (1<<1) | (1<<2);
   PORTB |= (1<<0);
 
-#if defined(OUTPUT_DRIVER_MC33879A)
-#warning "Building for MC33879A"
+#if defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_AUTO)
   // enable SPI, no interrupts, MSB first, Master mode,
   // mode 1 (SCK low when idle, data valid on falling edge)
   // and clock = FCPU/16 = 1Mhz
   SPCR = (1<<SPE) | (0<<DORD) | (1<<MSTR) |
     (0<<CPOL) | (1<<CPHA) | (0<<SPR1) | (1<<SPR0);
 #elif defined(OUTPUT_DRIVER_TLE94108EL)
-#warning "Building for TLE94108EL"
   // enable SPI, no interrupts, LSB first, Master mode,
   // mode 1 (SCK low when idle, data valid on falling edge)
   // and clock = FCPU/16 = 1Mhz
   SPCR = (1<<SPE) | (1<<DORD) | (1<<MSTR) |
     (0<<CPOL) | (1<<CPHA) | (0<<SPR1) | (1<<SPR0);
-#else
-#error "No output driver specified!"
 #endif
 
   SPSR &= ~(1<<SPI2X);   // single speed
@@ -154,6 +151,41 @@ void Ftduino::output_init() {
   DDRB |= (1<<7);
   PORTB &= ~(1<<7);  // no PWM on IN6
 
+#if defined(OUTPUT_DRIVER_AUTO)
+  // SPI has been initialized MSB first (for MC33879A). Try to
+  // detect chip
+
+  // sending this 0x00 will trigger a SPI ERR on TLE94108EL, however
+  // it will not trigger anything on MC33879A
+  PORTB &= ~(1<<0);  // set /SS low
+  SPDR = 0x00; while(!(SPSR & (1<<SPIF)));
+  PORTB |=  (1<<0);  // set /SS high
+
+  _delay_us(5);      // TLE94108EL needs this pause, MC33879A doesn't care
+
+  // sending another 0x00 will return the previous SPI ERR
+  PORTB &= ~(1<<0);  // set /SS low
+  SPDR = 0x00; while(!(SPSR & (1<<SPIF))); uint8_t v0 = SPDR;
+  PORTB |=  (1<<0);  // set /SS high
+
+  if(!v0) {
+    // mc33879a detected
+    odrv_mc33879a = true;
+    spi_tx = 0;        // all outputs of
+    output_spi_tx();
+  } else {
+    // tle94108el detected
+    SPCR |= (1<<DORD);  // switch to LSB first
+
+    // TODO: we could reset the SYS_DIAG1 register (0b10011011)
+    
+    odrv_mc33879a = false;
+    state = 0;
+    write_spi_reg(HB_ACT_1_CTRL, 0);
+    write_spi_reg(HB_ACT_2_CTRL, 0); 
+  }  
+#endif
+  
 #if defined(OUTPUT_DRIVER_MC33879A)
   spi_tx = 0;        // all outputs off
   output_spi_tx();
@@ -164,7 +196,7 @@ void Ftduino::output_init() {
 #endif
 }
 
-#if defined(OUTPUT_DRIVER_MC33879A)
+#if defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_AUTO)
 void Ftduino::output_spi_tx(void) {
   uint8_t i;
   uint32_t data = spi_tx;
@@ -192,8 +224,14 @@ static const uint8_t mc33879_lowside_map[4] = {
       MC33879_PORT(8), MC33879_PORT(1), MC33879_PORT(7), MC33879_PORT(3) };
 
 // any SPI transfer transfers 16 bits per mc33879 and 32 bits in total
-void Ftduino::output_set(uint8_t port, uint8_t mode) {
-  uint32_t set_mask = 0, clr_mask = 0;
+#if defined(OUTPUT_DRIVER_MC33879A)
+void Ftduino::output_set(uint8_t port, uint8_t mode)
+#endif
+#if defined(OUTPUT_DRIVER_AUTO)
+void Ftduino::output_set_mc33879a(uint8_t port, uint8_t mode)
+#endif
+{
+    uint32_t set_mask = 0, clr_mask = 0;
 
   // mode can be 0 (floating), 1 (high) or 2 (low)
   if(mode == 1) {
@@ -222,8 +260,9 @@ void Ftduino::output_set(uint8_t port, uint8_t mode) {
 
   output_spi_tx();
 }
+#endif
 
-#elif defined(OUTPUT_DRIVER_TLE94108EL)
+#if defined(OUTPUT_DRIVER_TLE94108EL) || defined(OUTPUT_DRIVER_AUTO)
 void Ftduino::write_spi_reg(uint8_t reg, uint8_t data) {
   PORTB &= ~(1<<0);  // set /SS low
   SPDR = reg;  while(!(SPSR & (1<<SPIF)));
@@ -235,7 +274,13 @@ void Ftduino::write_spi_reg(uint8_t reg, uint8_t data) {
   _delay_us(5);
 }
 
-void Ftduino::output_set(uint8_t port, uint8_t mode) {
+#if defined(OUTPUT_DRIVER_TLE94108EL)
+void Ftduino::output_set(uint8_t port, uint8_t mode)
+#endif
+#if defined(OUTPUT_DRIVER_AUTO)
+void Ftduino::output_set_tle94108el(uint8_t port, uint8_t mode)
+#endif
+{
   // TLE94108EL pins are mapped straight 0-7 to O1-O8
   // mode = 0 -> both drivers off,
   // mode = 1 -> highside on, mode = 2 -> lowside on
@@ -256,6 +301,13 @@ void Ftduino::output_set(uint8_t port, uint8_t mode) {
 }
 #endif
 
+#if defined(OUTPUT_DRIVER_AUTO)
+void Ftduino::output_set(uint8_t port, uint8_t mode) {
+  if(odrv_mc33879a) output_set_mc33879a(port, mode);
+  else              output_set_tle94108el(port, mode);
+}
+#endif
+  
 void Ftduino::motor_set(uint8_t port, uint8_t mode) {
   // map from motor to output port
   uint8_t o = (2 * (port - Ftduino::M1)) + Ftduino::O1;
