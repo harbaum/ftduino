@@ -1,7 +1,7 @@
 /*
   FtduinoSimple.cpp - Library for ftduino
 
-  (c) 2017 by Till Harbaum <till@harbaum.org>
+  (c) 2017-2021 by Till Harbaum <till@harbaum.org>
 
   A very simple io library for the ftduino only supporting
   diginal IO but without and interrupt handlers and with a
@@ -111,6 +111,11 @@ bool Ftduino::input_get(uint8_t ch) {
   return !rval;
 }
 
+#if defined(OUTPUT_DRIVER_TLE94108EL)
+#define HB_ACT_1_CTRL  0b10000011
+#define HB_ACT_2_CTRL  0b11000011
+#endif
+
 void Ftduino::output_init() {
   uint8_t i;
   
@@ -119,11 +124,23 @@ void Ftduino::output_init() {
   DDRB |= (1<<0) | (1<<1) | (1<<2);
   PORTB |= (1<<0);
 
+#if defined(OUTPUT_DRIVER_MC33879A)
+#warning "Building for MC33879A"
   // enable SPI, no interrupts, MSB first, Master mode,
   // mode 1 (SCK low when idle, data valid on falling edge)
   // and clock = FCPU/16 = 1Mhz
   SPCR = (1<<SPE) | (0<<DORD) | (1<<MSTR) |
     (0<<CPOL) | (1<<CPHA) | (0<<SPR1) | (1<<SPR0);
+#elif defined(OUTPUT_DRIVER_TLE94108EL)
+#warning "Building for TLE94108EL"
+  // enable SPI, no interrupts, LSB first, Master mode,
+  // mode 1 (SCK low when idle, data valid on falling edge)
+  // and clock = FCPU/16 = 1Mhz
+  SPCR = (1<<SPE) | (1<<DORD) | (1<<MSTR) |
+    (0<<CPOL) | (1<<CPHA) | (0<<SPR1) | (1<<SPR0);
+#else
+#error "No output driver specified!"
+#endif
 
   SPSR &= ~(1<<SPI2X);   // single speed
 
@@ -133,14 +150,21 @@ void Ftduino::output_init() {
   PORTE |= (1<<6);  // not in sleep mode
 
   // PB.7 is the PWM input of the IN6 of O2. We don't use that feature by
-  // now, so it's just pulled down
+  // now, so it's just pulled down. On V1.4 this is the RGB LED output
   DDRB |= (1<<7);
   PORTB &= ~(1<<7);  // no PWM on IN6
 
+#if defined(OUTPUT_DRIVER_MC33879A)
   spi_tx = 0;        // all outputs off
   output_spi_tx();
+#elif defined(OUTPUT_DRIVER_TLE94108EL)
+  state = 0;
+  write_spi_reg(HB_ACT_1_CTRL, 0);
+  write_spi_reg(HB_ACT_2_CTRL, 0); 
+#endif
 }
 
+#if defined(OUTPUT_DRIVER_MC33879A)
 void Ftduino::output_spi_tx(void) {
   uint8_t i;
   uint32_t data = spi_tx;
@@ -198,6 +222,39 @@ void Ftduino::output_set(uint8_t port, uint8_t mode) {
 
   output_spi_tx();
 }
+
+#elif defined(OUTPUT_DRIVER_TLE94108EL)
+void Ftduino::write_spi_reg(uint8_t reg, uint8_t data) {
+  PORTB &= ~(1<<0);  // set /SS low
+  SPDR = reg;  while(!(SPSR & (1<<SPIF)));
+  SPDR = data; while(!(SPSR & (1<<SPIF))); 
+  PORTB |=  (1<<0);  // set /SS high
+
+  // A pause of min 5us is required after setting SS high
+  // before being allowed to drive it low again
+  _delay_us(5);
+}
+
+void Ftduino::output_set(uint8_t port, uint8_t mode) {
+  // TLE94108EL pins are mapped straight 0-7 to O1-O8
+  // mode = 0 -> both drivers off,
+  // mode = 1 -> highside on, mode = 2 -> lowside on
+  
+  if(mode == 1) {
+    state &= ~(1 << (2*port));  // clear lowside driver
+    state |=  (2 << (2*port));  // set highside driver  
+  } else if(mode == 2) {
+    state |=  (1 << (2*port));  // set lowside driver
+    state &= ~(2 << (2*port));  // clear highside driver  
+  } else {
+    state &= ~(3 << (2*port));  // clear both drivers  
+  }
+
+  // and write state into registers
+  write_spi_reg(HB_ACT_1_CTRL, state);
+  write_spi_reg(HB_ACT_2_CTRL, state >> 8);
+}
+#endif
 
 void Ftduino::motor_set(uint8_t port, uint8_t mode) {
   // map from motor to output port

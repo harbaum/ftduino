@@ -1,5 +1,5 @@
 /*
-  Ftduino.h - Library for ftduino
+  FtduinoSimple.h - Library for ftduino
 
   (c) 2017 by Till Harbaum <till@harbaum.org>
 */
@@ -45,11 +45,15 @@ class Ftduino {
     void pulldown_c1_init();
     void counter_init(void);
 
-    void output_spi_tx(void);
     void cd4051_set(char mode);
     void pulldown_c1_enable(char on);
-   
+#if defined(OUTPUT_DRIVER_MC33879A)
+    void output_spi_tx(void);
     uint32_t spi_tx;
+#elif defined(OUTPUT_DRIVER_TLE94108EL)
+    void write_spi_reg(uint8_t reg, uint8_t data);
+    uint16_t state;
+#endif
 };
 
 extern Ftduino ftduino;
