@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google" value="notranslate">
+  <title>Blockly Demo:</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="blockly_compressed.js"></script>
+  <script src="blocks_compressed.js"></script>
+  <script src="javascript_compressed.js"></script>
+  <script src="code.js"></script>
+  <script src="blocks/junior.js"></script>
+  <script src="generators/javascript/junior.js"></script>
+  <script src="acorn_interpreter.js"></script>
+</head>
+<body>
+  <table width="100%" height="100%">
+    <tr>
+      <td colspan=2>
+        <table width="100%">
+          <tr id="tabRow" height="1em">
+            <td id="tab_blocks" class="tabon">...</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_javascript" class="taboff">JavaScript</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_xml" class="taboff">XML</td>
+            <td class="tabmax">
+              <button id="trashButton" class="notext" title="...">
+                <img src='media/1x1.gif' class="trash icon21">
+              </button>
+              <button id="linkButton" class="notext" title="...">
+                <img src='media/1x1.gif' class="link icon21">
+              </button>
+              <button id="runButton" class="notext primary" title="...">
+                <img src='media/1x1.gif' class="run icon21">
+              </button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="99%" colspan=2 id="content_area">
+      </td>
+    </tr>
+  </table>
+  <div id="content_blocks" class="content"></div>
+  <pre id="content_javascript" class="content"></pre>
+  <pre id="content_php" class="content"></pre>
+  <pre id="content_python" class="content"></pre>
+  <pre id="content_dart" class="content"></pre>
+  <textarea id="content_xml" class="content" wrap="off"></textarea>
+
+  <xml id="toolbox" style="display: none">
+    <category name="Junior">
+        <block type="green_flag"></block>
+        <block type="right"></block>
+        <block type="left"></block>
+        <block type="up"></block>
+        <block type="down"></block>
+        <block type="turn_right"></block>
+        <block type="turn_left"></block>
+        <block type="end"></block>
+        <block type="stop"></block>
+        <block type="repeat"></block>
+    </category>
+    <category name="Junior Repeat">
+        <block type="right_r"></block>
+        <block type="left_r"></block>
+        <block type="up_r"></block>
+        <block type="down_r"></block>
+        <block type="turn_right_r"></block>
+        <block type="turn_left_r"></block>
+    </category>
+    <category name="Numbers (dice)">
+        <block type="dice_1"></block>
+        <block type="dice_2"></block>
+        <block type="dice_3"></block>
+        <block type="dice_4"></block>
+        <block type="dice_5"></block>
+        <block type="dice_6"></block>
+    </category>
+    <category name="Numbers">
+        <block type="num_1"></block>
+        <block type="num_2"></block>
+        <block type="num_3"></block>
+        <block type="num_4"></block>
+        <block type="num_5"></block>
+        <block type="num_6"></block>
+        <block type="num_7"></block>
+        <block type="num_8"></block>
+        <block type="num_9"></block>
+        <block type="num_10"></block>
+    </category>
+    <category name="Junior Math">
+        <block type="plus"></block>
+        <block type="minus"></block>
+    </category>
+    <category name="Loops">
+        <block type="repeat_loop">
+			<value name="TIMES">
+				<shadow type="dice_4"></block>
+			</value> 
+		</block>
+
+    </category>
+  </xml>
+
+  
+<xml id="startBlocks" style="display: none">
+  <block type="green_flag" x="88" y="38">
+    <next>
+      <block type="right">
+        <next>
+          <block type="right">
+            <next>
+              <block type="right">
+                <next>
+                  <block type="turn_right">
+                    <next>
+                      <block type="right">
+                        <next>
+                          <block type="right">
+                            <next>
+                              <block type="end"></block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="green_flag" x="188" y="38">
+    <next>
+      <block type="right_r">
+        <value name="REPEAT">
+          <block type="dice_3"></block>
+        </value>
+        <next>
+          <block type="turn_right_r">
+            <next>
+              <block type="right_r">
+                <value name="REPEAT">
+                  <block type="dice_2"></block>
+                </value>
+                <next>
+                  <block type="end"></block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="green_flag" x="338" y="38">
+    <next>
+      <block type="right_r">
+        <value name="REPEAT">
+          <block type="plus">
+            <value name="FIRST">
+              <block type="dice_1"></block>
+            </value>
+            <value name="SECOND">
+              <block type="dice_2"></block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="turn_right_r">
+            <next>
+              <block type="repeat_loop">
+                <value name="TIMES">
+                  <shadow type="dice_4"></shadow>
+                  <block type="dice_2"></block>
+                </value>
+                <statement name="DO">
+                  <block type="right_r"></block>
+                </statement>
+                <next>
+                  <block type="end"></block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
+
+</body>
+</html>
