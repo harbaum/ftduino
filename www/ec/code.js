@@ -351,8 +351,8 @@ Code.init = function() {
 
   Code.loadBlocks('');
 
-  Code.tabClick(Code.selected);
-
+  Code.tabClick(Code.selected);    
+    
   Code.bindClick('trashButton',
       function() {Code.discard(); Code.renderContent();});
   Code.bindClick('runButton', Code.run);
@@ -377,7 +377,6 @@ Code.initLanguage = function() {
   document.head.parentElement.setAttribute('lang', Code.LANG);
 
   // Inject language strings.
-  document.title += ' ' + MSG['title'];
   document.getElementById('tab_blocks').textContent = MSG['blocks'];
 
   document.getElementById('linkButton').title = MSG['linkTooltip'];
@@ -395,10 +394,18 @@ Code.initLanguage = function() {
 };
 
 Code.send = function(chr) {
-    if(Code.characteristic=== undefined)
+    if(Code.characteristic === undefined)
 	return;
 
-    Code.characteristic.writeValue(new Uint8Array([ chr.charCodeAt(0) ]));
+    if(Code.encoder === undefined)
+	Code.encoder = new TextEncoder();
+
+    // TODO: make sure at most 20 Bytes are sent
+    Code.characteristic.writeValue(Code.encoder.encode(chr)).then(function() {
+	// sending ok ...
+    }).catch(error => {
+        console.log("Error: " + error);
+    });;
 }
 
 Code.connect = function(run) {
@@ -427,7 +434,7 @@ Code.connect = function(run) {
 
 var initInterpreter = function(interpreter, scope) {
     var wrapper = function(chr, callback) {
-	console.log("send");
+	console.log("send: " + chr);
 	Code.send(chr);
 	setTimeout(callback, 1000);  // some delay to keep things slow
     };
