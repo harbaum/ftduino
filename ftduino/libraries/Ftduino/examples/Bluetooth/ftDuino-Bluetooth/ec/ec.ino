@@ -4,9 +4,8 @@ I2cSerialBt btSerial;
 
 void setup() {
   Serial.begin(115200);
-//  while(!Serial);
+//  while(!Serial);   // wait for USB
   
-  Wire.setClock(400000);
   // wait max 1 sec for adapter to appear on bus. This is not
   // needed as begin() will wait for the device. But this way
   // we can use the led as an inidictaor for problems with 
@@ -30,9 +29,8 @@ void setup() {
 void loop() {
   if(btSerial.available()) {
     char chr = btSerial.read();
-    Serial.print(chr, HEX);
-    Serial.print(" ");
-    Serial.println(String(chr));
+    Serial.print("RX: ");
+    Serial.println(chr, HEX);
     switch(chr) {
       case 'r':
         digitalWrite(LED_BUILTIN, HIGH); 
