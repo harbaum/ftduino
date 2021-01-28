@@ -38,7 +38,16 @@ Blockly.JavaScript['turn_left'] = function(block) {
 
 Blockly.JavaScript['turn_right'] = function(block) {
   var code = "send('R', 500);";
-0);";
+  return code;
+};
+
+Blockly.JavaScript['end'] = function(block) {
+  var code = "send('e', 100);";
+  return code;
+};
+
+Blockly.JavaScript['stop'] = function(block) {
+  var code = "send('t', 100);";
   return code;
 };
 

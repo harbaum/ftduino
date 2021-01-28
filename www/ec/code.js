@@ -473,7 +473,6 @@ Code.run = function() {
 Code.runJS = function() {
   if(Code.running) {
       console.log("Stopping");
-      Code.send('x');
       Code.running = false;
     return;
   }
