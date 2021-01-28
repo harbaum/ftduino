@@ -433,10 +433,10 @@ Code.connect = function(run) {
 }
 
 var initInterpreter = function(interpreter, scope) {
-    var wrapper = function(chr, callback) {
-	console.log("send: " + chr);
+    var wrapper = function(chr, time, callback) {
+	console.log("send: " + chr + " time: " + time);
 	Code.send(chr);
-	setTimeout(callback, 1000);  // some delay to keep things slow
+	setTimeout(callback, time);  // some delay to keep things slow
     };
     interpreter.setProperty(scope, 'send',
 	    interpreter.createAsyncFunction(wrapper));

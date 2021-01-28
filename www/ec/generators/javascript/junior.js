@@ -7,57 +7,53 @@ goog.require('Blockly.JavaScript');
 
 
 Blockly.JavaScript['green_flag'] = function(block) {
-    var code = "";
+    var code = "send('s', 0);";
     return code;
 };
 
 Blockly.JavaScript['right'] = function(block) {
-  var code = "send('r');";
+  var code = "send('r', 1000);";
   return code;
 };
 
 Blockly.JavaScript['left'] = function(block) {
-  var code = "send('l');";
+  var code = "send('l', 1000);";
   return code;
 };
 
 Blockly.JavaScript['up'] = function(block) {
-  var code = "send('u');";
+  var code = "send('u', 1000);";
   return code;
 };
 
 Blockly.JavaScript['down'] = function(block) {
-  var code = "send('d');";
+  var code = "send('d', 1000);";
   return code;
 };
 
 Blockly.JavaScript['turn_left'] = function(block) {
-  var code = "send('L');";
+  var code = "send('L', 500);";
   return code;
 };
 
 Blockly.JavaScript['turn_right'] = function(block) {
-  var code = "send('R');";
+  var code = "send('R', 500);";
   return code;
 };
 
 Blockly.JavaScript['end'] = function(block) {
-  var code = "";
+  var code = "send('e', 0);";
   return code;
 };
 
 
 Blockly.JavaScript['stop'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = "";
-  // TODO: Change ORDER_NONE to the correct strength.
+  var code = "send('t', 0);";
   return code;
 };
 
 Blockly.JavaScript['repeat'] = function(block) {
-  // TODO: Assemble JavaScript into code variable.
-  var code = "";
-  // TODO: Change ORDER_NONE to the correct strength.
+  var code = "send('p', 0);";
   return code;
 };
 
@@ -68,7 +64,7 @@ Blockly.JavaScript['right_r'] = function(block) {
   value_repeat = eval(value_repeat); //in case the text is something like (3+3)
   var code = "";
   for(var i=0; i<value_repeat; i++)
-	  code = code+"send('r');";
+	  code = code+"send('r', 1000);";
   return code;
 };
 
@@ -79,7 +75,7 @@ Blockly.JavaScript['left_r'] = function(block) {
   value_repeat = eval(value_repeat); //in case the text is something like (3+3)
   var code = "";
   for(var i=0; i<value_repeat; i++)
-	  code = code+"send('l');";
+	  code = code+"send('l', 1000);";
   return code;
 };
 
@@ -90,7 +86,7 @@ Blockly.JavaScript['up_r'] = function(block) {
   value_repeat = eval(value_repeat); //in case the text is something like (3+3)
   var code = "";
   for(var i=0; i<value_repeat; i++)
-	  code = code+"send('u');";
+	  code = code+"send('u', 1000);";
   return code;
 };
 
@@ -101,7 +97,7 @@ Blockly.JavaScript['down_r'] = function(block) {
   value_repeat = eval(value_repeat); //in case the text is something like (3+3)
   var code = "";
   for(var i=0; i<value_repeat; i++)
-	  code = code+"send('d');";
+	  code = code+"send('d', 1000);";
   return code;
 };
 
@@ -112,7 +108,7 @@ Blockly.JavaScript['turn_right_r'] = function(block) {
   value_repeat = eval(value_repeat); //in case the text is something like (3+3)
   var code = "";
   for(var i=0; i<value_repeat; i++)
-	  code = code+"send('R');";
+	  code = code+"send('R', 500);";
   return code;
 };
 
@@ -123,7 +119,7 @@ Blockly.JavaScript['turn_left_r'] = function(block) {
   value_repeat = eval(value_repeat); //in case the text is something like (3+3)
   var code = "";
   for(var i=0; i<value_repeat; i++)
-	  code = code+"send('L');";
+	  code = code+"send('L', 500);";
   return code;
 };
 
