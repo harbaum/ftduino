@@ -33,8 +33,8 @@ void setup() {
 void loop() {
   if(btSerial.available()) {
     char chr = btSerial.read();
-    Serial.print("RX: ");
-    Serial.println(chr, HEX);
+    Serial.print("RX: "); Serial.print(String(chr)); 
+    Serial.print(" - "); Serial.println(chr, HEX);
 
     switch(chr) {
       case 'u':  // forward

@@ -7,7 +7,7 @@ goog.require('Blockly.JavaScript');
 
 
 Blockly.JavaScript['green_flag'] = function(block) {
-    var code = "send('s', 100);";
+    var code = "send('s', 0);";
     return code;
 };
 
@@ -42,17 +42,17 @@ Blockly.JavaScript['turn_right'] = function(block) {
 };
 
 Blockly.JavaScript['end'] = function(block) {
-  var code = "send('e', 100);";
+  var code = "send('e', 0);";
   return code;
 };
 
 Blockly.JavaScript['stop'] = function(block) {
-  var code = "send('t', 100);";
+  var code = "send('t', 0);";
   return code;
 };
 
 Blockly.JavaScript['repeat'] = function(block) {
-  var code = "send('p', 100);";
+  var code = "send('p', 0);";
   return code;
 };
 

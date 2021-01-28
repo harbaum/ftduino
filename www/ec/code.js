@@ -400,11 +400,33 @@ Code.send = function(chr) {
     if(Code.encoder === undefined)
 	Code.encoder = new TextEncoder();
 
+    // check if no other transfer is in progress
+    if(Code.in_progress) {
+	//console.log("in progress, add to pending");
+	Code.pending.push(chr);
+	//console.log("pending now: " + Code.pending);
+	return;
+    }
+    
     // TODO: make sure at most 20 Bytes are sent
+    console.log("writeValue()");
+    Code.in_progress = true;
     Code.characteristic.writeValue(Code.encoder.encode(chr)).then(function() {
+	//console.log("writeValue() ok");
 	// sending ok ...
+	Code.in_progress = false;
+
+	// send anything that might be pending
+	if(Code.pending.length > 0) {
+	    // send pending ...
+	    var item = Code.pending.shift();
+	    //console.log("send pending:" + item);	    
+	    Code.send(item);
+	}
+	
     }).catch(error => {
-        console.log("Error: " + error);
+        console.log("writeValue() error: " + error);
+	Code.in_progress = false;
     });;
 }
 
@@ -425,6 +447,8 @@ Code.connect = function(run) {
         return service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb');
     }).then(characteristic => {
         console.log("Characteristic found. All prepared!");
+	Code.pending = [ ]
+	Code.in_progress = false
 	Code.characteristic = characteristic;
 	run();
     }).catch(error => {
