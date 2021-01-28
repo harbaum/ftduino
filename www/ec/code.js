@@ -473,7 +473,7 @@ Code.run = function() {
 Code.runJS = function() {
   if(Code.running) {
       console.log("Stopping");
-      Code.send('x', 0);
+      Code.send('x');
       Code.running = false;
     return;
   }
@@ -487,6 +487,7 @@ Code.runJS = function() {
           if(interpreter.run() && Code.running) {
               setTimeout(runner, 10);
           } else {
+	      Code.send('x');
 	      Code.running = false;
           }
       }
