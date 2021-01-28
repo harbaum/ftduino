@@ -39,45 +39,45 @@ void loop() {
     switch(chr) {
       case 'u':  // forward
         digitalWrite(LED_BUILTIN, HIGH); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::RIGHT, Ftduino::MAX);
         ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::RIGHT, Ftduino::MAX);
       	break;
 	
       case 'd':  // backward
         digitalWrite(LED_BUILTIN, HIGH); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::LEFT, Ftduino::MAX);
         ftduino.motor_set(Ftduino::M1, Ftduino::LEFT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::LEFT, Ftduino::MAX);
       	break;
 
       case 'r':  // turn right
         digitalWrite(LED_BUILTIN, HIGH); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::RIGHT, Ftduino::MAX);
-        ftduino.motor_set(Ftduino::M1, Ftduino::BRAKE, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::BRAKE, Ftduino::MAX);
         break;
 	
       case 'l':  // turn left
         digitalWrite(LED_BUILTIN, HIGH); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::BRAKE, Ftduino::MAX);
-        ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M1, Ftduino::BRAKE, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::RIGHT, Ftduino::MAX);
         break;
 
       case 'R':  // rotate right
         digitalWrite(LED_BUILTIN, HIGH); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::RIGHT, Ftduino::MAX);
-        ftduino.motor_set(Ftduino::M1, Ftduino::LEFT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::LEFT, Ftduino::MAX);
         break;
 	
       case 'L':  // rotate left
         digitalWrite(LED_BUILTIN, HIGH); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::LEFT, Ftduino::MAX);
-        ftduino.motor_set(Ftduino::M1, Ftduino::RIGHT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M1, Ftduino::LEFT, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::RIGHT, Ftduino::MAX);
         break;
 
-	// 'e', 't' and 'x' are sent when the program ends
+	    // 'e', 't' and 'x' are sent when the program ends
       default:   // any other character stops the motors
         digitalWrite(LED_BUILTIN, LOW); 
-        ftduino.motor_set(Ftduino::M0, Ftduino::OFF, Ftduino::MAX);
         ftduino.motor_set(Ftduino::M1, Ftduino::OFF, Ftduino::MAX);
+        ftduino.motor_set(Ftduino::M2, Ftduino::OFF, Ftduino::MAX);
         break;
     }
   }
