@@ -472,8 +472,9 @@ Code.run = function() {
     
 Code.runJS = function() {
   if(Code.running) {
-    console.log("Stopping");
-    Code.running = false;
+      console.log("Stopping");
+      Code.send('x', 0);
+      Code.running = false;
     return;
   }
 
@@ -481,13 +482,12 @@ Code.runJS = function() {
   var code = Blockly.JavaScript.workspaceToCode(Code.workspace);
   try {
       var interpreter = new Interpreter(code, initInterpreter);
+      Code.running = true;
       var runner = function() {
-	  Code.running = true;
           if(interpreter.run() && Code.running) {
               setTimeout(runner, 10);
           } else {
 	      Code.running = false;
-	      console.log("DONE");
           }
       }
       runner();
