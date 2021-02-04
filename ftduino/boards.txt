@@ -48,9 +48,11 @@ menu.odrv=Output Driver
 ftduino.menu.odrv.auto=Automatic (All Board Revs.)
 ftduino.menu.odrv.mc33879a=MC33879A (Board Rev. 1.3 and older)
 ftduino.menu.odrv.tle94108el=TLE94108EL (Board Rev. 1.4 and newer)
+ftduino.menu.odrv.drv8908=DRV8908 (Board Rev. 1.4 and newer)
 ftduino.menu.odrv.auto.build.odrv=-DOUTPUT_DRIVER_AUTO
 ftduino.menu.odrv.mc33879a.build.odrv=-DOUTPUT_DRIVER_MC33879A
 ftduino.menu.odrv.tle94108el.build.odrv=-DOUTPUT_DRIVER_TLE94108EL
+ftduino.menu.odrv.drv8908.build.odrv=-DOUTPUT_DRIVER_DRV8908
 
 menu.usonic=Ultrasonic on C1
 ftduino.menu.usonic.enabled=Enabled (occupies timer3 and USART)
