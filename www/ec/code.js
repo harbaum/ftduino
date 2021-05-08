@@ -393,7 +393,21 @@ Code.initLanguage = function() {
   }
 };
 
+Code.handlePending = function() {
+    Code.in_progress = false;
+
+    // send anything that might be pending
+    if(Code.pending.length > 0) {
+	// send pending ...
+	var item = Code.pending.shift();
+	//console.log("send pending:" + item);	    
+	Code.send(item);
+    }
+}
+    
 Code.send = function(chr) {
+    console.log("Sending", chr);
+    
     if(Code.characteristic === undefined)
 	return;
 
@@ -411,45 +425,129 @@ Code.send = function(chr) {
     // TODO: make sure at most 20 Bytes are sent
     console.log("writeValue()");
     Code.in_progress = true;
-    Code.characteristic.writeValue(Code.encoder.encode(chr)).then(function() {
-	//console.log("writeValue() ok");
-	// sending ok ...
-	Code.in_progress = false;
 
-	// send anything that might be pending
-	if(Code.pending.length > 0) {
-	    // send pending ...
-	    var item = Code.pending.shift();
-	    //console.log("send pending:" + item);	    
-	    Code.send(item);
-	}
-	
-    }).catch(error => {
-        console.log("writeValue() error: " + error);
-	Code.in_progress = false;
-    });;
+    // for ftDuino just send the characters directly
+    var characteristic = [ undefined, undefined ];
+    var value = [ undefined, undefined ];
+    if("uart" in Code.characteristic) {
+	// ftduino
+	characteristic[0] = Code.characteristic["uart"]
+	value[0] = Code.encoder.encode(chr);
+    } else {
+	// ft controllers
+	characteristic[0] = Code.characteristic["m1"]
+	characteristic[1] = Code.characteristic["m2"]
+
+	value = [ new Uint8Array([0]), new Uint8Array([0])];	    
+	if(chr == 'r') // drive right -> only power m1
+	    value[0] = new Uint8Array([100]);
+	else if(chr == 'R') // turn right -> power m1 forward and m2 backward
+	    value = [ new Uint8Array([100]), new Uint8Array([-100])];
+	else if(chr == 'l') // drive left -> only power m2
+	    value[1] = new Uint8Array([100]);
+	else if(chr == 'L') // turn left -> power m1 backward and m2 forward
+	    value = [ new Uint8Array([-100]), new Uint8Array([100])];
+	else if(chr == 'f') // forward
+	    value = [ new Uint8Array([100]), new Uint8Array([100])];
+	else if(chr == 'b') // backward
+	    value = [ new Uint8Array([-100]), new Uint8Array([-100])];
+    }
+
+    if(characteristic[0]) {    
+	characteristic[0].writeValue(value[0]).then(function() {
+	    console.log("writeValue(0,",value[0],") ok", characteristic);
+
+	    // send second half if required
+	    if(characteristic[1]) {
+		characteristic[1].writeValue(value[1]).then(function() {
+		    console.log("writeValue(1,",value[1],") ok");
+		    Code.handlePending();		    
+		}).catch(error => {
+		    console.log("writeValue(1) error: " + error);
+		    Code.handlePending();
+		});
+	    } else	    
+		Code.handlePending();
+	}).catch(error => {
+            console.log("writeValue(0) error: " + error);
+	    Code.handlePending();
+	});
+    } else {
+	console.log("command ignored");
+	Code.handlePending();
+    }
 }
 
 Code.connect = function(run) {
-    navigator.bluetooth.requestDevice({
-        filters: [
-	    { services: ['0000ffe0-0000-1000-8000-00805f9b34fb']},
-	],
-        optionalServices: ['0000ffe0-0000-1000-8000-00805f9b34fb']
+    Code.device = undefined;
+    Code.server = undefined;
+    Code.service = undefined;
+    Code.characteristic = {};
+
+    navigator.bluetooth.requestDevice( {
+	// this will not find the fischertechnik controllers ...
+//	filters: [
+//	    { services: ['0000ffe0-0000-1000-8000-00805f9b34fb']},
+//	    { services: ['8ae883b4-ad7d-11e6-80f5-76304dec7eb7']},
+//	    { services: ['2e58327e-c5c5-11e6-9d9d-cec0c932ce01']},
+//	    { name: 'BT Control Receiver'},
+//	    { name: 'BT Smart Controller'}
+//	],
+	acceptAllDevices: true,
+	optionalServices: [
+	    '0000ffe0-0000-1000-8000-00805f9b34fb',
+	    '8ae883b4-ad7d-11e6-80f5-76304dec7eb7',
+	    '2e58327e-c5c5-11e6-9d9d-cec0c932ce01' ]
     }).then(device => {
-        console.log("Device found. Connecting ...");
+        console.log("Device",device, "found. Connecting ...");
+	Code.device = device;
         return device.gatt.connect();
     }).then(server => {
+	Code.server = server;
         console.log("Connected. Searching for primary service ...");
-        return server.getPrimaryService('0000ffe0-0000-1000-8000-00805f9b34fb');
+	// search for device specific service for ftDuino, Bt Smart Controller or BT Control Receiver
+	var service = '0000ffe0-0000-1000-8000-00805f9b34fb';
+	if(Code.device.name == 'BT Control Receiver')
+	    service = '2e58327e-c5c5-11e6-9d9d-cec0c932ce01'
+	else if(Code.device.name == 'BT Smart Controller')
+	    service = '8ae883b4-ad7d-11e6-80f5-76304dec7eb7'
+        return server.getPrimaryService(service);
     }).then(service => {
+	Code.service = service
         console.log("Primary service found. Requesting characteristic ...");
-        return service.getCharacteristic('0000ffe1-0000-1000-8000-00805f9b34fb');
+	// search for first device specific characteristic. Will be the only one for the ftDuinos UART,
+	// will be M1 for the ft controllers
+	var characteristic = '0000ffe1-0000-1000-8000-00805f9b34fb';
+	if(Code.device.name == 'BT Control Receiver')
+	    characteristic = '2e583378-c5c5-11e6-9d9d-cec0c932ce01'
+	else if(Code.device.name == 'BT Smart Controller')
+	    characteristic = '8ae8860c-ad7d-11e6-80f5-76304dec7eb7'	
+        return service.getCharacteristic(characteristic);
     }).then(characteristic => {
-        console.log("Characteristic found. All prepared!");
+        console.log("First characteristic found.");
 	Code.pending = [ ]
 	Code.in_progress = false
-	Code.characteristic = characteristic;
+	if((Code.device.name == 'BT Control Receiver') || (Code.device.name == 'BT Smart Controller')) {
+	    Code.characteristic["m1"] = characteristic
+
+	    if(Code.device.name == 'BT Control Receiver')
+		characteristic = '2e583666-c5c5-11e6-9d9d-cec0c932ce01'
+	    else
+		characteristic = '8ae88b84-ad7d-11e6-80f5-76304dec7eb7'
+	    console.log("requesting second characteristic");
+	    return Code.service.getCharacteristic(characteristic);
+	}	
+	else {
+	    Code.characteristic["uart"] = characteristic
+	    // we don't need a second characteristic, so return an empty promise
+	    return new Promise((resolve) => { resolve(42); });
+	}
+    }).then(characteristic => {
+	if((Code.device.name == 'BT Control Receiver') || (Code.device.name == 'BT Smart Controller')) {
+            console.log("Second characteristic found:", characteristic);
+	    Code.characteristic["m2"] = characteristic
+	}
+	    
 	run();
     }).catch(error => {
         alert("Error: " + error);
@@ -485,7 +583,7 @@ Code.run = function() {
     }
 
     // not connected yet? Connect and then run
-    if(Code.characteristic=== undefined) {
+    if(Code.characteristic === undefined) {
 	Code.connect(Code.runJS);
 	return;
     }
