@@ -1,266 +1,335 @@
 <!DOCTYPE html>
-<html lang="de">
-  <head>
-    <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="../menu.css">
-    <script src="../menu.js"></script> 
-    <title>ftDuino - Arduino for fischertechnik</title>
-  </head>
-    
-  <body><center>
-    <table width="974">
-      <tr><td>    
-	  <img src="../images/banner.jpg"/>
-	  
-      </td></tr><tr><td>
-	  
-	  <div class="tab">
-	    <button class="tablinks" onclick="openTab(event, 'about')" id="defaultOpen">About</button>
-	    <button class="tablinks" onclick="openTab(event, 'news')">News</button>
-	    <button class="tablinks" onclick="openTab(event, 'specs')">Specifications</button>
-	    <button class="tablinks" onclick="openTab(event, 'links')">Documents and Links</button>
-	    <button class="tablinks" onclick="openTab(event, 'quickstart')">Quickstart</button>
-	    <button class="tablinks" onclick="openTab(event, 'buy')">Purchase</button>
-	    <a class="tablang" href="../de"><img src="../images/de.png"></a>
-	  </div>
-	  
-	  <!-- Tab content -->
-	  <div id="about" class="tabcontent">
-	    <h3>ftDuino - Arduino for fischertechnik</h3>
-	    <table><tr><td>    
-		  <p>The ftDuino bridges the gap between the popular
-		    <a href="http://arduino.cc">Arduino</a> controllers and
-		    the versatile <a href="http://fischertechnik.de">fischertechnik construction toy</a>.</p>
-		  
-		  <p>The ftDuino is meant for beginners who wants to
-		    get a first glance at "real" programming and who want
-		    to control their fischertechnik models in a prefessional
-		    way. It's also perfect for Arduino professionals who
-		    want to make use of the powerful fischertechnik system
-		    for complex mechanical models.</p>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ftDuino - Arduino for Fischertechnik</title>
 
-		  <p>The ftDuino does not require any soldering and
-		    the fischertechik system makes the mechanical
-		    part a piece of cake.</p>
-		</td>
-		<td> </td>
-		<td><img src="../images/mobile.jpg" width="300"/></td>
-	    </tr></table>			      
-	  </div>
-	  
-	  <div id="news" class="tabcontent">
-	    <h3>News</h3>
-	    <table><tr><td>
-		  <dl><dt><b>December 2020</b></dt>
-		    <dd>Special <a href="https://harbaum.github.io/ftduino/www/blue/anleitung.pdf">ftDuino Bluetooth Module</a> now <a href="https://www.mintronics.de/btadapter">available</a>.</dd>
-		  </dl>
-		  <dl><dt><b>July 2020</b></dt>
-		    <dd><a href="https://harbaum.github.io/ftduino/www/manual/experimente.html#6.19">Bluetooth for the ftDuino</a>.</dd>
-		  </dl>		  
-		  <dl><dt><b>June 2020</b></dt>
-		    <dd>The <a href="http://tx-pi.de/hat/">TX-Pi HAT</a> integrates the Raspberry Pi into the fischertechnik world as well. Raspberry Pi and ftDuino can of course be connected via USB and be used together.</dd>
-		  </dl>		    
-		  <dl><dt><b>May 2020</b></dt>
-		    <dd>The ftDuino is being mentioned in the book <a href="https://www.dpunkt.de/buecher/12514/9783864904264-bauen%2C-erleben%2C-begreifen%3A--fischertechnik%C2%AE-roboter-mit-arduino.html">fischertechnik®-Roboter mit Arduino</a>.</dd>
-		  </dl>
-		  <dl><dt><b>April 2019</b></dt>
-		    <dd>New: the <a href="https://harbaum.github.io/ftduino/www/manual/experimente.html#6.13.9">ftDuino servo adapter</a></dd>
-		  </dl>
-		  <dl><dt><b>March 2019</b></dt>
-		    <dd>The ftDuino supports   
-		    <a href="https://harbaum.github.io/ftduino/webusb/scratch3/">Scratch3</a>.</dd>
-		    <dd>The ftDuino is being mentioned in the <a href="http://www.raspberry-pi-geek.de/Magazin/2019/04/Fischertechnik-Roboter-mit-dem-Ftduino-steuern">Raspberry Pi Geek Magazine</a></dd>
-		  </dl>
-		  <dl><dt><b>Febuary 2019</b></dt>
-		    <dd>The ftDuino is mentioned in the 
-		    <a href="https://apps.fischer.de/ecom/fischertechnik/epaper/school-catalogue-2019/index.html#21">fischertechnik catalogue</a>.</dd>
-		  </dl>
-		  <dl><dt><b>December 2018</b></dt>
-		    <dd>The ftDuino can be controlled from
-		    within <a href="https://minecraft.net">Minecraft</a>
-		    and connects the game with the real world.</dd>
-		  </dl>
-		  <dl><dt><b>October 2018</b></dt>
-		    <dd>The ftDuino
-		      supports <a href="http://s4a.cat/">Scratch for
-		      Arduino</a> and can thus be controlled using the
-		      popular scratch environment.</dd>
-		  </dl>
-		  <dl><dt><b>August 2018</b></dt>
-		    <dd>The ftDuino supports the new <a href="https://www.fischertechnik.de/en/products/playing/robotics/544624-robotics-txt-smart-home">fischertechnik environmental sensor</a> from the 
-		     new Smart Home and IoT Sets.</dd>
-		  </dl>
-		</td>
-		<td> </td>
-		<td><img src="../images/minecraft.jpg" width="300"/></td>
-	    </tr></table>			      
-	  </div>
-	  
-	  <div id="specs" class="tabcontent">
-	    <h3>Specifications</h3>
-	    <table><tr><td valign="top">    
-	    <ul>
-		<li>mechanically and electrically compatible with the fischertechnik TXT controller</li>
-		<ul>
-		  <li>8 universal analog inputs I1 to I8</li>
-		  <li>4 fast counter inputs C1 to C4</li>
-		  <li>8 analog outputs O1 to O8 which can be combined as motor outputs M1 to M4</li>
-		  <li>supports all current fischertechnik actors and sensors</li>
-		  <ul>
-		    <li>motors</li>
-		    <li>switches and buttons</li>
-		    <li>temperature and optical sensors</li>
-		    <li>line, distance and orientation sensors</li>
-		    <li>much more ...</li>
-		  </ul>
-		</ul>
-		<li>I²C connector</li>
-		<ul>
-		  <li>fischertechnik TX compatible</li>
-		  <li>master/slave capable</li>
-		</ul>
-                <li>compatible with all current fischertechnik 9V power sources</li>
-		<ul>
-                  <li><a href="https://ft-datenbank.de/ft-article/415">9V battery holder</a></li>
-                  <li><a href="https://ft-datenbank.de/ft-article/89">8.4V accu pack</a></li>
-                  <li><a href="https://ft-datenbank.de/ft-article/4161">9V power se</a></li>
+    <link href="../bootstrap.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../page.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class="w-1"></div>
+    <a class="navbar-brand" href="#"><span class="header-f">f</span><span class="header-t">t</span><span
+            class="header-duino">Duino</span></a>
+    <button class="navbar-toggler" type="button"
+            onclick="document.getElementById('navbarNav').classList.toggle('collapse')" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#About">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#News">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Specifications">Specifications</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#DocumentsAndLinks">Documents and Links</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Quickstart">Quickstart</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#Purchase">Purchase</a>
+            </li>
+        </ul>
+    </div>
+    <a href="../de"><img class="float-end" src="../images/de.png" alt="DE" style="margin-right: 15px"></a>
+</nav>
+<div id="About" style="height: 80px"></div>
+<main>
+    <h3 class="page-title">About</h3>
+    <h1 class="page-title">ftDuino - Arduino for fischertechnik</h1>
+    <br/>
+    <div class="container f-container about-flex">
+        <div>
+            <p>The ftDuino bridges the gap between the popular <a href="https://arduino.cc">Arduino</a> controllers and
+                the versatile <a href="https://fischertechnik.de">fischertechnik construction toy.</a></p>
+            <br/>
+            <p>The ftDuino is meant for beginners who wants to get a first glance at "real" programming and who want to
+                control their fischertechnik models in a prefessional way. It's also perfect for Arduino professionals
+                who want to make use of the powerful fischertechnik system for complex mechanical models.</p>
+            <p>The ftDuino does not require any soldering and the fischertechik system makes the mechanical part a piece
+                of cake.</p>
+        </div>
+        <section>
+            <img src="../images/mobile.jpg" alt="Demo">
+        </section>
+    </div>
+    <div id="News" class="spacer-1"></div>
+    <h1 class="page-title">News</h1>
+    <div class="container f-container about-flex">
+        <div>
+            <dl>
+                <dt><b>December 2020</b></dt>
+                <dd>Special <a href="https://harbaum.github.io/ftduino/www/blue/anleitung.pdf">ftDuino
+                    Bluetooth Module</a> now <a
+                        href="https://www.mintronics.de/btadapter">available</a>.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>July 2020</b></dt>
+                <dd><a href="https://harbaum.github.io/ftduino/www/manual/experimente.html#6.19">Bluetooth
+                    for the ftDuino</a>.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>June 2020</b></dt>
+                <dd>The <a href="http://tx-pi.de/hat/">TX-Pi HAT</a> integrates the Raspberry Pi
+                    into the fischertechnik world as well. Raspberry Pi and ftDuino can of course be
+                    connected via USB and be used together.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>May 2020</b></dt>
+                <dd>The ftDuino is being mentioned in the book <a
+                        href="https://www.dpunkt.de/buecher/12514/9783864904264-bauen%2C-erleben%2C-begreifen%3A--fischertechnik%C2%AE-roboter-mit-arduino.html">fischertechnik®-Roboter
+                    mit Arduino</a>.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>April 2019</b></dt>
+                <dd>New: the <a
+                        href="https://harbaum.github.io/ftduino/www/manual/experimente.html#6.13.9">ftDuino
+                    servo adapter</a></dd>
+            </dl>
+            <dl>
+                <dt><b>March 2019</b></dt>
+                <dd>The ftDuino supports
+                    <a href="https://harbaum.github.io/ftduino/webusb/scratch3/">Scratch3</a>.
+                </dd>
+                <dd>The ftDuino is being mentioned in the <a
+                        href="http://www.raspberry-pi-geek.de/Magazin/2019/04/Fischertechnik-Roboter-mit-dem-Ftduino-steuern">Raspberry
+                    Pi Geek Magazine</a></dd>
+            </dl>
+            <dl>
+                <dt><b>Febuary 2019</b></dt>
+                <dd>The ftDuino is mentioned in the
+                    <a href="https://apps.fischer.de/ecom/fischertechnik/epaper/school-catalogue-2019/index.html#21">fischertechnik
+                        catalogue</a>.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>December 2018</b></dt>
+                <dd>The ftDuino can be controlled from
+                    within <a href="https://minecraft.net">Minecraft</a>
+                    and connects the game with the real world.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>October 2018</b></dt>
+                <dd>The ftDuino
+                    supports <a href="http://s4a.cat/">Scratch for
+                        Arduino</a> and can thus be controlled using the
+                    popular scratch environment.
+                </dd>
+            </dl>
+            <dl>
+                <dt><b>August 2018</b></dt>
+                <dd>The ftDuino supports the new <a
+                        href="https://www.fischertechnik.de/en/products/playing/robotics/544624-robotics-txt-smart-home">fischertechnik
+                    environmental sensor</a> from the
+                    new Smart Home and IoT Sets.
+                </dd>
+            </dl>
+        </div>
+        <section>
+            <img src="../images/minecraft.jpg" alt="Demo">
+        </section>
+    </div>
+    <div id="Specifications" class="spacer-1"></div>
+    <h1 class="page-title">Specifications</h1>
+    <br/>
+    <div class="container f-container about-flex">
+        <div>
+            <ul>
+                <li>mechanically and electrically compatible with the fischertechnik TXT controller</li>
+                <ul>
+                    <li>8 universal analog inputs I1 to I8</li>
+                    <li>4 fast counter inputs C1 to C4</li>
+                    <li>8 analog outputs O1 to O8 which can be combined as motor outputs M1 to M4</li>
+                    <li>supports all current fischertechnik actors and sensors</li>
+                    <ul>
+                        <li>motors</li>
+                        <li>switches and buttons</li>
+                        <li>temperature and optical sensors</li>
+                        <li>line, distance and orientation sensors</li>
+                        <li>much more ...</li>
+                    </ul>
                 </ul>
-		<li>voll kompatibel mit der Arduino-IDE</li>
-		<ul>
-		  <li>specially adopted code libraries</li>
-		  <li>many examples</li>
-		</ul>
-	    </ul>
-	    <br>
-	    Attention: The ftDuino is <b>not</b> compatibel with the old power supplies <a href="https://ft-datenbank.de/ft-article/3117">30090</a> and <a href="https://ft-datenbank.de/ft-article/3116">30180</a> which aren't sold anymore.
-		</td>
-		<td> </td>
-		<td><img src="../images/anschluesse.png" width="300"/></td>
-	    </tr></table>			      
-	  </div>
-	  
-	  <div id="links" class="tabcontent">
-	    <h3>Documents and links</h3>
-	    <table width="100%"><tr><td width="66%" valign="top">
-	    <h4>Generic</h4>
-	    <ul>
-		<li><a href="https://harbaum.github.io/ftduino/manual.pdf">Users manual (german, PDF)</a></li>
-		<li><a href="https://harbaum.github.io/ftduino/www/manual/">Users manual (german, english, dutch, french, HTML)</a></li>
-		<li><a href="http://github.com/harbaum/ftduino">Github repository (english)</a></li>
-		<li><a href="https://www.youtube.com/playlist?list=PLi6a2BPpYcCTMfehFcKaVUSZGubVMpxHx">Youtube channel</a></li>
-		<li><a href="https://forum.ftcommunity.de/viewforum.php?f=8&sid=8a5d4d3be63c14fd7884cd14ee49214d">ftc discussion forum</a></li>
-	    </ul>
-	    <h4>Special projects</h4>
-              <ul>
-		<li><a href="../../webusb/en">ftDuino WebUSB landing page</a></li>
-		<li><a href="https://github.com/harbaum/ftduino/releases/download/0.0.13/ftDuinoDemo-debug.apk">ftDuino Android demo app</a></li>
-		<li><a href="https://harbaum.github.io/ftduino/minecraft/ftduino-0.0.4.jar">Minecraft mod 0.0.4 for Forge 1.12.2</a></li>
-		<li><a href="https://harbaum.github.io/ftduino/webusb/scratch3/">Scratch 3</a></li>
-	      </ul>
-              <h4>Sightings</h4>
-	      <ul>
-		<li>In the book <a href="https://www.dpunkt.de/buecher/12514/9783864904264-bauen%2C-erleben%2C-begreifen%3A--fischertechnik%C2%AE-roboter-mit-arduino.html">fischertechnik®-Roboter mit Arduino</a></li>
-		<li><a href="https://www.cyberforum.de/newsroom/technikbegeisterter-nachwuchs-zu-besuch-im-rathaus/">ftDuino in the town hall of Karlsruhe</a></li>
-		<li><a href="https://www.cyberforum.de/newsroom/ueber-300-kleine-hacker-in-der-ernst-reuter-schule/">Hacker school on 12.12 '18 in Karlsruhe</a></li>
-		<li><a href="https://apps.fischer.de/ecom/fischertechnik/epaper/school-catalogue-2019/index.html#21">ftDuino in the fischertechnik catalogue</a></li>
-		<li><a href="http://www.raspberry-pi-geek.de/Magazin/2019/04/Fischertechnik-Roboter-mit-dem-Ftduino-steuern">Mentioned in Raspberry Pi Geek Magazine</a></li>
-	      </ul>
-	      <h4>Shops</h4>
-	      <ul>
-		<li>ftDuino</li>
-		<ul>
-		  <li><a href="https://www.mintronics.de">MINTronics - Peter Habermehl</a></li>
-		  <li><a href="https://santjohanser.de/fischertechnik/robotics/controller-software/1080/ftduino">Santjohanser Spielen. Lernen. Technik.</a></li>
-		  <li><a href="https://gundermann-software.de/produkt/ftduino/">Gundermann Hard & Softwareberatung e.K.</a></li>
-		  <li><a href="https://www.christiani-shop.de/schule/schulstufen/sekundarstufe/ftduino.html">Christiani</a></li>
-		</ul>
-		<li>ftDuino addons</li>
-		<ul>
-		  <li><a href="https://www.mintronics.de">MINTronics - Peter Habermehl</a></li>
-		  <li><a href="https://gundermann-software.de/shop/">Gundermann Hard & Softwareberatung e.K.</a></li>
-		</ul>
-	      </ul>
-		</td>
-		<td> </td>
-		<td><img src="../images/ide.png" width="100%"/></td>
-	    </tr></table>		
-	  </div>
+                <li>I²C connector</li>
+                <ul>
+                    <li>fischertechnik TX compatible</li>
+                    <li>master/slave capable</li>
+                </ul>
+                <li>compatible with all current fischertechnik 9V power sources</li>
+                <ul>
+                    <li><a href="https://ft-datenbank.de/ft-article/415">9V battery holder</a></li>
+                    <li><a href="https://ft-datenbank.de/ft-article/89">8.4V accu pack</a></li>
+                    <li><a href="https://ft-datenbank.de/ft-article/4161">9V power se</a></li>
+                </ul>
+                <li>voll kompatibel mit der Arduino-IDE</li>
+                <ul>
+                    <li>specially adopted code libraries</li>
+                    <li>many examples</li>
+                </ul>
+            </ul>
+        </div>
+        <section>
+            <img src="../images/anschluesse.png" alt="Demo">
+        </section>
+    </div>
+    <div id="DocumentsAndLinks" class="spacer-1"></div>
+    <h1 class="page-title">Documents and Links</h1>
+    <br/>
+    <div class="container f-container about-flex">
+        <div>
+            <h4>Generic</h4>
+            <ul>
+                <li><a href="https://harbaum.github.io/ftduino/manual.pdf">Users manual (german, PDF)</a></li>
+                <li><a href="https://harbaum.github.io/ftduino/www/manual/">Users manual (german, english, dutch,
+                    french, HTML)</a></li>
+                <li><a href="http://github.com/harbaum/ftduino">Github repository (english)</a></li>
+                <li><a href="https://www.youtube.com/playlist?list=PLi6a2BPpYcCTMfehFcKaVUSZGubVMpxHx">Youtube
+                    channel</a></li>
+                <li><a href="https://forum.ftcommunity.de/viewforum.php?f=8&amp;sid=8a5d4d3be63c14fd7884cd14ee49214d">ftc
+                    discussion forum</a></li>
+            </ul>
+            <h4>Special projects</h4>
+            <ul>
+                <li><a href="../../webusb/en">ftDuino WebUSB landing page</a></li>
+                <li><a href="https://github.com/harbaum/ftduino/releases/download/0.0.13/ftDuinoDemo-debug.apk">ftDuino
+                    Android demo app</a></li>
+                <li><a href="https://harbaum.github.io/ftduino/minecraft/ftduino-0.0.4.jar">Minecraft mod 0.0.4 for
+                    Forge 1.12.2</a></li>
+                <li><a href="https://harbaum.github.io/ftduino/webusb/scratch3/">Scratch 3</a></li>
+            </ul>
+            <h4>Sightings</h4>
+            <ul>
+                <li>In the book <a
+                        href="https://www.dpunkt.de/buecher/12514/9783864904264-bauen%2C-erleben%2C-begreifen%3A--fischertechnik%C2%AE-roboter-mit-arduino.html">fischertechnik®-Roboter
+                    mit Arduino</a></li>
+                <li><a href="https://www.cyberforum.de/newsroom/technikbegeisterter-nachwuchs-zu-besuch-im-rathaus/">ftDuino
+                    in the town hall of Karlsruhe</a></li>
+                <li><a href="https://www.cyberforum.de/newsroom/ueber-300-kleine-hacker-in-der-ernst-reuter-schule/">Hacker
+                    school on 12.12 '18 in Karlsruhe</a></li>
+                <li><a href="https://apps.fischer.de/ecom/fischertechnik/epaper/school-catalogue-2019/index.html#21">ftDuino
+                    in the fischertechnik catalogue</a></li>
+                <li>
+                    <a href="http://www.raspberry-pi-geek.de/Magazin/2019/04/Fischertechnik-Roboter-mit-dem-Ftduino-steuern">Mentioned
+                        in Raspberry Pi Geek Magazine</a></li>
+            </ul>
+            <h4>Shops</h4>
+            <ul>
+                <li>ftDuino</li>
+                <ul>
+                    <li><a href="https://www.mintronics.de">MINTronics - Peter Habermehl</a></li>
+                    <li><a href="https://santjohanser.de/fischertechnik/robotics/controller-software/1080/ftduino">Santjohanser
+                        Spielen. Lernen. Technik.</a></li>
+                    <li><a href="https://gundermann-software.de/produkt/ftduino/">Gundermann Hard &amp; Softwareberatung
+                        e.K.</a></li>
+                    <li><a href="https://www.christiani-shop.de/schule/schulstufen/sekundarstufe/ftduino.html">Christiani</a>
+                    </li>
+                </ul>
+                <li>ftDuino addons</li>
+                <ul>
+                    <li><a href="https://www.mintronics.de">MINTronics - Peter Habermehl</a></li>
+                    <li><a href="https://gundermann-software.de/shop/">Gundermann Hard &amp; Softwareberatung e.K.</a>
+                    </li>
+                </ul>
+            </ul>
+        </div>
+        <section>
+            <img src="../images/ide.png" alt="Demo">
+        </section>
+    </div>
+    <div id="Quickstart" class="spacer-1"></div>
+    <h1 class="page-title">Quickstart</h1>
+    <br/>
+    <div class="w-100 text-center">
+        <h3>Quickstart</h3>
+        <p>A detailed description can be found in the <a href="https://harbaum.github.io/ftduino/manual.pdf">german manual</a>.</p>
 
-	  <div id="quickstart" class="tabcontent">
-	    <h3>Quickstart</h3>
-	    <p>A detailed description can be found in the <a href="https://harbaum.github.io/ftduino/manual.pdf">german manual</a>.</p>
+        <p>A previously installed arduino IDE is required. If it's
+            not yet install then it can be downloaded and installed
+            from
+            the <a href="https://www.arduino.cc/en/Main/Software">Arduino
+                website</a>.</p>
 
-	    <p>A previously installed arduino IDE is required. If it's
-	      not yet install then it can be downloaded and installed
-	      from
-	      the <a href="https://www.arduino.cc/en/Main/Software">Arduino
-	      website</a>.</p>
+        <p>In the preferences of the arduino IDE the URL</p>
+        <div style="text-align: center;"><tt>https://harbaum.github.io/ftduino/package_ftduino_index.json</tt></div>
+        <p>needs to be configured as depicted below:</p>
 
-	    <p>In the preferences of the arduino IDE the URL</p>
-	    <center><tt>https://harbaum.github.io/ftduino/package_ftduino_index.json</tt></center>
-	    <p>needs to be configured as depicted below:</p>
-	      
-	    <center><img src="../images/setup_preferences_en.png"/></center>
+        <div style="text-align: center;"><img src="../images/setup_preferences_en.png"></div>
 
-	    <p>Afterwards the ftDuino shows up in the board manager. A click on "install" will include the
-	      ftDuino support into the arduino IDE.</p>
-	    
-	    <center><img src="../images/setup_boardmanager_en.png"/></center>
+        <p>Afterwards the ftDuino shows up in the board manager. A click on "install" will include the
+            ftDuino support into the arduino IDE.</p>
 
-	    <p>After successful installation the ftDuino board can be selected. If everything is setup
-	      correctly then the ftDuino examples will now show up in the IDE. They can directly be
-	      opened and be downloaded onto the ftDuino.</p>
-	     
-	    <center><img src="../images/setup_examples_en.png"/></center>
+        <div style="text-align: center;"><img src="../images/setup_boardmanager_en.png"></div>
 
-	    <h3>Driver</h3>
-	    
-	    <p>Windows 10, Linux and MacOS already include the matching drivers and the ftDuino can be used
-	      immediately. Windows 7 needs the installation of an <a href="https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/ftduino.inf">INF file</a>.</p>
-	  </div>
-	  
-	  <div id="buy" class="tabcontent">
-	    <h3>Purchase your own ftDuino</h3>
-	    <table><tr><td>    
-		  <p>The ftDuino is professionally manufactured and comes
-		    fully assembled inside a robust injection moulded case. The
-		    manual is available for <a href="https://harbaum.github.io/ftduino/manual.pdf">download</a>.</p>
-		  
-		  <p>The ftDuino is a hobby project and is being produced
-		    depending on demand. Thus price and availability may
-		    vary a little bit.</p>
+        <p>After successful installation the ftDuino board can be selected. If everything is setup
+            correctly then the ftDuino examples will now show up in the IDE. They can directly be
+            opened and be downloaded onto the ftDuino.</p>
 
-		  <p><ul>
-		      <li>Purchase your ftDuino</li>
-		      <ul>
-			<li>Special offers and direct sales: Send request to <a href="mailto:info@ftduino.de">info@ftduino.de</a>
-			<li><a href="https://www.mintronics.de">MINTronics Peter Habermehl - the ftDuino store!</a></li>
-			<li><a href="https://santjohanser.de/fischertechnik/robotics/controller-software/1080/ftduino">Santjohanser Spielen. Lernen. Technik.</a></li>
-			<li><a href="https://gundermann-software.de/produkt/ftduino/">Gundermann Hard & Softwareberatung e.K.</a></li>
-			<li><a href="https://www.christiani-shop.de/schule/schulstufen/sekundarstufe/ftduino.html">Christiani</a></li>
-		      </ul>
-		      <li>Purchase ftDuino addons</li>
-		      <ul>
-			<li><a href="https://gundermann-software.de/shop/">Gundermann Hard & Softwareberatung e.K.</a></li>
-		  </ul></p>
-		  
-		</td>		      
-		<td> </td>
-		<td><img src="../images/ftduino.jpg" width="300"/></td>
-	    </tr></table>			      
-	  </div>
-	  
-	  <script>
-	    document.getElementById("defaultOpen").click();
-	  </script>
-	  
-      </td></tr>
-      
-      <tr><td>
-	  <footer>
-	    <p><a href="mailto:till@harbaum.org">Till Harbaum</a> - <a href="../impressum.html">Impressum</a></p>
-	  </footer>
-	  
-    </td></tr></table></center>
-  </body>
+        <div style="text-align: center;"><img src="../images/setup_examples_en.png"></div>
+
+        <h3>Driver</h3>
+
+        <p>Windows 10, Linux and MacOS already include the matching drivers and the ftDuino can be used
+            immediately. Windows 7 needs the installation of an <a href="https://raw.githubusercontent.com/harbaum/ftduino/master/ftduino/driver/ftduino.inf">INF file</a>.</p>
+    </div>
+    <div id="Purchase" class="spacer-1"></div>
+    <h1 class="page-title">Purchase your own ftDuino</h1>
+    <br>
+    <div class="container f-container about-flex">
+        <div>
+            <p>The ftDuino is professionally manufactured and comes
+                fully assembled inside a robust injection moulded case. The
+                manual is available for <a href="https://harbaum.github.io/ftduino/manual.pdf">download</a>.</p>
+
+            <p>The ftDuino is a hobby project and is being produced
+                depending on demand. Thus price and availability may
+                vary a little bit.</p>
+
+            <p></p><ul>
+            <li>Purchase your ftDuino</li>
+            <ul>
+                <li>Special offers and direct sales: Send request to <a href="mailto:info@ftduino.de">info@ftduino.de</a>
+                </li><li><a href="https://www.mintronics.de">MINTronics Peter Habermehl - the ftDuino store!</a></li>
+                <li><a href="https://santjohanser.de/fischertechnik/robotics/controller-software/1080/ftduino">Santjohanser Spielen. Lernen. Technik.</a></li>
+                <li><a href="https://gundermann-software.de/produkt/ftduino/">Gundermann Hard &amp; Softwareberatung e.K.</a></li>
+                <li><a href="https://www.christiani-shop.de/schule/schulstufen/sekundarstufe/ftduino.html">Christiani</a></li>
+            </ul>
+            <li>Purchase ftDuino addons</li>
+            <ul>
+                <li><a href="https://gundermann-software.de/shop/">Gundermann Hard &amp; Softwareberatung e.K.</a></li>
+            </ul><p></p>
+
+        </ul>
+        </div>
+        <section>
+            <img src="../images/ftduino.jpg" alt="Demo">
+        </section>
+    </div>
+
+    <div class="spacer-1"></div>
+    <p class="footer">
+        <a href="mailto:till@harbaum.org">Till Harbaum</a> - <a href="../impressum.html">Impressum</a>
+    </p>
+</main>
+</body>
 </html>
