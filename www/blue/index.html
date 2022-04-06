@@ -63,6 +63,8 @@
       <img style="border: 5px solid #888;" width="360" src="images/screenshot_demo.png" />
     </center>
 
+    <p>More details can be found in the <a href="examples.html">examples</a>.</p>
+    
     <h2>How it works</h2>
     <ul>
       <li>You simply design a custom interface exactly matching your needs.</li>
@@ -85,8 +87,15 @@
     <ul>
       <li>The <a href="https://play.google.com/store/apps/details?id=org.harbaum.ftduinoblue">ftDuinoBlue app</a> for android</li>
       <li>A <a href="http://ftduino.de">ftDuino</a> or Arduino (see pictures below)</li>
-      <li>A HM-10 bluetooth module for your Arduino or a <a href="https://www.mintronics.de/btadapter">matching Bluetooth module</a> for your ftDuino</li>
-      <li>The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example sketch</a></li>
+      <ul>
+	<li>A HM-10 bluetooth module for your Arduino or a <a href="https://www.mintronics.de/btadapter">matching Bluetooth module</a> for your ftDuino</li>
+	<li>The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/sketch/ftduinoblue_demo">example sketch</a></li>
+      </ul>
+      <li>or a Micropython device with Bluetooth suppiort</li>
+      <ul>
+	<li>A Micropython enabled device with bleutooth low energy support like e.g. the ESP32</li>
+	<li>The <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/micropython">example script</a></li>
+      </ul>
     </ul>
 
     <h2 id="gs">Getting started</h2>
@@ -94,10 +103,10 @@
     <p>Although ftDuinoBlue was designed for and with the
       <a href="http://ftduino.de">ftDuino</a> and
       its <a href="https://www.mintronics.de/btadapter">Bluetooth
-      adapter</a>it can equally well be used with the Arduino Uno or
-      most other Arduinos. This section describes a most simple
-      Arduino Uno based setup as well as the ftDuino setup ftDuinoBlue
-      was designed for.</p>
+      adapter</a> it can equally well be used with the Arduino Uno or
+      most other Arduinos and even a MicroPython equipped ESP32. This
+      section describes a most simple Arduino Uno based setup as well
+      as the ftDuino setup ftDuinoBlue was designed for.</p>
     
     <h3>Getting started with an Arduino Uno</h3>
 
@@ -176,5 +185,16 @@
       <li><a href="https://github.com/harbaum/ftduino/tree/master/ftduino/libraries/Ftduino/examples/Bluetooth/ftDuino-Bluetooth/txt_automation_3axis">A full control setup for the fischertechnik 3axis robot</a></li>
     </ul>      
 
+    <h3>Getting started with Micropython on ESP32</h3>
+
+    <p>Make sure you have Micropython installed on your ESP32. Then install the three files from
+      <a href="https://github.com/harbaum/ftDuinoBlue/tree/master/micropython">here</a> onto the
+      ESP32's file system using your favorite tool like ampy or µPIDE.</p>
+
+    <p>The demo expects a LED to be connected to GPIO2 of the ESP32. This is the case with the
+      ESP32 Devkit. You can use a LED on a different port by changing <a href="https://github.com/harbaum/ftDuinoBlue/blob/5ab3235a6fcbcc177f2521e66a027c39bf084f4c/micropython/ftduinoBlueDemo.py#L28">this line</a>.</p>
+
+    <p>Once the script is running the ESP32 will be detected by the <a href="https://play.google.com/store/apps/details?id=org.harbaum.ftduinoblue" class="pseudo button">ftDuinoBlue Android App</a> and the blinking LED
+      can be controlled.</p>    
   </body>
 </html>
