@@ -429,7 +429,29 @@ Code.send = function(chr) {
     // for ftDuino just send the characters directly
     var characteristic = [ undefined, undefined ];
     var value = [ undefined, undefined ];
-    if("uart" in Code.characteristic) {
+    if("robby" in Code.characteristic) {
+	// ft robby
+	characteristic[0] = Code.characteristic["robby"]
+
+	if(chr == 'r') // drive right -> only power l
+	    value = new Uint8Array([66,0,0]);
+	else if(chr == 'R') // turn right -> power l forward and r backward
+	    value = new Uint8Array([66,-66,0]);
+	else if(chr == 'l') // drive left -> only power r
+	    value = new Uint8Array([0,66,0]);
+	else if(chr == 'L') // turn left -> power l backward and r forward
+	    value = new Uint8Array([0,-66,0]);
+	else if(chr == 'f') // forward
+	    value = new Uint8Array([66,66,0]);
+	else if(chr == 'b') // backward
+	    value = new Uint8Array([-66,-66,0]);
+	else // stop
+	    value = new Uint8Array([0]);
+
+	value = [ value.buffer ];
+	console.log("value", value)
+	
+    } else if("uart" in Code.characteristic) {
 	// ftduino
 	characteristic[0] = Code.characteristic["uart"]
 	value[0] = Code.encoder.encode(chr);
@@ -495,15 +517,19 @@ Code.connect = function(run) {
 //	],
 	acceptAllDevices: true,
 	optionalServices: [
-	    '0000ffe0-0000-1000-8000-00805f9b34fb',
-	    '8ae883b4-ad7d-11e6-80f5-76304dec7eb7',
-	    '2e58327e-c5c5-11e6-9d9d-cec0c932ce01' ]
+	    '7b130100-ce8d-45bb-9158-631b769139e9',  // ft robby
+	    '0000ffe0-0000-1000-8000-00805f9b34fb',  // hm-10
+	    '8ae883b4-ad7d-11e6-80f5-76304dec7eb7',  // BT Smart Controller
+	    '2e58327e-c5c5-11e6-9d9d-cec0c932ce01' ] // BT Control Receiver
     }).then(device => {
         console.log("Device",device, "found. Connecting ...");
 	Code.device = device;
         return device.gatt.connect();
     }).then(server => {
 	Code.server = server;
+
+	console.log("c", Code.device);
+	
         console.log("Connected. Searching for primary service ...");
 	// search for device specific service for ftDuino, Bt Smart Controller or BT Control Receiver
 	var service = '0000ffe0-0000-1000-8000-00805f9b34fb';
@@ -511,6 +537,8 @@ Code.connect = function(run) {
 	    service = '2e58327e-c5c5-11e6-9d9d-cec0c932ce01'
 	else if(Code.device.name == 'BT Smart Controller')
 	    service = '8ae883b4-ad7d-11e6-80f5-76304dec7eb7'
+	else if(Code.device.name.startsWith('Robby'))
+	    service = '7b130100-ce8d-45bb-9158-631b769139e9'
         return server.getPrimaryService(service);
     }).then(service => {
 	Code.service = service
@@ -522,12 +550,14 @@ Code.connect = function(run) {
 	    characteristic = '2e583378-c5c5-11e6-9d9d-cec0c932ce01'
 	else if(Code.device.name == 'BT Smart Controller')
 	    characteristic = '8ae8860c-ad7d-11e6-80f5-76304dec7eb7'	
+	else if(Code.device.name.startsWith('Robby'))
+	    characteristic = '7b130101-ce8d-45bb-9158-631b769139e9'
         return service.getCharacteristic(characteristic);
     }).then(characteristic => {
         console.log("First characteristic found.");
 	Code.pending = [ ]
 	Code.in_progress = false
-	if((Code.device.name == 'BT Control Receiver') || (Code.device.name == 'BT Smart Controller')) {
+	if((Code.device.name == 'BT Smart Controller') || (Code.device.name == 'BT Smart Controller')) {
 	    Code.characteristic["m1"] = characteristic
 
 	    if(Code.device.name == 'BT Control Receiver')
@@ -536,7 +566,11 @@ Code.connect = function(run) {
 		characteristic = '8ae88b84-ad7d-11e6-80f5-76304dec7eb7'
 	    console.log("requesting second characteristic");
 	    return Code.service.getCharacteristic(characteristic);
-	}	
+	} else if(Code.device.name.startsWith('Robby')) {
+	    Code.characteristic["robby"] = characteristic	    
+	    // we don't need a second characteristic, so return an empty promise
+	    return new Promise((resolve) => { resolve(42); });
+	}
 	else {
 	    Code.characteristic["uart"] = characteristic
 	    // we don't need a second characteristic, so return an empty promise
