@@ -440,13 +440,13 @@ Code.send = function(chr) {
 	else if(chr == 'l') // drive left -> only power r
 	    value = new Uint8Array([0,66,0]);
 	else if(chr == 'L') // turn left -> power l backward and r forward
-	    value = new Uint8Array([0,-66,0]);
-	else if(chr == 'f') // forward
+	    value = new Uint8Array([-66,66,0]);
+	else if(chr == 'u') // forward
 	    value = new Uint8Array([66,66,0]);
-	else if(chr == 'b') // backward
+	else if(chr == 'd') // backward
 	    value = new Uint8Array([-66,-66,0]);
 	else // stop
-	    value = new Uint8Array([0]);
+	    value = new Uint8Array([0,0,0]);
 
 	value = [ value.buffer ];
 	console.log("value", value)
@@ -469,9 +469,9 @@ Code.send = function(chr) {
 	    value[1] = new Uint8Array([100]);
 	else if(chr == 'L') // turn left -> power m1 backward and m2 forward
 	    value = [ new Uint8Array([-100]), new Uint8Array([100])];
-	else if(chr == 'f') // forward
+	else if(chr == 'u') // forward
 	    value = [ new Uint8Array([100]), new Uint8Array([100])];
-	else if(chr == 'b') // backward
+	else if(chr == 'd') // backward
 	    value = [ new Uint8Array([-100]), new Uint8Array([-100])];
     }
 
@@ -551,7 +551,7 @@ Code.connect = function(run) {
 	else if(Code.device.name == 'BT Smart Controller')
 	    characteristic = '8ae8860c-ad7d-11e6-80f5-76304dec7eb7'	
 	else if(Code.device.name.startsWith('Robby'))
-	    characteristic = '7b130101-ce8d-45bb-9158-631b769139e9'
+	    characteristic = '7b130102-ce8d-45bb-9158-631b769139e9'
         return service.getCharacteristic(characteristic);
     }).then(characteristic => {
         console.log("First characteristic found.");
