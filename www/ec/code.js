@@ -511,7 +511,6 @@ Code.connect = function(run) {
     Code.device = undefined;
     Code.server = undefined;
     Code.service = undefined;
-    Code.characteristic = {};
 
     navigator.bluetooth.requestDevice( {
 	// this will not find the fischertechnik controllers ...
@@ -562,6 +561,7 @@ Code.connect = function(run) {
     }).then(characteristic => {
         console.log("First characteristic found.");
 	Code.pending = [ ]
+	Code.characteristic = {};
 	Code.in_progress = false
 	if((Code.device.name == 'BT Smart Controller') || (Code.device.name == 'BT Smart Controller')) {
 	    Code.characteristic["m1"] = characteristic
@@ -590,7 +590,8 @@ Code.connect = function(run) {
 	    
 	run();
     }).catch(error => {
-        alert("Error: " + error);
+	if(! error.message.includes("cancelled"))	
+            alert("Error: " + error.message);
     });
 }
 
