@@ -423,7 +423,6 @@ Code.send = function(chr) {
     }
     
     // TODO: make sure at most 20 Bytes are sent
-    console.log("writeValue()");
     Code.in_progress = true;
 
     // for ftDuino just send the characters directly
@@ -449,8 +448,6 @@ Code.send = function(chr) {
 	    value = new Uint8Array([0,0,0]);
 
 	value = [ value.buffer ];
-	console.log("value", value)
-	
     } else if("uart" in Code.characteristic) {
 	// ftduino
 	characteristic[0] = Code.characteristic["uart"]
@@ -500,6 +497,16 @@ Code.send = function(chr) {
     }
 }
 
+Code.onDisconnected = function() {
+    console.log("disconnected");
+    Code.characteristic = undefined;  // this triggers reconnection
+
+    if(Code.running) {
+	console.log("Stopping");
+	Code.running = false;
+    }
+}
+    
 Code.connect = function(run) {
     Code.device = undefined;
     Code.server = undefined;
@@ -524,12 +531,11 @@ Code.connect = function(run) {
     }).then(device => {
         console.log("Device",device, "found. Connecting ...");
 	Code.device = device;
+	device.addEventListener('gattserverdisconnected', Code.onDisconnected);
         return device.gatt.connect();
     }).then(server => {
 	Code.server = server;
 
-	console.log("c", Code.device);
-	
         console.log("Connected. Searching for primary service ...");
 	// search for device specific service for ftDuino, Bt Smart Controller or BT Control Receiver
 	var service = '0000ffe0-0000-1000-8000-00805f9b34fb';
