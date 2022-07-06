@@ -191,7 +191,7 @@ Code.bindClick = function(el, func) {
     el = document.getElementById(el);
   }
   el.addEventListener('click', func, true);
-  el.addEventListener('touchend', func, true);
+//  el.addEventListener('touchend', func, true);
 };
 
 /**
@@ -355,6 +355,7 @@ Code.init = function() {
     
   Code.bindClick('trashButton',
       function() {Code.discard(); Code.renderContent();});
+
   Code.bindClick('runButton', Code.run);
   document.getElementById('linkButton').className = 'disabled';
     
