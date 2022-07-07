@@ -513,12 +513,12 @@ Code.connect = function(run) {
     Code.server = undefined;
     Code.service = undefined;
 
-    navigator.bluetooth.requestDevice( {
-	// this will not find the fischertechnik controllers ...
+//    navigator.bluetooth.requestDevice( {
+//	// this will not find the fischertechnik controllers by name
+//      // see https://stackoverflow.com/questions/72903299/howto-filter-for-uuid-or-name-in-web-bluetooth
 //	filters: [
-//	    { services: ['0000ffe0-0000-1000-8000-00805f9b34fb']},
-//	    { services: ['8ae883b4-ad7d-11e6-80f5-76304dec7eb7']},
-//	    { services: ['2e58327e-c5c5-11e6-9d9d-cec0c932ce01']},
+//	    { services: ['0000ffe0-0000-1000-8000-00805f9b34fb' ] },
+//	    { services: ['7b130100-ce8d-45bb-9158-631b769139e9'] },
 //	    { name: 'BT Control Receiver'},
 //	    { name: 'BT Smart Controller'}
 //	],
