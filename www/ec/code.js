@@ -513,40 +513,18 @@ Code.connect = function(run) {
     Code.server = undefined;
     Code.service = undefined;
 
-    // this will not find the fischertechnik controllers by name
-    // see https://stackoverflow.com/questions/72903299/howto-filter-for-uuid-or-name-in-web-bluetooth
-    let requestParms = { filters: [
-	{ services: ['0000ffe0-0000-1000-8000-00805f9b34fb' ] },
-	{ services: ['7b130100-ce8d-45bb-9158-631b769139e9'] },
-	{ name: 'BT Control Receiver'},
-	{ name: 'BT Smart Controller'}
-    ] };
-    
-    if (navigator.userAgentData) {
-	let vendors = window.navigator.userAgentData.brands;
-
-//	let vstr = "";
-//	for(let i=0;i<vendors.length;i++)
-//	    vstr += String(vendors[i].brand) + ", "	    
-//	alert(vstr);
-
-	// chromium but neither chrome nor edge -> workaround for name detection
-	if ((vendors.filter(e => e.brand === 'Chromium').length > 0) &&
-	    (vendors.filter(e => e.brand === 'Google Chrome').length == 0) &&
-	    (vendors.filter(e => e.brand === 'Microsoft Edge').length == 0) ) {
-	    
-	    requestParms = { acceptAllDevices: true };
-	}
-    }
-    
-    navigator.bluetooth.requestDevice(
-	Object.assign({}, requestParms, {
-	    optionalServices: [
-		'7b130100-ce8d-45bb-9158-631b769139e9',  // ft robby
-		'0000ffe0-0000-1000-8000-00805f9b34fb',  // hm-10
-		'8ae883b4-ad7d-11e6-80f5-76304dec7eb7',  // BT Smart Controller
-		'2e58327e-c5c5-11e6-9d9d-cec0c932ce01' ] // BT Control Receiver
-	})).then(device => {
+    navigator.bluetooth.requestDevice( {
+	filters: [
+	    { services: ['0000ffe0-0000-1000-8000-00805f9b34fb' ] },
+	    { services: ['7b130100-ce8d-45bb-9158-631b769139e9'] },
+	    { name: 'BT Control Receiver'},
+	    { name: 'BT Smart Controller'} ],
+	optionalServices: [
+	    '7b130100-ce8d-45bb-9158-631b769139e9',  // ft robby
+	    '0000ffe0-0000-1000-8000-00805f9b34fb',  // hm-10
+	    '8ae883b4-ad7d-11e6-80f5-76304dec7eb7',  // BT Smart Controller
+	    '2e58327e-c5c5-11e6-9d9d-cec0c932ce01' ] // BT Control Receiver
+    } ).then(device => {
         console.log("Device",device, "found. Connecting ...");
 	Code.device = device;
 	device.addEventListener('gattserverdisconnected', Code.onDisconnected);
