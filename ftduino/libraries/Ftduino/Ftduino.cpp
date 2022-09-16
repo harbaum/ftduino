@@ -9,6 +9,7 @@
 #include <avr/pgmspace.h>
 #include <avr/interrupt.h>
 
+#define IN_FTDUINO_LIB
 #include "Ftduino.h"
 #include "adc_table.h"
 

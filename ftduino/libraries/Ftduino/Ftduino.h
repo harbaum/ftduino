@@ -9,6 +9,12 @@
 
 #include "Arduino.h"
 
+#ifdef IN_FTDUINO_LIB
+#if !defined(OUTPUT_DRIVER_MC33879A) && !defined(OUTPUT_DRIVER_AUTO)
+#error "Only the MC33879A or AUTO output drivers are currently supported!"
+#endif
+#endif
+
 #define STRINGIFY(name) #name
 #define CLASS_IRQ(name, vector) \
     static void name(void) asm(STRINGIFY(vector)) \
