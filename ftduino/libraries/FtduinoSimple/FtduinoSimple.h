@@ -25,7 +25,7 @@
   #else
     #warning "Error, no output driver configured"
   #endif
-#else
+
   // make sure WebUSB is being used with correct settings
   #if USB_VERSION == 0x210 && !defined(WebUSB_h)
     #error "Please include WebUSB.h if WebUSB is being used!"
