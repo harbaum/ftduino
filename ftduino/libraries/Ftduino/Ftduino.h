@@ -10,9 +10,14 @@
 #include "Arduino.h"
 
 #ifdef IN_FTDUINO_LIB
-#if !defined(OUTPUT_DRIVER_MC33879A) && !defined(OUTPUT_DRIVER_AUTO)
-#error "Only the MC33879A or AUTO output drivers are currently supported!"
-#endif
+  #if !defined(OUTPUT_DRIVER_MC33879A) && !defined(OUTPUT_DRIVER_AUTO)
+    #error "Only the MC33879A or AUTO output drivers are currently supported!"
+  #endif
+#else
+  // make sure WebUSB is being used with correct settings
+  #if USB_VERSION == 0x210 && !defined(WebUSB_h)
+    #error "Please include WebUSB.h if WebUSB is being used!"
+  #endif
 #endif
 
 #define STRINGIFY(name) #name

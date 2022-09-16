@@ -10,21 +10,26 @@
 #include "Arduino.h"
 
 #ifndef IN_FTDUINO_SIMPLE_LIB
-#if defined(OUTPUT_DRIVER_MC33879A)
-#warning "Building for MC33879A boards only"
-#ifndef MC33879A_ONLY  // user has to define this
-#error "Please select 'Automatic' output driver or define MC33879A_ONLY when using MC33879A output driver."
-#endif
-#elif defined(OUTPUT_DRIVER_TLE94108EL)
-#warning "Building for TLE94108EL boards only"
-#ifndef TLE94108EL_ONLY  // user has to define this
-#error "Please select 'Automatic' output driver or define TLE94108EL_ONLY when using TLE94108EL output driver."
-#endif
-#elif defined(OUTPUT_DRIVER_AUTO)
-// #warning "Building for output auto detection"
+  #if defined(OUTPUT_DRIVER_MC33879A)
+    #warning "Building for MC33879A boards only"
+    #ifndef MC33879A_ONLY  // user has to define this
+      #error "Please select 'Automatic' output driver or define MC33879A_ONLY when using MC33879A output driver."
+    #endif
+  #elif defined(OUTPUT_DRIVER_TLE94108EL)
+    #warning "Building for TLE94108EL boards only"
+    #ifndef TLE94108EL_ONLY  // user has to define this
+      #error "Please select 'Automatic' output driver or define TLE94108EL_ONLY when using TLE94108EL output driver."
+    #endif
+  #elif defined(OUTPUT_DRIVER_AUTO)
+    // #warning "Building for output auto detection"
+  #else
+    #warning "Error, no output driver configured"
+  #endif
 #else
-#warning "Error, no output driver configured"
-#endif
+  // make sure WebUSB is being used with correct settings
+  #if USB_VERSION == 0x210 && !defined(WebUSB_h)
+    #error "Please include WebUSB.h if WebUSB is being used!"
+  #endif
 #endif
 
 class Ftduino {

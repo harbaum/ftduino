@@ -4,6 +4,12 @@
 
 // https://www.json.org/json-de.html
 
+#if USB_VERSION == 0x210
+#include <WebUSB.h>
+extern WebUSB WebUSBSerial;
+#define Serial WebUSBSerial
+#endif
+
 #ifdef ARDUINO
 #include <Ftduino.h>
 #else
@@ -13,12 +19,6 @@
 
 #include <string.h>
 #include "JsonParser.h"
-
-#if USB_VERSION == 0x210
-#include <WebUSB.h>
-extern WebUSB WebUSBSerial;
-#define Serial WebUSBSerial
-#endif
 
 // generic JSON error codes
 #define ERR_UNEXP_STATE  1  // unexpected state
