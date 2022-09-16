@@ -25,6 +25,10 @@
 
 #include "WebUSB.h"
 
+#if USB_VERSION != 0x210
+#error "Error! Please select 'Tools / USB Version / WebUSB'"
+#endif
+
 #ifdef ARDUINO_ARCH_SAMD
 
 #define USB_SendControl				USBDevice.sendControl

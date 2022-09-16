@@ -10,7 +10,7 @@
  */
 
 #if USB_VERSION != 0x210
-#error "Bitte board 'ftDuino (WebUSB)' auswählen"
+#error "Bitte 'Werkzeuge / USB Version / WebUSB' auswählen"
 #endif
  
 WebUSB WebUSBSerial(1 /* https:// */, "harbaum.github.io/ftduino/webusb/console");
