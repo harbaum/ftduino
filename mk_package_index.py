@@ -55,7 +55,7 @@ for version in versions:
     release["name"] = PLATFORM_NAME
     release["architecture"] = ARCHITECTURE
     release["version"] = version
-    release["category"] = PLATFORM_NAME
+    release["category"] = "Contributed"
 
     archivefilename = "ftduino-" + version + ".zip"
     archivepath = RELEASES_PATH + "/" + version + "/" + archivefilename
@@ -76,6 +76,8 @@ for version in versions:
 
     release["help"] = { "online": HELP }
     release["boards"] = [ { "name": BOARDNAME } ]
+    release["toolsDependencies"] = [ ]
+    
     releases.append(release)
 
 ftduino["platforms"] = releases
