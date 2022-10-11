@@ -10,8 +10,8 @@
 #include "Arduino.h"
 
 #ifndef IN_FTDUINO_LIB
-  #if !defined(OUTPUT_DRIVER_MC33879A) && !defined(OUTPUT_DRIVER_AUTO)
-    #error "Only the MC33879A or AUTO output drivers are currently supported!"
+  #if !defined(OUTPUT_DRIVER_TLE94108EL) && !defined(OUTPUT_DRIVER_MC33879A) && !defined(OUTPUT_DRIVER_AUTO)
+    #error "Only the MC33879A, TLE94108EL or AUTO output drivers are currently supported!"
   #endif
 
   // make sure WebUSB is being used with correct settings
@@ -108,8 +108,16 @@ class Ftduino {
     
     // ---------- outputs ----------------    
     void output_init();
-
+#if defined(OUTPUT_DRIVER_AUTO)
+    static const uint8_t CHIP_UNKNOWN = 0, CHIP_MC33879 = 1, CHIP_TLE94108 = 2, CHIP_DRV8908 = 3;    
+    uint8_t spi_probe();
+    uint8_t driver_chip;
+    void spi_interrupt_exec_mc33879();
+    void spi_interrupt_exec_tle94108();
+    void (Ftduino::*spi_interrupt_exec)();
+#else
     void spi_interrupt_exec();
+#endif
     CLASS_IRQ(spi_interrupt, SPI_STC_vect);
     
     uint8_t spi_state = 0;                  // byte/word counter for spi transmission

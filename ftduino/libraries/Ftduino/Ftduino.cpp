@@ -1,8 +1,14 @@
 /*
   Ftduino.cpp - Library for ftDuino
 
-  (c) 2017 by Till Harbaum <till@harbaum.org>
+  (c) 2017-2022 by Till Harbaum <till@harbaum.org>
 */
+
+/*
+ * TODO:
+ * - /CS high time by emtpy spi transfer for TLE94108
+ * 
+ */
 
 #include <Arduino.h>
 
@@ -221,24 +227,126 @@ uint16_t Ftduino::input_get(uint8_t ch) {
 // (- both MOSFETs should never be enabled at the same time)
 // PWM toggles between floating and low or floating and high
 
-void Ftduino::spi_interrupt_exec() {
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A)
+#if defined(OUTPUT_DRIVER_AUTO)
+void Ftduino::spi_interrupt_exec_mc33879() 
+#else
+void Ftduino::spi_interrupt_exec() 
+#endif
+{ 
+  // The spi state machine counter runs through 4*64 states.
+  // It sends 64 sequences of 32 on/off bits each.
+  
   if(!(spi_state & 3)) {
-    // set /SS high and low again
-    PORTB |=  (1<<0);
+    // set /SS high and low again. The mc33879 can live with this being only
+    // high for a very short moment.
+    PORTB |=  (1<<0);    
     PORTB &= ~(1<<0);
     
     // fetch next data word
     spi_tx_data.w = spi_tx_in[(spi_state>>2)&(SPI_PWM_CYCLE_LEN-1)];
   }
   
+  // Each sequence sends
+  // two bytes to each of the two MC33879. The second byte contains
+  // the information which drivers are to be enabled. The first
+  // byte contains the configuration for the open load detection
+  // and is always zero.
+
+  // MC33879:  <00><OUT0-3><00><OUT4-7>
   if(spi_state & 1) SPDR = spi_tx_data.b[(spi_state>>1) & 1];
   else              SPDR = 0;
+
   spi_state++;
 }
+#endif
+
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_TLE94108EL)
+#if defined(OUTPUT_DRIVER_AUTO)
+void Ftduino::spi_interrupt_exec_tle94108() 
+#else
+void Ftduino::spi_interrupt_exec() 
+#endif
+{ 
+  // The spi state machine counter runs through 4*64 states.
+  // It sends 64 sequences of 32 on/off bits each.
+  
+  if(!(spi_state & 1)) {
+    // set /SS high and low again. The TLE94108 needs this to be high for
+    // at least 5us (t_CSNH) 
+    PORTB |=  (1<<0);    
+    _delay_us(4);
+    PORTB &= ~(1<<0);
+    
+    // fetch next data word
+    spi_tx_data.w = spi_tx_in[(spi_state>>2)&(SPI_PWM_CYCLE_LEN-1)];
+  }
+  
+  // TLE94108: <ADR0><HB_ACT_1_CTRL><ADR1><HB_ACT_2_CTRL>
+  if(spi_state & 1) SPDR = spi_tx_data.b[(spi_state>>1) & 1];
+  else              SPDR = (spi_state & 2)?0b11000011:0b10000011;
+  
+  spi_state++;
+}
+#endif
 
 void Ftduino::spi_interrupt() {
+  // Use chip specific handler routine  
+#if defined(OUTPUT_DRIVER_AUTO)
+  (ftduino.*ftduino.spi_interrupt_exec)();  
+#else
   ftduino.spi_interrupt_exec();
+#endif
 }
+
+#if defined(OUTPUT_DRIVER_AUTO)
+uint8_t Ftduino::spi_probe() {
+  // try to figure out which chip is installed. This may either be a pair of MC33879
+  // in ftDuinos up to V1.3 or the TLE94108 or the DRV8908 in newer ones starting with
+  // V1.4 
+  
+  // sending this 0x00 will trigger a SPI ERR on TLE94108EL, however
+  // it will not trigger anything on MC33879A
+
+  // send a single 00 byte. The TLE94108 will set SPI error as the first bit
+  // always needs a set first bit. Actually sending only one byte also triggers the
+  // spi error
+  delay(1);                                 // give control signals a millisecond to settle
+  PORTB &= ~(1<<0);                         // drive /SS low
+  _delay_us(1);                             // TLE94108EL needs this pause, MC33879A doesn't care
+  SPDR = 0x00; while(!(SPSR & (1<<SPIF)));  // wait for SPI transfer to end
+  _delay_us(1);
+  PORTB |=  (1<<0);
+  
+  _delay_us(5);
+  PORTB &= ~(1<<0);
+  _delay_us(1);
+  SPDR = 0x00; while(!(SPSR & (1<<SPIF)));  // wait for SPI transfer to end
+  uint8_t r = SPDR;  
+  _delay_us(1);
+  PORTB |= (1<<0);             // drive /SS high
+
+  // 1. no chip at all connected returns 0xff (floating input, may vary)  
+  // 2. MC33879 returns 0x00
+  // 3. TLE94018 returns bit 0 set on second read (not bit 7 since SPI is configured MSB first,
+  //    while TLE94108 is LSB first. Without VS (9V) will report 0x05, otherwise 0x01
+  // 4. DRV8908 returns C0 (C4 with no power) as upper two bits are always one with this
+  //    chip. The DRV8908 is MSB first
+
+  // test for MC33879: This simply returns 0x00
+  if(!r) return CHIP_MC33879;
+
+  // test for TLE94108: ignore undervoltage bit 4, all other bits should be
+  // zero except bit 0 which reports a SPI error as 0x00 is not a valid request
+  if((r & ~4) == 0x01) return CHIP_TLE94108;
+
+  // test for drv8908: The two upper bits are always 1, ignore undervoltage
+  // bit 4, all other bits should be zero
+  if((r & ~4) == 0xc0) return CHIP_DRV8908;
+  
+  return CHIP_UNKNOWN;
+}
+#endif
 
 void Ftduino::output_init() {
   uint8_t i;
@@ -259,8 +367,22 @@ void Ftduino::output_init() {
   // enable SPI, enable interrupts, MSB first, Master mode,
   // mode 1 (SCK low when idle, data valid on falling edge)
   // and clock = FCPU/64 = 250khz
+
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_DRV8908)
+  // Don't enable interrupt yet to not affect probing. Also
+  // don't enable it if hard configured for DRV8908 as that
+  // doesn't use interrupts at all
+  
+  // DORD: 0=MSB first, 1=LSB first
+  // CPOL: 0=SCK low when idle, 1=SCK high when idle
+  // CPHA: 0=sample on first edge, 1=sample on second edge
+  // SPR1/0: 00=f/4, 01=/16, 10=/64, 11=/128 (250kHz)
+  SPCR = (0<<SPIE) | (1<<SPE) | (0<<DORD) | (1<<MSTR) |
+    (0<<CPOL) | (1<<CPHA) | (1<<SPR1) | (0<<SPR0);
+#else
   SPCR = (1<<SPIE) | (1<<SPE) | (0<<DORD) | (1<<MSTR) |
     (0<<CPOL) | (1<<CPHA) | (1<<SPR1) | (0<<SPR0);
+#endif
 
   SPSR &= ~(1<<SPI2X);   // single speed
 
@@ -269,20 +391,55 @@ void Ftduino::output_init() {
   DDRE  |= (1<<6);
   PORTE |= (1<<6);  // not in sleep mode
 
-  // PB.7 is the PWM input of the IN6 of O2. We don't use that feature by
-  // now, so it's just pulled down
+  // For MC33879 PB.7 is the PWM input of the IN6 of O2. We don't use that
+  // feature in this driver, so it's just pulled down. This is also ok with
+  // the TLE94108 which has this pin grounded. For the DRV8908 this is the
+  // fault output which is an open collector output. Grounding that is also
+  // not a problem.  
   DDRB |= (1<<7);
   PORTB &= ~(1<<7);  // no PWM on IN6
+
+#if defined(OUTPUT_DRIVER_AUTO)
+  // probe for chip type
+  driver_chip = spi_probe();
+
+  // setup interrupt vector
+  if(driver_chip == CHIP_MC33879)
+    spi_interrupt_exec = &Ftduino::spi_interrupt_exec_mc33879;
+  else if(driver_chip == CHIP_TLE94108)
+    spi_interrupt_exec = &Ftduino::spi_interrupt_exec_tle94108;
+
+  // finally enable SPI interrupt for the chips using soft-pwm
+  if((driver_chip == CHIP_MC33879) || (driver_chip == CHIP_TLE94108))
+    SPCR |= (1<<SPIE);
+#endif
+
+  // in case of TLE94108 switch to MSB first
+#if defined(OUTPUT_DRIVER_AUTO)
+  if(driver_chip == CHIP_TLE94108)
+#endif
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_TLE94108EL)
+    SPCR |= (1<<DORD);
+#endif
   
-  // clear SPI PWM table
-  for(i=0;i<SPI_PWM_CYCLE_LEN;i++)
-    spi_tx_in[i] = 0;
+#if defined(OUTPUT_DRIVER_AUTO)
+  if((driver_chip == CHIP_MC33879) || (driver_chip == CHIP_TLE94108))
+#endif
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_TLE94108EL)
+  {
+    // clear SPI PWM table
+    for(i=0;i<SPI_PWM_CYCLE_LEN;i++)
+      spi_tx_in[i] = 0;
     
-  // trigger first transfer
-  spi_state = 0;
-  SPDR = 0x00;
+    // trigger first transfer. This happens without /CE being asserted, so the
+    // driver chips won't notice this. But this gets the transfer interrupts going
+    spi_state = 0;
+    SPDR = 0x00;
+  }
+#endif
 }
 
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A)
 #define MC33879_PORT(a)   (1<<(a-1))
 
 static const uint8_t mc33879_highside_map[4] = { 
@@ -290,47 +447,79 @@ static const uint8_t mc33879_highside_map[4] = {
 
 static const uint8_t mc33879_lowside_map[4] = { 
       MC33879_PORT(8), MC33879_PORT(1), MC33879_PORT(7), MC33879_PORT(3) };
+#endif
 
 // any SPI transfer transfers 16 bits per mc33879 and 32 bits in total
 void Ftduino::output_set(uint8_t port, uint8_t mode, uint8_t pwm) {
-
-  // mc33879 MSB = Open Load Detection Current On/OFF
-  // mc33879 LSB = Output ON/OFF
-
-  // MOSFET connections according to schematic
-  // O1/O5 -> highside S2, lowside D8
-  // O2/O6 -> highside S6, lowside D1
-  // O3/O7 -> highside S4, lowside D7
-  // O4/O8 -> highside S5, lowside D3
-
-  // Never enable at the same time:
-  // channel 2 and 8, 6 and 1, 4 and 7, 5 and 3
-
-  // O1-O4 = first 33879 in chain
-  // O5-O8 = second 33879 in chain
-
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_TLE94108EL)
   uint32_t set_mask = 0, clr_mask = 0;
+#endif
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A)
+#if defined(OUTPUT_DRIVER_AUTO)
+  if(driver_chip == CHIP_MC33879)
+#endif    
+  {
+    // mc33879 MSB = Open Load Detection Current On/OFF
+    // mc33879 LSB = Output ON/OFF
 
-  // mode can be 0 (floating), 1 (high) or 2 (low)
-  if(mode == 1) {
-    set_mask = mc33879_highside_map[port&3];  // highside to be set
-    clr_mask = mc33879_lowside_map[port&3];   // lowside to be cleared
-  } else if(mode == 2) {
-    set_mask = mc33879_lowside_map[port&3];   // lowside to be set
-    clr_mask = mc33879_highside_map[port&3];  // highside to be cleared
-  } else {
-    set_mask = 0;                             // nothing to be set
-    clr_mask = mc33879_highside_map[port&3] | // highside and lowside to be cleared
-               mc33879_lowside_map[port&3];
+    // MOSFET connections according to schematic
+    // O1/O5 -> highside S2, lowside D8
+    // O2/O6 -> highside S6, lowside D1
+    // O3/O7 -> highside S4, lowside D7
+    // O4/O8 -> highside S5, lowside D3
+
+    // Never enable at the same time:
+    // channel 2 and 8, 6 and 1, 4 and 7, 5 and 3
+
+    // O1-O4 = first 33879 in chain
+    // O5-O8 = second 33879 in chain
+
+    // mode can be 0 (floating), 1 (high) or 2 (low)
+    if(mode == 1) {
+      set_mask = mc33879_highside_map[port&3];  // highside to be set
+      clr_mask = mc33879_lowside_map[port&3];   // lowside to be cleared
+    } else if(mode == 2) {
+      set_mask = mc33879_lowside_map[port&3];   // lowside to be set
+      clr_mask = mc33879_highside_map[port&3];  // highside to be cleared
+    } else {
+      set_mask = 0;                             // nothing to be set
+      clr_mask = mc33879_highside_map[port&3] | // highside and lowside to be cleared
+                mc33879_lowside_map[port&3];
+    }
+
+    // ports O1..O4 (0-3) are in MSB, ports O5-O8 (4-7) are in MSB of lower 16 bit
+    if(!(port & 4)) {
+      set_mask <<= 8;
+      clr_mask <<= 8;
+    }
   }
+#endif
 
-  // ports O1..O4 (0-3) are in MSB, ports O5-O8 (4-7) are in MSB of lower 16 bit
-  if(!(port & 4)) {
-    set_mask <<= 8;
-    clr_mask <<= 8;
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_TLE94108EL)
+#if defined(OUTPUT_DRIVER_AUTO)
+  if(driver_chip == CHIP_TLE94108)
+#endif    
+  {
+    // TLE94108
+    // mode can be 0 (floating), 1 (high) or 2 (low)
+    // unlike the 33879, the outputs of the 94108 are ordered nicely
+    if(mode == 1) {
+       set_mask = (2<<(2*port));  // set highside
+       clr_mask = (1<<(2*port));  // clear lowside
+    } else if(mode == 2) {
+       set_mask = (1<<(2*port));  // set lowside
+       clr_mask = (2<<(2*port));  // clear highside
+    } else {
+       set_mask = 0;
+       clr_mask = (3<<(2*port));  // highside and lowside to be cleared     
+    }
   }
+#endif
 
-  // set 0..32 entries in the PWN table according the requested PWM
+//  Serial.print("SET/CLR "); Serial.print(set_mask, HEX); Serial.print(" "); Serial.println(clr_mask, HEX);
+//  Serial.print("STATE ");  Serial.println(spi_state, HEX);    
+
+  // set entries 0..63 in the PWN table according the requested PWM
   for(uint8_t i=0;i<SPI_PWM_CYCLE_LEN;i++) {
     if(i<pwm) {
        spi_tx_in[i] |=  set_mask;
@@ -714,4 +903,3 @@ void Ftduino::init() {
 }
 
 Ftduino::Ftduino() { }
-
