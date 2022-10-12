@@ -290,6 +290,7 @@ void Ftduino::spi_interrupt_exec()
 }
 #endif
 
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_TLE94108EL)
 void Ftduino::spi_interrupt() {
   // Use chip specific handler routine  
 #if defined(OUTPUT_DRIVER_AUTO)
@@ -298,6 +299,7 @@ void Ftduino::spi_interrupt() {
   ftduino.spi_interrupt_exec();
 #endif
 }
+#endif
 
 #if defined(OUTPUT_DRIVER_AUTO)
 uint8_t Ftduino::spi_probe() {
@@ -437,7 +439,72 @@ void Ftduino::output_init() {
     SPDR = 0x00;
   }
 #endif
+
+  // since the drv8908 is able to do all PWM for all eight channels in hardware we 
+  // need to setup its hardware accordingly
+#if defined(OUTPUT_DRIVER_AUTO)
+  if(driver_chip == CHIP_DRV8908)
+#endif
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_DRV8908)
+  {
+    // give chip a millisecond to come out of reset/sleep
+    delay(1);
+    
+    drv8908_transfer_byte(PWM_CTRL_1, 0xff);    // set all pwm modes
+    drv8908_transfer_byte(PWM_CTRL_2, 0x00);    // enable all PWM generators    
+    drv8908_transfer_byte(SR_CTRL_1, 0x00);     // slew rate 0.6V/us    
+
+    drv8908_transfer_byte(OLD_CTRL_1, 0xff);     // disable open load detection 
+    drv8908_transfer_byte(OLD_CTRL_2, 0xc0);     // don't disable outputs on open load detection 
+    drv8908_transfer_byte(OLD_CTRL_3, 0x00);
+    drv8908_transfer_byte(OLD_CTRL_4, 0x00);     // disable low current open load detection
+    drv8908_transfer_byte(OLD_CTRL_5, 0x00);     // disable passive current open load detection
+    drv8908_transfer_byte(OLD_CTRL_6, 0x00);
+    
+    // map all pwm channels 1-8 to outputs O1-O8
+    drv8908_transfer_byte(PWM_MAP_CTRL_1, 0b00001000);
+    drv8908_transfer_byte(PWM_MAP_CTRL_2, 0b00011010);
+    drv8908_transfer_byte(PWM_MAP_CTRL_3, 0b00101100);
+    drv8908_transfer_byte(PWM_MAP_CTRL_4, 0b00111110);
+    
+    // set all pwm frequencies to 200Hz
+    drv8908_transfer_byte(PWM_FREQ_CTRL_1, 0xaa);
+    drv8908_transfer_byte(PWM_FREQ_CTRL_2, 0xaa);
+  }
+#endif
 }
+
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_DRV8908)
+uint8_t Ftduino::drv8908_transfer_byte(uint8_t addr, uint8_t value) {
+  PORTB &= ~(1<<0);                          // activate /SS
+  _delay_us(1);
+  SPDR = addr; while(!(SPSR & (1<<SPIF)));   // wait for SPI transfer to end
+  uint8_t status = SPDR;  
+  SPDR = value; while(!(SPSR & (1<<SPIF)));  // wait for SPI transfer to end
+  uint8_t retval = SPDR;
+  PORTB |= (1<<0);                           // drive /SS high
+
+  // status byte: 1 1 OT OLD OCP UVLO OVP NPOR
+  // OT  = Overtemperature
+  // OLD = Open Load Detected
+  // OCP = Overcurrent Protection
+  // UVLO = Undervoltage
+  // OVP = Overvoltage
+  // NPOR = Not Power-On Reset
+
+  // clear any error
+  if(status != 0xc1) {
+    _delay_us(10);
+    PORTB &= ~(1<<0);                                 // activate /SS
+    _delay_us(1);
+    SPDR = CONFIG_CTRL; while(!(SPSR & (1<<SPIF)));   // write CONFIG_CTRL and wait for SPI transfer to end
+    SPDR = 0x01; while(!(SPSR & (1<<SPIF)));          // clear all faults and wait for SPI transfer to end
+    PORTB |= (1<<0);                                  // drive /SS high
+  }
+
+  return retval;
+}
+#endif
 
 #if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A)
 #define MC33879_PORT(a)   (1<<(a-1))
@@ -516,6 +583,35 @@ void Ftduino::output_set(uint8_t port, uint8_t mode, uint8_t pwm) {
   }
 #endif
 
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_DRV8908)
+#if defined(OUTPUT_DRIVER_AUTO)
+  if(driver_chip == CHIP_DRV8908)
+#endif    
+  {
+    uint8_t op_ctrl = (port<=3)?OP_CTRL_1:OP_CTRL_2;
+    uint8_t op_port = port & 3;   // 0..3
+    uint8_t op_mode = (mode==0)?0:((mode==1)?2:1);
+
+    // expand duty cycle to 8 bits, so that 00000000 and 11111111 are reached
+    drv8908_transfer_byte(PWM_DUTY_CTRL_1+port, (pwm<<2)|(pwm&3));    // set duty cycle
+
+    // set output mode, ftduino os off=0, hi=1, low=2, drv is off,low,hi
+    uint8_t tmp = drv8908_transfer_byte(0x40 | op_ctrl, 0); // 0x40 = read flag
+    tmp &= ~(3 << (2*op_port));
+    tmp |=  op_mode << (2*op_port);
+    drv8908_transfer_byte(op_ctrl, tmp);
+    
+//    self.set(output, mode)
+//    self.enable_pwm(output, True)
+//    self.map_pwm(output, output)                   # use pwm ch 1 for O1, ch 2 for O2, ... 
+//    self.set_pwm_freq(output, DRV8908.FREQ_200HZ)  # 200Hz is fine for motors and lamps
+//    self.set_pwm_duty(output, value)
+  }
+#endif
+  
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_TLE94108EL)
+  // the DRV8908 is the only chip that does not need the spi pwm table
+
 //  Serial.print("SET/CLR "); Serial.print(set_mask, HEX); Serial.print(" "); Serial.println(clr_mask, HEX);
 //  Serial.print("STATE ");  Serial.println(spi_state, HEX);    
 
@@ -527,6 +623,7 @@ void Ftduino::output_set(uint8_t port, uint8_t mode, uint8_t pwm) {
     } else
        spi_tx_in[i] &= ~(set_mask | clr_mask);
   }
+#endif
 }
 
 void Ftduino::motor_set(uint8_t port, uint8_t mode, uint8_t pwm) {
