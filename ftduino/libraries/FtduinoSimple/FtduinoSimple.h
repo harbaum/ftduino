@@ -1,7 +1,7 @@
 /*
   FtduinoSimple.h - Library for ftduino
 
-  (c) 2017 by Till Harbaum <till@harbaum.org>
+  (c) 2017-2022 by Till Harbaum <till@harbaum.org>
 */
 
 #ifndef ftduino_h
@@ -10,22 +10,6 @@
 #include "Arduino.h"
 
 #ifndef IN_FTDUINO_SIMPLE_LIB
-  #if defined(OUTPUT_DRIVER_MC33879A)
-    #warning "Building for MC33879A boards only"
-    #ifndef MC33879A_ONLY  // user has to define this
-      #error "Please select 'Automatic' output driver or define MC33879A_ONLY when using MC33879A output driver."
-    #endif
-  #elif defined(OUTPUT_DRIVER_TLE94108EL)
-    #warning "Building for TLE94108EL boards only"
-    #ifndef TLE94108EL_ONLY  // user has to define this
-      #error "Please select 'Automatic' output driver or define TLE94108EL_ONLY when using TLE94108EL output driver."
-    #endif
-  #elif defined(OUTPUT_DRIVER_AUTO)
-    // #warning "Building for output auto detection"
-  #else
-    #warning "Error, no output driver configured"
-  #endif
-
   // make sure WebUSB is being used with correct settings
   #if USB_VERSION == 0x210 && !defined(WebUSB_h)
     #error "Please include WebUSB.h if WebUSB is being used!"
@@ -74,14 +58,16 @@ class Ftduino {
     void output_spi_tx(void);
     uint32_t spi_tx;
 #endif
-#if defined(OUTPUT_DRIVER_TLE94108EL) || defined(OUTPUT_DRIVER_AUTO)
+#if defined(OUTPUT_DRIVER_TLE94108EL) || defined(OUTPUT_DRIVER_DRV8908) || defined(OUTPUT_DRIVER_AUTO)
     void write_spi_reg(uint8_t reg, uint8_t data);
-    uint16_t state;
+    uint16_t state;  // state of output registers
 #endif
 #if defined(OUTPUT_DRIVER_AUTO)
+    static const uint8_t CHIP_UNKNOWN = 0, CHIP_MC33879 = 1, CHIP_TLE94108 = 2, CHIP_DRV8908 = 3;    
     void output_set_mc33879a(uint8_t port, uint8_t mode);
     void output_set_tle94108el(uint8_t port, uint8_t mode);
-    bool odrv_mc33879a;
+    void output_set_drv8908(uint8_t port, uint8_t mode);
+    uint8_t driver_chip;
 #endif
 };
 
