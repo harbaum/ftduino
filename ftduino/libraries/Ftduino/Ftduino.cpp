@@ -588,24 +588,18 @@ void Ftduino::output_set(uint8_t port, uint8_t mode, uint8_t pwm) {
   if(driver_chip == CHIP_DRV8908)
 #endif    
   {
+    pwm = 255 * (uint16_t)pwm / 64;  // map 0..64 -> 0..255  
     uint8_t op_ctrl = (port<=3)?OP_CTRL_1:OP_CTRL_2;
     uint8_t op_port = port & 3;   // 0..3
     uint8_t op_mode = (mode==0)?0:((mode==1)?2:1);
 
-    // expand duty cycle to 8 bits, so that 00000000 and 11111111 are reached
-    drv8908_transfer_byte(PWM_DUTY_CTRL_1+port, (pwm<<2)|(pwm&3));    // set duty cycle
+    drv8908_transfer_byte(PWM_DUTY_CTRL_1+port, pwm);    // set duty cycle
 
     // set output mode, ftduino os off=0, hi=1, low=2, drv is off,low,hi
     uint8_t tmp = drv8908_transfer_byte(0x40 | op_ctrl, 0); // 0x40 = read flag
     tmp &= ~(3 << (2*op_port));
     tmp |=  op_mode << (2*op_port);
     drv8908_transfer_byte(op_ctrl, tmp);
-    
-//    self.set(output, mode)
-//    self.enable_pwm(output, True)
-//    self.map_pwm(output, output)                   # use pwm ch 1 for O1, ch 2 for O2, ... 
-//    self.set_pwm_freq(output, DRV8908.FREQ_200HZ)  # 200Hz is fine for motors and lamps
-//    self.set_pwm_duty(output, value)
   }
 #endif
   
