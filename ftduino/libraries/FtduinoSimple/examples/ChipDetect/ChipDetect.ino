@@ -115,5 +115,5 @@ void loop() {
   for(char i=0;i<chip;i++)
     blink(100);
     
-  delay(1000);
+  delay(1500 - 200 * chip);
 }
