@@ -447,6 +447,10 @@ void Ftduino::output_init() {
 #endif
 #if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_DRV8908)
   {
+    // increase SPI speed to 4 Mhz as PWM is implemented by hardware,
+    // no SPI IRQ is needed and thus the SPI speed does not affect performance
+    SPCR &= ~((1<<SPR1) | (1<<SPR0));
+    
     // give chip a millisecond to come out of reset/sleep
     delay(1);
     
