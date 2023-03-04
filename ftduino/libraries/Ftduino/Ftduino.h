@@ -123,9 +123,9 @@ class Ftduino {
     uint8_t spi_state = 0;                  // byte/word counter for spi transmission
     uint16_t spi_tx_in[SPI_PWM_CYCLE_LEN];  // set outside interrupt
 
-    // repeatedly sent during interupt:
+    // repeatedly sent during interrupt:
     union {
-      uint16_t w;    // repeated during interupt
+      uint16_t w;    // repeated during interrupt
       uint8_t b[2];
     } spi_tx_data;
 
