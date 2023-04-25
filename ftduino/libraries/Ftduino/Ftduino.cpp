@@ -6,7 +6,7 @@
 
 /*
  * TODO:
- * - /CS high time by emtpy spi transfer for TLE94108
+ * - /CS high time by empty spi transfer for TLE94108
  * 
  */
 
@@ -127,7 +127,7 @@ void Ftduino::adc_init() {
   // setup 4051 mux driving the pullups
   cd4051_init();
 
-  // disable digitial function of analog pins
+  // disable digital function of analog pins
   DIDR0 = (1 << ADC7D) | (1 << ADC6D) | (1 << ADC5D) | (1 << ADC4D);
   DIDR2 = (1 << ADC11D) | (1 << ADC10D) | (1 << ADC9D) | (1 << ADC8D);
   
@@ -908,7 +908,7 @@ void Ftduino::ext_interrupt3() {
 
 void Ftduino::pc_interrupt() {
   // The hardware won't tell us which pin fired this interrupt.
-  // so we need to keep track of that outselves
+  // so we need to keep track of that ourselves
   static uint8_t portb_state = 0xff;  // assume both pins are pulled high
   uint8_t pinb = PINB;
     
@@ -950,7 +950,7 @@ void Ftduino::counter_init(void) {
 
   // run timer 1 in fast pwm mode with OCR1A as top. Since OCR1A is lower
   // than OCR1B, the counter will normally never pass OCR1B and the
-  // interrupt will thus never fire unless TCNT is explicitely being
+  // interrupt will thus never fire unless TCNT is explicitly being
   // set to a value > OCR1A
   TCCR1B = (1<<WGM13) | (1<<WGM12);
   TCCR1A = (1<<WGM11) | (1<<WGM10);
