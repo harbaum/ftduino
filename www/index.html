@@ -1,14 +1,39 @@
 <!DOCTYPE HTML>
 <html lang="en-US">
-    <head>
-        <meta charset="UTF-8">
+<head>
+    <meta charset="us-ascii">
+    <noscript>
         <meta http-equiv="refresh" content="0; url=de">
-        <script type="text/javascript">
+    </noscript>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript">
+        function getLang() {
+            return (navigator.language || navigator.languages[0]);
+        }
+
+        if (getLang()==="de-DE")
             window.location.href = "de"
-        </script>
-        <title>Page Redirection</title>
-    </head>
-    <body>
-        If you are not redirected automatically, follow this <a href='de'>link to the german pages</a>.
-    </body>
+        else
+            window.location.href = "en"
+    </script>
+    <title>Page Redirection</title>
+
+    <style>
+        * {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        }
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<p>If you are not redirected automatically, follow this <a href='de'>link to the german pages</a>.</p>
+</body>
 </html>

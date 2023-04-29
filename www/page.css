@@ -1,0 +1,90 @@
+* {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.w-1 {
+    width: 1%;
+}
+
+.header-f {
+    color: #ff0505;
+}
+
+.header-t {
+    color: #0000fb;
+}
+
+.header-duino {
+    color: #0ad5dc;
+}
+
+.navbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.navbar-brand {
+    font-size: 2.3em;
+    font-weight: bolder;
+    letter-spacing: 2px;
+    text-shadow: -0.5px 1px 0 #fff,
+    1px 1px 0 #fff,
+    1px -1px 0 #fff,
+    -1px -1px 0 #fff;
+}
+
+.nav-link {
+    color: white!important;
+    text-align: center;
+}
+
+.page-title {
+    padding-top: 1em;
+    width: 100%;
+    text-align: center;
+}
+
+.f-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about-flex {
+    flex-direction: row;
+}
+
+.about-flex div {
+    max-width: 49%;
+    float: left;
+}
+
+@media only screen and (max-width: 900px) {
+    .about-flex div {
+        max-width: 100%;
+    }
+}
+
+section {
+    width: 50%;
+    min-width: 300px;
+    text-align: center;
+}
+
+.about-flex img {
+    width: 300px;
+    float: right;
+}
+
+main {
+    height: fit-content;
+}
+
+.spacer-1 {
+    height: 10vh;
+}
+
+.footer {
+    width: 100%;
+    text-align: center;
+}

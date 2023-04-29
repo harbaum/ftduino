@@ -1,0 +1,11 @@
+### IntelliJ and Jetbrains-Based IDEs
+.idea/
+
+### Linux
+.Trash-*
+
+### Windows
+desktop.ini
+
+### Common Run Directory
+run/
