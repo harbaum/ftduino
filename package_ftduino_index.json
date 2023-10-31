@@ -187,8 +187,8 @@
                     "category": "Contributed",
                     "url": "https://github.com/harbaum/ftduino/releases/download/0.0.16/ftduino-0.0.16.zip",
                     "archiveFileName": "ftduino-0.0.16.zip",
-                    "checksum": "SHA-256:9e155c054c8a478cb9919c961d9de00cb1a3a0bc1e65ba4100590b0da9ce68ac",
-                    "size": "335975",
+                    "checksum": "SHA-256:e585b8b12afc328c8adad8d45927cbda855e6f42e0c0eb59cfdf8db7935e1bec",
+                    "size": "407571",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
@@ -225,8 +225,27 @@
                     "category": "Contributed",
                     "url": "https://github.com/harbaum/ftduino/releases/download/0.0.18/ftduino-0.0.18.zip",
                     "archiveFileName": "ftduino-0.0.18.zip",
-                    "checksum": "SHA-256:16747af2a65509e8b539e158d76987c571a39ea6b6814db648d359b4d47aac8c",
-                    "size": "377955",
+                    "checksum": "SHA-256:88488e671563abc301b2c9d44e01391bc9ae5f189e4dc481a5f4a4c283c2ea13",
+                    "size": "377766",
+                    "help": {
+                        "online": "http://ftduino.de/issues"
+                    },
+                    "boards": [
+                        {
+                            "name": "ftDuino fischertechnik compatible controller"
+                        }
+                    ],
+                    "toolsDependencies": []
+                },
+                {
+                    "name": "ftDuino",
+                    "architecture": "avr",
+                    "version": "0.0.19",
+                    "category": "Contributed",
+                    "url": "https://github.com/harbaum/ftduino/releases/download/0.0.19/ftduino-0.0.19.zip",
+                    "archiveFileName": "ftduino-0.0.19.zip",
+                    "checksum": "SHA-256:db939d1ae18f2b36e88c6767d725b8fcfdbda3183c1932f977f768d1aeffa865",
+                    "size": "384522",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
