@@ -244,8 +244,8 @@
                     "category": "Contributed",
                     "url": "https://github.com/harbaum/ftduino/releases/download/0.0.19/ftduino-0.0.19.zip",
                     "archiveFileName": "ftduino-0.0.19.zip",
-                    "checksum": "SHA-256:db939d1ae18f2b36e88c6767d725b8fcfdbda3183c1932f977f768d1aeffa865",
-                    "size": "384522",
+                    "checksum": "SHA-256:28cb5fa048b343c00d02ea65245ca231dfe611ae535c0b95be5f64a5ebd19213",
+                    "size": "384831",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
