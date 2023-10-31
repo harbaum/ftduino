@@ -10,10 +10,6 @@
 #include "Arduino.h"
 
 #ifndef IN_FTDUINO_LIB
-  #if !defined(OUTPUT_DRIVER_TLE94108EL) && !defined(OUTPUT_DRIVER_MC33879A) && !defined(OUTPUT_DRIVER_AUTO)
-    #error "Only the MC33879A, TLE94108EL or AUTO output drivers are currently supported!"
-  #endif
-
   // make sure WebUSB is being used with correct settings
   #if USB_VERSION == 0x210 && !defined(WebUSB_h)
     #error "Please include WebUSB.h if WebUSB is being used!"
@@ -115,9 +111,11 @@ class Ftduino {
     void spi_interrupt_exec_mc33879();
     void spi_interrupt_exec_tle94108();
     void (Ftduino::*spi_interrupt_exec)();
-#else
+#elif defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_TLE94108EL)
     void spi_interrupt_exec();
 #endif
+
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_MC33879A) || defined(OUTPUT_DRIVER_TLE94108EL)
     CLASS_IRQ(spi_interrupt, SPI_STC_vect);
     
     uint8_t spi_state = 0;                  // byte/word counter for spi transmission
@@ -128,6 +126,34 @@ class Ftduino {
       uint16_t w;    // repeated during interupt
       uint8_t b[2];
     } spi_tx_data;
+#endif
+
+#if defined(OUTPUT_DRIVER_AUTO) || defined(OUTPUT_DRIVER_DRV8908)
+    static const uint8_t IC_STAT = 0x00, OCP_STAT_1 = 0x01,
+            OCP_STAT_2      = 0x02, OCP_STAT_3      = 0x03,
+            OLD_STAT_1      = 0x04, OLD_STAT_2      = 0x05,
+            OLD_STAT_3      = 0x06, CONFIG_CTRL     = 0x07,
+            OP_CTRL_1       = 0x08, OP_CTRL_2       = 0x09, 
+            OP_CTRL_3       = 0x0A, PWM_CTRL_1      = 0x0B,
+            PWM_CTRL_2      = 0x0C, FW_CTRL_1       = 0x0D,
+            FW_CTRL_2       = 0x0E, PWM_MAP_CTRL_1  = 0x0F,
+            PWM_MAP_CTRL_2  = 0x10, PWM_MAP_CTRL_3  = 0x11,
+            PWM_MAP_CTRL_4  = 0x12, PWM_FREQ_CTRL_1 = 0x13,
+            PWM_FREQ_CTRL_2 = 0x14, PWM_DUTY_CTRL_1 = 0x15,
+            PWM_DUTY_CTRL_2 = 0x16, PWM_DUTY_CTRL_3 = 0x17,
+            PWM_DUTY_CTRL_4 = 0x18, PWM_DUTY_CTRL_5 = 0x19,
+            PWM_DUTY_CTRL_6 = 0x1A, PWM_DUTY_CTRL_7 = 0x1B,
+            PWM_DUTY_CTRL_8 = 0x1C, SR_CTRL_1       = 0x1D,
+            SR_CTRL_2       = 0x1E, OLD_CTRL_1      = 0x1F,
+            OLD_CTRL_2      = 0x20, OLD_CTRL_3      = 0x21,
+            OLD_CTRL_4      = 0x22, OLD_CTRL_5      = 0x23,
+            OLD_CTRL_6      = 0x24;
+  
+    static const uint8_t FREQ_80HZ = 0, FREQ_100HZ = 1, 
+            FREQ_200HZ = 2, FREQ_2KHZ = 3;
+    
+    uint8_t drv8908_transfer_byte(uint8_t reg, uint8_t value);
+#endif
 
     // -------- ultrasonic ---------------
     void pulldown_c1_init();
