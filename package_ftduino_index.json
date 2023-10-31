@@ -225,8 +225,8 @@
                     "category": "Contributed",
                     "url": "https://github.com/harbaum/ftduino/releases/download/0.0.18/ftduino-0.0.18.zip",
                     "archiveFileName": "ftduino-0.0.18.zip",
-                    "checksum": "SHA-256:88488e671563abc301b2c9d44e01391bc9ae5f189e4dc481a5f4a4c283c2ea13",
-                    "size": "377766",
+                    "checksum": "SHA-256:16747af2a65509e8b539e158d76987c571a39ea6b6814db648d359b4d47aac8c",
+                    "size": "377955",
                     "help": {
                         "online": "http://ftduino.de/issues"
                     },
